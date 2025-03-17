@@ -9,63 +9,77 @@
     <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
     <title>Brew & Go Coffee - Home</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <!-- Header Navigation -->
-    <header class="site-header">
-        <div class="header-container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">Brew & Go</a>
-                <ul class="nav-menu">
+    <header>
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label> 
+            
+            <div class="logo">BREW & GO</div>
+    
+            <span class="cart-icon">🛒</span>
+    
+            <div class="nav-dropdown">
+                <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Products</a>
-                        <ul class="dropdown-content">
-                            <li><a href="product1.html">Basic Brew</a></li>
-                            <li><a href="product2.html">Artisan Brew</a></li>
-                            <li><a href="product3.html">Non-Coffee</a></li>
-                            <li><a href="product4.html">Hot Beverages</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Activities</a>
-                        <ul class="dropdown-content">
-                            <li><a href="coming_soon.html">Coming Soon</a></li>
-                            <li><a href="current.html">Current</a></li>
-                            <li><a href="pass_activities.html">Past Activities</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="joinus.html">Join Us</a></li>
                     <li><a href="enquiry.html">Enquiry</a></li>
                     <li><a href="registration.html">Membership</a></li>
                 </ul>
-            </nav>
-        </div>
+            </div>
+        </nav> 
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Brew & Go Coffee</h1>
-            <p>Your perfect coffee experience awaits!</p>
-            <a href="product1.html" class="btn">View Our Brews</a>
+    <section class="section hero-section">
+        <h1 class="section-header">TASTE THE JOY OF THE EXTRAORDINARY</h1>
+        <p class="section-content">
+            Your perfect coffee experience awaits. Explore our curated selection of premium coffees.
+        </p>
+        <a href="products.html" class="btn">SHOP NOW</a>
     </section>
 
-    <!-- Promotions Section -->
-    <section class="promotions">
-        <h2>Latest Promotions</h2>
-        <p>Check out our latest deals and special offers!</p>
-        <!-- Promotion content -->
+    <!-- Introduction Section -->
+    <section class="section blend-section">
+        <h2 class="section-header" style="position: relative;">
+            Local brand specializing</br>
+            Handcrafted coffee beverages.</h2>
+        <div class="section-content"  style="position: relative;">
+            <p>Established in 2023</p>
+            <p><em>One Jaya Mall @ Kuching - 2024 </em></p>
+            <p><em>Plaza Merdeka Shopping Centre @ Kuching - 2025</em></p>
+        </div>
+        <a href="enquiry.html" class="btn">BOOK A TASTE</a>
     </section>
 
-    <!-- Latest News Section -->
-    <section class="news">
-        <h2>Latest News</h2>
-        <p>Stay updated with what's happening at Brew & Go!</p>
-        <!-- News content -->
+    <section class="barista-section">
+        <section class="barista-section">
+            <video class="barista-video" autoplay muted loop>
+                <source src="styles/images/Barista2.mp4" type="video/mp4">        
+                Your browser does not support the video tag.
+            </video>
+        
+            <div class="barista-image">
+                <a class="btn"> JOIN US? :3</a>
+            </div>
+        
+            <video class="barista-video" autoplay muted loop>
+                <source src="styles/images/Barista1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
     </section>
+        
+
+
+
+<!-- <a href="joinus.html" class="btn">JOIN US</a> -->
+
 
     <!-- Footer Section -->
     <footer>
@@ -76,6 +90,5 @@
             <a href="https://www.facebook.com/profile.php?id=61554234958482">Facebook</a>
         </p>
     </footer>
-
 </body>
 </html>
