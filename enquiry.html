@@ -1,1 +1,122 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+    <title>Brew & Go Coffee - Enquiry</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="enquiry-page">
+    <div id="top"></div>
+    <div id="top"></div>
+    <header>
+        <nav class="navbar">
+            <!-- Hamburger Icon (Hidden in Landscape) -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+    
+            <!-- Logo -->
+            <div class="logo">BREW & GO</div>
+    
+            <!-- Shopping Cart -->
+            <span class="cart-icon">🛒</span>
+    
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="joinus.html">Join Us</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="registration.html">Membership</a></li>
+            </ul>
+    
+            <!-- Mobile Dropdown Menu -->
+            <div class="nav-dropdown">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="enquiry.html">Enquiry</a></li>
+                    <li><a href="registration.html">Membership</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="enquiry-section">
+        <h2>Submit Your Enquiry</h2>
+        <form action="process_enquiry.php" method="POST">
+            <!-- First Name -->
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first_name" maxlength="25" pattern="[A-Za-z\s]+" required>
+            
+            <!-- Last Name -->
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last_name" maxlength="25" pattern="[A-Za-z\s]+" required>
+
+            <!-- Email -->
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            
+
+            <!-- Phone Number -->
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="0123456789" required>
+
+            <!-- Enquiry Type -->
+            <label for="enquiry">Enquiry Type:</label>
+            <select id="enquiry" name="enquiry" required>
+                <option value="">Select an enquiry type</option>
+                <option value="Membership">Membership</option>
+                <option value="Products">Products</option>
+                <option value="Pop-up Market Activities">Pop-up Market Activities</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Enquiry</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="products.html"><h3>PICK YOUR COFFEE</h3></a>
+                <a href="joinus.html"><h3>BECOME A BARISTA</h3></a>
+                <a href="#top"><h3>BREW N GO</h3></a>
+            </div>
+    
+            <div class="footer-subscribe">
+                <h3>DON'T MISS OUT, SUBSCRIBE TODAY</h3>
+                <form action="#" method="post">
+                    <input type="email" placeholder="My email address" required>
+                    <button type="submit">SIGN ME UP</button>
+                </form>
+            </div>
+    
+            <div class="footer-social">
+                <p>&copy; Brew & Go Coffee | 2025</p>
+                <div class="social-icons">
+                    <a href="mailto:104404059l@students.swinburne.edu.my" target="_blank">
+                        <img src="styles/images/Mail.png" alt="Mail" width="63" height="63">
+                    </a>
+                    <a href="https://www.instagram.com/brewngo.coffee/" target="_blank">
+                        <img src="styles/images/Instagram.png" alt="Instagram" width="63" height="63">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank">
+                        <img src="styles/images/Meta.png" alt="Facebook" width="63" height="63">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -13,15 +13,30 @@
 </head>
 
 <body>
+    <div id="top"></div>
     <header>
         <nav class="navbar">
+            <!-- Hamburger Icon (Hidden in Landscape) -->
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-icon">&#9776;</label> 
-            
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+    
+            <!-- Logo -->
             <div class="logo">BREW & GO</div>
     
+            <!-- Shopping Cart -->
             <span class="cart-icon">🛒</span>
     
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="joinus.html">Join Us</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="registration.html">Membership</a></li>
+            </ul>
+    
+            <!-- Mobile Dropdown Menu -->
             <div class="nav-dropdown">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -32,13 +47,15 @@
                     <li><a href="registration.html">Membership</a></li>
                 </ul>
             </div>
-        </nav> 
+        </nav>
     </header>
+    
+    
 
     <!-- Hero Section -->
     <section class="section hero-section">
-        <h1 class="section-header">TASTE THE JOY OF THE EXTRAORDINARY</h1>
-        <p class="section-content">
+        <h1 class="hero-header">TASTE THE JOY OF THE EXTRAORDINARY</h1>
+        <p class="section-content" style="font-size:27px; margin-bottom:6%;">
             Your perfect coffee experience awaits. Explore our curated selection of premium coffees.
         </p>
         <a href="products.html" class="btn">SHOP NOW</a>
@@ -46,10 +63,10 @@
 
     <!-- Introduction Section -->
     <section class="section blend-section">
-        <h2 class="section-header" style="position: relative;">
-            Local brand specializing</br>
+        <h2 class="blend-header" style="position: relative;">
+            Local brand specializing<br>
             Handcrafted coffee beverages.</h2>
-        <div class="section-content"  style="position: relative;">
+        <div class="section-content"  style="position: relative; font-size:27px; margin-bottom:3%;">
             <p>Established in 2023</p>
             <p><em>One Jaya Mall @ Kuching - 2024 </em></p>
             <p><em>Plaza Merdeka Shopping Centre @ Kuching - 2025</em></p>
@@ -65,7 +82,7 @@
             </video>
         
             <div class="barista-image">
-                <a class="btn"> JOIN US? :3</a>
+                <a href="joinus.html"class="btn"> JOIN US? :3</a>
             </div>
         
             <video class="barista-video" autoplay muted loop>
@@ -81,14 +98,38 @@
 <!-- <a href="joinus.html" class="btn">JOIN US</a> -->
 
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; Brew & Go Coffee | <a href="mailto:yourstudentemail@swinburne.edu.my">Email Us</a></p>
-        <p>
-            Follow us:
-            <a href="https://www.instagram.com/brewngo.coffee/">Instagram</a> |
-            <a href="https://www.facebook.com/profile.php?id=61554234958482">Facebook</a>
-        </p>
-    </footer>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="products.html"><h3>PICK YOUR COFFEE</h3></a>
+            <a href="joinus.html"><h3>BECOME A BARISTA</h3></a>
+            <a href="#top"><h3>BREW N GO</h3></a>
+        </div>
+
+        <div class="footer-subscribe">
+            <h3>DON'T MISS OUT, SUBSCRIBE TODAY</h3>
+            <form action="#" method="post">
+                <input type="email" placeholder="My email address" required>
+                <button type="submit">SIGN ME UP</button>
+            </form>
+        </div>
+
+        <div class="footer-social">
+            <p>&copy; Brew & Go Coffee | 2025</p>
+            <div class="social-icons">
+                <a href="mailto:104404059l@students.swinburne.edu.my" target="_blank">
+                    <img src="styles/images/Mail.png" alt="Mail" width="63" height="63">
+                </a>
+                <a href="https://www.instagram.com/brewngo.coffee/" target="_blank">
+                    <img src="styles/images/Instagram.png" alt="Instagram" width="63" height="63">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank">
+                    <img src="styles/images/Meta.png" alt="Facebook" width="63" height="63">
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
