@@ -61,6 +61,20 @@ html, body {
     transition: transform 0.3s ease;
 }
 
+@media screen and (max-width: 1100px) { /* Adjust width based on overlap */
+    .nav-menu {
+        display: none; /* Hide full menu */
+    }
+
+    .nav-icon {
+        display: block; /* Show hamburger icon */
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
+}
+
 .cart-icon {
     flex: 1;
     text-align: left;
@@ -198,7 +212,16 @@ html, body {
     font-weight: bold;
     text-align: center;
     background-blend-mode: overlay;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.3);
+}
+
+.barista-image .join-us-btn {
+    opacity: 0.3;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.barista-image:hover .join-us-btn {
+    opacity: 1;
 }
 
 .btn {
@@ -208,19 +231,22 @@ html, body {
     padding: 18px 45px;
     font-weight: bold;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     display: inline-block;
     font-size: 36px;
 }
 
 .btn:hover {
     background-color: #8f784b;
+    transform: translateY(-5px);
 }
+
 .footer {
-    background-color: black;
-    color: white;
-    padding: 40px 20px;
     text-align: center;
+    background-color: #111;
+    color: white;
+    padding: 20px 0;
+    margin-top: auto;
 }
 
 .footer-container {
@@ -300,71 +326,52 @@ html, body {
 
 @media (orientation: portrait) {
     .nav-icon {
-        display: block; /* Show hamburger */
+        display: block;
     }
 
     .nav-dropdown {
-        display: flex; /* Allow dropdown to function */
+        display: flex;
     }
 
     .nav-menu {
-        display: none; /* Hide full navbar */
+        display: none;
     }
 }
 
-/* When in landscape mode (desktop), show full navbar */
 @media (orientation: landscape) {
     .nav-icon {
-        display: none; /* Hide hamburger */
+        display: none;
     }
 
     .nav-menu {
-        display: flex; /* Show full navbar */
+        display: flex;
     }
 }
 
-/* Mobile-Friendly */
-@media (max-width: 800px) {
-    
-    .logo {
-        font-size: 20px;
-    }
-    
-    .nav-icon, 
-    .cart-icon {
-        font-size: 20px;
-        flex: 1;
-        text-align: left;
-        font-size: 24px;
-        cursor: pointer;
-        padding: 0 45px;
-    }
-    
-    .section-header {
-        font-size: 64px;
-    }
-    
-    .section-content {
-        font-size: 16px;
-    }
-    
-    .navbar {
-        flex-direction: column;
-        padding: 20px;
-    }
-    
-    .nav-dropdown {
-        width: 100%;
-        left: 0;
-        right: 0;
-        text-align: center;
-    }
-    
+.popup-box {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Enquiry.css */
 
-/* Apply background ONLY to the Enquiry Page */
+
 .enquiry-page {
     background-image: url('images/EnquiryBackground.png');
     background-size: cover;
@@ -372,18 +379,22 @@ html, body {
     background-repeat: no-repeat;
     background-blend-mode: overlay;
     background-color: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 
 .enquiry-section {
     width: 90%;
     max-width: 800px;
-    /*TOP RIGHT BOTTOM LEFT*/
-    margin:100px auto 0px auto;    
+    margin: 100px auto 50px; /* TOP-RIGHT-BOTTOM-LEFT */
     background: white;
     padding: 30px;
-    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    margin-bottom:50px;
 }
 
 .enquiry-section h2 {
@@ -399,6 +410,17 @@ form {
 
 label {
     font-weight: bold;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+legend {
+    font-weight: bold;
+    color: #b49a5f;
 }
 
 input,
@@ -455,4 +477,142 @@ footer a img {
 
 footer a img:hover {
     opacity: 0.7;
+}
+
+
+
+@keyframes appear {
+    from{
+        opacity: 0;
+        /* scale: 0.5 */ /*UP DOWN*/ 
+        transform:translateX(-100px)
+    }
+    to{
+        opacity:1;
+        /* scale: 1 */ /*UP DOWN*/
+        transform:translateX(0px)
+    }
+}
+
+/* .location-container {
+    display:flex;
+    justify-content: center;
+    gap: 60px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.location-map{
+    text-align: center;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 300px;
+    background-color: #b49a5f;
+    border-radius: 10px;
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0 cover 40%;
+    margin-bottom: 60px;
+}
+
+.location-map p {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin: 5px 0px;
+}
+
+.location-map iframe {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+} */
+/* Store Locator Layout */
+.store-locator {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+}
+
+/* Sidebar - Location Selection */
+.store-sidebar {
+    width: 25%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+/* Store Selection Items */
+.store-item {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Highlight Selected Store */
+input[type="radio"]:checked + label {
+    background: #b49a5f;
+    color: white;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+}
+
+/* Store Labels */
+.store-item label {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    text-align: center;
+}
+
+.store-item p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Hide Radio Buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* Map Container */
+.map-container {
+    width: 75%;
+    height: 100%;
+    position: relative;
+}
+
+/* Hide all maps initially */
+.map-wrapper {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Show Selected Map */
+#onejaya:checked ~ .map-container #map-onejaya-wrapper {
+    display: block;
+}
+
+#plaza-merdeka:checked ~ .map-container #map-plaza-wrapper {
+    display: block;
+}
+
+/* Map Styling */
+.map {
+    width: 100%;
+    height: 100%;
+    border: none;
 }

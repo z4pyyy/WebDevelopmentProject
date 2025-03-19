@@ -1,0 +1,27 @@
+/* Mobile View Adjustments */
+@media screen and (max-width: 1100px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        display: none;
+    }
+
+    .nav-icon {
+        display: block;
+    }
+
+    .hero-section {
+        font-size: 32px;
+        padding: 20px;
+    }
+
+    .enquiry-section {
+        width: 95%;
+        margin: 60px auto;
+        padding: 20px;
+    }
+}

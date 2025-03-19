@@ -9,6 +9,7 @@
     <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
     <title>Brew & Go Coffee - Home</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mobile.css" media="screen and (max-width: 1100px)">    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -82,7 +83,7 @@
             </video>
         
             <div class="barista-image">
-                <a href="joinus.html"class="btn"> JOIN US? :3</a>
+                <a href="joinus.html"class="btn join-us-btn"> JOIN US? :3</a>
             </div>
         
             <video class="barista-video" autoplay muted loop>
@@ -92,12 +93,44 @@
         </section>
     </section>
         
+    <h1>Find Us Here</h1>
 
-
-
-<!-- <a href="joinus.html" class="btn">JOIN US</a> -->
-
-
+    <section class="store-locator">
+        <!-- Sidebar with Location Selection -->
+        <div class="store-sidebar">
+            <h2>SELECT A LOCATION</h2>
+    
+            <!-- Onejaya Selection -->
+            <input type="radio" id="onejaya" name="store" checked>
+            <label for="onejaya" class="store-item">
+                Onejaya Shopping Complex
+                <p>🕘 9AM - 6PM Daily</p>
+            </label>
+    
+            <!-- Plaza Merdeka Selection -->
+            <input type="radio" id="plaza-merdeka" name="store">
+            <label for="plaza-merdeka" class="store-item">
+                Plaza Merdeka
+                <p>🕙 10AM - 10PM Daily</p>
+            </label>
+        </div>
+    
+        <!-- Map Container -->
+        <div class="map-container">
+            <!-- Onejaya Map -->
+            <iframe id="map-onejaya"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sOnejaya%20Shopping%20Complex!5e0!3m2!1sen!2smy!4v1710482345678"
+                class="map">
+            </iframe>
+    
+            <!-- Plaza Merdeka Map -->
+            <iframe id="map-plaza"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sPlaza%20Merdeka!5e0!3m2!1sen!2smy!4v1710482345678"
+                class="map">
+            </iframe>
+        </div>
+    </section>
+    
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-links">
@@ -108,12 +141,12 @@
 
         <div class="footer-subscribe">
             <h3>DON'T MISS OUT, SUBSCRIBE TODAY</h3>
-            <form action="#" method="post">
+            <form action="subscribe.php" method="POST" enctype="text/plain">
                 <input type="email" placeholder="My email address" required>
-                <button type="submit">SIGN ME UP</button>
+                <button type="submit">Subscribe</button>
             </form>
         </div>
-
+        
         <div class="footer-social">
             <p>&copy; Brew & Go Coffee | 2025</p>
             <div class="social-icons">
@@ -130,6 +163,5 @@
         </div>
     </div>
 </footer>
-
 </body>
 </html>
