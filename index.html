@@ -17,16 +17,27 @@
     <div id="top"></div>
     <header>
         <nav class="navbar">
-            <!-- Hamburger Icon (Hidden in Landscape) -->
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <label for="nav-toggle" class="nav-icon">&#9776;</label>
-    
-            <!-- Logo -->
-            <div class="logo">BREW & GO</div>
-    
+            
+            <a href="index.html" class="logo">
+                <img src="styles/images/Logo.png" alt="Brew & Go Logo">
+                BREW & GO
+            </a>
+            
             <!-- Shopping Cart -->
-            <span class="cart-icon">🛒</span>
-    
+            <input type="checkbox" id="cart-toggle" class="cart-toggle">
+            <label for="cart-toggle" class="cart-icon">🛒</label>
+            
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
+
+            <div class="cart-overlay"></div>
+
+
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
@@ -83,7 +94,7 @@
             </video>
         
             <div class="barista-image">
-                <a href="joinus.html"class="btn join-us-btn"> JOIN US? :3</a>
+                <a href="joinus.html" class="btn join-us-btn"> JOIN US? :3</a>
             </div>
         
             <video class="barista-video" autoplay muted loop>
@@ -93,43 +104,37 @@
         </section>
     </section>
         
-    <h1>Find Us Here</h1>
-
     <section class="store-locator">
         <!-- Sidebar with Location Selection -->
-        <div class="store-sidebar">
-            <h2>SELECT A LOCATION</h2>
-    
+        <div class="store-sidebar">    
             <!-- Onejaya Selection -->
-            <input type="radio" id="onejaya" name="store" checked>
+            <input type="radio" id="onejaya" name="store">
             <label for="onejaya" class="store-item">
                 Onejaya Shopping Complex
                 <p>🕘 9AM - 6PM Daily</p>
             </label>
+            <div class="map-wrapper" id="map-onejaya-wrapper">
+                <iframe id="map-onejaya"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sOnejaya%20Shopping%20Complex!5e0!3m2!1sen!2smy!4v1710482345678"
+                    class="map">
+                </iframe>
+            </div>
     
             <!-- Plaza Merdeka Selection -->
-            <input type="radio" id="plaza-merdeka" name="store">
+            <input type="radio" id="plaza-merdeka" name="store" checked>
             <label for="plaza-merdeka" class="store-item">
                 Plaza Merdeka
                 <p>🕙 10AM - 10PM Daily</p>
             </label>
-        </div>
-    
-        <!-- Map Container -->
-        <div class="map-container">
-            <!-- Onejaya Map -->
-            <iframe id="map-onejaya"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sOnejaya%20Shopping%20Complex!5e0!3m2!1sen!2smy!4v1710482345678"
-                class="map">
-            </iframe>
-    
-            <!-- Plaza Merdeka Map -->
-            <iframe id="map-plaza"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sPlaza%20Merdeka!5e0!3m2!1sen!2smy!4v1710482345678"
-                class="map">
-            </iframe>
+            <div class="map-wrapper" id="map-plaza-wrapper">
+                <iframe id="map-plaza"
+                    src="https://maps.google.com/maps?q=Plaza+Merdeka,Kuching,Sarawak&t=&z=15&ie=UTF8&iwloc=B&output=embed" 
+                    class="map" allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
+    
     
 <footer class="footer">
     <div class="footer-container">
@@ -150,14 +155,14 @@
         <div class="footer-social">
             <p>&copy; Brew & Go Coffee | 2025</p>
             <div class="social-icons">
-                <a href="mailto:104404059l@students.swinburne.edu.my" target="_blank">
-                    <img src="styles/images/Mail.png" alt="Mail" width="63" height="63">
+                <a href="mailto:104404059@students.swinburne.edu.my" target="_blank">
+                    <img src="styles/images/Mail.png" alt="Mail" width="120" height="120">
                 </a>
                 <a href="https://www.instagram.com/brewngo.coffee/" target="_blank">
-                    <img src="styles/images/Instagram.png" alt="Instagram" width="63" height="63">
+                    <img src="styles/images/Instagram.png" alt="Instagram" width="120" height="120">
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank">
-                    <img src="styles/images/Meta.png" alt="Facebook" width="63" height="63">
+                    <img src="styles/images/Meta.png" alt="Facebook" width="120" height="120">
                 </a>
             </div>
         </div>
