@@ -54,10 +54,10 @@ html, body {
     color: white;
     text-decoration: none; /* Remove underline */
     position: absolute;
+    align-items: center;
     left: 48.5%;
     transform: translateX(-50%);
     display: flex;
-    align-items: center;
     gap: 10px; /* Add spacing between logo and text */
 }
 
@@ -125,25 +125,34 @@ html, body {
 .cart-sidebar {
     position: fixed;
     top: 0;
-    left: -40%; /* Initially hidden */
+    left: -40%;
     width: 30%;
     height: 100vh;
-    background: #ab9155;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+    background: #ffcd5959;
+    box-shadow: -5px 0 10px rgba(61, 61, 61, 0.45);
     padding: 20px;
     transition: left 0.3s ease-in-out;
     z-index: 1500;
     color: #ffffff98;
 }
 
+.cart-sidebar h2 {
+    margin-top:30px;
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.cart-sidebar p{
+    font-size: 18px;
+}
+
 /* Close Button */
 .close-cart {
     display: block;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     text-align: left, center;
-    padding: 10px;
-    color:#ababab;
+    color:#ffffff;
 }
 
 /* Overlay Background (Blur Effect) */
@@ -256,19 +265,116 @@ html, body {
     box-sizing: border-box;
 }
 
+/* Featured Carousel Section */
+.featured-carousel {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/IndexBackground.png');
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 80px 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+/* Wrapper for the scrolling effect */
+.carousel-wrapper {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none;
+    position: relative;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Track that holds the cards */
+.carousel-track {
+    display: flex;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+}
+
+.carousel-card {
+    background: hsla(60, 2%, 62%, 0.45);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 400px; 
+    height: 550px;
+    margin: 20px;
+    flex-shrink: 0;
+    font-size: 21px;
+    color: rgb(26, 25, 25);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+    margin-top: 50px;
+}
+
+/* Fix Image Positioning */
+.carousel-card img {
+    width: auto;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+/* Keyframes for Infinite Scrolling */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-400px * 5)); /* Adjust based on the number of cards */
+    }
+}
+
+
 .hero-section {
-    background-image: url('images/IndexBackground.png');
+    background-image: url('../images/IndexBackground.png');
     background-blend-mode: overlay;
     background-color: rgba(0,0,0,0.3);
     font-size: 54px;
+    font-weight:bold;
 }
 
 .blend-section {
-    background-image: url('images/IndexBackground3.png');
+    background-image: url('../images/IndexBackground3.png');
     background-blend-mode: overlay;
     background-color: rgba(0,0,0,0.7);
-    font-size: 45px;
+}
 
+.blend-header {
+    margin-bottom: 0px;
+    font-size: 72px;
+}
+
+.blend-section h5{
+    font-size: 27px;
+}
+.bio-logo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.bio-logo img {
+    display: block;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .barista-section {
@@ -293,7 +399,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('images/BaristaPIC2.png');
+    background-image: url('../images/BaristaPIC2.png');
     background-size: cover;
     background-position: center;
     color: white;
@@ -463,7 +569,7 @@ html, body {
 
 
 .enquiry-page {
-    background-image: url('images/EnquiryBackground.png');
+    background-image: url('../images/EnquiryBackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -620,7 +726,7 @@ footer a img:hover {
 } */
 
 .store-locator {
-    /* background-image: url('images/IndexBackground6.png'); */
+    /* background-image: url('../images/IndexBackground6.png'); */
     background-blend-mode: overlay;
     background-color: rgba(0,0,0,0.7);
 }
