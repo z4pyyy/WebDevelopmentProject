@@ -15,17 +15,30 @@
 
 <body class="enquiry-page">
     <div id="top"></div>
-    <div id="top"></div>
     <header>
         <nav class="navbar">
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <label for="nav-toggle" class="nav-icon">&#9776;</label>
+            
             <a href="index.html" class="logo">
                 <img src="images/Logo.png" alt="Brew & Go Logo">
                 BREW & GO
-            </a>    
-            <span class="cart-icon">🛒</span>
-    
+            </a>
+            
+            <!-- Shopping Cart -->
+            <input type="checkbox" id="cart-toggle" class="cart-toggle">
+            <label for="cart-toggle" class="cart-icon">🛒</label>
+            
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
+
+            <div class="cart-overlay"></div>
+
+
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
@@ -35,6 +48,7 @@
                 <li><a href="registration.html">Membership</a></li>
             </ul>
     
+            <!-- Mobile Dropdown Menu -->
             <div class="nav-dropdown">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -48,20 +62,20 @@
         </nav>
     </header>
 
-    <section class="enquiry-section">
+    <section class="enquiry-hero">
+        <h1>How Can We Help You?</h1>
+        <p>We’re here to answer your questions, take suggestions, and assist with anything you need.</p>
+    </section>
+
+    <section class="enquiry-container">
         <h2>Submit Your Enquiry</h2>
         <form action="process_enquiry.php" method="POST">
-            <!-- First Name -->
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first_name" placeholder="Your first name" maxlength="25" pattern="[A-Za-z\s]+" required>
-            
-            <!-- Last Name -->
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last_name"  placeholder="Your Last name"maxlength="25" pattern="[A-Za-z\s]+" required>
-
-            <!-- Email -->
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+            <div class="input-group">
+                <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
+                <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
+            </div>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="text" id="phone" name="phone" placeholder="Phone Number" required>
 
             <!-- Address Fieldset -->
             <fieldset>
@@ -110,9 +124,8 @@
                 <option value="Products">Products</option>
                 <option value="Pop-up Market Activities">Pop-up Market Activities</option>
             </select>
-
-            <!-- Submit Button -->
-            <button type="submit">Submit Enquiry</button>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            <button type="submit">Submit</button>
         </form>
     </section>
 
@@ -125,24 +138,24 @@
             </div>
     
             <div class="footer-subscribe">
-                <h3>DON'T MISS OUT, SUBSCRIBE TODAY</h3>
-                <form action="#" method="post">
+                <h3>DON'T MISS OUT, <br> SUBSCRIBE TODAY</h3>
+                <form action="subscribe.php" method="POST" enctype="text/plain">
                     <input type="email" placeholder="My email address" required>
-                    <button type="submit">SIGN ME UP</button>
+                    <button type="submit">Subscribe</button>
                 </form>
             </div>
-    
+            
             <div class="footer-social">
                 <p>&copy; Brew & Go Coffee | 2025</p>
                 <div class="social-icons">
-                    <a href="mailto:104404059l@students.swinburne.edu.my" target="_blank">
-                        <img src="images/Mail.png" alt="Mail" width="63" height="63">
+                    <a href="mailto:104404059@students.swinburne.edu.my" target="_blank">
+                        <img src="images/Mail.png" alt="Mail" width="120" height="120">
                     </a>
                     <a href="https://www.instagram.com/brewngo.coffee/" target="_blank">
-                        <img src="images/Instagram.png" alt="Instagram" width="63" height="63">
+                        <img src="images/Instagram.png" alt="Instagram" width="120" height="120">
                     </a>
                     <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank">
-                        <img src="images/Meta.png" alt="Facebook" width="63" height="63">
+                        <img src="images/Meta.png" alt="Facebook" width="120" height="120">
                     </a>
                 </div>
             </div>
