@@ -1,14 +1,45 @@
 /* Mobile View Adjustments */
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 1300px){
+    
     .navbar {
-        flex-direction: row;
-        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
-    /* Display when checkbox is checked */
-    #nav-toggle:checked ~ .nav-menu {
-        display: flex;
+    .cart-icon{
+        margin-right: 36px;
+
     }
+
+    .nav-icon,
+    .cart-icon {
+        padding: 10px;
+        flex: 0 0 auto;
+        display:block;
+    }
+
+    .logo {
+        font-size: 15px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    /* Optional: Make sure icons don’t stretch navbar width */
+    .nav-icon img,
+    .cart-icon img {
+        max-width: 30px;
+        height: auto;
+    }
+
 
     .nav-menu {
         max-width: 1300px;
@@ -18,23 +49,6 @@
     .nav-menu li {
         display: block;
     }
-.nav-dropdown {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(25, 25, 25, 0.95);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-    z-index: 1000;
-}
 
     .nav-menu a {
         color: white;
@@ -51,35 +65,20 @@
     }
 
 
-    #nav-toggle:checked ~ .nav-menu {
-        transform: translateY(0);
-        opacity: 1;
+    #nav-toggle:checked ~ .nav-dropdown {
         visibility: visible;
-    }
-
-    .nav-icon {
-        display: block;
-        font-size: 32px;
-        cursor: pointer;
-        position: relative;
-        z-index: 1000;
-        color: white;
-        padding-left:30px;
-    }
-
-    .cart-icon{
-        padding: 0px 60px;
+        display: flex;
     }
 
     .hero-section {
         padding: 20px;
-        flex: 1 1 33.33%;
-        height: 100vh;
     }
 
     .hero-row{
         flex-direction: column !important;
+        padding-top: 90px;
     }
+    
     .hero-header{
     font-size: 63px;
     }
@@ -89,9 +88,6 @@
     font-size: 27px;
     }
 
-    .logo{
-    font-size: 15px;
-    }
 
     .barista-section{
         display: flex;
