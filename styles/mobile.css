@@ -1,14 +1,5 @@
 /* Mobile View Adjustments */
 @media only screen and (max-width: 1024px){
-    .navbar {
-        flex-direction: row;
-        padding: 10px;
-    }
-
-    /* Display when checkbox is checked */
-    #nav-toggle:checked ~ .nav-menu {
-        display: flex;
-    }
 
     .nav-menu {
         max-width: 1300px;
@@ -18,23 +9,6 @@
     .nav-menu li {
         display: block;
     }
-.nav-dropdown {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(25, 25, 25, 0.95);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-    z-index: 1000;
-}
 
     .nav-menu a {
         color: white;
@@ -51,20 +25,19 @@
     }
 
 
-    #nav-toggle:checked ~ .nav-menu {
+    #nav-toggle:checked ~ .nav-dropdown {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
+        display: flex;
     }
 
     .nav-icon {
-        display: block;
-        font-size: 32px;
+        font-size: 28px;
         cursor: pointer;
         position: relative;
-        z-index: 1000;
-        color: white;
-        padding-left:30px;
+        z-index: 1100;
+        transition: transform 0.3s ease;
     }
 
     .cart-icon{
@@ -74,12 +47,12 @@
     .hero-section {
         padding: 20px;
         flex: 1 1 33.33%;
-        height: 100vh;
     }
 
     .hero-row{
         flex-direction: column !important;
     }
+    
     .hero-header{
     font-size: 63px;
     }
@@ -137,4 +110,36 @@
         gap:30px;
         flex-direction: column;
     }
+}
+
+
+
+/* Extra Small Devices (e.g. iPhone SE, Galaxy Fold) */
+@media only screen and (max-width: 375px) {
+    /* Styles for very small phones */
+  }
+  
+/* Small Devices (e.g. iPhone XR, Pixel 7, Galaxy S8+) */
+@media only screen and (max-width: 480px) {
+/* Styles for standard smartphones */
+}
+
+/* Medium Devices (e.g. iPhone 12/14 Pro Max, Galaxy S20, small tablets) */
+@media only screen and (max-width: 768px) {
+/* Styles for large phones and small tablets */
+}
+
+/* Large Devices (e.g. iPad Air/Pro, Surface Pro 7, small laptops) */
+@media only screen and (max-width: 1024px) {
+/* Tablet styles */
+}
+
+/* Extra Large Devices (e.g. Asus Zenbook Fold, desktops) */
+@media only screen and (max-width: 1280px) {
+/* Small desktop styles */
+}
+
+/* Ultra-Wide Screens (e.g. widescreen monitors) */
+@media only screen and (min-width: 1281px) {
+/* Full desktop styles */
 }
