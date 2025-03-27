@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Profile</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div id="top"></div>
+    <header>
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+            
+            <a href="index.html" class="logo">
+                <img src="images/Logo.png" alt="Brew & Go Logo">
+                BREW & GO
+            </a>
+            
+            <div class="nav-spacer"></div>
+
+            <!-- Shopping Cart -->
+            <input type="checkbox" id="cart-toggle" class="cart-toggle">
+            <label for="cart-toggle" class="cart-icon">🛒</label>
+            
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
+
+            <div class="cart-overlay"></div>
+
+
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="joinus.html">Join Us</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="registration.html">Membership</a></li>
+                <li><a href="admin.html">View</a></li>                    
+            </ul>
+    
+            <!-- Mobile Dropdown Menu -->
+            <div class="nav-dropdown">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="enquiry.html">Enquiry</a></li>
+                    <li><a href="registration.html">Membership</a></li>
+                    <li><a href="admin.html">View</a></li>                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <section class="profile-container">
+        <div class="profile-card">
+          <img src="images/dev1.jpg" alt="Developer Photo" class="profile-photo">
+          <div class="profile-info">
+            <h2>Jane Doe</h2>
+            <p>Front-end Developer passionate about responsive design and user-friendly web experiences. Skilled in HTML, CSS, and PHP.</p>
+          </div>
+        </div>
+      
+        <div class="category-section">
+          <details>
+            <summary>Skills</summary>
+            <p>HTML, CSS, PHP</p>
+          </details>
+      
+          <details>
+            <summary>Projects</summary>
+            <p>Brew & Go Website, Personal Portfolio</p>
+          </details>
+      
+          <details>
+            <summary>Contact</summary>
+            <p>Email: jane@example.com</p>
+          </details>
+        </div>
+      </section>
+
+
+
+      <footer class="footer">
+        <div class="footer-container">
+          <!-- Left Section -->
+          <div class="footer-company">
+            <a href="#top"><p>Brew & Go Coffee</p></a>
+            <p>© COPYRIGHT 2025 BREW & GO</p>
+          </div>
+
+          <!-- Center Section (Social Media) -->
+          <div class="footer-social-links">
+            <p><strong>More About Us</strong></p>
+            <div class="social-icons">
+              <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+              <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+              <a href="#" target="_blank"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+              <a href="104404059@students.swinburne.edu.my" target="_blank"><img src="images/Mail.png" alt="Mail"></a>
+
+            </div>
+          </div>
+      
+          <!-- Right Section (Developers) -->
+          <div class="footer-developers">
+            <p></p>
+            <p><a href="profile1.html"> © Terence Wong</a></p>
+            <p><a href="profile2.html"> © Darren Chong</a></p>
+            <p><a href="profile3.html"> © Hans Yee</a></p>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

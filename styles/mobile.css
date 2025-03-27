@@ -103,6 +103,16 @@
         margin: 60px auto;
         padding: 20px;
     }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+      } 
+      
     .store-locator {
         flex-direction: column;
         height: auto;
@@ -124,13 +134,37 @@
         height: 400px;
         max-width: 600px;
     }
-    
-    .footer{
-        flex-direction: row;
-    }
 
-    .footer-container{
-        gap:30px;
+    .blend-section-split {
         flex-direction: column;
+        height: auto;
+      }
+    
+      .blend-left, .blend-right {
+        width: 100%;
+        height: auto;
+      }
+    
+      .blend-left {
+        padding: 40px 30px;
+      }
+    
+      .blend-right img {
+        width: 90%;
+        height: auto;
+      }
+
+      .perks-list.fancy li {
+        font-size: 18px;
+        min-height: 150px;
+        padding: 30px;
+      }
+      @keyframes gradientFlow {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
     }
 }
