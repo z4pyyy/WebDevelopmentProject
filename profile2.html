@@ -1,11 +1,22 @@
+<!-- <?php
+  session_start();
+?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Profile</title>
-  <link rel="stylesheet" href="styles/style.css">
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+    <title>Brew & Go Coffee - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div id="top"></div>
     <header>
@@ -36,13 +47,34 @@
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li class="dropdown">
+                  <a href="products.html">Products ▾</a>
+                  <ul class="dropdown-content">
+                    <li><a href="product1.html">Basic Brew</a></li>
+                    <li><a href="product2.html">Artisan Brew</a></li>
+                    <li><a href="product3.html">Non-Coffee</a></li>
+                    <li><a href="product4.html">Seasonal</a></li>
+                  </ul>
+                <li class="dropdown">
+                  <a href="blog.html">Blog ▾</a>
+                  <ul class="dropdown-content">
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Current Event</a></li>
+                    <li><a href="#">Past Events</a></li>
+                  </ul>
+                </li>
                 <li><a href="joinus.html">Join Us</a></li>
                 <li><a href="enquiry.html">Enquiry</a></li>
                 <li><a href="registration.html">Membership</a></li>
-                <li><a href="admin.html">View</a></li>                    
-            </ul>
+                <li><a href="view.html">View</a></li>                    
+                <!-- <li>
+                  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                    <a href="view.php">View</a>
+                  <?php else: ?>
+                    <a href="login.php">Login</a>
+                  <?php endif; ?>
+                </li> -->
+              </ul>
     
             <!-- Mobile Dropdown Menu -->
             <div class="nav-dropdown">
@@ -72,19 +104,66 @@
       
         <div class="category-section">
           <details>
+            <summary>Experience</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/Codligence.png" alt="Intern Company" class="category-icon">
+                <p>
+                  <strong>Intern at Codligence Sdn. Bhd.</strong><br>
+                  <span class="time-frame">2024 – 2025</span>
+                </p>
+              </li>
+            </ol>
+          </details>
+          
+          <details>
+            <summary>Education</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/swinburne.png" alt="Swinburne Logo" class="category-icon">
+                <span>Swinburne University – Bachelor in Computer Science</span>
+              </li>
+            </ol>
+          </details>
+          
+          <details>
             <summary>Skills</summary>
-            <p>HTML, CSS, PHP</p>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/HTML.png" alt="HTML Logo" class="category-icon">
+                <span>HTML5</span>
+              </li>
+              <li>
+                <img src="images/CSS.png" alt="CSS Logo" class="category-icon">
+                <span>CSS3</span>
+              </li>
+              <li>
+                <img src="images/PHP.png" alt="PHP Logo" class="category-icon">
+                <span>PHP</span>
+              </li>
+            </ol>
           </details>
-      
+
           <details>
-            <summary>Projects</summary>
-            <p>Brew & Go Website, Personal Portfolio</p>
+            <summary>Personal Achivements</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/Codligence.png" alt="Intern Company" class="category-icon">
+                <p>
+                  <strong>Intern at Codligence Sdn. Bhd.</strong><br>
+                  <span class="time-frame">2024 – 2025</span>
+                </p>
+              </li>
+            </ol>
           </details>
-      
-          <details>
-            <summary>Contact</summary>
-            <p>Email: jane@example.com</p>
-          </details>
+
+
+                    
+          
         </div>
       </section>
 

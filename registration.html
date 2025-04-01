@@ -1,1 +1,221 @@
-.
+<!-- <?php
+  session_start();
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+    <title>Brew & Go Coffee - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="registration-page">    
+  <div id="top"></div>
+    <header>
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+            
+            <a href="index.html" class="logo">
+                <img src="images/Logo.png" alt="Brew & Go Logo">
+                BREW & GO
+            </a>
+            
+            <div class="nav-spacer"></div>
+
+            <!-- Shopping Cart -->
+            <input type="checkbox" id="cart-toggle" class="cart-toggle">
+            <label for="cart-toggle" class="cart-icon">🛒</label>
+            
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
+
+            <div class="cart-overlay"></div>
+
+
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                  <a href="products.html">Products ▾</a>
+                  <ul class="dropdown-content">
+                    <li><a href="product1.html">Basic Brew</a></li>
+                    <li><a href="product2.html">Artisan Brew</a></li>
+                    <li><a href="product3.html">Non-Coffee</a></li>
+                    <li><a href="product4.html">Seasonal</a></li>
+                  </ul>
+                <li class="dropdown">
+                  <a href="blog.html">Blog ▾</a>
+                  <ul class="dropdown-content">
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Current Event</a></li>
+                    <li><a href="#">Past Events</a></li>
+                  </ul>
+                </li>
+                <li><a href="joinus.html">Join Us</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="registration.html">Membership</a></li>
+                <li><a href="view.html">View</a></li>                    
+                <!-- <li>
+                  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                    <a href="view.php">View</a>
+                  <?php else: ?>
+                    <a href="login.php">Login</a>
+                  <?php endif; ?>
+                </li> -->
+              </ul>
+    
+            <!-- Mobile Dropdown Menu -->
+            <div class="nav-dropdown">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="enquiry.html">Enquiry</a></li>
+                    <li><a href="registration.html">Membership</a></li>
+                    <li><a href="admin.html">View</a></li>                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+  <!-- Hero Section -->
+  <section class="enquiry-hero">
+    <h1>Join Brew & Go Rewards</h1>
+    <p>Register now and enjoy exclusive member perks, points, and special offers!</p>
+  </section>
+
+  <!-- Header Section -->
+  <!-- <section class="enquiry-header">
+    <div class="header-left">
+      <img src="images/Logo.png" alt="Brew & Go Logo" />
+    </div>
+    <div class="header-right">
+      <strong>BREW & GO COFFEE</strong><br />
+      Ground Floor, G63, Lot, Onejaya Shopping Complex,<br />
+      11430, Jalan Song, Tabuan Heights,<br />
+      93350 Kuching, Sarawak<br />
+      www.brewngo.com<br />
+      (+60)11-1653 1886
+    </div>
+  </section> -->
+
+  <!-- Registration Form -->
+  <section class="registration-container">
+    <h2>Membership Registration</h2>
+    <form action="process_registration.php" method="POST" class="registration-form">
+  
+      <div class="form-section">
+        <h3>Login Info</h3>
+        <div class="input-group-row">
+        <div class="input-group">
+          <label for="username">Login ID</label>
+          <input type="text" id="username" name="username" maxlength="10" pattern="[A-Za-z]+" placeholder="Username" required>
+          <p class="password-hint">⚠ A-Z only, case-sensitive, max 25 characters.</p>
+        </div>
+        <div class="input-group">
+          <label for="id_tag">ID Tag</label>
+          <input 
+            type="text" 
+            id="id_tag" 
+            name="id_tag" 
+            maxlength="3" 
+            pattern="#\d{2}" 
+            placeholder="#78" 
+            required
+            title="Must start with # followed by exactly 2 digits (e.g., #01)"
+          >
+          <p class="password-hint">⚠ Must begin with # followed by 2 digits (e.g., #01)</p>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+
+  
+      <div class="form-section">
+        <h3>Personal Info</h3>
+        <div class="input-group-row">
+          <div class="input-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" maxlength="25" pattern="[A-Za-z]+" placeholder="Jackie" required>
+          </div>
+          <div class="input-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" maxlength="25" pattern="[A-Za-z]+" placeholder="Chan" required>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Contact Info</h3>
+        <div class="input-group-row">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="meow@mail.com" required>
+          </div>
+          <div class="input-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(+60) 1234-5678" required>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Set Your Password</h3>
+        <div class="input-group-row">
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" maxlength="25" pattern="[A-Za-z]{1,25}" placeholder="Aa-Zz" required>
+            <p class="password-hint">⚠ A-Z only, case-sensitive, max 25 characters.</p>
+          </div>
+          <div class="input-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" maxlength="25" pattern="[A-Za-z]+" required>
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-company">
+        <a href="#top"><p>Brew & Go Coffee</p></a>
+        <p>© COPYRIGHT 2025 BREW & GO</p>
+      </div>
+
+      <div class="footer-social-links">
+        <p><strong>More About Us</strong></p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+          <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+          <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+          <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
+        </div>
+      </div>
+
+      <div class="footer-developers">
+        <p><a href="profile1.html">© Terence Wong</a></p>
+        <p><a href="profile2.html">© Darren Chong</a></p>
+        <p><a href="profile3.html">© Hans Yee</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
