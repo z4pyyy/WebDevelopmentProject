@@ -29,12 +29,10 @@
                 BREW & GO
             </a>
             
-            <div class="nav-spacer"></div>
 
             <!-- Shopping Cart -->
-            <input type="checkbox" id="cart-toggle" class="cart-toggle">
-            <label for="cart-toggle" class="cart-icon">🛒</label>
-            
+            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
+            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
             <div class="cart-sidebar">
                 <h2>Shopping Cart</h2>
                 <p>Your selected items will appear here.</p>
@@ -119,25 +117,23 @@
         <!-- Name Row -->
         <div class="input-row">
           <div class="input-col">
-            <label>Your Name</label>
+            <label><strong>Your Name</strong></label>
             <input type="text" name="first_name" placeholder="First Name" required>
-            <small>First Name</small>
           </div>
           <div class="input-col">
             <label>&nbsp;</label>
             <input type="text" name="last_name" placeholder="Last Name" required>
-            <small>Last Name</small>
           </div>
         </div>
     
         <!-- Contact Row -->
         <div class="input-row">
           <div class="input-col">
-            <label>Phone Number</label>
+            <label><strong>Number</strong></label>
             <input type="tel" name="phone" placeholder="(+60) 1234-5678" required>
           </div>
           <div class="input-col">
-            <label>Your E-mail Address</label>
+            <label><strong>Your E-mail Address</strong></label>
             <input type="email" name="email" placeholder="ex: email@example.com" required>
           </div>
         </div>
@@ -183,7 +179,7 @@
     
         <!-- Enquiry -->
         <div class="form-field">
-          <label for="enquiry">Enquiry Type</label>
+          <label for="enquiry"><strong>Enquiry Type</strong></label>
           <select id="enquiry" name="enquiry" required>
             <option value="">Select an enquiry type</option>
             <option value="Membership">Membership</option>
@@ -194,7 +190,7 @@
     
         <!-- Message -->
         <div class="input-full">
-          <label>Leave Your Message</label>
+          <label><strong>Leave Your Message</strong></label>
           <textarea name="message" rows="5" required></textarea>
         </div>
     
