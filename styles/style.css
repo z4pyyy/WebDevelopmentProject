@@ -216,7 +216,7 @@ html, body {
 }
 
 .cart-sidebar h2 {
-    margin-top:30px;
+    margin-top: 60px;
     font-size: 45px;
     margin-bottom: 10px;
 }
@@ -394,6 +394,19 @@ html, body {
     gap: 20px;
   }
   
+  .section-2 .btn {
+    margin-top: 30px; /* move it lower */
+    background-color: #e9bb77; /* lighter than before */
+    opacity: 0.6; /* a bit more visible */
+  }
+  
+  .section-2 .btn:hover {
+    background-color: #d2a659; /* slightly richer hover */
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  
+
   /* 3D-style heading */
   .hero-header {
     font-size: 150px;
@@ -412,7 +425,7 @@ html, body {
     display: inline-block;
     padding: 14px 28px;
     font-size: 18px;
-    background-color: #d2a659;
+    background-color: hwb(38 35% 18%);
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -424,7 +437,7 @@ html, body {
   
   .btn:hover {
     opacity: 1;
-    background-color: #8f784b;
+    background-color: #caab6c;
     transform: translateY(-5px);
   }
   
@@ -563,8 +576,8 @@ html, body {
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
         display: inline-block;
         animation: moodGlow 2s ease-in-out infinite alternate;
-
     }
+
     @keyframes moodGlow {
         0% {
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
@@ -573,6 +586,7 @@ html, body {
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
         }
     }
+
     .cta-button:hover {
         background: linear-gradient(135deg, #cdcdcd, #d2a659);
         color: white;
@@ -809,6 +823,9 @@ html, body {
         display: none;
     }
 
+    .cta-button {
+      padding: 27px 30px;
+    }
 }
 
 @media (orientation: landscape) {
@@ -1845,5 +1862,153 @@ details[open] {
     min-height: 100vh;
     padding: 40px 20px;
     box-sizing: border-box;
+  }
+
+
+  /* Joinus.html */
+  .joinus-hero {
+    margin-top: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px;
+    background-image: url('../images/BaristaPIC1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+    gap: 40px;
+    position: relative;
+  }
+  
+  .joinus-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 0;
+  }
+  
+  .joinus-text {
+    flex: 1;
+    color: #ffffff;
+    text-align: center;
+    max-width: 620px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+  }
+  
+  .joinus-text h1 {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    white-space: normal; /* Changed to allow wrapping on smaller screens */
+    letter-spacing: -0.5px;
+  }
+  
+  .joinus-text p {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.95);
+    text-align: justify;
+  }
+
+  .joinus-text,
+  .joinus-form {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+  
+  .joinus-form {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    color: #333;
+    margin-top: 3%;
+  }
+  
+  .joinus-form fieldset {
+    border: none;
+    padding: 0;
+  }
+  
+  .joinus-form legend {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .joinus-form label {
+    font-weight: bold;
+  }
+  
+  .joinus-form input,
+  .joinus-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .joinus-form button {
+    background-color: #ff9900;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .joinus-form button:hover {
+    background-color: #2c3ca4;
+  }
+  
+  .input-group-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  .form-submit-row {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .joinus-form button[type="submit"] {
+    background-color: #ff9900;
+    color: white;
+    padding: 14px 30px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  }
+  
+  .joinus-form button[type="submit"]:hover {
+    background-color: #2c3ca4;
+    transform: translateY(-2px);
   }
   

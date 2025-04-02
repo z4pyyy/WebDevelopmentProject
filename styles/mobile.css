@@ -87,16 +87,20 @@
 
     .hero-row{
         flex-direction: column !important;
-        padding-top: 90px;
+        padding-top: 60px;
     }
     
     .hero-header{
     font-size: 63px;
     }
 
-    .btn {
-    padding: 6px 9px;
-    font-size: 27px;
+    .section-2 .btn {
+        padding: 15px;
+        font-size: 18px;
+      }
+
+    .blend-header{
+        font-size: 45px;
     }
 
 
@@ -137,7 +141,7 @@
 
     .map-wrapper {
         display: none;
-        width: 100%;
+        width: 90%;
         height: 400px;
         max-width: 600px;
     }
@@ -169,11 +173,20 @@
         height: auto;
       }
 
+      .perks-list.fancy {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        list-style: none;
+      }
+
       .perks-list.fancy li {
         font-size: 18px;
         min-height: 150px;
-        padding: 30px;
+        padding: 20px;
       }
+
+
       @keyframes gradientFlow {
         0% {
             background-position: 0% 50%;
@@ -198,4 +211,5 @@
         flex-direction: column;
         align-items: center;
     }
+
 }
