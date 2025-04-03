@@ -17,8 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="login-page">
-  <div id="top"></div>
+<body>
+    <div id="top"></div>
     <header>
         <nav class="navbar">
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -28,9 +28,13 @@
                 <img src="images/Logo.png" alt="Brew & Go Logo">
                 BREW & GO
             </a>
+            
+            <div class="nav-spacer"></div>
+
             <!-- Shopping Cart -->
-            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
-            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
+            <input type="checkbox" id="cart-toggle" class="cart-toggle">
+            <label for="cart-toggle" class="cart-icon">🛒</label>
+            
             <div class="cart-sidebar">
                 <h2>Shopping Cart</h2>
                 <p>Your selected items will appear here.</p>
@@ -88,54 +92,104 @@
     </header>
 
 
-    <div class="login-wrapper">
-        <section class="registration-container">
-          <h2>Member Login</h2>
-          <form action="process_login.php" method="POST" class="registration-form">
-            <div class="form-section">
-              <h3>Login Credentials</h3>
-              <div class="input-group-row">
-                <div class="input-group">
-                  <label for="username">Login ID</label>
-                  <input type="text" id="username" name="username" maxlength="10" pattern="[A-Za-z]+" placeholder="Enter Login ID" required>
-                </div>
-                <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" maxlength="25" required>
+
+    <section class="profile-container">
+        <div class="profile-card">
+          <img src="images/dev1.jpg" alt="Developer Photo" class="profile-photo">
+          <div class="profile-info">
+            <h2>Jared Teh</h2>
+            <p>Rookie front-end developer with little experience but a willingness to learn.</p>
+          </div>
+        </div>
+      
+        <div class="category-section">
+          <details>
+            <summary>Experience</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <p>
+                  <strong>N/A</strong><br>
+                </p>
+              </li>
+            </ol>
+          </details>
+          
+          <details>
+            <summary>Education</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/swinburne.png" alt="Swinburne Logo" class="category-icon">
+                <span>Swinburne University – Foundation Studies (Information Technology/Multimedia)</span>
+              </li>
+            </ol>
+          </details>
+          
+          <details>
+            <summary>Skills</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <img src="images/HTML.png" alt="HTML Logo" class="category-icon">
+                <span>HTML5</span>
+              </li>
+              <li>
+                <img src="images/CSS.png" alt="CSS Logo" class="category-icon">
+                <span>CSS3</span>
+              </li>
+            </ol>
+          </details>
+
+          <details>
+            <summary>Personal Achievements</summary>
+            <hr>
+            <ol class="category-list">
+              <li>
+                <p>
+                  <strong>N/A</strong><br>
+                </p>
+              </li>
+            </ol>
+          </details>
+
+
+                    
+          
+        </div>
+      </section>
+
+
+
+      <footer class="footer">
+        <div class="footer-container">
+          <!-- Left Section -->
+          <div class="footer-company">
+            <a href="#top"><p>Brew & Go Coffee</p></a>
+            <p>© COPYRIGHT 2025 BREW & GO</p>
+          </div>
+
+          <!-- Center Section (Social Media) -->
+          <div class="footer-social-links">
+            <p><strong>More About Us</strong></p>
+            <div class="social-icons">
+              <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+              <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+              <a href="#" target="_blank"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+              <a href="104404059@students.swinburne.edu.my" target="_blank"><img src="images/Mail.png" alt="Mail"></a>
+
             </div>
+          </div>
+      
+          <!-- Right Section (Developers) -->
+          <div class="footer-developers">
+            <p></p>
+            <p><a href="profile1.html"> © Terence Wong</a></p>
+            <p><a href="profile2.html"> © Darren Chong</a></p>
+            <p><a href="profile3.html"> © Hans Yee</a></p>
+            <p><a href="profile4.html"> © Jared Teh</a></p>
+          </div>
         </div>
-    </div>
-    <button type="submit">Login</button>
-        </form>
-        </section>
-    </div>
-  
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-company">
-        <a href="#top"><p>Brew & Go Coffee</p></a>
-        <p>© COPYRIGHT 2025 BREW & GO</p>
-      </div>
-
-      <div class="footer-social-links">
-        <p><strong>More About Us</strong></p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
-          <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
-          <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
-          <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
-        </div>
-      </div>
-
-      <div class="footer-developers">
-        <p><a href="profile1.html">© Terence Wong</a></p>
-        <p><a href="profile2.html">© Darren Chong</a></p>
-        <p><a href="profile3.html">© Hans Yee</a></p>
-        <p><a href="profile4.html"> © Jared Teh</a></p>
-      </div>
-    </div>
-  </footer>
+      </footer>
 </body>
-
 </html>
-  
