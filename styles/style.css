@@ -77,7 +77,6 @@ html, body {
 
 }
 
-
 .nav-menu .dropdown-content {
     display: none;
     position: absolute;
@@ -367,22 +366,23 @@ html, body {
     background-repeat: no-repeat;
   }
   
+  
   /* Background images */
   .section-1 {
     background-image: url('../images/IndexBNG3.png');
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
   }
   
   .section-2 {
     background-image: url('../images/INDEXBNG5.png');
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
   }
   
   .section-3 {
     background-image: url('../images/INDEXBNG2.png');
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
   }
   
@@ -474,6 +474,17 @@ html, body {
         width: 100%;
     }
 
+    .featured-carousel::before,
+    .featured-carousel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+    
     .section-title{
         background: rgba(255, 255, 255, 0.03);
         color: white;
@@ -491,13 +502,15 @@ html, body {
       
     /* Wrapper for the scrolling effect */
     .carousel-wrapper {
-        display: flex;
-        overflow-x: auto;   
-        scroll-behavior: smooth;
-        width: 100%;
-        scrollbar-width: none;
-        position: relative;
-        scroll-snap-type: x mandatory;
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      width: 100%;
+      padding: 0 60px;
+      scrollbar-width: none;
+      position: relative;
+      scroll-snap-type: x mandatory;
+      box-sizing: border-box;
     }
 
     /* Hide scrollbar for WebKit browsers */
@@ -507,9 +520,17 @@ html, body {
 
     /* Track that holds the cards */
     .carousel-track {
-        display: flex;
-        width: calc(400px * 20);
-        animation: scroll 40s linear infinite;
+      display: flex;
+      gap: 30px;
+      animation: scroll 40s linear infinite;
+    }
+
+    .carousel-card:first-child {
+      margin-left: 60px;
+    }
+    
+    .carousel-card:last-child {
+      margin-right: 60px;
     }
 
     .carousel-card .drink-category {
@@ -522,12 +543,14 @@ html, body {
     }
     
     .carousel-card {
-        background: hsla(0, 0%, 100%, 0.45);
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: hsla(0, 0%, 100%, 0.7);
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         width: 400px;
         height: 550px;
-        margin: 20px;
+        margin-inline: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;        
         flex-shrink: 0;
         scroll-snap-align: center;
         overflow: hidden;
@@ -541,6 +564,10 @@ html, body {
         color: rgb(29, 29, 29);
     }
     
+    .carousel-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
     /* Category Header */
     .carousel-card h2 {
         width: 100%;
@@ -625,15 +652,14 @@ html, body {
     }
 
 
-@keyframes scroll {
-    0% {
-      transform: translateX(0);
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
 
 .blend-section h5{
     font-size: 27px;
@@ -655,16 +681,18 @@ html, body {
     width: 100%;
     height: 60vh;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.075);
+    background-blend-mode: overlay;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .barista-video {
     flex: 1;
     width: 100%;
     height: 100%;
-    mix-blend-mode: overlay;
     pointer-events: none;
     object-fit: cover;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .barista-image {
@@ -1195,51 +1223,15 @@ input:focus, select:focus {
     }
 }
 
-/* .location-container {
-    display:flex;
-    justify-content: center;
-    gap: 60px;
-    flex-direction: row;
-    align-items: center;
-}
-
-.location-map{
-    text-align: center;
-    flex-wrap: wrap;
-    width: 400px;
-    height: 300px;
-    background-color: #b49a5f;
-    border-radius: 10px;
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0 cover 40%;
-    margin-bottom: 60px;
-}
-
-.location-map p {
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    margin: 5px 0px;
-}
-
-.location-map iframe {
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-} */
-
 .store-locator {
-    background-image: url('../images/IndexBackground8.png');
-    background-blend-mode: overlay;
-    background-color: rgba(0,0,0,0.6);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center top -200px;
-    display: flex;
-    width: 100%;
-    height: 90vh;
+  background-image: url('../images/IndexBackground8.png');
+  background-blend-mode: overlay;
+  background-color: rgba(0,0,0,0.6);
+  background-size: cover;
+  background-position: center top -200px;
+  display: flex;
+  width: 100%;
+  height: 90vh;
 }
 
 /* Sidebar - Location Selection */
@@ -1290,10 +1282,10 @@ input[type="radio"] {
 
 /* Map Wrapper - Ensures only one map is displayed at a time */
 .map-wrapper {
-    display: none;
-    width: 100%;
-    height: 100%;
-    max-width: 1200px;
+  display: none;
+  width: 100%;
+  height: 45vh;
+  max-width: 1200px;
 }
 
 /* Show Selected Map */
@@ -2012,3 +2004,176 @@ details[open] {
     transform: translateY(-2px);
   }
   
+
+
+
+  /*Product.html*/
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .prd-menu {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow-y: auto;
+    display: flex;
+  }
+  
+  .prd-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .prd-menu ul li {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .prd-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .prd-menu ul li a:hover {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .prd-content-container {
+    margin-left: 200px;
+    padding: 30px;
+    width: calc(100% - 200px);
+    box-sizing: border-box;
+  }
+  
+  .prd-drink-name {
+    font-size: 45px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 90px;
+  }
+  
+  .prd-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+}
+  
+  .prd-product-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  .prd-product-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .prd-product-info {
+    text-align: left;
+  }
+  
+  .prd-description {
+    max-width: 300px;
+    margin: 10px 0;
+  }
+  
+  .prd-price {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .prd-name {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: transparent;
+    background: linear-gradient(90deg, #000000, #e8cf9e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+  }
+
+  /* Enhance all .prd-product-item with hover and spacing */
+  .prd-product-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .prd-product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Consistent naming */
+  .prd-description {
+    max-width: 320px;
+    margin: 10px 0;
+    font-size: 15px;
+    color: #444;
+  }
+
+  .prd-price {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 14px;
+    margin: 3px 0;
+  }
+
+  .prd-product-info h2 {
+    margin: 0;
+  }
+
+  /* Optional - product image hover pop */
+  .prd-product-image img:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
