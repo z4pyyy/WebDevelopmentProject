@@ -212,171 +212,94 @@
         align-items: center;
     }
 
-}
-
-
 
   /*Product.html*/
+  .prd-menu-toggle,
+  .prd-menu-btn,
   .prd-menu {
-    width: 200px;
-    background-color: #f4f4f4;
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    overflow-y: auto;
-    display: flex;
+  display: none;
   }
-  
-  .prd-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .prd-menu ul li {
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  
-  .prd-menu ul li a {
-    display: block;
-    width: 100%;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  
-  .prd-menu ul li a:hover {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .prd-content-container {
-    margin-left: 200px;
-    padding: 30px;
-    width: calc(100% - 200px);
-    box-sizing: border-box;
-  }
-  
+
   .prd-drink-name {
     font-size: 45px;
     text-align: center;
     margin-bottom: 30px;
-    margin-top: 90px;
+    margin-top: 0;
   }
-  
-  .prd-product-list {
+  .prd-toggle-wrapper {
+    margin-top: 60px;
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-}
-  
-  .prd-product-item {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
-    width: 100%;
+    padding: 10px;
   }
-  
-  .prd-product-image img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .prd-product-info {
-    text-align: left;
-  }
-  
-  .prd-description {
-    max-width: 300px;
-    margin: 10px 0;
-  }
-  
-  .prd-price {
+
+  .prd-menu-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
     font-weight: bold;
-    color: #007bff;
-  }
-  
-  .prd-name {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    color: transparent;
-    background: linear-gradient(90deg, #000000, #e8cf9e);
-    -webkit-background-clip: text;
-    background-clip: text;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
   }
 
-  /* Enhance all .prd-product-item with hover and spacing */
-  .prd-product-item {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    background-color: white;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    max-width: 900px;
+  .prd-menu-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Checkbox toggle hidden */
+  .prd-menu-toggle {
+    display: none;
+  }
+
+  /* Menu (hidden by default) */
+  .prd-menu {
+    display: none;
+    position: fixed;
+    left: 0;
     width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f8f8f8;
+    z-index: 1000;
+    padding: 20px 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
 
-  .prd-product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  /* Show menu when checkbox is checked */
+  .prd-menu-toggle:checked + .prd-menu-btn + .prd-menu {
+    display: block;
   }
 
-  /* Consistent naming */
-  .prd-description {
-    max-width: 320px;
-    margin: 10px 0;
-    font-size: 15px;
-    color: #444;
+  /* 2x2 layout */
+  .prd-menu ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+    list-style: none;
+    justify-items: center;
   }
 
-  .prd-price {
-    font-weight: bold;
-    color: #007bff;
-    font-size: 14px;
-    margin: 3px 0;
+  .prd-menu ul li {
+    width: 100%;
   }
 
-  .prd-product-info h2 {
-    margin: 0;
+  .prd-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
   }
-
-  /* Optional - product image hover pop */
-  .prd-product-image img:hover {
-    transform: scale(1.03);
-    transition: transform 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  }
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
