@@ -1,4 +1,4 @@
-html, body.index-page {
+html, body {
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -15,13 +15,11 @@ html, body.index-page {
 
 
 body.index-page {
-  background-image: url('../images/BNG1.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
-  background-blend-mode: overlay;
-  background-color: rgba(0, 0, 0, 0.72);
+  background: linear-gradient(to bottom, #2e1f11, #402f1a, #5a4229, #c89b63); 
 }
 
 
@@ -461,20 +459,30 @@ body.index-page {
     }
   }
   
-  
-
     .blend-section {
-            background-image: url('../images/IndexBackground3.png');
-            background-blend-mode: overlay;
-            background-color: rgba(0,0,0,0.7);
+      background-image: url('../images/IndexBackground3.png');
+      background-blend-mode: overlay;
+      background-color: rgba(0,0,0,0.7);
     }
 
     .carousel-container{
-      max-width: 90%;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      text-align: center;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      padding: 40px 60px;
+      border-radius: 100px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #292929;
+      background-image: url('../images/BNG1.png');
+      background-blend-mode: overlay;
+      background-color: rgba(0,0,0,0.7);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+
+
 
     /* Featured Carousel Section */
     .featured-carousel {
@@ -504,31 +512,40 @@ body.index-page {
     }
     
     .section-title{
-      padding: 3px 300px;
-        background: rgba(255, 255, 255, 0.03);
-        color: white;
-        margin: 60px 10px;        
-        font-size: 90px;
-        font-weight: bold;
-        border-radius: 10px;
-        text-decoration: none;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        box-shadow: 0 8px 18px 10px rgba(0, 0, 0,0.45);
-        display: inline-block;
-        white-space: nowrap;
-        text-align: center;
+      background: linear-gradient(184deg, #c99871, #926139, #ffffff);
+      background-size: 300% 300%;
+      animation: glowFlow 7s ease infinite;        
+      color: white;
+      font-size: 90px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 18px 10px rgba(0, 0, 0,0.45);
+      display: inline-block;
+      white-space: nowrap;
+      text-align: center;
+      margin: 0 auto 40px auto;
+      padding: 30px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;      
+      margin-bottom: 20px;  
       }
       
     /* Wrapper for the scrolling effect */
     .carousel-wrapper {
       display: flex;
-      overflow-x: auto;
+      overflow-x: hidden;
       scroll-behavior: smooth;
       width: 100%;
       padding: 0 60px;
       scrollbar-width: none;
       position: relative;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: none;
       box-sizing: border-box;
     }
 
@@ -541,17 +558,27 @@ body.index-page {
     .carousel-track {
       display: flex;
       gap: 30px;
+      width: max-content;
       animation: scroll 40s linear infinite;
       overflow-y: hidden;
     }
 
-    .carousel-card:first-child {
-      margin-left: 60px;
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }    
+
+    .carousel-card:first-child,.carousel-card:last-child {
+      margin-left: 0;
+      margin-right: 0;
     }
     
-    .carousel-card:last-child {
-      margin-right: 60px;
+    .carousel-wrapper {
+      margin-bottom: 40px;
     }
+    
+    .cta-button-wrapper {
+      margin-top: 40px;
+    }    
 
     .carousel-card .drink-category {
         background-color: rgba(255, 255, 255, 0.1);
@@ -563,8 +590,8 @@ body.index-page {
     }
     
     .carousel-card {
-        background: hsla(0, 0%, 100%, 0.7);
-        border-radius: 18px;
+      background: linear-gradient(175deg, #c99871, #926139, #ffffff);
+      border-radius: 18px;
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         width: 400px;
@@ -608,7 +635,7 @@ body.index-page {
     .cta-button-wrapper {
         text-align: center;
         margin-top: 30px;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
     }
     
     .cta-button {
@@ -665,13 +692,12 @@ body.index-page {
 
     /* Fix Image Positioning */
     .carousel-card img {
-        height: 230px;
+        max-height: 230px;
         width: auto;
         object-fit: contain;
         margin-top: 30px;
         margin-bottom: 10px;
     }
-
 
     @keyframes scroll {
       0% {
@@ -681,7 +707,7 @@ body.index-page {
         transform: translateX(-50%);
       }
     }
-
+    
 
 
 .blend-section h5{
@@ -1326,18 +1352,6 @@ input[type="radio"]:checked + label + .map-wrapper {
     overflow: hidden;
 }
   
-  /* Left Side */
-  .blend-left {
-    padding: 40px;
-    gap: 30px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
   
 /* Big Heading (h1) - with gradient & 3D style */
 .blend-header {
@@ -1397,15 +1411,16 @@ input[type="radio"]:checked + label + .map-wrapper {
   }
   
   .perk-grid-layout {
-    display: grid;
-    grid-template-columns: 100%;
+    display: flex;
+    flex-direction: row;
     gap: 1rem;
     margin: 2rem auto;
-    max-width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
+    max-width: 90%;
+    padding: 0 1rem;
+    flex-wrap: nowrap;
+    align-items: stretch;
   }
-  
+
   .perk-feature-card {
     flex: 1 1 45%;
     min-height: 500px;
@@ -1417,6 +1432,7 @@ input[type="radio"]:checked + label + .map-wrapper {
     position: relative;
   }
   
+  
   .perk-side-grid {
     flex: 1 1 55%;
     display: grid;
@@ -1424,6 +1440,7 @@ input[type="radio"]:checked + label + .map-wrapper {
     grid-auto-rows: 1fr;
     gap: 1rem;
   }
+  
   
   .perk-card {
     position: relative;
@@ -1925,6 +1942,15 @@ details[open] {
 
 
   /* Joinus.html */
+  .joinus-page{
+    background-image: url('../images/BaristaPIC1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #000;
+  }
+
   .joinus-hero {
     margin-top: 3%;
     display: flex;
@@ -1932,11 +1958,6 @@ details[open] {
     justify-content: space-between;
     align-items: flex-start;
     padding: 30px;
-    background-image: url('../images/BaristaPIC1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     color: white;
     min-height: 100vh;
     gap: 40px;
@@ -1966,7 +1987,7 @@ details[open] {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 25px;
-    white-space: normal; /* Changed to allow wrapping on smaller screens */
+    white-space: normal;
     letter-spacing: -0.5px;
   }
   
