@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Activities</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden; /* Prevent scrolling */
+    }
+
+    /* Title for Past Activities (always visible) */
+    .past-activities-title {
+      font-size: 40px;
+      margin-top: 20px;
+      font-style: italic;
+      color: #fff;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10; /* Ensure title stays on top */
+    }
+
+    /* Hide all pages by default */
+    .page {
+      display: none;
+      padding: 50px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Show the target page */
+    .page:target {
+      display: flex;
+    }
+
+    /* Layout adjustments */
+    .content {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      max-width: 1000px;
+    }
+
+    .activity-image {
+      width: 50%;
+      max-width: 400px;
+      margin-right: 20px;
+      border-radius: 15px;
+    }
+
+    .activity-description {
+      width: 50%;
+      text-align: center;
+      font-style: italic;
+      font-size: 20px;
+    }
+
+    .activity-button {
+      padding: 10px 20px;
+      background-color: #b49a5f;
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-style: italic;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .activity-button:hover {
+      background-color: #8f784b;
+      color: #000;
+    }
+
+    /* Navigation links to move between sections */
+    .nav-links {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-size: 18px;
+      margin-right: 15px;
+      text-decoration: none;
+      font-style: italic;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: #555;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Title for Past Activities -->
+  <div class="past-activities-title">Past Activities</div>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+    <a href="#page1">1</a>
+    <a href="#page2">2</a>
+    <a href="#page3">3</a>
+    <a href="#page4">4</a>
+    <a href="#page5">5</a>
+  </div>
+
+  <!-- Page 1 -->
+  <div id="page1" class="page">
+    <div class="content">
+      <img src="images/Past1.jpg" alt="Past Activity Image 1" class="activity-image">
+      <div class="activity-description">
+        <p>24th January 2025 <br><br>
+            FREE ORANGES!!! 🍊🧧🪭<br>
+            Redeem free oranges from us when you purchase 2 drinks & more.<br>
+            Starting from Saturday 25/1 and while stocks last. Come come!!</p>
+        <a href="https://www.facebook.com/share/p/1AXJ2yhYcx/" class="activity-button" target="_blank">Show in Web</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2" class="page">
+    <div class="content">
+      <img src="images/Past2.jpg" alt="Past Activity Image 2" class="activity-image">
+      <div class="activity-description">
+        <p>28th October 2024 <br><br>
+            Enjoy 11% OFF on your total bill, every Thursday! ☕️</p>
+        <a href="https://www.facebook.com/share/p/15ownGyQ5r/" class="activity-button" target="_blank">Show in Web</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div id="page3" class="page">
+    <div class="content">
+      <img src="images/Past3.jpg" alt="Past Activity Image 3" class="activity-image">
+      <div class="activity-description">
+        <p>9th September 2024 <br><br>
+            Lazy to go out? <br>
+            Order from us on Grabfood and get it delivered right at your door step! ☕️<br><br>
+            Get up to 50% off too! </p>
+        <a href="https://www.facebook.com/share/p/1AEvFEc2tA/" class="activity-button" target="_blank">Show in Web</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 4 -->
+  <div id="page4" class="page">
+    <div class="content">
+      <img src="images/Past4.jpg" alt="Past Activity Image 4" class="activity-image">
+      <div class="activity-description">
+        <p>4th April 2024 <br><br>
+            We’re excited to announce that our cozy little coffee cart is now open for all the coffee drinkers community! <br><br>
+            📍 Location: Main entrance of One Jaya <br>
+            🕰️ Opening hours: Saturday to Thursday 9am-6pm, close on Friday</p>
+        <a href="https://www.facebook.com/share/p/12H4yxZbY8g/" class="activity-button" target="_blank">Show in Web</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 5 -->
+  <div id="page5" class="page">
+    <div class="content">
+      <img src="images/Past5.jpg" alt="Past Activity Image 5" class="activity-image">
+      <div class="activity-description">
+        <p>28th March 2024 <br><br>
+            Finally.. the wait is over! <br>
+            Join us at the Grand Opening of our Coffee Cart this Saturday, 30th March 2024 at 9am onwards!<br><br>
+            Stand a chance to get our free goodie bag for the first 50 customers!! </p>
+        <a href="https://www.facebook.com/share/p/15xobh7QwJ/" class="activity-button" target="_blank">Show in Web</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

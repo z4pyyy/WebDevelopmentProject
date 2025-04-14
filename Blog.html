@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>BLOG</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      width: 1920px;
+      height: 2750px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 40px;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    /* --- Current Activities Section --- */
+    .current-activities {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 100px;
+      text-align: center;
+    }
+
+    .current-image {
+      flex: 1;
+      max-width: 50%;
+    }
+
+    .current-image img {  
+      width: 100%;
+      height: auto;
+      border: 2px solid #fff;
+      display: block;
+      transition: transform 0.4s ease;
+      border-radius: 20px;
+    }
+
+    .current-image img:hover {
+      transform: scale(1.05);
+    }
+
+    .current-description {
+      flex: 1;
+      font-style: italic;
+      font-size: 30px;
+    }
+
+    .current-description h3 {
+      font-style: italic;
+      font-size: 50px;
+    }
+
+    /* --- Bottom Section: Coming Soon + Past Activities --- */
+    .bottom-section {
+      display: flex;
+      gap: 40px;
+    }
+
+    .coming-soon, .past-activities {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .coming-soon {
+      width: 40%;
+      height:1500px;
+    }
+
+    .past-activities {
+      width: 60%;
+      height: 1500px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .coming-soon img, .past-activities img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #fff;
+    }
+
+    .view-more {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #b49a5f;
+      color: #fff;
+      text-decoration: none;
+      font-style: italic;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .view-more:hover {
+      background-color: #8f784b;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    /* --- Past Activities Container --- */
+    .past-slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- Individual Slide --- */
+    .past-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none; /* Only active when visible */
+    }
+
+    /* --- Slideshow Timing & Visibility Control --- */
+    .past-slide:nth-child(1) {
+      animation: slideFade1 9s ease-out infinite;
+    }
+    .past-slide:nth-child(2) {
+      animation: slideFade2 9s ease-out infinite;
+    }
+    .past-slide:nth-child(3) {
+      animation: slideFade3 9s ease-out infinite;
+    }
+
+    /* Keyframes for each slide with pointer control */
+    @keyframes slideFade1 {
+      0%, 90% { opacity: 0; pointer-events: none; }
+      10%, 30% { opacity: 1; pointer-events: auto; }
+      40% { opacity: 0; pointer-events: none; }
+    }
+
+    @keyframes slideFade2 {
+      0%, 30% { opacity: 0; pointer-events: none; }
+      40%, 60% { opacity: 1; pointer-events: auto; }
+      70% { opacity: 0; pointer-events: none; }
+    }
+
+    @keyframes slideFade3 {
+      0%, 60% { opacity: 0; pointer-events: none; }
+      70%, 90% { opacity: 1; pointer-events: auto; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+
+    /* --- Slide Image Styling --- */
+    .past-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    /* --- Dim Overlay on Hover --- */
+    .past-slide::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      transition: background-color 0.4s ease-in;
+      z-index: 1;
+    }
+
+    .past-slide:hover::after {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* --- Caption Styling (Center Description) --- */
+    .slide-caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centers the caption */
+      color: #fff;
+      font-size: 36px;
+      font-style: italic;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.4s ease-in;
+      text-align: center;
+      width: 80%;
+    }
+
+    /* --- Show Caption on Hover --- */
+    .past-slide:hover .slide-caption {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Title -->
+    <h1>BLOG</h1>
+
+    <!-- Current Activities -->
+    <div class="section-title">Current Activities</div>
+    <div class="current-activities">
+      <div class="current-image">
+        <a href="current.html"><img src="images/Current.jpg" alt="Current Activities"></a>
+      </div>
+      <div class="current-description">
+        <h3>What’s New!</h3>
+        <p>Get 1 free drinks and 1 RM10 Voucher!!......</p>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+
+      <!-- Coming Soon -->
+      <div class="coming-soon">
+        <div class="section-title">Coming Soon!</div>
+        <img src="images/ComingSoon.jpg" alt="Coming Soon">
+        <a class="view-more" href="coming_soon.html">VIEW MORE</a>
+      </div>
+
+      <!-- Past Activities -->
+      <div class="past-activities">
+        <div class="section-title">Past Activities</div>
+        <div class="past-slideshow">
+          <div class="past-slide">
+            <img src="images/Past1.jpg" alt="Past 1"> 
+            <div class="slide-caption">25th January 2025 <br><br> Redeem <b>Free</b> Oranges When 2 Drinks Purchase Was Made!! <br><br>  While Stocks Last!!</div>
+          </div>
+          <div class="past-slide">
+            <img src="images/Past2.jpg" alt="Past 2">
+            <div class="slide-caption">28th October 2024 <br><br> Enjoy <b>11% Off</b> Total Bill Every Thursday</div>
+          </div>
+          <div class="past-slide">
+            <img src="images/Past3.jpg" alt="Past 3">
+            <div class="slide-caption">9th September 2024 <br><br> Enjoy Hot Deals Up To <b>50% Off</b> From 9th -30th September 2024 while placing order on Grabfood. </div>
+          </div>
+        </div>
+        <a class="view-more" href="past_activities.html">VIEW MORE</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

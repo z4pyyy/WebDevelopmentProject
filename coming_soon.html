@@ -1,1 +1,87 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 60px;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    .coming-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #fff;
+    }
+
+    .coming-container img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .coming-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0);
+      transition: background-color 0.4s ease-in;
+    }
+
+    .coming-caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 20px;
+      font-style: italic;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+      z-index: 2;
+      width: 80%;
+    }
+
+    .coming-container:hover .coming-overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .coming-container:hover .coming-caption {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Coming Soon!</h1>
+
+  <div class="coming-container">
+    <img src="images/ComingSoon.jpg" alt="Coming Soon">
+    <div class="coming-overlay"></div>
+    <div class="coming-caption">
+      🌟 Stay Tune for May 2025!! 🌟 <br />
+      🎉 Exclusive Promotions or even New Flavours may going to lease soon! 🎉
+    </div>
+  </div>
+
+</body>
+</html>
