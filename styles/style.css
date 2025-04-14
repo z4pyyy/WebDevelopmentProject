@@ -480,8 +480,19 @@ body.index-page {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      max-width: 80%;
+      height:auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
+    
 
+    .index-product{
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      align-items: center;
+    }
 
 
     /* Featured Carousel Section */
@@ -511,28 +522,27 @@ body.index-page {
       pointer-events: none;
     }
     
+    .line {
+      flex: 1 1 0%;
+      border-top: 1px dotted black;
+      margin: 0px 2.5vw;
+  }
+
     .section-title{
-      background: linear-gradient(184deg, #c99871, #926139, #ffffff);
+      background: #ffffff;
       background-size: 300% 300%;
       animation: glowFlow 7s ease infinite;        
-      color: white;
+      color: #000;
       font-size: 90px;
       font-weight: bold;
-      border-radius: 10px;
       text-decoration: none;
-      transition: transform 0.3s ease;
-      box-shadow: 0 8px 18px 10px rgba(0, 0, 0,0.45);
-      display: inline-block;
       white-space: nowrap;
-      text-align: center;
       margin: 0 auto 40px auto;
       padding: 30px 60px;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
       width: 100%;
-      box-sizing: border-box;      
       margin-bottom: 20px;  
       }
       
