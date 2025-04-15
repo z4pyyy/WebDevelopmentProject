@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
 </head>
 
 <body class="index-page">
@@ -43,7 +44,7 @@
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li class="dropdown">
-                  <a href="product1.html">Products ▾</a>
+                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
                   <ul class="dropdown-content">
                     <li><a href="product1.html">Basic Brew</a></li>
                     <li><a href="product2.html">Artisan Brew</a></li>
@@ -51,16 +52,16 @@
                     <li><a href="product4.html">Seasonal</a></li>
                   </ul>
                 <li class="dropdown">
-                  <a href="blog.html">Blog ▾</a>
+                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
                   <ul class="dropdown-content">
                     <li><a href="#">Coming Soon</a></li>
                     <li><a href="#">Current Event</a></li>
                     <li><a href="#">Past Events</a></li>
                   </ul>
                 </li>
-                <li><a href="joinus.html">Join Us</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="registration.html">Membership</a></li>
+                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
+                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
+                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
                 <!-- <li>
                   <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                     <a href="view.php">View</a>
@@ -94,7 +95,7 @@
           <div class="center-content">
             <br><br>
             <h1 class="hero-header">&</h1>
-            <a href="product1.html" class="btn">LEARN MORE</a>
+            <a href="#productsection" class="btn">LEARN MORE</a>
           </div>
         </div>
       
@@ -105,10 +106,10 @@
         </div>
     </section>    
   
-    <div class="index-product">
+    <div class="index-product" id="productsection">
       <div class="line-title-wrapper">
         <span class="line"></span>
-        <h1 class="blend-header">What's the mood for today?</h1>
+        <h1 class="blend-header"><span class="hover-underline">Let your mood <br> lead the brew</span></h1>
         <span class="line"></span>
       </div>  
   <div class="carousel-container">
@@ -118,7 +119,9 @@
           <div class="carousel-track">
             <div class="carousel-card">
               <h2>Basic Brew</h2>
+              <div class="carousel-img-wrapper">
               <img src="images/OrangeAmericano.jpg" alt="Aerocano">
+              </div>                  
               <h3>Orange Americano</h3>
               <br>
               <p>Rich, creamy, and smooth espresso-based latte.</p>
@@ -126,7 +129,9 @@
             </div>
             <div class="carousel-card">
               <h2>Artisan Brew</h2>
-              <img src="images/ButterscotchLatte.jpg" alt="Butterscotch Latte">
+              <div class="carousel-img-wrapper">
+                <img src="images/ButterscotchLatte.jpg" alt="Butterscotch Latte">
+              </div>     
               <h3>Butterscotch Latte</h3>
               <br>
               <p>A perfect blend of espresso, vanilla, and caramel drizzle.</p>
@@ -134,7 +139,9 @@
             </div>
             <div class="carousel-card">
               <h2>Artisan Brew</h2>
-              <img src="images/CheeseAmericano.jpg" alt="Cheese Americano">
+              <div class="carousel-img-wrapper">
+                <img src="images/CheeseAmericano.jpg" alt="Cheese Americano">
+              </div>     
               <h3>Cheese Americano</h3>
               <br>
               <p>A bold americano topped with a rich cheese foam.</p>
@@ -142,7 +149,9 @@
                     </div>
                     <div class="carousel-card">
                         <h2>Non-Coffee</h2>
-                        <img src="images/YuriMatchaLatte.jpg" alt="Vienna Latte">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/YuriMatchaLatte.jpg" alt="Vienna Latte">
+                        </div>     
                         <h3>Yuri Matcha Latte</h3>
                         <br>
                         <p>Aromatic espresso with a frothy milk finish.</p>
@@ -150,7 +159,9 @@
                       </div>
                       <div class="carousel-card">
                         <h2>Artisan Brew</h2>
-                        <img src="images/IcedMocha.jpg" alt="Iced Mocha">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/IcedMocha.jpg" alt="Iced Mocha">
+                        </div>     
                         <h3>Iced Mocha</h3>
                         <br>
                         <p>Chocolate and espresso in perfect harmony.</p>
@@ -158,7 +169,9 @@
                     </div>
                     <div class="carousel-card">
                         <h2>Basic Brew</h2>
-                        <img src="images/OrangeAmericano.jpg" alt="Aerocano">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/OrangeAmericano.jpg" alt="Aerocano">
+                        </div>     
                         <h3>Orange Americano</h3>
                         <br>
                         <p>Rich, creamy, and smooth espresso-based latte.</p>
@@ -166,7 +179,9 @@
                       </div>
                       <div class="carousel-card">
                         <h2>Basic Brew</h2>
-                        <img src="images/IcedCappucino.jpg" alt="Butterscotch Latte">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/IcedCappucino.jpg" alt="Butterscotch Latte">
+                        </div>     
                         <h3>Iced Cappucino</h3>
                         <br>
                         <p>A perfect blend of espresso, vanilla, and caramel drizzle.</p>
@@ -174,7 +189,9 @@
                       </div>
                       <div class="carousel-card">
                         <h2>Artisan Brew</h2>
-                        <img src="images/OrangeMocha.jpg" alt="Cheese Americano">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/OrangeMocha.jpg" alt="Cheese Americano">
+                        </div>     
                         <h3>Orange Mocha</h3>
                         <br>
                         <p>A bold americano topped with a rich cheese foam.</p>
@@ -182,7 +199,9 @@
                       </div>
                       <div class="carousel-card">
                         <h2>Artisan Brew</h2>
-                        <img src="images/StrawberryLatte.jpg" alt="Vienna Latte">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/StrawberryLatte.jpg" alt="Vienna Latte">
+                        </div>     
                         <h3>Strawberry Latte</h3>
                         <br>
                         <p>Aromatic espresso with a frothy milk finish.</p>
@@ -190,7 +209,9 @@
                       </div>
                       <div class="carousel-card">
                         <h2>Artisan Brew</h2>
-                        <img src="images/PistachioLatte.jpg" alt="Iced Mocha">
+                        <div class="carousel-img-wrapper">
+                          <img src="images/PistachioLatte.jpg" alt="Iced Mocha">
+                        </div>     
                         <h3>Pistachio Latte</h3>
                         <br>
                         <p>Chocolate and espresso in perfect harmony.</p>
@@ -212,7 +233,7 @@
       <div class="seperater-text">
         <h1>Experience Brew & Go</h1>
         <p>Where coffee meets character.</p>
-        <a href="#mood" class="transparent-btn">Explore More</a>
+        <a href="activity1.html" class="transparent-btn">Explore More</a>
       </div>
     </div>
   </div>
@@ -220,55 +241,100 @@
       <div class="perks-membership-section">
         <div class="perks-line-title-wrapper">
           <span class="perks-line"></span>
-          <h1 class="perks-blend-header">Barista in the Blend	<br> Perks Never End</h1>
+          <h1 class="perks-blend-header"><span class="hover-underline"> Barista in the Blend	<br> Perks Never End </span></h1>
           <span class="perks-line"></span>
         </div>
         <div class="join-section-grid">
+
           <!-- LEFT: Join as Member -->
           <div class="join-card">
             <div class="card-title-overlay">
               <div class="line-title-wrapper">
                 <span class="line"></span>
-                <h1 class="blend-header">Front of the Queue</h1>
+                <h1 class="blend-header"><span class="hover-underline"> Front of the Queue </span></h1>
                 <span class="line"></span>
               </div>
             </div>
-        
-            <div class="card-image-wrapper">
-              <img src="images/IndexBNG5.png" alt="Join Our Membership" />
+            <div class="flip-container">
+              <div class="flipper">
+                <div class="flip-front">
+                  <img src="images/IndexBNG5.png" alt="Join Our Membership" />
+                </div>
+                <div class="flip-back">
+                  <div class="back-info">
+                    <h3>Join Brew & Go Rewards</h3>
+                    <h2>Register now and enjoy exclusive member perks, points, and special offers!</h2>
+                    
+                    <ul class="perk-list">
+                      <li>💳 Minimum top-up to join: <strong>RM30</strong></li>
+                      <li>💰 Top-up options: <strong>RM50, RM100, RM200</strong></li>
+                      <li>🔒 Credit stored is <strong>non-withdrawable</strong></li>
+                      <li>🕓 <strong>Lifetime Membership</strong></li>
+                    </ul>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                </div>
+              </div>
             </div>
-        
+          
             <div class="button-row">
-              <a href="registration.html" class="btn-primary">Join Now</a>
-              <a href="login.html" class="btn secondary">Already a member? Log In</a>
+              <a href="registration.html" class="btn-index-primary">Join Member</a>
+              <a href="login.html" class="btn-index-secondary"> Log In</a>
             </div>
           </div>
         
-          <!-- RIGHT: Join as Crew -->
+           <!-- RIGHT: Join as Crew -->
           <div class="join-card">
             <div class="card-title-overlay">
               <div class="line-title-wrapper">
                 <span class="line"></span>
-                <h1 class="blend-header">Behind the Brew</h1>
+                <h1 class="blend-header"><span class="hover-underline"> Behind the Brew </span></h1>
                 <span class="line"></span>
               </div>
             </div>
-        
-            <div class="card-image-wrapper">
-              <img src="images/BaristaPIC2.png" alt="Join the Crew" />
+
+            <div class="flip-container">
+              <div class="flipper">
+                <!-- Front Image -->
+                <div class="flip-front">
+                  <img src="images/BaristaPIC2.png" alt="Join the Crew" />
+                </div>
+                <!-- Back Info -->
+                <div class="flip-back">
+                  <div class="back-info">
+                    <h3>We're Hiring!</h3>
+                    <p><strong>Positions:</strong> Barista | Cashier</p>
+                    <p><strong>Locations:</strong><br>One Jaya Mall<br>Plaza Merdeka Mall</p>
+                    <p><strong>Benefits:</strong><br>
+                      EPF & SOCSO<br>
+                      Meal Allowance Provided<br>
+                      Sales Commission<br>
+                      Salary Range: RM1,700 – RM3,800
+                    </p>
+                    <br>
+                    <br>
+                  </div>
+                </div>
+              </div>
             </div>
-        
+
             <div class="button-row">
-              <a href="joinus.html" class="btn-primary">Join the Crew</a>
-              <a href="profile1.html" class="btn secondary">Meet the Team</a>
+              <a href="joinus.html" class="btn-index-primary">Join the Crew</a>
+              <a href="profile1.html" class="btn-index-secondary">Meet the Team</a>
             </div>
           </div>
+
         </div>
-        </div>
+      </div>
+
         <div class="membership-section-bng">
           <div class="membership-line-title-wrapper">
             <span class="membership-line"></span>
-            <h1 class="membership-blend-header">Membership Perks</h1>
+            <h1 class="membership-blend-header"> <span class="hover-underline"> Membership Perks </span></h1>
             <span class="membership-line"></span>
           </div>      
           <div class="membership-cards-row">
@@ -309,63 +375,68 @@
           </div>
         </div>
         <section class="store-locator">
-        <div class="store-location-wrapper">   
-                <!-- Onejaya Selection -->
-                <input type="radio" id="onejaya" name="store">
-                <label for="onejaya" class="store-item">
-                    One Jaya Mall
-                    <p>🕘 9AM - 6PM Daily</p>
-                </label>
-                <div class="map-wrapper" id="map-onejaya-wrapper">
-                    <iframe id="map-onejaya"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sOnejaya%20Shopping%20Complex!5e0!3m2!1sen!2smy!4v1710482345678"
-                        class="map">
-                    </iframe>
-                </div>
-        
-                <!-- Plaza Merdeka Selection -->
-                <input type="radio" id="plaza-merdeka" name="store" checked>
-                <label for="plaza-merdeka" class="store-item">
-                    Plaza Merdeka
-                    <p>🕙 10AM - 10PM Daily</p>
-                </label>
-                <div class="map-wrapper" id="map-plaza-wrapper">
-                    <iframe id="map-plaza"
-                        src="https://maps.google.com/maps?q=Plaza+Merdeka,Kuching,Sarawak&t=&z=15&ie=UTF8&iwloc=B&output=embed" 
-                        class="map" allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-            <div class="store-info-wrapper">
-              <div class="store-about-box">
-                <h2>About Us</h2>
-                <p>Brew & Go. Coffee is a local Kuching-based brand specializing in handcrafted coffee beverages. In
-                  addition to coffee, their menu also includes non-coffee beverages such as matcha and chocolate.
-                  Established in 2023 as a home-based business, Brew & Go opened its first coffee kiosk at One Jaya
-                  Mall in 2024. Recently, they expanded and launched their second kiosk at Plaza Merdeka Shopping
-                  Centre and are now seeking opportunities for further growth.</p>
-                <p>At Brew & Go, we are passionate about crafting the perfect cup of coffee. Our mission is to provide you with a unique and delightful coffee experience that you can enjoy on the go.</p>
-                <p>Whether you're in a hurry or looking to relax, our expertly brewed beverages are designed to satisfy your cravings.</p>
-                <p>Join us at our locations and discover the world of Brew & Go!</p>
+          <div class="map-line-title-wrapper">
+            <span class="map-line"></span>
+            <h1 class="map-blend-header"><span class="hover-underline">Find us here - Kuching</span></h1>
+            <span class="map-line"></span>
+          </div>  
+          <div class="store-location">
+            <!-- One Jaya Mall -->
+            <div class="store-card">
+              <!-- LEFT SIDE: Location Name -->
+              <div class="store-info">
+                <h2 class="store-name">📍 <a href="https://www.google.com/maps?ll=1.518072,110.36579&z=16&t=m&hl=en-US&gl=US&mapclient=embed&q=Onejaya+Shopping+Complex+Tabuan+Heights+93350+Kuching+Sarawak"> One Jaya Mall</h2></a>
+                <p class="store-hours">🕙 9AM – 6PM Daily</p>
+              </div>
+            
+              <!-- RIGHT SIDE: Embedded Map -->
+              <div class="map-wrapper">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.366462936843!2d110.3438275!3d1.5566899999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7f35c6fd89b%3A0x16b49ebadfbb7e87!2sOnejaya%20Shopping%20Complex!5e0!3m2!1sen!2smy!4v1710482345678"
+                  class="map"
+                  allowfullscreen>
+                </iframe>
               </div>
             </div>
-          </section>
-        <section class="barista-section">
-            <video class="barista-video" autoplay muted loop>
-                <source src="images/Barista2.mp4" type="video/mp4">        
-                Your browser does not support the video tag.
-            </video>
-        
-            <div class="barista-image">
-                <a href="joinus.html" class="btn join-us-btn"> JOIN US? :3</a>
+            
+            <!-- Plaza Merdeka -->
+            <div class="store-card">
+              <!-- LEFT SIDE: Location Name -->
+              <div class="store-info">
+                <h2 class="store-name">📍 <a href="https://www.google.com/maps?ll=1.558574,110.344017&z=15&t=m&hl=en-US&gl=US&mapclient=embed&cid=1175031353901621320">Plaza Merdeka</h2></a>
+                <span class="store-hours">🕙 10AM – 10PM Daily</span>
+              </div>
+              <div class="map-wrapper">
+                <iframe 
+                  src="https://maps.google.com/maps?q=Plaza+Merdeka,Kuching,Sarawak&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                  class="map"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-        
-            <video class="barista-video" autoplay muted loop>
+            </div>
+          </section>
+
+          <section class="barista-section">
+            <div class="barista-video-wrapper">
+              <video class="barista-video" autoplay muted loop>
+                <source src="images/Barista2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          
+            <div class="barista-image">
+              <a href="joinus.html" class="btn join-us-btn"> JOIN US? :3</a>
+            </div>
+          
+            <div class="barista-video-wrapper">
+              <video class="barista-video" autoplay muted loop>
                 <source src="images/Barista1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-            </video>
-        </section>
-      </div>
+              </video>
+            </div>
+          </section>
+          
         
         <footer class="footer">
             <div class="footer-container">
