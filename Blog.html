@@ -1,271 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=1920, initial-scale=1.0">
-  <title>BLOG</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      width: 1920px;
-      height: 2750px;
-      box-sizing: border-box;
-    }
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+    <title>Brew & Go Coffee - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
+</head>
 
-    .container {
-      padding: 40px;
-    }
+<body class="blog-page">
+    <div id="top"></div>
+    <header>
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+            
+            <a href="index.html" class="logo">
+                <img src="images/Logo.png" alt="Brew & Go Logo">
+                BREW & GO
+            </a>
+            
+            <!-- Shopping Cart -->
+            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
+            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
 
-    h1 {
-      font-size: 60px;
-      font-style: italic;
-      text-align: center;
-      margin-bottom: 40px;
-    }
+            <div class="cart-overlay"></div>
 
-    .section-title {
-      font-size: 40px;
-      font-style: italic;
-      margin-bottom: 20px;
-    }
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li class="dropdown">
+                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
+                  <ul class="dropdown-content">
+                    <li><a href="product1.html">Basic Brew</a></li>
+                    <li><a href="product2.html">Artisan Brew</a></li>
+                    <li><a href="product3.html">Non-Coffee</a></li>
+                    <li><a href="product4.html">Seasonal</a></li>
+                  </ul>
+                <li class="dropdown">
+                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
+                  <ul class="dropdown-content">
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Current Event</a></li>
+                    <li><a href="#">Past Events</a></li>
+                  </ul>
+                </li>
+                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
+                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
+                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
+                <!-- <li>
+                  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                    <a href="view.php">View</a>
+                  <?php else: ?>
+                    <a href="login.php">Login</a>
+                  <?php endif; ?>
+                </li> -->
+              </ul>
+    
+            <!-- Mobile Dropdown Menu -->
+            <div class="nav-dropdown">
+                <ul>
+                    <li><a href="product1.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="enquiry.html">Enquiry</a></li>
+                    <li><a href="registration.html">Membership</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<style>
 
-    /* --- Current Activities Section --- */
-    .current-activities {
-      display: flex;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 100px;
-      text-align: center;
-    }
+.blog-page{
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
 
-    .current-image {
+.blog-container{
+  display:flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blog-title{
+  background-image: url('../images/IndexBackground8.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  background-position: center 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  margin-bottom: 30px;
+  margin-top: 90px;
+  height: 950px;
+  display:flex;
+  text-align: center;
+  align-items:center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blog-title h1{
+  font-size: 150px;
+  font-weight: 700;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  color: white;
+  margin: 20px auto;
+}
+
+.blog-title h3{
+  font-size: 50px;
+  font-weight: 700;
+  font-family: 'Times New Roman', Times, serif;
+  color:white;
+}
+
+.blog-section-title{
+  display:flex;
+  background-color: white;
+  height: 300px;
+  width:100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-section-title h2{
+  font-size: 72px;
+  font-weight: 100;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  color: black;
+}
+
+.blog-transparent-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width:10%;
+  height:80px;
+  font-size: 27px;
+  }
+  
+  .blog-transparent-btn:hover {
+    background-color: white;
+    color: black;
+  }
+
+.current-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.current-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: white;
+  padding: 40px 60px;
+  gap: 100px;
+  position: relative;
+}
+
+.current-info {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.current-picture img {
+  max-height: 600px;
+  width: auto;
+  border-radius: 12px;
+}
+
+.coming-soon img,
+.past-activities img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.description h2,
+.coming-soon h2,
+.past-activities h2 {
+  margin-top: 0;
+  font-size: 54px;
+  color: #b49a5f;
+}
+
+.activities-title h2{
+  margin-top: 0;
+  font-size: 63px;
+  color: #b49a5f;
+  text-align: center;
+}
+
+.description p{
+  color:rgb(0, 0, 0);
+  font-size: 27px;
+  text-align: justify;
+}
+
+.blog-time-frame {
+  position: absolute;
+  bottom: 30px;
+  right: 60px;
+  padding: 20px 30px;
+  background-color: #f9f9f9;
+  border-left: 6px solid #b49a5f;
+  border-radius: 10px;
+  color: #333;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+}
+
+.blog-time-frame h2 {
+  font-size: 18px;
+  color: #b49a5f;
+  margin: 10px 0 4px;
+  text-align:left;
+}
+
+.blog-time-frame p {
+  text-align: left;
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+
+
+.blog-bottom-title {
+  background-color: white;
+  padding: 60px 0;
+}
+
+.blog-bottom-title h2 {
+  font-size: 72px;
+  font-weight: 100;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  color: black;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 60px;
+  background-color: #ffffff;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.coming-soon-box,
+.past-activities {
+  flex: 1 1 45%;
+  height: 1100px;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #a72727;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.past-slide img,
+.coming-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.coming-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.coming-image:hover img {
+  filter: blur(5px);
+}
+
+.coming-image:hover .coming-caption {
+  opacity: 1;
+}
+
+.coming-image,
+.past-slideshow {
+  position: relative;
+    width: 100%;
+    height: 1100px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.past-slide:hover img {
+  filter: blur(5px);
+}
+
+.past-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.4s ease-in-out;
+  z-index: 1;
+}
+
+.past-slide:hover::after {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.past-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 0;
+  animation: fadeSlide 36s ease-in-out infinite;
+}
+
+.past-slideshow:hover .past-slide {
+  animation-play-state: paused;
+}
+
+.s1 { animation-delay: 0s; }
+.s2 { animation-delay: 6s; }
+.s3 { animation-delay: 12s; }
+.s4 { animation-delay: 18s; }
+.s5 { animation-delay: 24s; }
+.s6 { animation-delay: 30s; }
+
+@keyframes fadeSlide {
+  0%, 14%   { opacity: 0; z-index: 0; }
+  15%, 30%  { opacity: 1; z-index: 1; }
+  31%, 100% { opacity: 0; z-index: 0; }
+}
+
+.no-animation {
+  opacity: 1 !important;
+  z-index: 1 !important;
+  animation: none !important;
+}
+
+/* Base styling */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+
+.past-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.slide-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-style: italic;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+  text-align: center;
+}
+
+.past-slide:hover .slide-caption {
+  opacity: 1;
+}
+
+.end-line {
       flex: 1;
-      max-width: 50%;
-    }
-
-    .current-image img {  
-      width: 100%;
-      height: auto;
-      border: 2px solid #fff;
-      display: block;
-      transition: transform 0.4s ease;
-      border-radius: 20px;
-    }
-
-    .current-image img:hover {
-      transform: scale(1.05);
-    }
-
-    .current-description {
-      flex: 1;
-      font-style: italic;
-      font-size: 30px;
-    }
-
-    .current-description h3 {
-      font-style: italic;
-      font-size: 50px;
-    }
-
-    /* --- Bottom Section: Coming Soon + Past Activities --- */
-    .bottom-section {
-      display: flex;
-      gap: 40px;
-    }
-
-    .coming-soon, .past-activities {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .coming-soon {
-      width: 40%;
-      height:1500px;
-    }
-
-    .past-activities {
-      width: 60%;
-      height: 1500px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .coming-soon img, .past-activities img {
-      width: 100%;
-      height: auto;
-      border: 2px solid #fff;
-    }
-
-    .view-more {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #b49a5f;
-      color: #fff;
-      text-decoration: none;
-      font-style: italic;
-      font-size: 16px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .view-more:hover {
-      background-color: #8f784b;
-      color: #000;
-      transform: translateY(-2px);
-    }
-
-    /* --- Past Activities Container --- */
-    .past-slideshow {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* --- Individual Slide --- */
-    .past-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none; /* Only active when visible */
-    }
-
-    /* --- Slideshow Timing & Visibility Control --- */
-    .past-slide:nth-child(1) {
-      animation: slideFade1 9s ease-out infinite;
-    }
-    .past-slide:nth-child(2) {
-      animation: slideFade2 9s ease-out infinite;
-    }
-    .past-slide:nth-child(3) {
-      animation: slideFade3 9s ease-out infinite;
-    }
-
-    /* Keyframes for each slide with pointer control */
-    @keyframes slideFade1 {
-      0%, 90% { opacity: 0; pointer-events: none; }
-      10%, 30% { opacity: 1; pointer-events: auto; }
-      40% { opacity: 0; pointer-events: none; }
-    }
-
-    @keyframes slideFade2 {
-      0%, 30% { opacity: 0; pointer-events: none; }
-      40%, 60% { opacity: 1; pointer-events: auto; }
-      70% { opacity: 0; pointer-events: none; }
-    }
-
-    @keyframes slideFade3 {
-      0%, 60% { opacity: 0; pointer-events: none; }
-      70%, 90% { opacity: 1; pointer-events: auto; }
-      100% { opacity: 0; pointer-events: none; }
-    }
-
-    /* --- Slide Image Styling --- */
-    .past-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-
-    /* --- Dim Overlay on Hover --- */
-    .past-slide::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0);
-      transition: background-color 0.4s ease-in;
-      z-index: 1;
-    }
-
-    .past-slide:hover::after {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* --- Caption Styling (Center Description) --- */
-    .slide-caption {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* Centers the caption */
-      color: #fff;
-      font-size: 36px;
-      font-style: italic;
-      opacity: 0;
-      z-index: 2;
-      transition: opacity 0.4s ease-in;
-      text-align: center;
-      width: 80%;
-    }
-
-    /* --- Show Caption on Hover --- */
-    .past-slide:hover .slide-caption {
-      opacity: 1;
+      border-top: 3px dotted #000;
+      height: 1px;
+      margin: 0 1.5vw;
     }
 
   </style>
 </head>
-<body>
-  <div class="container">
-    <!-- Title -->
-    <h1>BLOG</h1>
 
-    <!-- Current Activities -->
-    <div class="section-title">Current Activities</div>
-    <div class="current-activities">
-      <div class="current-image">
-        <a href="current.html"><img src="images/Current.jpg" alt="Current Activities"></a>
-      </div>
-      <div class="current-description">
-        <h3>What’s New!</h3>
-        <p>Get 1 free drinks and 1 RM10 Voucher!!......</p>
-      </div>
+  <section class="blog-container">
+    <div class="blog-title">
+      <h1>BLOG</h1>
+      <h3>Find out about the future, present, pass of Brew & Go</h3>
+      <a href="#current-activities" class="blog-transparent-btn">Explore More</a>
     </div>
-
-    <div class="bottom-section">
-
-      <!-- Coming Soon -->
-      <div class="coming-soon">
-        <div class="section-title">Coming Soon!</div>
-        <img src="images/ComingSoon.jpg" alt="Coming Soon">
-        <a class="view-more" href="coming_soon.html">VIEW MORE</a>
+    <div class="blog-section-title" id="current-activities">
+      <h2 >Current Activities</h2>
       </div>
+      <div class="line-title-wrapper">
+        <span class="line"></span>
+      </div>  
 
-      <!-- Past Activities -->
-      <div class="past-activities">
-        <div class="section-title">Past Activities</div>
-        <div class="past-slideshow">
-          <div class="past-slide">
-            <img src="images/Past1.jpg" alt="Past 1"> 
-            <div class="slide-caption">25th January 2025 <br><br> Redeem <b>Free</b> Oranges When 2 Drinks Purchase Was Made!! <br><br>  While Stocks Last!!</div>
-          </div>
-          <div class="past-slide">
-            <img src="images/Past2.jpg" alt="Past 2">
-            <div class="slide-caption">28th October 2024 <br><br> Enjoy <b>11% Off</b> Total Bill Every Thursday</div>
-          </div>
-          <div class="past-slide">
-            <img src="images/Past3.jpg" alt="Past 3">
-            <div class="slide-caption">9th September 2024 <br><br> Enjoy Hot Deals Up To <b>50% Off</b> From 9th -30th September 2024 while placing order on Grabfood. </div>
+
+      <div class="top-row">
+        <div class="current-wrapper">
+          <div class="current-section">
+            <div class="current-picture">
+              <img src="images/Current.jpg" alt="Current Promo">
+            </div>
+        
+            <div class="current-info">
+              <div class="activities-title">
+                <h2>What's New?</h2>
+              </div>
+              <div class="description">
+                <p>Get 1 free drink with a top-up of RM50!</p>
+                <p>Valid until end of the month at all outlets.</p>
+              </div>
+            </div>
+        
+            <!-- Timeframe block -->
+            <div class="blog-time-frame">
+              <h2>Date:</h2>
+              <p>Valid until end of the month at all outlets.</p>
+              <h2>Expiry Date:</h2>
+              <p>March 31, 2025</p>
+            </div>
           </div>
         </div>
-        <a class="view-more" href="past_activities.html">VIEW MORE</a>
+        <div class="line-title-wrapper">
+          <span class="end-line"></span>
+        </div>      
+      </div>
+    
+
+
+
+
+
+
+    <div class="blog-section-title blog-bottom-title">
+      <h2>Coming Soon | Past Activities</h2>
+    </div>
+    <div class="bottom-row">
+      <!-- Coming Soon -->
+      <div class="coming-soon-box">
+        <div class="coming-image">
+          <img src="images/ComingSoon1.png" alt="Coming Soon">
+          <div class="coming-caption">
+            <h3>COMING SOON</h3>
+            <p>Stay tuned for our exciting April deals and new launches!</p>
+          </div>
+        </div>
       </div>
 
+      <!-- Past Activities Slideshow -->
+      <div class="past-activities">
+        <div class="past-slideshow">
+          <div class="slides">
+            <div class="past-slide s1 no-animation">
+              <img src="images/CHRISTMAS2024.png" alt="Slide 1">
+              <div class="slide-caption">25 Jan 2025<br><b>Free Oranges</b> w/ 2 drinks</div>
+            </div>
+            <div class="past-slide s2">
+              <img src="images/SENIKITAWEEKEND.png" alt="Slide 2">
+              <div class="slide-caption">28 Oct 2024<br><b>11% Off</b> Thursdays</div>
+            </div>
+            <div class="past-slide s3">
+              <img src="images/SENIKITA.png" alt="Slide 3">
+              <div class="slide-caption">9 Sep 2024<br><b>50% Off</b> Grabfood promo</div>
+            </div>
+            <div class="past-slide s4">
+              <img src="images/RAYA2024.png" alt="Slide 4">
+              <div class="slide-caption">Hari Raya Promo</div>
+            </div>
+            <div class="past-slide s5">
+              <img src="images/DISCOUNTTHURDAY2024.png" alt="Slide 5">
+              <div class="slide-caption">Discount Thursday</div>
+            </div>
+            <div class="past-slide s6">
+              <img src="images/CNYOPENING.png" alt="Slide 6">
+              <div class="slide-caption">Chinese New Year Opening</div>
+            </div>
+          </div>
+        </div>
+        </div>
     </div>
-  </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Left Section (Developers) -->
+      <div class="footer-developers">
+        <p class="footer-header">DEVELOPED BY</p>
+        <p><span class="hover-underline"><a href="profile1.html">Terence Wong</a></span></p>
+        <p><span class="hover-underline"><a href="profile2.html">Darren Chong</a></span></p>
+        <p><span class="hover-underline"><a href="profile3.html">Hans Yee</a></span></p>
+        <p><span class="hover-underline"><a href="profile4.html">Jared Teh</a></span></p>
+      </div>
+  
+      <!-- Center Section (Subscribe) -->
+      <div class="footer-subscribe">
+        <p class="footer-header">SUBSCRIBE EMAIL</p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit" class="btn-index-subscribe">Subscribe</button>
+        </form>
+      </div>
+  
+      <!-- Right Section (Social Media) -->
+      <div class="footer-social-links">
+        <p class="footer-header">MORE ABOUT US</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+          <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+          <a href="#" target="_blank"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+          <a href="mailto:104404059@students.swinburne.edu.my" target="_blank"><img src="images/Mail.png" alt="Mail"></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <a href="#top"><p class="footer-brand">BREW & GO</p></a>
+      <p>© COPYRIGHT 2025 BREW & GO</p>
+    </div>
+  </footer>
+  
 </body>
 </html>
