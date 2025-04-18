@@ -1,10 +1,7 @@
-<!-- <?php
-  session_start();
-?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
@@ -13,7 +10,8 @@
     <title>Brew & Go Coffee - Home</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
 </head>
 
 <body class="product-page">
@@ -39,28 +37,27 @@
 
             <div class="cart-overlay"></div>
 
-
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li class="dropdown">
-                    <a href="product1.html">Products ▾</a>
-                    <ul class="dropdown-content">
+                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
+                  <ul class="dropdown-content">
                     <li><a href="product1.html">Basic Brew</a></li>
                     <li><a href="product2.html">Artisan Brew</a></li>
                     <li><a href="product3.html">Non-Coffee</a></li>
                     <li><a href="product4.html">Seasonal</a></li>
                   </ul>
                 <li class="dropdown">
-                  <a href="blog.html">Blog ▾</a>
+                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
                   <ul class="dropdown-content">
-                    <li><a href="#">Coming Soon</a></li>
-                    <li><a href="#">Current Event</a></li>
-                    <li><a href="#">Past Events</a></li>
+                    <li><a href="coming_soon.html">Coming Soon</a></li>
+                    <li><a href="current_activity.html">Current Event</a></li>
+                    <li><a href="past_activity.html">Past Events</a></li>
                   </ul>
                 </li>
-                <li><a href="joinus.html">Join Us</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="registration.html">Membership</a></li>
+                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
+                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
+                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
                 <!-- <li>
                   <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                     <a href="view.php">View</a>
@@ -73,7 +70,7 @@
             <!-- Mobile Dropdown Menu -->
             <div class="nav-dropdown">
                 <ul>
-                    <li><a href="product1.html">Products ▾</a></li>
+                    <li><a href="product1.html">Products</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="joinus.html">Join Us</a></li>
                     <li><a href="enquiry.html">Enquiry</a></li>
@@ -279,34 +276,50 @@
   </ol>
 </section>
 <footer class="footer">
-    <div class="footer-container">
-      <!-- Left Section -->
-      <div class="footer-company">
-        <a href="#top"><p>Brew & Go Coffee</p></a>
-        <p>© COPYRIGHT 2025 BREW & GO</p>
-      </div>
+  <div class="footer-container">
+    
+    <!-- Column 1: Developers -->
+    <div class="footer-column">
+      <p class="footer-header">DEVELOPED BY</p>
+      <p><a href="profile1.html">Terence Wong</a></p>
+      <p><a href="profile2.html">Darren Chong</a></p>
+      <p><a href="profile3.html">Hans Yee</a></p>
+      <p><a href="profile4.html">Jared Teh</a></p>
+    </div>
 
-      <!-- Center Section (Social Media) -->
-      <div class="footer-social-links">
-        <p><strong>More About Us</strong></p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
-          <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
-          <a href="#" target="_blank"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
-          <a href="104404059@students.swinburne.edu.my" target="_blank"><img src="images/Mail.png" alt="Mail"></a>
+    <!-- Column 2: Acknowledgement -->
+    <div class="footer-column">
+      <p class="footer-header">ACKNOWLEDGEMENT</p>
+      <p><a href="acknowledgement.html">Acknowledgement</a></p>
+      <p><a href="enhancements.html">Enhancements</a></p>
+      <p><a href="#videolink">Presentation Video</a></p>
+    </div>
 
-        </div>
-      </div>
-  
-      <!-- Right Section (Developers) -->
-      <div class="footer-developers">
-        <p></p>
-        <p><a href="profile1.html"> © Terence Wong</a></p>
-        <p><a href="profile2.html"> © Darren Chong</a></p>
-        <p><a href="profile3.html"> © Hans Yee</a></p>
-        <p><a href="profile4.html"> © Jared Teh</a></p>
+    <!-- Column 3: Subscription -->
+    <div class="footer-column">
+      <p class="footer-header">SUBSCRIBE EMAIL</p>
+      <form class="subscribe-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn-index-subscribe">Subscribe</button>
+      </form>
+    </div>
+
+    <!-- Column 4: Social Links -->
+    <div class="footer-column">
+      <p class="footer-header">MORE ABOUT US</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+        <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+        <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
       </div>
     </div>
-  </footer>
+  </div>
+
+  <div class="footer-bottom">
+    <a href="#top"><p class="footer-brand">BREW & GO</p></a>
+    <p>© COPYRIGHT 2025 BREW & GO</p>
+  </div>
+</footer>  
 </body>
 </html> 

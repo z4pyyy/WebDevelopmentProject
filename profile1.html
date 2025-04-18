@@ -1,7 +1,3 @@
-<!-- <?php
-  session_start();
-?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +11,10 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
 </head>
 
-<body>
+<body class="product-page">
     <div id="top"></div>
     <header>
         <nav class="navbar">
@@ -29,12 +26,9 @@
                 BREW & GO
             </a>
             
-            <div class="nav-spacer"></div>
-
             <!-- Shopping Cart -->
-            <input type="checkbox" id="cart-toggle" class="cart-toggle">
-            <label for="cart-toggle" class="cart-icon">🛒</label>
-            
+            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
+            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
             <div class="cart-sidebar">
                 <h2>Shopping Cart</h2>
                 <p>Your selected items will appear here.</p>
@@ -43,11 +37,10 @@
 
             <div class="cart-overlay"></div>
 
-
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li class="dropdown">
-                  <a href="product1.html">Products ▾</a>
+                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
                   <ul class="dropdown-content">
                     <li><a href="product1.html">Basic Brew</a></li>
                     <li><a href="product2.html">Artisan Brew</a></li>
@@ -55,16 +48,16 @@
                     <li><a href="product4.html">Seasonal</a></li>
                   </ul>
                 <li class="dropdown">
-                  <a href="blog.html">Blog ▾</a>
+                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
                   <ul class="dropdown-content">
-                    <li><a href="#">Coming Soon</a></li>
-                    <li><a href="#">Current Event</a></li>
-                    <li><a href="#">Past Events</a></li>
+                    <li><a href="coming_soon.html">Coming Soon</a></li>
+                    <li><a href="current_activity.html">Current Event</a></li>
+                    <li><a href="past_activity.html">Past Events</a></li>
                   </ul>
                 </li>
-                <li><a href="joinus.html">Join Us</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="registration.html">Membership</a></li>
+                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
+                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
+                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
                 <!-- <li>
                   <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                     <a href="view.php">View</a>
@@ -90,11 +83,23 @@
 
 
     <section class="profile-container">
-        <div class="profile-card">
-          <img src="images/dev1.jpg" alt="Developer Photo" class="profile-photo">
-          <div class="profile-info">
-            <h2>Jane Doe</h2>
-            <p>Front-end Developer passionate about responsive design and user-friendly web experiences. Skilled in HTML, CSS, and PHP.</p>
+      <div class="profile-card">
+        <img src="images/TERENCE.jpg" alt="Terence Wong Profile Photo" class="profile-photo">
+        <div class="profile-info">
+          <h1>Terence Wong Chin Seng</h1>
+          <p class="student-id">Student ID: 104404059</p>
+          <p class="course">Bachelor of Computer Science</p>
+          <div class="category-section">
+            <details open class="animated-details">
+              <summary>About Me</summary>
+              <hr>
+                <ol class="category-list">            
+                <p>21 years old, born in 2004 and raised in Kuching <br><br>A city as rich in flavor as the dreams I carry. I’m a guy who leads with purpose, whether I’m clutching rounds in Valorant or rewriting system logic at 2AM. 
+                From developing full-stack Laravel applications to building aesthetic custom keyboards,<br><br> I’ve always believed in committing fully — not just doing things, but doing them like it’s the last time I’ll ever get to. 
+                <br>That same energy fuels my life: part creative, part strategist, part philosopher.<br> I play to win, but I also play to grow.</p>
+                </ol>
+              </details>
+            </div>
           </div>
         </div>
       
@@ -104,7 +109,9 @@
             <hr>
             <ol class="category-list">
               <li>
-                <img src="images/Codligence.png" alt="Intern Company" class="category-icon">
+                <a href="https://www.codligence.com">
+                  <img src="images/Codligence.png" alt="Intern Company" class="category-icon">
+                </a>
                 <p>
                   <strong>Intern at Codligence Sdn. Bhd.</strong><br>
                   <span class="time-frame">2024 – 2025</span>
@@ -118,8 +125,31 @@
             <hr>
             <ol class="category-list">
               <li>
-                <img src="images/swinburne.png" alt="Swinburne Logo" class="category-icon">
-                <span>Swinburne University – Bachelor in Computer Science</span>
+                <a href="swinburne.edu.my">
+                  <img src="images/swinburne.png" alt="Swinburne Logo" class="category-icon">
+                </a>
+                  <p>
+                    <strong>Swinburne University – Bachelor in Computer Science</strong><br>
+                <span class="time-frame">PRESENT</span>
+                </p>
+              </li>
+              <li>
+                <a href="https://www.fame.edu.my">
+                  <img src="images/FAME.png" alt="Swinburne Logo" class="category-icon">
+                </a>
+                  <p>
+                <strong>FAME INTERNATIONAL COLLEGE – Diploma In Computer Science</strong><br>
+                <span class="time-frame">2022 - 2025</span>
+              </p>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/SmkGreenRoad/?locale=ms_MY">
+                  <img src="images/SMKGREENROAD.jpeg" alt="Swinburne Logo" class="category-icon">
+                </a>
+                <p>
+                <strong>SMK GREEN ROAD – 5A</strong><br>
+                <span class="time-frame">2017-2022</span>
+              </p>
               </li>
             </ol>
           </details>
@@ -130,15 +160,15 @@
             <ol class="category-list">
               <li>
                 <img src="images/HTML.png" alt="HTML Logo" class="category-icon">
-                <span>HTML5</span>
+                <p><strong>HTML</strong><br></p>
               </li>
               <li>
                 <img src="images/CSS.png" alt="CSS Logo" class="category-icon">
-                <span>CSS3</span>
+                <p><strong>CSS3</strong><br></p>
               </li>
               <li>
                 <img src="images/PHP.png" alt="PHP Logo" class="category-icon">
-                <span>PHP</span>
+                <p><strong>PHP</strong><br></p>
               </li>
             </ol>
           </details>
@@ -148,9 +178,18 @@
             <hr>
             <ol class="category-list">
               <li>
-                <img src="images/Codligence.png" alt="Intern Company" class="category-icon">
+                <a href="https://www.vlr.gg/team/17592/veeks-esports/">
+                <img src="images/VKS.png" alt="Intern Company" class="category-icon">
+              </a>
                 <p>
-                  <strong>Intern at Codligence Sdn. Bhd.</strong><br>
+                  <strong>MAIN ROASTER PLAYER FOR VEEKS ESPORT</strong><br>
+                  <span class="time-frame">PRESENT</span>
+                </p>
+              </li>
+              <li>
+                <img src="images/MASISWA.png" alt="Intern Company" class="category-icon">
+                <p>
+                  <strong>2024 Masiswa Esport - Valorant Competition</strong><br>
                   <span class="time-frame">2024 – 2025</span>
                 </p>
               </li>
@@ -167,33 +206,49 @@
 
       <footer class="footer">
         <div class="footer-container">
-          <!-- Left Section -->
-          <div class="footer-company">
-            <a href="#top"><p>Brew & Go Coffee</p></a>
-            <p>© COPYRIGHT 2025 BREW & GO</p>
+          
+          <!-- Column 1: Developers -->
+          <div class="footer-column">
+            <p class="footer-header">DEVELOPED BY</p>
+            <p><a href="profile1.html">Terence Wong</a></p>
+            <p><a href="profile2.html">Darren Chong</a></p>
+            <p><a href="profile3.html">Hans Yee</a></p>
+            <p><a href="profile4.html">Jared Teh</a></p>
           </div>
-
-          <!-- Center Section (Social Media) -->
-          <div class="footer-social-links">
-            <p><strong>More About Us</strong></p>
+      
+          <!-- Column 2: Acknowledgement -->
+          <div class="footer-column">
+            <p class="footer-header">ACKNOWLEDGEMENT</p>
+            <p><a href="acknowledgement.html">Acknowledgement</a></p>
+            <p><a href="enhancements.html">Enhancements</a></p>
+            <p><a href="#videolink">Presentation Video</a></p>
+          </div>
+      
+          <!-- Column 3: Subscription -->
+          <div class="footer-column">
+            <p class="footer-header">SUBSCRIBE EMAIL</p>
+            <form class="subscribe-form">
+              <input type="email" placeholder="Enter your email" required>
+              <button type="submit" class="btn-index-subscribe">Subscribe</button>
+            </form>
+          </div>
+      
+          <!-- Column 4: Social Links -->
+          <div class="footer-column">
+            <p class="footer-header">MORE ABOUT US</p>
             <div class="social-icons">
               <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
               <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
-              <a href="#" target="_blank"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
-              <a href="104404059@students.swinburne.edu.my" target="_blank"><img src="images/Mail.png" alt="Mail"></a>
-
+              <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+              <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
             </div>
           </div>
-      
-          <!-- Right Section (Developers) -->
-          <div class="footer-developers">
-            <p></p>
-            <p><a href="profile1.html"> © Terence Wong</a></p>
-            <p><a href="profile2.html"> © Darren Chong</a></p>
-            <p><a href="profile3.html"> © Hans Yee</a></p>
-            <p><a href="profile4.html"> © Jared Teh</a></p>
-          </div>
         </div>
-      </footer>
+      
+        <div class="footer-bottom">
+          <a href="#top"><p class="footer-brand">BREW & GO</p></a>
+          <p>© COPYRIGHT 2025 BREW & GO</p>
+        </div>
+      </footer>  
 </body>
 </html>
