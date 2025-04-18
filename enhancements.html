@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+    <title>Brew & Go Coffee - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="acknowledgements-page">
+    <div id="top"></div>
+    <header>
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-icon">&#9776;</label>
+            
+            <a href="index.html" class="logo">
+                <img src="images/Logo.png" alt="Brew & Go Logo">
+                BREW & GO
+            </a>
+            
+            <!-- Shopping Cart -->
+            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
+            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
+            <div class="cart-sidebar">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items will appear here.</p>
+                <label for="cart-toggle" class="close-cart">✖ Close</label>
+            </div>
+
+            <div class="cart-overlay"></div>
+
+
+            <!-- Full Navbar Menu (Hidden in Portrait) -->
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="product1.html">Products ▾</a>
+                    <ul class="dropdown-content">
+                    <li><a href="product1.html">Basic Brew</a></li>
+                    <li><a href="product2.html">Artisan Brew</a></li>
+                    <li><a href="product3.html">Non-Coffee</a></li>
+                    <li><a href="product4.html">Seasonal</a></li>
+                  </ul>
+                <li class="dropdown">
+                  <a href="blog.html">Blog ▾</a>
+                  <ul class="dropdown-content">
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Current Event</a></li>
+                    <li><a href="#">Past Events</a></li>
+                  </ul>
+                </li>
+                <li><a href="joinus.html">Join Us</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="registration.html">Membership</a></li>
+                <li><a href="view.html">View</a></li>                    
+                <!-- <li>
+                  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                    <a href="view.php">View</a>
+                  <?php else: ?>
+                    <a href="login.php">Login</a>
+                  <?php endif; ?>
+                </li> -->
+              </ul>
+    
+            <!-- Mobile Dropdown Menu -->
+            <div class="nav-dropdown">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product1.html">Products ▾</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="enquiry.html">Enquiry</a></li>
+                    <li><a href="registration.html">Membership</a></li>
+                    <li><a href="admin.html">View</a></li>                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+<style>
+  .acknowledgements-page{
+  margin: 0;
+  padding: 0;
+  background-color: #9b3907;
+}
+
+.joinus-text {
+    flex: 1;
+    color: #ffffff;
+    text-align: left;
+    max-width: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+  }
+</style>
+
+  <section class="joinus-hero">
+    <div class="joinus-text">
+      <h1>Enhancements</h1>
+      <br>
+      <h2>All Pages</h2>
+      <ol>
+        <li><h2>Navbar</h2>
+        <p>The navbar, found on every page of the site, itself contains two enhancements: dropdown content lists and hover effects for each button.</p></li>
+          
+        <p>Hovering over the either the 'Products ▾' button or 'Blog ▾' button will cause a drop-down menu to appear, listing the various pages 
+        under either of the categories i.e. bringing up all 4 categories of Brew N Go products when the 'Products ▾' button is hovered over.</p>  
+        
+        <p>Every button of the navbar will change colour from white to golden-yellow when hovered over. The buttons will also be underlined.</p>
+          
+        <li><h2>Shopping Cart</h2>
+        <p>The shopping cart function can be found on every page, particularly the <a href="product1.html">products pages</a> where its effects are most apparent.
+        When any item is selected and added to the user's selection, the item(s) will still appear in the Shopping Cart while visiting other pages of the site. The
+        Shopping Cart can be opened by pressing the respective button, and can be closed through the 'Close' button in the sidebar or by pressing the Shopping Cart
+        button again.</p>
+
+        <li><h2>Mobile View</h2>
+        <p>If the site is viewed using a mobile device, the site's layout will be reconfigured accordingly, making it easier to navigate.</p>
+          
+        <p>The layout of the currently viewed page shifts according to the viewing device's dimensions and configuration. Buttons will be hidden or repositioned 
+        to better suit a mobile viewer while still retaining the overall structure of the original page.</p>
+            
+        <p>The navbar normally found on the top of the page will be hidden when being viewed using a phone or tablet due to the dynamic mobile dimensions feature. 
+        Instead it will be hidden, replaced by a hamburger button on the top-left of the screen. Pressing this button causes the menu's buttons to be overlaid 
+        onto the screen, allowing the user to navigate the site as normal.</p>
+        </li>
+
+        <li><h2>Footer</h2></li>
+        <p>The footer also has a separate hover effect, smoothly turning the text from white to yellow instead of golden-yellow.</p>
+      </ol>
+      <br>
+      <h2>Index page/<a href="index.html">index.html</a></h2>
+      <ol>
+        <li><h2>Carousel section</h2>
+        <p>The carousel section on the index page has its own separate hover effects, and - as is instantly visible - automatically scrolls through Brew N Go's item selection.
+        The scrolling animation pauses when the user hovers over a certain item, continuing once the user stops.</p>
+        <p>The carousel section also has its own hover effects. Hovering over an item will enlarge the contained image and raise the text slightly, as well as making the image's
+        shadow cover a larger area.</p>
+        </li>
+        <li><h2>Membership section</h2>
+        <p>The membership section has 2 separate hover effects.</p>
+        <p>Firstly, when hovering over either of the pictures in the main membership section ("Front of the Queue" and "Behind the Brew"), both pictures will appear to flip over,
+        to display cards with relevant information on them. This is in addition to the standard hover effects for buttons. As expected, moving the cursor away will cause the card
+        to flip over again.</p>
+        <p>The membership perks section below also has its own hover effect. When hovering over any of the 5 cards in this section, the image will enlarge itself and display text
+        which disappears when the user stops hovering over it. This hover effect also causes the other cards to be shifted around organically.</p>
+        </li>
+        <li><h2>Map section</h2>
+        <p>The map section contains 2 interactive Google Maps integrations. Both have the locations of Brew N Go branches marked on them, and allow the user to scroll through the map
+        using Ctrl + Mouse. The map can be zoomed in and out, the use of satellite imaging instead of usual road routes can be toggled, and so on.</p>
+        </li>
+        <li><h2>Video section</h2>
+        <p>At the bottom of the page, 2 videos are continuously looping on either side of the 'Join Us' button.</p>
+        </li>
+      </ol>
+      <br>
+      <h2>Products/<a href="product1.html">product1.html</a>, <a href="product2.html">product2.html</a>, <a href="product3.html">product3.html</a>, <a href="product4.html">product4.html</a></h2>
+      <ol>
+        <li><h2>Full menu section hover effects</h2>
+        <p>Hovering over any box in the full menu will cause the box to be darkened slightly. Hovering over a box containing an item or an item's price will highlight the full row.</p>  
+        </li>
+        <li><h2>Menu category hover effects</h2>
+        <p>Hovering over any category button in the sidebar will cause the button to be coloured blue and cause the text to change colours from black to white. Hovering over any item will cause
+        the button to be highlighted by elevating it and expanding the drop shadow, and hovering over the picture will also cause the picture to expand. These effects revert upon the user's cursor
+        being moved away.
+        </p>
+        </li>
+      </ol>
+      <h2>Blog/<a href="Blog.html">Blog.html</a></h2>
+      <ol>
+        <li><h2>Slideshow</h2>
+        <p>The pictures in the Past Activities section of the page will change at regular intervals, and each picture can be clicked to take the user to <a href="past_activity.html">the Past Activities page</a>.</p>  
+        </li>
+        <li><h2>Hover effects for each slide</h2>
+        <p>Each individual slide, when hovered over, will display different text in regards to the event - the date and summary of the event in most cases. Hovering over the event listed under 'Coming Soon'
+        causes a similar effect.
+        </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+    <footer class="footer">
+      <div class="footer-container">
+        
+        <!-- Column 1: Developers -->
+        <div class="footer-column">
+          <p class="footer-header">DEVELOPED BY</p>
+          <p><a href="profile1.html">Terence Wong</a></p>
+          <p><a href="profile2.html">Darren Chong</a></p>
+          <p><a href="profile3.html">Hans Yee</a></p>
+          <p><a href="profile4.html">Jared Teh</a></p>
+        </div>
+    
+        <!-- Column 2: Acknowledgement -->
+        <div class="footer-column">
+          <p class="footer-header">ACKNOWLEDGEMENT</p>
+          <p><a href="acknowledgements.html">Acknowledgement</a></p>
+          <p><a href="enhancements.html">Enhancements</a></p>
+          <p><a href="#videolink">Presentation Video</a></p>
+        </div>
+    
+        <!-- Column 3: Subscription -->
+        <div class="footer-column">
+          <p class="footer-header">SUBSCRIBE EMAIL</p>
+          <form class="subscribe-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn-index-subscribe">Subscribe</button>
+          </form>
+        </div>
+    
+        <!-- Column 4: Social Links -->
+        <div class="footer-column">
+          <p class="footer-header">MORE ABOUT US</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
+            <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
+            <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
+            <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
+          </div>
+        </div>
+      </div>
+    
+      <div class="footer-bottom">
+        <a href="#top"><p class="footer-brand">BREW & GO</p></a>
+        <p>© COPYRIGHT 2025 BREW & GO</p>
+      </div>
+    </footer>
+
+</body>
+</html>
