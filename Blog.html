@@ -79,354 +79,6 @@
             </div>
         </nav>
     </header>
-<style>
-
-.blog-page{
-  margin: 0;
-  padding: 0;
-  background-color: #000000;
-}
-
-.blog-container{
-  display:flex;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.blog-title{
-  background-image: url('../images/IndexBackground8.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  background-position: center 50%;
-  background-color: rgba(0, 0, 0, 0.7);
-  margin: 0;
-  margin-bottom: 30px;
-  margin-top: 90px;
-  height: 950px;
-  display:flex;
-  text-align: center;
-  align-items:center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.blog-title h1{
-  font-size: 150px;
-  font-weight: 700;
-  font-family: 'Times New Roman', Times, serif;
-  text-align: center;
-  color: white;
-  margin: 20px auto;
-}
-
-.blog-title h3{
-  font-size: 50px;
-  font-weight: 700;
-  font-family: 'Times New Roman', Times, serif;
-  color:white;
-}
-
-.blog-section-title{
-  display:flex;
-  background-color: white;
-  height: 300px;
-  width:100%;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-
-.blog-section-title h2{
-  font-size: 72px;
-  font-weight: 100;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
-.blog-transparent-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  background-color: transparent;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  width:10%;
-  height:80px;
-  font-size: 27px;
-  }
-  
-  .blog-transparent-btn:hover {
-    background-color: white;
-    color: black;
-  }
-
-.current-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.current-section {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  background: white;
-  padding: 40px 60px;
-  gap: 100px;
-  position: relative;
-}
-
-.current-info {
-  flex: 1;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.current-picture img {
-  max-height: 600px;
-  width: auto;
-  border-radius: 12px;
-}
-
-.coming-soon img,
-.past-activities img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.description h2,
-.coming-soon h2,
-.past-activities h2 {
-  margin-top: 0;
-  font-size: 54px;
-  color: #b49a5f;
-}
-
-.activities-title h2{
-  margin-top: 0;
-  font-size: 63px;
-  color: #b49a5f;
-  text-align: center;
-}
-
-.description p{
-  color:rgb(0, 0, 0);
-  font-size: 27px;
-  text-align: justify;
-}
-
-.blog-time-frame {
-  position: absolute;
-  bottom: 30px;
-  right: 60px;
-  padding: 20px 30px;
-  background-color: #f9f9f9;
-  border-left: 6px solid #b49a5f;
-  border-radius: 10px;
-  color: #333;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  max-width: 320px;
-}
-
-.blog-time-frame h2 {
-  font-size: 18px;
-  color: #b49a5f;
-  margin: 10px 0 4px;
-  text-align:left;
-}
-
-.blog-time-frame p {
-  text-align: left;
-  font-size: 16px;
-  margin: 0 0 12px;
-}
-
-
-.blog-bottom-title {
-  background-color: white;
-  padding: 60px 0;
-}
-
-.blog-bottom-title h2 {
-  font-size: 72px;
-  font-weight: 100;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
-.bottom-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 60px;
-  background-color: #ffffff;
-  flex-wrap: wrap;
-  gap: 60px;
-}
-
-.coming-soon-box,
-.past-activities {
-  flex: 1 1 45%;
-  height: 1100px;
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  background-color: #a72727;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.past-slide img,
-.coming-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.coming-caption {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 15px;
-}
-
-.coming-image:hover img {
-  filter: blur(5px);
-}
-
-.coming-image:hover .coming-caption {
-  opacity: 1;
-}
-
-.coming-image,
-.past-slideshow {
-  position: relative;
-    width: 100%;
-    height: 1100px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-}
-
-.past-slide:hover img {
-  filter: blur(5px);
-}
-
-.past-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color 0.4s ease-in-out;
-  z-index: 1;
-}
-
-.past-slide:hover::after {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.past-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 0;
-  animation: fadeSlide 36s ease-in-out infinite;
-}
-
-.past-slideshow:hover .past-slide {
-  animation-play-state: paused;
-}
-
-.s1 { animation-delay: 0s; }
-.s2 { animation-delay: 6s; }
-.s3 { animation-delay: 12s; }
-.s4 { animation-delay: 18s; }
-.s5 { animation-delay: 24s; }
-.s6 { animation-delay: 30s; }
-
-@keyframes fadeSlide {
-  0%, 14%   { opacity: 0; z-index: 0; }
-  15%, 30%  { opacity: 1; z-index: 1; }
-  31%, 100% { opacity: 0; z-index: 0; }
-}
-
-.no-animation {
-  opacity: 1 !important;
-  z-index: 1 !important;
-  animation: none !important;
-}
-
-/* Base styling */
-.slides {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-}
-
-.past-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.slide-caption {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 28px;
-  font-style: italic;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 12px;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 0.4s ease-in;
-  text-align: center;
-}
-
-.past-slide:hover .slide-caption {
-  opacity: 1;
-}
-
-.end-line {
-      flex: 1;
-      border-top: 3px dotted #000;
-      height: 1px;
-      margin: 0 1.5vw;
-    }
-
-  </style>
 </head>
 
   <section class="blog-container">
@@ -510,26 +162,36 @@
               <div class="slide-caption">25 Jan 2025<br><b>Free Oranges</b> w/ 2 drinks</div>
             </div>
           </a>
+          <a href="past_activity.html">  
             <div class="past-slide s2">
               <img src="images/SENIKITAWEEKEND.png" alt="Slide 2">
               <div class="slide-caption">28 Oct 2024<br><b>11% Off</b> Thursdays</div>
             </div>
+          </a>
+          <a href="past_activity.html">
             <div class="past-slide s3">
               <img src="images/SENIKITA.png" alt="Slide 3">
               <div class="slide-caption">9 Sep 2024<br><b>50% Off</b> Grabfood promo</div>
             </div>
+            </a>
+            <a href="past_activity.html">
             <div class="past-slide s4">
               <img src="images/RAYA2024.png" alt="Slide 4">
               <div class="slide-caption">Hari Raya Promo</div>
             </div>
+            </a>
+            <a href="past_activity.html">
             <div class="past-slide s5">
               <img src="images/DISCOUNTTHURDAY2024.png" alt="Slide 5">
               <div class="slide-caption">Discount Thursday</div>
             </div>
+          </a>
+          <a href="past_activity.html">
             <div class="past-slide s6">
               <img src="images/CNYOPENING.png" alt="Slide 6">
               <div class="slide-caption">Chinese New Year Opening</div>
             </div>
+          </a>
           </div>
         </div>
         </div>
