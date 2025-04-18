@@ -14,17 +14,17 @@
         margin-right: 36px;
 
     }
-    .cart-sidebar {
+    .cart-menu {
         width: 90%;
         padding: 20px 25px;
       }
     
-      .cart-sidebar p {
+      .cart-menu p {
         font-size: 16px;
         text-align: left;
       }
     
-      .cart-sidebar h2 {
+      .cart-menu h2 {
         font-size: 32px;
       }
     .nav-icon,
@@ -129,7 +129,7 @@
         height: auto;
     }
 
-    .store-sidebar {
+    .store-menu {
         width: 100%;
         padding: 10px;
     }
@@ -215,10 +215,50 @@
 
   /*Product.html*/
   .prd-menu-toggle,
-  .prd-menu-btn,
-  .prd-menu {
-  display: none;
+  .prd-menu-btn {
+    display: block;
   }
+
+  .prd-content-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    align-content: center;
+    flex-direction: column;
+}
+
+  .prd-product-info{
+    width:300px;
+    margin:0;
+  }
+
+.prd-product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  padding: 30px 20px;
+  width: 400px;
+  margin: 20px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.4s ease;
+}
+
+
+.prd-product-image img {
+  margin-bottom:30px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
 
   .prd-drink-name {
     font-size: 45px;
@@ -226,80 +266,115 @@
     margin-bottom: 30px;
     margin-top: 0;
   }
+  
   .prd-toggle-wrapper {
-    margin-top: 60px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 10px;
+    margin-top: 30px;
+    gap: 10px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .prd-menu-toggle {
+    display: none;
   }
 
   .prd-menu-btn {
-    display: inline-block;
     background-color: #007bff;
     color: white;
     padding: 12px 24px;
     font-weight: bold;
-    border-radius: 6px;
-    text-align: center;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease;
+    width: 90%;
+    max-width: 150px;
+    text-align: center;
   }
 
   .prd-menu-btn:hover {
     background-color: #0056b3;
   }
 
-  /* Checkbox toggle hidden */
-  .prd-menu-toggle {
-    display: none;
-  }
-
-  /* Menu (hidden by default) */
   .prd-menu {
-    display: none;
-    position: fixed;
-    left: 0;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
     width: 100%;
-    background-color: #f8f8f8;
-    z-index: 1000;
-    padding: 20px 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-
-  /* Show menu when checkbox is checked */
-  .prd-menu-toggle:checked + .prd-menu-btn + .prd-menu {
-    display: block;
-  }
-
-  /* 2x2 layout */
-  .prd-menu ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    max-width: 150px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 0 20px;
+    flex-direction: column;
     gap: 15px;
-    padding: 0;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 400px;
+    text-align: left;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.3s ease;
+  }
+  
+  /* When toggled ON */
+  .prd-menu-toggle:checked + .prd-menu-btn + .prd-menu {
+    max-height: 500px;
+    opacity: 1;
+    padding: 20px;
+  }
+  
+
+.prd-menu ul {
     list-style: none;
-    justify-items: center;
+    margin: 0;
+    padding: 0;
   }
 
   .prd-menu ul li {
-    width: 100%;
+    font-weight: bold;
+    text-align: left;
+    transition: background-color 0.2s ease;
+    max-width: 300px;
+  }
+
+  .prd-menu ul li:hover {
+    background-color: #f0f0f0;
   }
 
   .prd-menu ul li a {
-    display: block;
-    width: 100%;
-    padding: 12px 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    text-align: center;
     text-decoration: none;
     color: #333;
-    font-weight: 500;
+    display: block;
+  }
+
+  .prd-menu-toggle:checked + .prd-menu-btn + .prd-menu {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+  }
+
+  /* Optional overlay */
+  .menu-overlay {
+    display: none;
+  }
+
+  .prd-menu-toggle:checked ~ .menu-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+  }
+
+  .full-menu {
+    padding: 60px 30px;
+    background-color: #fffdf9;
+    margin-top: 60px;
+    margin: 60px auto;
+    width:80%;
   }
 }
