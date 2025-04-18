@@ -1,7 +1,3 @@
-<!-- <?php
-  session_start();
-?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +11,11 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
 </head>
 
-<body class="registration-page">    
-  <div id="top"></div>
+<body class="registration-page">
+    <div id="top"></div>
     <header>
         <nav class="navbar">
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -40,11 +37,10 @@
 
             <div class="cart-overlay"></div>
 
-
             <!-- Full Navbar Menu (Hidden in Portrait) -->
             <ul class="nav-menu">
                 <li class="dropdown">
-                  <a href="product1.html">Products ▾</a>
+                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
                   <ul class="dropdown-content">
                     <li><a href="product1.html">Basic Brew</a></li>
                     <li><a href="product2.html">Artisan Brew</a></li>
@@ -52,16 +48,16 @@
                     <li><a href="product4.html">Seasonal</a></li>
                   </ul>
                 <li class="dropdown">
-                  <a href="blog.html">Blog ▾</a>
+                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
                   <ul class="dropdown-content">
-                    <li><a href="#">Coming Soon</a></li>
-                    <li><a href="#">Current Event</a></li>
-                    <li><a href="#">Past Events</a></li>
+                    <li><a href="coming_soon.html">Coming Soon</a></li>
+                    <li><a href="current_activity.html">Current Event</a></li>
+                    <li><a href="past_activity.html">Past Events</a></li>
                   </ul>
                 </li>
-                <li><a href="joinus.html">Join Us</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="registration.html">Membership</a></li>
+                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
+                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
+                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
                 <!-- <li>
                   <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                     <a href="view.php">View</a>
@@ -83,7 +79,7 @@
             </div>
         </nav>
     </header>
-    
+
   <!-- Hero Section -->
   <section class="enquiry-hero">
     <h1>Join Brew & Go Rewards</h1>
@@ -195,13 +191,36 @@
 
   <footer class="footer">
     <div class="footer-container">
-      <div class="footer-company">
-        <a href="#top"><p>Brew & Go Coffee</p></a>
-        <p>© COPYRIGHT 2025 BREW & GO</p>
+      
+      <!-- Column 1: Developers -->
+      <div class="footer-column">
+        <p class="footer-header">DEVELOPED BY</p>
+        <p><a href="profile1.html">Terence Wong</a></p>
+        <p><a href="profile2.html">Darren Chong</a></p>
+        <p><a href="profile3.html">Hans Yee</a></p>
+        <p><a href="profile4.html">Jared Teh</a></p>
       </div>
-
-      <div class="footer-social-links">
-        <p><strong>More About Us</strong></p>
+  
+      <!-- Column 2: Acknowledgement -->
+      <div class="footer-column">
+        <p class="footer-header">ACKNOWLEDGEMENT</p>
+        <p><a href="acknowledgement.html">Acknowledgement</a></p>
+        <p><a href="enhancements.html">Enhancements</a></p>
+        <p><a href="#videolink">Presentation Video</a></p>
+      </div>
+  
+      <!-- Column 3: Subscription -->
+      <div class="footer-column">
+        <p class="footer-header">SUBSCRIBE EMAIL</p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit" class="btn-index-subscribe">Subscribe</button>
+        </form>
+      </div>
+  
+      <!-- Column 4: Social Links -->
+      <div class="footer-column">
+        <p class="footer-header">MORE ABOUT US</p>
         <div class="social-icons">
           <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
           <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
@@ -209,14 +228,13 @@
           <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
         </div>
       </div>
-
-      <div class="footer-developers">
-        <p><a href="profile1.html">© Terence Wong</a></p>
-        <p><a href="profile2.html">© Darren Chong</a></p>
-        <p><a href="profile3.html">© Hans Yee</a></p>
-      </div>
     </div>
-  </footer>
+  
+    <div class="footer-bottom">
+      <a href="#top"><p class="footer-brand">BREW & GO</p></a>
+      <p>© COPYRIGHT 2025 BREW & GO</p>
+    </div>
+  </footer>  
 </body>
 
 </html>
