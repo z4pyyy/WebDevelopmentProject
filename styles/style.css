@@ -2686,10 +2686,78 @@ details[open] {
   }
   
 
-
+  .promo-news-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .promo-news-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  
+  .promo-news-line {
+    flex: 1;
+    height: 2px;
+    background: #000;
+    margin: 0 15px;
+  }
+  
+  .promo-news-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .promo-news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
+  }
+  
+  .promo-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 600px;
+    transition: transform 0.3s ease;
+  }
+  
+  .promo-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .promo-card img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .promo-card-content {
+    padding: 20px;
+  }
+  
+  .promo-card-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .promo-card-content p {
+    font-size: 1rem;
+    color: #444;
+  }
+  
 
 
   /*Product.html*/
+  .prd-menu-toggle {
+    display: none;
+  }
+
   .prd-menu {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
@@ -2996,6 +3064,31 @@ details[open] {
   text-align: center;
 }
 
+.product-explainer {
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  background: #fffdf9;
+  border-radius: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.product-explainer dl dt {
+  font-weight: bold;
+  margin-top: 15px;
+  color: #b49a5f;
+}
+
+.product-explainer dl dd {
+  margin-left: 20px;
+  color: #444;
+}
+
+.product-explainer ol {
+  padding-left: 20px;
+  margin-top: 20px;
+}
 
 .blog-page{
   margin: 0;
