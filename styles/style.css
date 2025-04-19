@@ -2331,6 +2331,17 @@ input:focus, select:focus {
     margin-bottom: 8px;
   }
 
+  .registration-container a,
+  .tnc-list a{
+    color: #ffb000;
+    text-decoration: none;
+  }
+
+  .registration-container a:hover,
+  .tnc-list a:hover{
+  color:black;
+  }
+
   /* login.html */
   body.login-page {
     font-family: 'Roboto', sans-serif;
@@ -2431,6 +2442,33 @@ input:focus, select:focus {
     padding: 0;
   }
   
+  .shift-group {
+    border: none;
+    padding: 10px 20px;
+    background-color: #e6f0ff; /* Soft blue */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .shift-group legend {
+    font-weight: bold;
+    color: #5a5a5a;
+    margin-bottom: 8px;
+  }
+  
+  .shift-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  
+
   .joinus-form legend {
     font-size: 22px;
     font-weight: bold;
@@ -4014,6 +4052,70 @@ summary::marker {
 
 
 
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Container for All Content === */
+.acknowledgements-section {
+  max-width: 600px;
+  display:flex;
+  flex-direction: column;
+  margin: 50px auto;
+  padding: 20px;
+  align-items: center;
+  gap: 50px;
+}
+
+/* === Heading === */
+.acknowledgements-section h1 {
+  font-size: 3.6rem;
+  color: #c29200;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* === Individual Acknowledgement Item === */
+.acknowledgement-item {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  }
+
+.acknowledgement-item:hover {
+  transform: scale(1.5);
+}
+
+/* === Image Styling === */
+.acknowledgement-item img {
+  width: 300px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* === Link Styling === */
+.acknowledgement-item a {
+  font-size: 1rem;
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.acknowledgement-item a:hover {
+  text-decoration: underline;
+  color: #c29200;
+}
 
 
 

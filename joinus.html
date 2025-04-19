@@ -120,14 +120,21 @@
                 <input type="tel" id="phone" name="phone" pattern="\d{10}" maxlength="10" required>
             </div>
             </div>
-            <div class="input-group-row">
-              <div class="input-group">
-                <label for="shift">Preferred Shift</label>
-                <p><input type="radio" id="morning" name="shift" value="Morning">Morning</p>
-                <p><input type="radio" id="night" name="shift" value="Night">Night</p>
-                
-              </div>
+            <div class="input-group">
+              <fieldset class="shift-group">
+                <legend>Preferred Shift</legend>
+                <label for="morning">
+                  <input type="radio" name="shift" id="morning" value="morning">
+                  Morning
+                </label>
+                <label for="night">
+                  <input type="radio" name="shift" id="night" value="night">
+                  Night
+                </label>
+              </fieldset>
+              
             </div>
+            
             <!-- Address -->
             <fieldset>
               <legend>Address</legend>
