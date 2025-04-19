@@ -2976,6 +2976,57 @@ input:focus, select:focus {
   color:white;
 }
 
+.past-activity img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.description h2,
+.past-activity h2 {
+  margin-top: 0;
+  font-size: 54px;
+  color: #b49a5f;
+}
+
+.coming-soon img,
+.past-activities img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.description h2,
+.coming-soon h2,
+.past-activities h2 {
+  margin-top: 0;
+  font-size: 54px;
+  color: #b49a5f;
+}
+
+.past-transparent-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width:20%;
+  height:40px;
+  font-size: 27px;
+  }
+
+.past-transparent-btn:hover {
+    background-color: rgb(217, 239, 250);
+    color: black;
+  }
+
+
 .blog-section-title{
   display:flex;
   background-color: white;
@@ -3110,18 +3161,7 @@ input:focus, select:focus {
   justify-content: space-between;
 }
 
-.past-activity img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
 
-.description h2,
-.past-activity h2 {
-  margin-top: 0;
-  font-size: 54px;
-  color: #b49a5f;
-}
 
 .activities-title h2{
   margin-top: 0;
@@ -3208,27 +3248,6 @@ input:focus, select:focus {
     margin: 0 1.5vw;
   }
 
-  .past-transparent-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid rgb(0, 0, 0);
-    background-color: transparent;
-    color: rgb(0, 0, 0);
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    width:20%;
-    height:40px;
-    font-size: 27px;
-    }
-
-    .past-transparent-btn:hover {
-        background-color: rgb(217, 239, 250);
-        color: black;
-      }
 
       
 .blog-page{
@@ -3277,24 +3296,6 @@ input:focus, select:focus {
   color:white;
 }
 
-.blog-section-title{
-  display:flex;
-  background-color: white;
-  height: 300px;
-  width:100%;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-
-.blog-section-title h2{
-  font-size: 72px;
-  font-weight: 100;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
 .blog-transparent-btn {
   display: flex;
   justify-content: center;
@@ -3316,51 +3317,6 @@ input:focus, select:focus {
     background-color: white;
     color: black;
   }
-
-.current-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.current-section {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  background: white;
-  padding: 40px 60px;
-  gap: 100px;
-  position: relative;
-  
-}
-
-.current-info {
-  flex: 1;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.current-picture img {
-  max-height: 600px;
-  width: auto;
-  border-radius: 12px;
-}
-
-.coming-soon img,
-.past-activities img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.description h2,
-.coming-soon h2,
-.past-activities h2 {
-  margin-top: 0;
-  font-size: 54px;
-  color: #b49a5f;
-}
 
 .activities-title h2{
   margin-top: 0;
@@ -3456,23 +3412,7 @@ input:focus, select:focus {
   color:white;
 }
 
-.blog-section-title{
-  display:flex;
-  background-color: white;
-  height: 300px;
-  width:100%;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
 
-.blog-section-title h2{
-  font-size: 72px;
-  font-weight: 100;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
 
 .blog-transparent-btn {
   display: flex;
@@ -3540,6 +3480,19 @@ input:focus, select:focus {
   color: #b49a5f;
 }
 
+.coming-soon-box,
+.past-activities {
+  flex: 1 1 45%;
+  height: 1100px;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #a72727;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .activities-title h2{
   margin-top: 0;
   font-size: 63px;
@@ -3603,18 +3556,7 @@ input:focus, select:focus {
   gap: 60px;
 }
 
-.coming-soon-box,
-.past-activities {
-  flex: 1 1 45%;
-  height: 1100px;
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  background-color: #a72727;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
 
 .past-slide img,
 .coming-image img {
