@@ -1242,7 +1242,7 @@ footer .subscribe-form button.btn-index-subscribe:hover {
 
   body.enquiry-page {
     font-family: 'Roboto', sans-serif;
-    background-image: url('../images/IndexBNG18.png');
+    background-image: url('../images/INDEXBNG18.png');
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
@@ -2452,6 +2452,7 @@ input:focus, select:focus {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: flex-start;
   }
   
   .shift-group legend {
@@ -2467,8 +2468,6 @@ input:focus, select:focus {
     font-size: 1rem;
     color: #333;
   }
-  
-  
 
   .joinus-form legend {
     font-size: 22px;
@@ -4238,6 +4237,13 @@ body {
       margin: 0;
   }
 
+  .joinus-text{
+    margin-top: 100px;
+  }
+
+  .joinus-text p{
+    font-size: 15px;
+  }
 
   .barista-section{
       display: flex;
@@ -4248,6 +4254,10 @@ body {
       width: 95%;
       margin: 60px auto;
       padding: 20px;
+  }
+
+  .enquiry-hero{
+    margin-top: 100px;
   }
 
   textarea {
@@ -4492,6 +4502,11 @@ transition: transform 0.3s ease;
   bottom: 0;
   background: rgba(0,0,0,0.4);
   z-index: 1000;
+}
+
+.enquiry-container,
+.enquiry-header{
+  max-width:80%;
 }
 
 .full-menu {
