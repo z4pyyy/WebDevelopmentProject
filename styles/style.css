@@ -376,7 +376,7 @@ body.index-page {
   
   /* Background images */
   .section-1 {
-    background-image: url('../images/IndexBNG3.png');
+    background-image: url('../images/INDEXBNG3.png');
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
   }
@@ -521,7 +521,8 @@ body.index-page {
       justify-content: center;
       gap: 20px;
       width: 100%;
-      color:#000
+      color:#000;
+      margin-top: 60px;
     }
 
     .membership-line-title-wrapper {
@@ -1086,7 +1087,7 @@ body.index-page {
 
 .subscribe-form input[type="email"] {
   padding: 10px;
-  width: 300px;
+  max-width:80%;
   border-radius: 6px;
   border: 3px solid black;
   font-size: 1rem;
@@ -1515,7 +1516,7 @@ footer .subscribe-form button.btn-index-subscribe:hover {
     color: white;
     text-align: right;
     max-width: 400px;
-    margin-right:100px;
+    margin-right: 60px;
   }
   
   .seperater-text h1 {
@@ -4224,8 +4225,17 @@ body {
       font-size: 18px;
     }
 
+    .seperater-text p{
+      font-size:18px;
+    }
+
+    .seperater-text h1{
+      font-size:27px;
+    }
+
   .blend-header{
-      font-size: 45px;
+      font-size: 27px;
+      margin: 0;
   }
 
 
@@ -4555,7 +4565,9 @@ transition: transform 0.3s ease;
 .join-section-grid {
   margin:0;
   gap:0;
-  display:block
+  display:block;
+  align-items: center;
+  justify-content: center;
 }
 
 .join-card{
@@ -4581,24 +4593,23 @@ transition: transform 0.3s ease;
 }
 
 .membership-card {
-  flex: 0 0 100px;
+  flex: 0 0 50px;
   width: 90%;
-  max-width: 400px;
-  height: 500px;
   transform: scale(0.5);
 }
 
 .membership-card:hover {
   flex: 0 0 600px;
   width: 90%;
-  max-width: 400px;
-  height: 500px;
   transform: scale(1.03);
 }
 
+.perks-blend-header{
+  font-size: 36px;
+}
 
 .store-location{
-  width:100%;
+  width:90%;
   border:0;
 }
 
