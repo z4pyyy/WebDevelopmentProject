@@ -17,67 +17,7 @@
 <body class="joinus-page">
     <div id="top"></div>
     <header>
-        <nav class="navbar">
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-icon">&#9776;</label>
-            
-            <a href="index.html" class="logo">
-                <img src="images/Logo.png" alt="Brew & Go Logo">
-                BREW & GO
-            </a>
-            
-            <!-- Shopping Cart -->
-            <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
-            <label for="cart-toggle" class="floating-cart-icon">🛒</label>
-            <div class="cart-sidebar">
-                <h2>Shopping Cart</h2>
-                <p>Your selected items will appear here.</p>
-                <label for="cart-toggle" class="close-cart">✖ Close</label>
-            </div>
-
-            <div class="cart-overlay"></div>
-
-            <!-- Full Navbar Menu (Hidden in Portrait) -->
-            <ul class="nav-menu">
-                <li class="dropdown">
-                  <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
-                  <ul class="dropdown-content">
-                    <li><a href="product1.html">Basic Brew</a></li>
-                    <li><a href="product2.html">Artisan Brew</a></li>
-                    <li><a href="product3.html">Non-Coffee</a></li>
-                    <li><a href="product4.html">Hot Beverage</a></li>
-                  </ul>
-                <li class="dropdown">
-                  <span class="hover-underline"><a href="blog.html">Blog ▾</a></span>
-                  <ul class="dropdown-content">
-                    <li><a href="coming_soon.html">Coming Soon</a></li>
-                    <li><a href="current_activity.html">Current Event</a></li>
-                    <li><a href="past_activity.html">Past Events</a></li>
-                  </ul>
-                </li>
-                <li><span class="hover-underline"><a href="joinus.html">Join Us</a></li></span>
-                <li><span class="hover-underline"><a href="enquiry.html">Enquiry</a></li></span>
-                <li><span class="hover-underline"><a href="registration.html">Membership</a></li></span>
-                <!-- <li>
-                  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-                    <a href="view.php">View</a>
-                  <?php else: ?>
-                    <a href="login.php">Login</a>
-                  <?php endif; ?>
-                </li> -->
-              </ul>
-    
-            <!-- Mobile Dropdown Menu -->
-            <div class="nav-dropdown">
-                <ul>
-                    <li><a href="product1.html">Products</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="joinus.html">Join Us</a></li>
-                    <li><a href="enquiry.html">Enquiry</a></li>
-                    <li><a href="registration.html">Membership</a></li>
-                </ul>
-            </div>
-        </nav>
+      <?php include 'navbar.php'; ?>
     </header>
 
     <section class="joinus-hero">
@@ -193,51 +133,7 @@
       </section>
 
 
-      <footer class="footer">
-        <div class="footer-container">
-          
-          <!-- Column 1: Developers -->
-          <div class="footer-column">
-            <p class="footer-header">DEVELOPED BY</p>
-            <p><a href="profile1.html">Terence Wong</a></p>
-            <p><a href="profile2.html">Darren Chong</a></p>
-            <p><a href="profile3.html">Hans Yee</a></p>
-            <p><a href="profile4.html">Jared Teh</a></p>
-          </div>
-      
-          <!-- Column 2: Acknowledgement -->
-          <div class="footer-column">
-            <p class="footer-header">ACKNOWLEDGEMENT</p>
-            <p><a href="acknowledgement.html">Acknowledgement</a></p>
-            <p><a href="enhancements.html">Enhancements</a></p>
-            <p><a href="https://www.youtube.com/watch?v=Nz_lsiT_kcI">Presentation Video</a></p>
-          </div>
-      
-          <!-- Column 3: Subscription -->
-          <div class="footer-column">
-            <p class="footer-header">SUBSCRIBE EMAIL</p>
-            <form class="subscribe-form">
-              <input type="email" placeholder="Enter your email" required>
-              <button type="submit" class="btn-index-subscribe">Subscribe</button>
-            </form>
-          </div>
-      
-          <!-- Column 4: Social Links -->
-          <div class="footer-column">
-            <p class="footer-header">MORE ABOUT US</p>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/brewngo.coffee/" target="_blank"><img src="images/Instagram.png" alt="Instagram"></a>
-              <a href="https://www.facebook.com/profile.php?id=61554234958482" target="_blank"><img src="images/Meta.png" alt="Facebook"></a>
-              <a href="#"><img src="images/Whatsapp.png" alt="Whatsapp"></a>
-              <a href="mailto:104404059@students.swinburne.edu.my"><img src="images/Mail.png" alt="Mail"></a>
-            </div>
-          </div>
-        </div>
-      
-        <div class="footer-bottom">
-          <a href="#top"><p class="footer-brand">BREW & GO</p></a>
-          <p>© COPYRIGHT 2025 BREW & GO</p>
-        </div>
-      </footer>  
+  <?php include 'footer.php'; ?>
+
 </body>
 </html>
