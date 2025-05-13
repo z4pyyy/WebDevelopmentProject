@@ -9,7 +9,6 @@
     <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
     <title>Brew & Go Coffee - Home</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/mobile.css?" media="screen and (max-width: 1300px)">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
 </head>
