@@ -27,7 +27,7 @@
             <p>As Brew & Go continues to grow, we are actively seeking passionate, motivated individuals to join our team. Whether you're an experienced barista, a customer service enthusiast, or someone eager to learn and grow in the food and beverage industry — we’d love to hear from you. Join us in shaping the future of local coffee culture, one cup at a time.</p>
         </div>
       
-        <form class="joinus-form">
+        <form class="joinus-form" action="process_joinus.php" method="POST" enctype="multipart/form-data">
           <div class="form-reset-topright">
             <button type="reset">Reset Form</button>
           </div>

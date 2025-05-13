@@ -20,7 +20,6 @@
     <div id="top"></div>
     <header>
       <?php include 'navbar.php'; ?>
-      <?php include 'connection.php'; ?>
     </header>
     
     <section class="hero-row">
