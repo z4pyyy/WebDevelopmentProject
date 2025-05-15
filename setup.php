@@ -63,6 +63,7 @@ echo mysqli_query($conn, $sql) ? "✅ Table 'job_application' ready.<br>" : "❌
 // ENQUIRY TABLE
 $sql = "CREATE TABLE IF NOT EXISTS enquiry (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id VARCHAR(20) UNIQUE,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,

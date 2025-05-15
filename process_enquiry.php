@@ -16,6 +16,7 @@ $message = trim($_POST['message']);
 $address = $street; // For column mapping
 
 // ✅ 3. Insert into enquiry table (corrected query)
+// ✅ 1. Insert without ticket_id
 $sql = "INSERT INTO enquiry (
     first_name, last_name, email, phone, address, postcode, city, state, enquiry_type, message
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -37,13 +38,22 @@ mysqli_stmt_bind_param(
 );
 
 if (mysqli_stmt_execute($stmt)) {
+    $last_id = mysqli_insert_id($conn);
+    $ticket_id = "ENQ-" . str_pad($last_id, 4, "0", STR_PAD_LEFT);
+
+    // ✅ 2. Update ticket_id
+    $update_sql = "UPDATE enquiry SET ticket_id = ? WHERE id = ?";
+    $update_stmt = mysqli_prepare($conn, $update_sql);
+    mysqli_stmt_bind_param($update_stmt, "si", $ticket_id, $last_id);
+    mysqli_stmt_execute($update_stmt);
+
+    // ✅ 3. Optional: store it in session for thank you page
+    session_start();
+    $_SESSION['enquiry_data'] = $_POST;
+    $_SESSION['enquiry_data']['ticket_id'] = $ticket_id;
+
     header("Location: thankyou_enquiry.php");
     exit;
 } else {
     echo "<p style='color:red;'>❌ Submission failed: " . mysqli_error($conn) . "</p>";
 }
-
-// ✅ 4. Cleanup
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
-?>
