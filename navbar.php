@@ -1,4 +1,4 @@
-<?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
+
 <nav class="navbar">
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-icon">&#9776;</label>

@@ -1,10 +1,60 @@
 <?php
-session_start();
-include 'connection.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include 'connection.php';
+include 'navbar.php';
 $username = trim($_POST['username']);
 $password = $_POST['password'];
 
+// 🔍 Special handling for admin login
+if ($username === 'admin') {
+    $admin_sql = "SELECT id, password FROM admin WHERE username = ?";
+    $admin_stmt = mysqli_prepare($conn, $admin_sql);
+    mysqli_stmt_bind_param($admin_stmt, "s", $username);
+    mysqli_stmt_execute($admin_stmt);
+    $admin_result = mysqli_stmt_get_result($admin_stmt);
+
+    if ($admin_row = mysqli_fetch_assoc($admin_result)) {
+        if (password_verify($password, $admin_row['password'])) {
+            // ✅ Admin login success
+            $_SESSION['admin_id'] = $admin_row['id'];
+            $_SESSION['role'] = 'admin';
+
+            echo <<<HTML
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="refresh" content="2;url=index.php">
+              <title>Admin Login</title>
+              <style>
+                body { font-family: 'Outfit', sans-serif; text-align: center; padding-top: 100px; background-color: #f0f0f0; }
+                .box { background: white; display: inline-block; padding: 40px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+              </style>
+            </head>
+            <body>
+              <div class="box">
+                <h2>👑 Welcome, Admin!</h2>
+                <p>You are now logged in as an administrator.</p>
+                <p>Redirecting to dashboard...</p>
+              </div>
+            </body>
+            </html>
+            HTML;
+            exit;
+        }
+    }
+
+    // ❌ Admin login failed
+    $_SESSION['login_error'] = "Invalid admin credentials.";
+    header("Location: login.php");
+    exit;
+}
+
+// 🔍 Normal user login
 $sql = "SELECT id, password FROM user WHERE username = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "s", $username);
@@ -12,14 +62,12 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $hashed_password = $row['password'];
-
-    if (password_verify($password, $hashed_password)) {
-        // ✅ Login success — set session
+    if (password_verify($password, $row['password'])) {
+        // ✅ User login success
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = 'user';
 
-        // ✅ Show success and redirect to index.php
         echo <<<HTML
         <!DOCTYPE html>
         <html lang="en">
@@ -28,19 +76,8 @@ if ($row = mysqli_fetch_assoc($result)) {
           <meta http-equiv="refresh" content="2;url=index.php">
           <title>Login Successful</title>
           <style>
-            body {
-              font-family: 'Outfit', sans-serif;
-              text-align: center;
-              padding-top: 100px;
-              background-color: #f8f8f8;
-            }
-            .box {
-              background: white;
-              display: inline-block;
-              padding: 40px;
-              border-radius: 10px;
-              box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            }
+            body { font-family: 'Outfit', sans-serif; text-align: center; padding-top: 100px; background-color: #f8f8f8; }
+            .box { background: white; display: inline-block; padding: 40px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
           </style>
         </head>
         <body>
@@ -56,7 +93,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     }
 }
 
-// ❌ Login failed — redirect back to login with a message
+// ❌ General login failure
 $_SESSION['login_error'] = "Invalid Login ID or Password.";
 header("Location: login.php");
 exit;

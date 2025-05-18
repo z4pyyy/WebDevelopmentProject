@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +20,6 @@
 
 <body class="login-page">
   <?php
-    session_start();
     $errors = $_SESSION['registration_errors'] ?? [];
     $input = $_SESSION['registration_input'] ?? [];
     unset($_SESSION['registration_errors'], $_SESSION['registration_input']);

@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +21,6 @@
 
 <body class="login-page">
     <?php
-      session_start();
       $error_message = $_SESSION['login_error'] ?? '';
       unset($_SESSION['login_error']);
     ?>
@@ -40,7 +45,7 @@
                   <label for="username">Login ID</label>
                   <input type="text" id="username" name="username" maxlength="30" 
                   pattern="[A-Za-z0-9#]+" 
-                  placeholder="Username#ID" 
+                  placeholder="Jackie" 
                   required title="Enter your full ID including #digits">
 
                 </div>

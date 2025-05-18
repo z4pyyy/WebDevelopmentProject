@@ -2252,6 +2252,13 @@ input:focus, select:focus {
     margin-bottom: 6px;
   }
   
+  .username-input {
+    width: 93% !important;     /* Allow full width */
+    max-width: 100% !important; /* Remove max cap */
+    flex: 1 1 100%;           /* Ensure it breaks into its own row if flex is used */
+    padding: 12px  !important; /* Remove padding */
+  }
+  
   .input-group input {
     padding: 12px;
     border-radius: 8px;
@@ -2263,11 +2270,6 @@ input:focus, select:focus {
     width:90%;
   }
 
-  .username-input {
-    width: 100% !important;     /* Allow full width */
-    max-width: 100% !important; /* Remove max cap */
-    flex: 1 1 100%;              /* Ensure it breaks into its own row if flex is used */
-  }
   
   .input-group input:focus {
     border-color: #3f51b5;
@@ -4118,6 +4120,143 @@ body {
   text-decoration: underline;
   color: #c29200;
 }
+
+
+
+
+
+
+/* === Assignment 2 === */
+/* === Admin Dashboard === */
+
+.admin-sidebar {
+  margin-top: 90px;
+  width: 220px;
+  background-color: #343a40;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.admin-content {
+  margin-left: 220px; /* Same as sidebar width */
+  flex-grow: 1;
+  padding: 30px;
+  background-color: #f8f9fa;
+  overflow-y: auto;
+  width: calc(100% - 220px);
+}
+
+.admin-sidebar h4 {
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid #495057;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-sidebar a {
+  color: #adb5bd;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background-color: #495057;
+  color: #fff;
+}
+
+.admin-navbar {
+  background-color: #ffffff;
+  padding: 10px 30px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-logout-button {
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.admin-logout-button:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.admin-dashboard {
+  margin-top: 90px;
+}
+
+.admin-card-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.admin-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+.admin-card h5 {
+  margin: 0 0 10px;
+}
+
+.admin-card p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.admin-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.admin-btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

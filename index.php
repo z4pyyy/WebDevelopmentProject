@@ -1,4 +1,9 @@
-
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+      <?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +20,9 @@
 </head>
 
 <body class="index-page">
-  <?php
-    session_start();
-  ?>
+
     <div id="top"></div>
     <header>
-      <?php include 'navbar.php'; ?>
     </header>
     
     <section class="hero-row">

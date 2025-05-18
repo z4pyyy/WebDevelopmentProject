@@ -53,6 +53,23 @@ $sql = "CREATE TABLE IF NOT EXISTS admin (
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'admin' ready.<br>" : "❌ " . mysqli_error($conn);
 
+// Check if default admin exists
+$check_admin_sql = "SELECT id FROM admin WHERE username = 'admin'";
+$check_admin_result = mysqli_query($conn, $check_admin_sql);
+
+if (mysqli_num_rows($check_admin_result) === 0) {
+    $hashed_admin_password = password_hash('admin', PASSWORD_DEFAULT);
+    $insert_admin_sql = "INSERT INTO admin (username, password) VALUES ('admin', '$hashed_admin_password')";
+    
+    if (mysqli_query($conn, $insert_admin_sql)) {
+        echo "✅ Default admin account created.<br>";
+    } else {
+        echo "❌ Failed to create default admin: " . mysqli_error($conn) . "<br>";
+    }
+} else {
+    echo "ℹ️ Default admin already exists.<br>";
+}
+
 // 4️⃣ JOB APPLICATION TABLE
 $sql = "CREATE TABLE IF NOT EXISTS job_application (
   id INT AUTO_INCREMENT PRIMARY KEY,
