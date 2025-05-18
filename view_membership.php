@@ -8,6 +8,9 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 include 'connection.php';
+include 'navbar.php';
+include 'navbar_admin.php';
+
 $sql = "SELECT * FROM membership ORDER BY registered_at DESC";
 $result = mysqli_query($conn, $sql);
 ?>
@@ -45,8 +48,7 @@ $result = mysqli_query($conn, $sql);
   </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
-    <?php include 'navbar_admin.php'; ?>
+
 
   <div class="admin-content">
     <div class="admin-navbar">
