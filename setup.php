@@ -22,16 +22,41 @@ if (mysqli_query($conn, $sql)) {
 mysqli_select_db($conn, $dbname);
 echo "✅ Selected database: $dbname<br>";
 
-// 1️⃣ MEMBERSHIP TABLE (Personal info only)
+// Create roles table
+$sql = "CREATE TABLE IF NOT EXISTS roles (
+  id TINYINT PRIMARY KEY,
+  name VARCHAR(50) UNIQUE NOT NULL
+)";
+echo mysqli_query($conn, $sql) ? "✅ Table 'roles' ready.<br>" : "❌ " . mysqli_error($conn);
+
+// Insert roles
+$roles = [1 => 'admin', 2 => 'operator', 3 => 'staff', 4 => 'user'];
+foreach ($roles as $id => $name) {
+    $check = mysqli_query($conn, "SELECT id FROM roles WHERE id = $id");
+    if (mysqli_num_rows($check) === 0) {
+        mysqli_query($conn, "INSERT INTO roles (id, name) VALUES ($id, '$name')");
+    }
+}
+
+// 1️⃣ MEMBERSHIP TABLE
 $sql = "CREATE TABLE IF NOT EXISTS membership (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  member_id VARCHAR(10) UNIQUE,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   phone VARCHAR(20) UNIQUE,
+  address TEXT DEFAULT NULL,
+  sex VARCHAR(10) DEFAULT NULL,
+  nationality VARCHAR(50) DEFAULT NULL,
+  wallet DECIMAL(10,2) DEFAULT 0.00,
+  points INT DEFAULT 0,
+  profile_picture VARCHAR(255) DEFAULT NULL,
   registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'membership' ready.<br>" : "❌ " . mysqli_error($conn);
+echo mysqli_query($conn, $sql) ? "✅ Table 'membership' updated and ready.<br>" : "❌ " . mysqli_error($conn);
+
+
 
 // 2️⃣ USER TABLE (Login credentials)
 $sql = "CREATE TABLE IF NOT EXISTS user (
@@ -39,10 +64,10 @@ $sql = "CREATE TABLE IF NOT EXISTS user (
   username VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   membership_id INT,
-  role TINYINT NOT NULL DEFAULT 4, -- 1=Admin, 2=Operator, 3=Staff, 4=User
-  FOREIGN KEY (membership_id) REFERENCES membership(id) ON DELETE CASCADE
+  role_id TINYINT DEFAULT 4,
+  FOREIGN KEY (membership_id) REFERENCES membership(id) ON DELETE CASCADE,
+  FOREIGN KEY (role_id) REFERENCES roles(id)
 )";
-
 echo mysqli_query($conn, $sql) ? "✅ Table 'user' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 3️⃣ ADMIN TABLE
@@ -53,14 +78,11 @@ $sql = "CREATE TABLE IF NOT EXISTS admin (
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'admin' ready.<br>" : "❌ " . mysqli_error($conn);
 
-// Check if default admin exists
-$check_admin_sql = "SELECT id FROM admin WHERE username = 'admin'";
+// Insert default admin (plain text 'admin')
+$check_admin_sql = "SELECT id FROM admin WHERE LOWER(username) = 'admin'";
 $check_admin_result = mysqli_query($conn, $check_admin_sql);
-
 if (mysqli_num_rows($check_admin_result) === 0) {
-    $hashed_admin_password = password_hash('admin', PASSWORD_DEFAULT);
-    $insert_admin_sql = "INSERT INTO admin (username, password) VALUES ('admin', '$hashed_admin_password')";
-    
+    $insert_admin_sql = "INSERT INTO admin (username, password) VALUES ('admin', 'admin')";
     if (mysqli_query($conn, $insert_admin_sql)) {
         echo "✅ Default admin account created.<br>";
     } else {
@@ -106,7 +128,7 @@ $sql = "CREATE TABLE IF NOT EXISTS enquiry (
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'enquiry' ready.<br>" : "❌ " . mysqli_error($conn);
 
-// ✅ Close connection
+// Close
 mysqli_close($conn);
 echo "✅ MySQL connection closed.<br>";
 ?>

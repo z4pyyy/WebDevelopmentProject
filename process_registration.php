@@ -64,23 +64,88 @@ if (!empty($errors)) {
     exit;
 }
 
-// 4. Insert into `membership` table
+// 1. Insert into membership
 $insert_membership_sql = "INSERT INTO membership (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)";
 $membership_stmt = mysqli_prepare($conn, $insert_membership_sql);
 mysqli_stmt_bind_param($membership_stmt, "ssss", $first_name, $last_name, $email, $phone);
-mysqli_stmt_execute($membership_stmt);
 
-// Get the inserted membership ID
+if (!mysqli_stmt_execute($membership_stmt)) {
+    die("❌ Membership insert failed: " . mysqli_error($conn));
+}
+
+// 2. Get inserted membership ID once
 $membership_id = mysqli_insert_id($conn);
+if ($membership_id <= 0) {
+    die("❌ Invalid membership ID returned.");
+}
 
-// 5. Insert into `user` table (hashed password)
+// 3. Generate and update member_id (e.g., BNG-00001)
+$formatted_id = 'BNG-' . str_pad($membership_id, 5, '0', STR_PAD_LEFT);
+$update_id_sql = "UPDATE membership SET member_id = ? WHERE id = ?";
+$update_stmt = mysqli_prepare($conn, $update_id_sql);
+mysqli_stmt_bind_param($update_stmt, "si", $formatted_id, $membership_id);
+mysqli_stmt_execute($update_stmt); // This is fine AFTER insert_id()
+
+// 4. Insert into user table
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-$insert_user_sql = "INSERT INTO user (username, password, membership_id, role) VALUES (?, ?, ?, 4)";
+$insert_user_sql = "INSERT INTO user (username, password, membership_id, role_id) VALUES (?, ?, ?, 4)";
 $user_stmt = mysqli_prepare($conn, $insert_user_sql);
 mysqli_stmt_bind_param($user_stmt, "ssi", $username, $hashed_password, $membership_id);
-mysqli_stmt_execute($user_stmt);
 
-// 6. Redirect
-header("Location: thankyou_registration.php");
+if (!mysqli_stmt_execute($user_stmt)) {
+    die("❌ User insert failed: " . mysqli_error($conn));
+}
+
+
+// 6. Inline confirmation screen
+echo <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="2;url=login.php">
+  <title>Welcome to Brew & Go!</title>
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .thankyou-box {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 450px;
+      width: 90%;
+    }
+
+    .thankyou-box h1 {
+      color: #4CAF50;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .thankyou-box p {
+      font-size: 1.1rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou-box">
+    <h1>🎉 Registration Complete!</h1>
+    <p>Welcome, <strong>{$username}</strong>!</p>
+    <p>You’ll be redirected to the login page in a moment...</p>
+  </div>
+</body>
+</html>
+HTML;
 exit;
 ?>

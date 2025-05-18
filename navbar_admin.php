@@ -5,6 +5,6 @@
     <a href="#">📩 View Enquiries</a>
     <a href="#">💼 Job Applications</a>
     <a href="#">📢 Promotions & News</a>
-    <a href="#">➕ User Management</a>
+    <a href="#">🏷️ Products</a>
     <a href="logout.php">🚪 Logout</a>
   </div>

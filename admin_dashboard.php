@@ -15,16 +15,17 @@ include 'navbar_admin.php';
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
+
+
 <body>
   <div class="admin-content">
     <div class="admin-navbar">
       <div><strong>Welcome, Admin</strong></div>
       <div><a href="logout.php" class="admin-logout-button">Logout</a></div>
     </div>
-
+    
     <div class="admin-dashboard">
       <h2>Dashboard Overview</h2>
-      <p>This is your Brew & Go admin panel. Use the sidebar to manage users, enquiries, jobs and more.</p>
 
       <div class="admin-card-grid">
         <div class="admin-card">

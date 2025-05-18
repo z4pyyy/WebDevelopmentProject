@@ -4203,28 +4203,43 @@ body {
 }
 
 .admin-dashboard {
-  margin-top: 90px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.admin-dashboard h2{
+  font-size: 2.5rem;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
 
 .admin-card-grid {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 20px;
+  width:90%;
 }
 
 .admin-card {
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(172, 172, 172);
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 20px;
   flex: 1;
-  min-width: 250px;
-  max-width: 300px;
+  align-items: center;
 }
 
 .admin-card h5 {
   margin: 0 0 10px;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .admin-card p {
@@ -4239,7 +4254,7 @@ body {
   text-decoration: none;
   padding: 6px 12px;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   transition: background-color 0.2s;
 }
 
@@ -4247,9 +4262,158 @@ body {
   background-color: #0056b3;
 }
 
+/* === MEMBER DASHBOARD === */
+body.product-page {
+  font-family: 'Outfit', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
 
+.member-dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-top: 90px;
+}
 
+.member-name {
+  color: #333;
+  font-weight: bold;
+}
 
+.member-profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.member-profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.member-profile-input {
+  display: none;
+}
+
+.member-profile-hint {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0;
+}
+
+.member-profile-wrapper img {
+  border-radius: 50%;
+  object-fit: contain;
+  height: 200px;
+  width: 200px;
+  transition: opacity 0.3s;
+}
+
+.member-profile-wrapper p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 8px;
+}
+
+.rewards-box {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.reward-points h3 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.reward-points p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  color: #777;
+}
+
+.progress-bar {
+  margin-top: 20px;
+  position: relative;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 10px;
+  transition: width 0.5s;
+}
+
+.progress-bar .star {
+  position: absolute;
+  top: -28px;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #333;
+  text-align: center;
+}
+
+.member-info {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 30px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.member-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.member-info li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.member-actions {
+  margin-top: 40px;
+}
+
+.member-update-form input,
+.member-update-form textarea,
+.member-update-form select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.member-update-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.member-update-form button:hover {
+  background-color: #0056b3;
+}
 
 
 

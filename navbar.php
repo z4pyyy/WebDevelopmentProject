@@ -41,16 +41,19 @@
       <li><span class="hover-underline"><a href="enquiry.php">Enquiry</a></li></span>
       <li>
         <?php if (isset($_SESSION['username'])): ?>
-          <a href="membership.php">👤 <?= htmlspecialchars($_SESSION['username']) ?></a>
+          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+          <?php else: ?>
+            <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($_SESSION['username']) ?></a></span>
+          <?php endif; ?>
         <?php else: ?>
-          <a href="registration.php">Membership</a>
+          <span class="hover-underline"><a href="registration.php">Membership</a></span>
         <?php endif; ?>
       </li>
       <?php if (isset($_SESSION['username'])): ?>
-        <li><a href="logout.php">Logout</a></li>
+        <li><span class="hover-underline"><a href="logout.php">Logout</a></li></span>
       <?php endif; ?>
     </ul>
-
   <!-- Mobile Dropdown Menu -->
   <div class="nav-dropdown">
       <ul>
@@ -60,9 +63,13 @@
           <li><a href="enquiry.php">Enquiry</a></li>
           <li>
             <?php if (isset($_SESSION['username'])): ?>
-              <a href="membership.php">👤 <?= htmlspecialchars($_SESSION['username']) ?></a>
+              <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+              <?php else: ?>
+                <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($_SESSION['username']) ?></a></span>
+              <?php endif; ?>
             <?php else: ?>
-              <a href="registration.php">Membership</a>
+              <span class="hover-underline"><a href="registration.php">Membership</a></span>
             <?php endif; ?>
           </li>
           <?php if (isset($_SESSION['username'])): ?>
