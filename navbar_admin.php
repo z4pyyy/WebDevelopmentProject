@@ -1,6 +1,6 @@
 <div class="admin-sidebar">
     <h4><span class="icon">👤</span> Admin Panel</h4>
-    <a href="admin_dashboard>>START.php" class="active">📊 Dashboard</a>
+    <a href="admin_dashboard.php" class="active">📊 Dashboard</a>
     <a href="view_membership.php">👥 View Members</a>
     <a href="#">📩 View Enquiries</a>
     <a href="#">💼 Job Applications</a>
