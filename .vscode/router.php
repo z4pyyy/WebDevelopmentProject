@@ -22,8 +22,8 @@ if (php_sapi_name() == "cli-server") {
             <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
             <script type="module">
                 window.addEventListener('DOMContentLoaded', (event) => {
-                const socket = io(`ws://localhost:5003`, { 
-                    auth: { token : "MDFiOTJiYzQtNWI4My00ODk1LWEyZGQtZmZkN2YwYTlkNzM5MTc0NzExNTMxMjU1NA==aMc" },   
+                const socket = io(`ws://localhost:5004`, { 
+                    auth: { token : "NjE2NDQ2YzktM2ExNC00ZmE3LWE0OTMtNzA1NDNjZTkwZmYxMTc0NzMzMjU2ODQ3Ng==aMc" },   
                     withCredentials: true,
                     reconnectionAttempts: 3
                 });

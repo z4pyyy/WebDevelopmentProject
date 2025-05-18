@@ -13,6 +13,13 @@
 </head>
 
 <body class="login-page">
+  <?php
+    session_start();
+    $errors = $_SESSION['registration_errors'] ?? [];
+    $input = $_SESSION['registration_input'] ?? [];
+    unset($_SESSION['registration_errors'], $_SESSION['registration_input']);
+  ?>
+
     <div id="top"></div>
     <header>
       <?php include 'navbar.php'; ?>
@@ -56,26 +63,35 @@
     </div>
     <form action="process_registration.php" method="POST" class="registration-form">
       <div class="form-section">
+      <?php if (!empty($errors)): ?>
+        <div class="form-errors" style="
+          background-color: #ffe6e6;
+          border: 2px solid #ff4d4d;
+          color: #b30000;
+          padding: 15px 20px;
+          border-radius: 8px;
+          margin-bottom: 20px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        ">
+          <h4 style="margin-top: 0;">⚠ Please correct the following:</h4>
+          <ul style="padding-left: 20px; margin-top: 10px;">
+            <?php foreach ($errors as $error): ?>
+              <li>❌ <?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+
+
         <h3>Login Info</h3>
         <div class="input-group-row">
         <div class="input-group">
-          <label for="username">Login ID</label>
-          <input type="text" id="username" name="username" maxlength="10" pattern="[A-Za-z]+" placeholder="Username" required>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="username-input"
+            maxlength="10" pattern="[A-Za-z]+"
+            placeholder="Username" required
+            value="<?= htmlspecialchars($input['username'] ?? '') ?>">
           <p class="password-hint">⚠ A-Z only, case-sensitive, max 25 characters.</p>
-        </div>
-        <div class="input-group">
-          <label for="id_tag">ID Tag</label>
-          <input 
-            type="text" 
-            id="id_tag" 
-            name="id_tag" 
-            maxlength="3" 
-            pattern="#\d{2}" 
-            placeholder="#78" 
-            required
-            title="Must start with # followed by exactly 2 digits (e.g., #01)"
-          >
-          <p class="password-hint">⚠ Must begin with # followed by 2 digits (e.g., #01)</p>
         </div>
       </div>
     </div>
@@ -86,11 +102,17 @@
         <div class="input-group-row">
           <div class="input-group">
             <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" maxlength="25" pattern="[A-Za-z]+" placeholder="Jackie" required>
+            <input type="text" id="first_name" name="first_name"
+              maxlength="25" pattern="[A-Za-z]+"
+              placeholder="Jackie" required
+              value="<?= htmlspecialchars($input['first_name'] ?? '') ?>">
           </div>
           <div class="input-group">
             <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" maxlength="25" pattern="[A-Za-z]+" placeholder="Chan" required>
+            <input type="text" id="last_name" name="last_name"
+              maxlength="25" pattern="[A-Za-z]+"
+              placeholder="Chan" required
+              value="<?= htmlspecialchars($input['last_name'] ?? '') ?>">
           </div>
         </div>
       </div>
@@ -100,11 +122,15 @@
         <div class="input-group-row">
           <div class="input-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="meow@mail.com" required>
+            <input type="email" id="email" name="email"
+              placeholder="meow@mail.com" required
+              value="<?= htmlspecialchars($input['email'] ?? '') ?>">
           </div>
           <div class="input-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(+60) 1234-5678" required>
+            <input type="tel" id="phone" name="phone"
+              placeholder="(+60) 1234-5678" required
+              value="<?= htmlspecialchars($input['phone'] ?? '') ?>">
           </div>
         </div>
       </div>
@@ -114,7 +140,7 @@
         <div class="input-group-row">
           <div class="input-group">
             <label for="password">Password</label>
-            <input type="text" id="password" name="password" maxlength="25" pattern="[A-Za-z]{1,25}" placeholder="Aa-Zz" required>
+            <input type="password" id="password" name="password" maxlength="25" pattern="[A-Za-z]{1,25}" placeholder="Aa-Zz" required>
             <p class="password-hint">⚠ A-Z only, case-sensitive, max 25 characters.</p>
           </div>
           <div class="input-group">

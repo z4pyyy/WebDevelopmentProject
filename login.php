@@ -14,6 +14,12 @@
 </head>
 
 <body class="login-page">
+    <?php
+      session_start();
+      $error_message = $_SESSION['login_error'] ?? '';
+      unset($_SESSION['login_error']);
+    ?>
+
     <div id="top"></div>
     <header>
       <?php include 'navbar.php'; ?>
@@ -23,12 +29,20 @@
         <section class="registration-container">
           <h2>Member Login</h2>
           <form action="process_login.php" method="POST" class="registration-form">
+            <?php if (!empty($error_message)): ?>
+              <p style="color: red; text-align: center;">❌ <?= htmlspecialchars($error_message) ?></p>
+            <?php endif; ?>
             <div class="form-section">
               <h3>Login Credentials</h3>
               <div class="input-group-row">
                 <div class="input-group">
+
                   <label for="username">Login ID</label>
-                  <input type="text" id="username" name="username" maxlength="10" pattern="[A-Za-z]+" placeholder="Enter Login ID" required>
+                  <input type="text" id="username" name="username" maxlength="30" 
+                  pattern="[A-Za-z0-9#]+" 
+                  placeholder="Username#ID" 
+                  required title="Enter your full ID including #digits">
+
                 </div>
                 <div class="input-group">
                 <label for="password">Password</label>
