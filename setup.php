@@ -52,9 +52,11 @@ $sql = "CREATE TABLE IF NOT EXISTS membership (
   wallet DECIMAL(10,2) DEFAULT 0.00,
   points INT DEFAULT 0,
   profile_picture VARCHAR(255) DEFAULT NULL,
+  status ENUM('Active', 'Expired') DEFAULT 'Expired',
   registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'membership' updated and ready.<br>" : "❌ " . mysqli_error($conn);
+
 
 
 

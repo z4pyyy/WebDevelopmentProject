@@ -13,7 +13,8 @@ include 'connection.php';
 $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT m.profile_picture, m.first_name, m.last_name, m.email, m.phone, m.registered_at,
-               m.member_id, m.wallet, m.points, m.sex, m.nationality, m.address
+               m.member_id, m.wallet, m.points, m.sex, m.nationality, m.address,
+               IF(m.wallet >= 30, 'Active', 'Expired') AS status
         FROM user u
         JOIN membership m ON u.membership_id = m.id
         WHERE u.id = ?";
@@ -22,6 +23,8 @@ mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $member = mysqli_fetch_assoc($result);
+$maxWallet = 1000;
+$walletProgress = min(100, ($member['wallet'] / $maxWallet) * 100);
 ?>
 
 <!DOCTYPE html>
@@ -71,12 +74,10 @@ $member = mysqli_fetch_assoc($result);
         <p>Total Stars Earned</p>
       </div>
       <div class="progress-bar">
-        <span class="star" style="left: 10%;">★<br>50</span>
-        <span class="star" style="left: 30%;">★<br>100</span>
-        <span class="star" style="left: 50%;">★<br>200</span>
-        <span class="star" style="left: 70%;">★<br>300</span>
-        <span class="star" style="left: 90%;">★<br>500</span>
-        <div class="fill" style="width: 20%;"></div>
+        <span class="star" style="left: 50%">★<br>Mid Tier</span>
+        <span class="star" style="left: 90%">★<br>Max Tier</span>
+        <div class="fill" style="width: <?= round($walletProgress) ?>%; transition: width 0.6s ease; background-color: #4caf50; height: 100%;"></div>
+        <div class="progress-label"><?= round($walletProgress) ?>%</div>
       </div>
     </div>
 
@@ -86,7 +87,21 @@ $member = mysqli_fetch_assoc($result);
         <li><strong>Member ID:</strong> <?= $member['member_id'] ?? 'N/A' ?></li>
         <li><strong>Email:</strong> <?= htmlspecialchars($member['email']) ?></li>
         <li><strong>Phone:</strong> <?= htmlspecialchars($member['phone']) ?></li>
+        <li><strong>Status:</strong> <?= $member['status'] ?></li>
         <li><strong>Wallet:</strong> RM <?= number_format($member['wallet'] ?? 0, 2) ?></li>
+        <li style="margin-top: 10px;">
+          <form action="update_profile.php" method="POST" style="display:inline-block;">
+            <input type="hidden" name="update_type" value="topup">
+            <select name="topup_amount" class="topup-input" required>
+              <option value="">Top-Up Amount</option>
+              <option value="30">RM30</option>
+              <option value="50">RM50</option>
+              <option value="100">RM100</option>
+              <option value="200">RM200</option>
+            </select>
+            <button type="submit" class="topup-button">Top Up</button>
+          </form>
+        </li>
         <li><strong>Nationality:</strong> <?= htmlspecialchars($member['nationality'] ?? '-') ?></li>
         <li><strong>Sex:</strong> <?= htmlspecialchars($member['sex'] ?? '-') ?></li>
         <li><strong>Address:</strong> <?= htmlspecialchars($member['address'] ?? '-') ?></li>
@@ -96,6 +111,7 @@ $member = mysqli_fetch_assoc($result);
     <div class="member-actions">
       <h3>✏️ Update My Info</h3>
       <form action="update_profile.php" method="POST" enctype="multipart/form-data" class="member-update-form">
+        <input type="hidden" name="update_type" value="details">
         <input type="text" name="first_name" value="<?= htmlspecialchars($member['first_name']) ?>" placeholder="First Name" required>
         <input type="text" name="last_name" value="<?= htmlspecialchars($member['last_name']) ?>" placeholder="Last Name" required>
         <input type="email" name="email" value="<?= htmlspecialchars($member['email']) ?>" placeholder="Email" required>

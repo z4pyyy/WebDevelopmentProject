@@ -54,9 +54,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 <input type="password" id="password" name="password" maxlength="25" required>
               </div>
             </div>
-            <p>Not a member yet?<br><a href="registration.html">Join Now!</a></p>
+            <p>Not a member yet?<br><a href="registration.php">Join Now!</a></p>
           </div>
-    <button type="submit">Login</button>
+        <button type="submit">Login</button>
         </form>
         </section>
     </div>

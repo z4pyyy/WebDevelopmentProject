@@ -22,6 +22,7 @@ if (strtolower($username) === 'admin'){
             // ✅ Admin login success
             $_SESSION['admin_id'] = $admin_row['id'];
             $_SESSION['role'] = 'admin';
+            $_SESSION['role_id'] = 1;
             $_SESSION['username'] = 'admin';
 
             echo <<<HTML
@@ -57,7 +58,7 @@ if (strtolower($username) === 'admin'){
 
 
 // 🔍 Normal user login
-$sql = "SELECT id, password FROM user WHERE username = ?";
+$sql = "SELECT id, password, role_id FROM user WHERE username = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "s", $username);
 mysqli_stmt_execute($stmt);

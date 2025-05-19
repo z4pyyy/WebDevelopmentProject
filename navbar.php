@@ -22,7 +22,7 @@
   <!-- Full Navbar Menu (Hidden in Portrait) -->
   <ul class="nav-menu">
       <li class="dropdown">
-        <span class="hover-underline"><a href="product1.html">Products ▾</a></span>
+        <span class="hover-underline"><a href="product1.php">Products ▾</a></span>
         <ul class="dropdown-content">
           <li><a href="product1.php">Basic Brew</a></li>
           <li><a href="product2.php">Artisan Brew</a></li>

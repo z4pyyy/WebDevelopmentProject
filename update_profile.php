@@ -27,7 +27,7 @@ if (!$membership_id) {
 $update_type = $_POST['update_type'] ?? 'full';
 
 if ($update_type === 'picture') {
-    // ✅ Picture update only
+    // ✅ Picture update
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
         $upload_dir = 'uploads/';
         if (!file_exists($upload_dir)) {
@@ -50,7 +50,25 @@ if ($update_type === 'picture') {
     exit;
 }
 
-// ✅ Full form update (text inputs)
+if ($update_type === 'topup') {
+    // ✅ Top-up update
+    $amount = (int) ($_POST['topup_amount'] ?? 0);
+    if (in_array($amount, [30, 50, 100, 200])) {
+        $sql = "UPDATE membership 
+                SET wallet = wallet + ?, 
+                    status = IF(wallet + ? >= 30, 'Active', 'Expired') 
+                WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "iii", $amount, $amount, $membership_id);
+        mysqli_stmt_execute($stmt);
+    }
+
+    mysqli_close($conn);
+    header("Location: membership.php");
+    exit;
+}
+
+// ✅ Full form update
 $first_name = trim($_POST['first_name']);
 $last_name = trim($_POST['last_name']);
 $email = trim($_POST['email']);
@@ -59,18 +77,17 @@ $address = trim($_POST['address']);
 $sex = $_POST['sex'];
 $nationality = trim($_POST['nationality']);
 
-// Optional: check for duplicate email/phone logic here if needed
-
 $sql = "UPDATE membership SET 
         first_name = ?, last_name = ?, email = ?, phone = ?, 
-        address = ?, sex = ?, nationality = ? 
+        address = ?, sex = ?, nationality = ?, 
+        status = IF(wallet >= 30, 'Active', 'Expired') 
         WHERE id = ?";
 
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "sssssssi", $first_name, $last_name, $email, $phone, $address, $sex, $nationality, $membership_id);
 mysqli_stmt_execute($stmt);
-mysqli_close($conn);
 
+mysqli_close($conn);
 header("Location: membership.php");
 exit;
 ?>
