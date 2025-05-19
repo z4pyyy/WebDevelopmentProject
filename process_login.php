@@ -26,26 +26,23 @@ if (strtolower($username) === 'admin'){
             $_SESSION['username'] = 'admin';
 
             echo <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-              <meta charset="UTF-8">
-              <meta http-equiv="refresh" content="2;url=admin_dashboard.php">
-              <title>Admin Login</title>
-              <style>
-                body { font-family: 'Outfit', sans-serif; text-align: center; padding-top: 100px; background-color: #f0f0f0; }
-                .box { background: white; display: inline-block; padding: 40px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-              </style>
-            </head>
-            <body>
-              <div class="box">
-                <h2>👑 Welcome, Admin!</h2>
-                <p>You are now logged in as an administrator.</p>
-                <p>Redirecting to dashboard...</p>
-              </div>
-            </body>
-            </html>
-            HTML;
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="refresh" content="2;url=admin_dashboard.php">
+                <title>Admin Login</title>
+                <link rel="stylesheet" href="styles/style.css">
+              </head>
+              <body class="login-confirm-body">
+                <div class="login-confirm-box">
+                  <h2>👑 Welcome, Admin!</h2>
+                  <p>You are now logged in as an administrator.</p>
+                  <p>Redirecting to dashboard...</p>
+                </div>
+              </body>
+              </html>
+              HTML;
             exit;
         }
     }
@@ -72,19 +69,16 @@ if ($row = mysqli_fetch_assoc($result)) {
         $_SESSION['role'] = 'user';
 
         echo <<<HTML
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="refresh" content="2;url=index.php">
-          <title>Login Successful</title>
-          <style>
-            body { font-family: 'Outfit', sans-serif; text-align: center; padding-top: 100px; background-color: #f8f8f8; }
-            .box { background: white; display: inline-block; padding: 40px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-          </style>
-        </head>
-        <body>
-          <div class="box">
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="2;url=admin_dashboard.php">
+            <title>Admin Login</title>
+            <link rel="stylesheet" href="styles/style.css">
+          </head>
+          <body class="login-confirm-body">
+            <div class="login-confirm-box">
             <h2>✅ Welcome, {$username}!</h2>
             <p>You are now logged in.</p>
             <p>Redirecting to homepage...</p>

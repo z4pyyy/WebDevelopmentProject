@@ -105,38 +105,6 @@ echo <<<HTML
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="2;url=login.php">
   <title>Welcome to Brew & Go!</title>
-  <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-      background-color: #f8f8f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .thankyou-box {
-      background-color: white;
-      border-radius: 12px;
-      padding: 40px 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      text-align: center;
-      max-width: 450px;
-      width: 90%;
-    }
-
-    .thankyou-box h1 {
-      color: #4CAF50;
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    .thankyou-box p {
-      font-size: 1.1rem;
-      color: #444;
-    }
-  </style>
 </head>
 <body>
   <div class="thankyou-box">

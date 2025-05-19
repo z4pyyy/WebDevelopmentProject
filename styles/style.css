@@ -4129,9 +4129,15 @@ body {
 /* === Assignment 2 === */
 /* === Admin Dashboard === */
 
+  .view-checkbox {
+      accent-color: #007bff;
+      transform: scale(1.2);
+      cursor: pointer;
+  }
+
 .admin-sidebar {
   margin-top: 90px;
-  width: 220px;
+  width: 230px;
   background-color: #343a40;
   color: #fff;
   display: flex;
@@ -4143,6 +4149,8 @@ body {
   top: 0;
   bottom: 0;
   z-index: 1000;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .admin-content {
@@ -4186,6 +4194,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 3rem;
 }
 
 .admin-logout-button {
@@ -4465,12 +4474,26 @@ body.product-page {
 }
 
 .member-details-inline {
-    font-size: 0.95em;
-    line-height: 1.6em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.95rem;
 }
 
+.detail-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.label {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+}
+
+
 .member-details-button {
-  background-color: #007bff !important;
+  background-color: orange !important;
   color: white !important;
   padding: 10px 20px;
   border: none;
@@ -4480,34 +4503,70 @@ body.product-page {
 }
 
 .member-details-button:hover {
-  background-color: #0056b3 !important;
+  background-color: #00ff37 !important;
+  transform: scale(1.05);
+  color:#ffffff !important;
+}
+
+.member-edit-button {
+  background-color: 007bff !important;
+  color: white !important;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width:100%;
+}
+
+.member-edit-button:hover {
+  background-color: #00ff37 !important;
   transform: scale(1.05);
 }
 
 .update-role-button {
-  background-color: orange;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  background-color: #007bff !important;
+  color: white !important;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width:100%;
 }
 
 .update-role-button:hover {
-  background-color: darkorange;
+  background-color: #00ff37 !important;
+  transform: scale(1.05);
 }
 
 select {
   padding: 6px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  width: 50%;
 }
 
-.action-buttons{
+.role-select {
   display: flex;
-  flex-direction:row;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* .action-buttons{
+  display: flex;
+  flex-direction:column;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+} */
+
+.action-buttons-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -4559,6 +4618,204 @@ select {
     text-align: center;
     margin-bottom: 15px;
 }
+
+.joinus-body {
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding-top: 100px;
+}
+.joinus-box {
+  background: #fff;
+  display: inline-block;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.joinus-box h2 {
+  color: #28a745;
+  margin-bottom: 10px;
+}
+.joinus-box p {
+  margin: 8px 0;
+  color: #333;
+}
+.joinus-backlink {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+.joinus-backlink:hover {
+  color: #0056b3;
+}
+
+/* 🔒 Login Success Pages */
+.login-confirm-body {
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+  padding-top: 100px;
+  background-color: #f8f8f8;
+}
+
+.login-confirm-box {
+  background: white;
+  display: inline-block;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.login-confirm-box h2 {
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.login-confirm-box p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.joinus-error-body {
+  font-family: 'Outfit', sans-serif;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.joinus-error-box {
+  background: #fff;
+  padding: 30px 40px;
+  border: 2px solid #dc3545;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.joinus-error-box h2 {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+.joinus-error-box p {
+  margin: 10px 0;
+}
+.joinus-error-box a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: #dc3545;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.joinus-error-box a:hover {
+  background: #b02a37;
+}
+
+.joinus-confirm-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+}
+
+.joinus-confirm-box h2 {
+  color: #4CAF50;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.joinus-confirm-box p {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 10px 0;
+}
+
+.joinus-confirm-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.joinus-confirm-link:hover {
+  text-decoration: underline;
+}
+
+.thankyou-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+}
+
+.thankyou-box h1 {
+  color: #4CAF50;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.thankyou-box p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.joinus-confirm-body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.viewjob-button {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.viewjob-button:hover {
+  background-color: #e0e0e0;
+}
+
+.viewjob-photo {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.viewjob-cv-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.viewjob-cv-link:hover {
+  background-color: #0056b3;
+}
+
 
 
 /* Mobile View Adjustments */

@@ -154,7 +154,7 @@ if (!$member) {
                     </td>
                 </tr>
                 <tr>
-                    <td>Status (Auto)</td>
+                    <td>Status</td>
                     <td><input type="text" class="readonly-field" value="<?= $member['status'] ?>" readonly></td>
                 </tr>
                 <tr>

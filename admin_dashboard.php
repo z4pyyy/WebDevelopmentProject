@@ -43,12 +43,12 @@ include 'navbar_admin.php';
                 <div class="admin-card">
                     <h5>📩 Enquiries</h5>
                     <p>View submitted customer enquiries.</p>
-                    <a href="view_enquiries.php" class="admin-btn">View Enquiries</a>
+                    <a href="view_enquiry.php" class="admin-btn">View Enquiries</a>
                 </div>
                 <div class="admin-card">
                     <h5>💼 Job Applications</h5>
                     <p>Check incoming applications for openings.</p>
-                    <a href="view_applications.php" class="admin-btn">View Applications</a>
+                    <a href="view_job.php" class="admin-btn">View Applications</a>
                 </div>
             </div>
         </div>

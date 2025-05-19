@@ -58,12 +58,10 @@ if ($selected_id) {
 
 <div class="admin-content">
     <div class="admin-navbar">
-        <div><strong>Member Wallet Overview</strong></div>
-        <div><a href="admin_panel.php" class="admin-logout-button">⬅ Back</a></div>
+        <div><strong>Registered Member</strong></div>
     </div>
 
     <table class="admin-table">
-        <caption>Member Table</caption>
         <thead>
             <tr>
                 <th>Username</th>
@@ -92,13 +90,13 @@ if ($selected_id) {
                               </option>
                           <?php endforeach; ?>
                       </select>
-                      <button type="submit" class="member-details-button">Update</button>
+                      <button type="submit" class="update-role-button">Update</button>
                   </form>
                 </td>
 
                 <!-- Action Buttons -->
                 <td>
-                  <div class="action-buttons">
+                  <div class="action-buttons-div">
                       <!-- View Details -->
                       <form method="POST" class="details-form">
                           <input type="hidden" name="view_id" value="<?= $row['membership_id'] ?>">
@@ -108,7 +106,7 @@ if ($selected_id) {
                       <!-- Edit Member (Link to edit page) -->
                       <form method="GET" action="edit_membership.php" class="details-form">
                           <input type="hidden" name="membership_id" value="<?= $row['membership_id'] ?>">
-                          <button type="submit" class="member-details-button">Edit</button>
+                          <button type="submit" class="member-edit-button">Edit</button>
                       </form>
                   </div>
               </td>
@@ -118,11 +116,11 @@ if ($selected_id) {
             <tr class="member-detail-row">
                 <td colspan="5">
                     <div class="member-details-inline">
-                        <strong>First Name:</strong> <?= htmlspecialchars($row['first_name']) ?><br>
-                        <strong>Last Name:</strong> <?= htmlspecialchars($row['last_name']) ?><br>
-                        <strong>Email:</strong> <?= htmlspecialchars($row['email']) ?><br>
-                        <strong>Phone:</strong> <?= htmlspecialchars($row['phone']) ?><br>
-                        <strong>Registered At:</strong> <?= $row['registered_at'] ?><br>
+                    <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
+                    <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
+                    <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
+                    <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
+                    <div class="detail-row"><span class="label">Registered At</span>: <?= $row['registered_at'] ?></div>
                     </div>
                 </td>
             </tr>
