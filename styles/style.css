@@ -3996,7 +3996,7 @@ details {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 1rem 1.2rem;
-  margin-bottom: 1.2rem;
+  /* margin-bottom: 1.2rem; */
   background-color: #fdfdfd;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease;
@@ -4155,7 +4155,7 @@ body {
 
 .admin-content {
   margin-top:70px;
-  margin-left: 220px; /* Same as sidebar width */
+  margin-left: 220px; 
   flex-grow: 1;
   padding: 30px;
   background-color: #f8f9fa;
@@ -4185,16 +4185,6 @@ body {
 .admin-sidebar a.active {
   background-color: #495057;
   color: #fff;
-}
-
-.admin-navbar {
-  background-color: #ffffff;
-  padding: 10px 30px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 3rem;
 }
 
 .admin-logout-button {
@@ -4554,14 +4544,6 @@ select {
   font-size: 1rem;
 }
 
-/* .action-buttons{
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-} */
-
 .action-buttons-div{
   display: flex;
   flex-direction: row;
@@ -4814,6 +4796,508 @@ select {
 
 .viewjob-cv-link:hover {
   background-color: #0056b3;
+}
+
+.action-buttons{
+  display: flex;
+  flex-direction:row;
+  gap: 10px;
+}
+
+.job-view-photo,
+.job-view-cv{
+  display:flex;
+  flex-direction:column;
+  width:50%;
+  border:0;
+  margin-top:12px;
+  box-shadow:0 0;
+  padding:0;
+}
+
+.admin-activities-wrapper {
+    padding: 30px;
+    margin-top: 90px;
+    margin-left: 250px; 
+}
+
+.hidden {
+  display: none;
+}
+
+.admin-activities-overview {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin: 20px 0;
+  width:90%;
+}
+
+.admin-activities-overview h4 {
+  margin: 0 0 10px 0;
+  color: #003366;
+}
+
+.admin-activities-overview ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-activities-overview li {
+  margin: 5px 0;
+}
+
+/* ───────────────────────────────
+  Section Headings
+─────────────────────────────── */
+.admin-activities-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ───────────────────────────────
+  Activity Card
+─────────────────────────────── */
+.activity-flex {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.admin-activity-card {
+  display: flex;
+  flex-direction: row;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.admin-activity-card h3 {
+  margin-top: 10px;
+  font-size: 36px;
+  color: #0056b3;
+}
+
+.admin-activity-meta {
+  display:flex;
+  flex-direction: column;
+  margin-top: 20px;
+  font-size: 21px;
+  color: #555;
+}
+
+.admin-activity-description {
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.admin-activity-link {
+  margin-top: 12px;
+}
+
+.admin-activity-link a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.admin-activity-actions {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  height:60px;
+  text-align: center;
+  align-items: center;
+}
+
+.admin-activity-actions a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #b02a37;
+}
+
+/* ───────────────────────────────
+  Add Button
+─────────────────────────────── */
+.add-btn {
+  background: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s ease;
+  font-size: 1rem !important;
+  margin-right:30px;
+}
+
+.add-btn:hover {
+  background: #218838;
+}
+
+/* ───────────────────────────────
+  Add Activity Form
+─────────────────────────────── */
+.add-activity-container {
+  max-width: 800px;
+  margin: 90px auto 40px;
+  padding: 20px;
+  background: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.add-activity-container h2 {
+  text-align: center;
+}
+
+.add-activity-form label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+}
+
+.add-activity-form input,
+.add-activity-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.add-activity-form button {
+  margin-top: 20px;
+  background: #28a745;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-activity-form button:hover {
+  background-color: #218838;
+}
+
+.hidden {
+  display: none;
+}
+
+.admin-activity-thumbnail {
+  width: 300px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.admin-activity-thumbnail img {
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.admin-header{
+    color: #000000;
+    font-size: 54px;
+    font-weight: 700;
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-top: 200px;
+    background-size: 200%;
+    animation: gradientFlow 5s linear infinite;
+    font-family: 'Outfit', sans-serif;
+  }
+
+.admin-activity-thumbnail img:hover {
+    opacity: 0.8;
+    transform: scale(1.2);
+}
+
+.centered-thumbnail {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.clickable-thumbnail {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.activity-image {
+    max-width: 300px;
+    max-height: 200px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.activity-image:hover {
+    opacity: 0.8;
+    transform: scale(1.3);
+}
+
+.activity-edit-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.activity-edit-link h3:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.activity-edit-link:hover .activity-image {
+    opacity: 0.8;
+    transform: scale(1.01);
+}
+
+.activity-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width:2rem;
+}
+
+.activity-details h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #004ba0;
+}
+
+.admin-activity-meta {
+  font-size: 0.95rem;
+  color: #444;
+  background-color: #f8f8f8;
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.admin-activity-description {
+  font-size: 0.95rem;
+  color: #333;
+  padding-left: 5px;
+}
+
+.admin-activity-link {
+  margin-top: 4px;
+  padding-left: 5px;
+}
+
+.admin-activity-link a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+
+/* ===== Navigation ===== */
+.admin-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2f3640;
+  color: white;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  border-bottom: 1px solid #ddd;
+  font-size: 3rem;
+}
+
+.add-btn {
+  background-color: #00a8ff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.add-btn:hover {
+  background-color: #0097e6;
+}
+
+/* ===== Section Headers ===== */
+.admin-activities-title {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #2f3640;
+}
+
+.admin-header {
+  font-size: 1.4rem;
+  margin: 20px 0 10px;
+  color: #273c75;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+/* ===== Divider Line ===== */
+.line {
+  display: block;
+  border-top: 2px solid #dcdde1;
+  margin: 15px 0;
+}
+
+/* ===== Activity Card (Product Card) ===== */
+.admin-activity-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.activity-flex{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width:90%;
+  gap: 30px;
+}
+
+.admin-activity-thumbnail img {
+  max-width: 300px;
+  max-height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.activity-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.activity-image:hover {
+  opacity: 0.85;
+  transform: scale(1.01);
+}
+
+.admin-activity-meta {
+  background-color: #f1f2f6;
+  padding: 10px 15px;
+  border-radius: 6px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #2f3640;
+}
+
+.admin-activity-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #353b48;
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #44bd32;
+}
+
+.edit-btn:hover {
+  background-color: #4cd137;
+}
+
+.delete-btn {
+  background-color: #e84118;
+}
+
+.delete-btn:hover {
+  background-color: #c23616;
+}
+
+.status-btn {
+  padding: 5px 10px;
+  border: none;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.status-btn.available {
+  background-color: #44bd32;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.status-btn.unavailable {
+  background-color: #718093;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.status-btn:hover {
+  opacity: 0.85;
 }
 
 

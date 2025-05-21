@@ -4,7 +4,7 @@
     <a href="view_membership.php">👥 View Members</a>
     <a href="view_enquiry.php">📩 View Enquiries</a>
     <a href="view_job.php">💼 Job Applications</a>
-    <a href="#">📢 Promotions & News</a>
-    <a href="#">🏷️ Products</a>
+    <a href="view_activity.php">📢 Promotions & News</a>
+    <a href="view_product.php">🏷️ Products</a>
     <a href="logout.php">🚪 Logout</a>
   </div>

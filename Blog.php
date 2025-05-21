@@ -2,13 +2,33 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+include 'connection.php';
+include 'navbar.php';
+
+// Fetch all activities
+$activities_query = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date DESC");
+$current = null;
+$coming = null;
+$past = [];
+
+$now = new DateTime();
+
+while ($row = mysqli_fetch_assoc($activities_query)) {
+    $start = new DateTime($row['event_date'] . ' ' . $row['start_time']);
+    $end = new DateTime($row['event_date'] . ' ' . $row['end_time']);
+
+    if ($start <= $now && $end >= $now && $current === null) {
+        $current = $row;
+    } elseif ($start > $now && $coming === null) {
+        $coming = $row;
+    } else {
+        $past[] = $row;
+    }
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
@@ -21,129 +41,81 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body class="blog-page">
-    <div id="top"></div>
-    <header>
-      <?php include 'navbar.php'; ?>
-    </header>
+<div id="top"></div>
 
-  <section class="blog-container">
+<section class="blog-container">
     <div class="blog-title">
-      <h1>BLOG</h1>
-      <h3>Find out about the future, present, pass of Brew & Go</h3>
-      <a href="#current-activities" class="blog-transparent-btn">Explore More</a>
+        <h1>BLOG</h1>
+        <h3>Find out about the future, present, pass of Brew & Go</h3>
+        <a href="#current-activities" class="blog-transparent-btn">Explore More</a>
     </div>
-    <div class="blog-section-title" id="current-activities">
-      <h2 >Current Activities</h2>
-      </div>
-      <div class="line-title-wrapper">
-        <span class="line"></span>
-      </div>  
 
+    <div class="blog-section-title blog-top-title">
+        <h2>Current Activities</h2>
+    </div>
 
-      <div class="top-row">
+    <?php if ($current): ?>
         <div class="current-wrapper">
-          <div class="current-section">
-            <div class="current-picture">
-              <a href="current_activity.html">
-              <img src="images/Current.jpg" alt="Current Promo">
-              </a>
+            <div class="current-section">
+                <div class="current-picture">
+                    <a href="current_activity.php">
+                        <img src="<?= htmlspecialchars($current['image_path']) ?>" alt="Current Activity">
+                    </a>
+                </div>
+                <div class="current-info">
+                    <div class="activities-title">
+                        <h2><?= htmlspecialchars($current['title']) ?></h2>
+                    </div>
+                    <div class="description">
+                        <p><?= nl2br(htmlspecialchars($current['description'])) ?></p>
+                    </div>
+                </div>
+                <div class="blog-time-frame">
+                    <h2>Date:</h2>
+                    <p><?= $current['event_date'] ?></p>
+                    <h2>Time:</h2>
+                    <p><?= $current['start_time'] ?> – <?= $current['end_time'] ?></p>
+                </div>
             </div>
-        
-            <div class="current-info">
-              <div class="activities-title">
-                <h2>What's New?</h2>
-              </div>
-              <div class="description">
-                <p>Get 1 free drink with a top-up of RM50!</p>
-                <p>Valid until end of the month at all outlets.</p>
-              </div>
-            </div>
-        
-            <!-- Timeframe block -->
-            <div class="blog-time-frame">
-              <h2>Date:</h2>
-              <p>Valid until end of the month at all outlets.</p>
-              <h2>Expiry Date:</h2>
-              <p>March 31, 2025</p>
-            </div>
-          </div>
         </div>
-        <div class="line-title-wrapper">
-          <span class="end-line"></span>
-        </div>      
-      </div>
-    
-
-
-
-
+    <?php else: ?>
+        <p style="text-align: center;">No current activity at the moment.</p>
+    <?php endif; ?>
 
 
     <div class="blog-section-title blog-bottom-title">
-      <h2>Coming Soon | Past Activities</h2>
+        <h2>Coming Soon | Past Activities</h2>
     </div>
     <div class="bottom-row">
-      <!-- Coming Soon -->
-      <div class="coming-soon-box">
-        <div class="coming-image">
-          <a href="coming_soon.html">
-            <img src="images/ComingSoon1.png" alt="Coming Soon">
-            <div class="coming-caption">
-              <h3>COMING SOON</h3>
-              <p>Stay tuned for our exciting April deals and new launches!</p>
+        <!-- Coming Soon -->
+        <?php if ($coming): ?>
+            <div class="coming-soon-box">
+                <div class="coming-image">
+                    <a href="coming_soon.php">
+                        <img src="<?= htmlspecialchars($coming['image_path']) ?>" alt="Coming Soon">
+                        <div class="coming-caption">
+                            <h3><?= htmlspecialchars($coming['title']) ?></h3>
+                            <p><?= htmlspecialchars($coming['description']) ?></p>
+                        </div>
+                    </a>
+                </div>
             </div>
-          </a>
-        </div>
-      </div>
-      
+        <?php endif; ?>
 
-      <!-- Past Activities Slideshow -->
-      <div class="past-activities">
-        <div class="past-slideshow">
-          <div class="slides">
-            <a href="past_activity.html">
-            <div class="past-slide s1 no-animation">
-              <img src="images/CHRISTMAS2024.png" alt="Slide 1">
-              <div class="slide-caption">25 Jan 2025<br><b>Free Oranges</b> w/ 2 drinks</div>
-            </div>
-          </a>
-          <a href="past_activity.html">  
-            <div class="past-slide s2">
-              <img src="images/SENIKITAWEEKEND.png" alt="Slide 2">
-              <div class="slide-caption">28 Oct 2024<br><b>11% Off</b> Thursdays</div>
-            </div>
-          </a>
-          <a href="past_activity.html">
-            <div class="past-slide s3">
-              <img src="images/SENIKITA.png" alt="Slide 3">
-              <div class="slide-caption">9 Sep 2024<br><b>50% Off</b> Grabfood promo</div>
-            </div>
-            </a>
-            <a href="past_activity.html">
-            <div class="past-slide s4">
-              <img src="images/RAYA2024.png" alt="Slide 4">
-              <div class="slide-caption">Hari Raya Promo</div>
-            </div>
-            </a>
-            <a href="past_activity.html">
-            <div class="past-slide s5">
-              <img src="images/DISCOUNTTHURDAY2024.png" alt="Slide 5">
-              <div class="slide-caption">Discount Thursday</div>
-            </div>
-          </a>
-          <a href="past_activity.html">
-            <div class="past-slide s6">
-              <img src="images/CNYOPENING.png" alt="Slide 6">
-              <div class="slide-caption">Chinese New Year Opening</div>
-            </div>
-          </a>
-          </div>
-        </div>
+        <!-- Past Activities -->
+        <div class="past-activities">
+            <?php foreach (array_slice($past, 0, 6) as $p): ?>
+                <a href="past_activity.php">
+                    <div class="past-slide">
+                        <img src="<?= htmlspecialchars($p['image_path']) ?>" alt="Past Activity">
+                        <div class="slide-caption"><?= $p['event_date'] ?><br><b><?= htmlspecialchars($p['title']) ?></b></div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
-  </section>
+</section>
 
-  <?php include 'footer.php'; ?>
-
+<?php include 'footer.php'; ?>
 </body>
 </html>

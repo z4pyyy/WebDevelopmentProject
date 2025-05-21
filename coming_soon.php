@@ -34,63 +34,40 @@ if (session_status() === PHP_SESSION_NONE) {
     
 
 
-      <div class="top-row">
-        <div class="current-wrapper">
-          <div class="current-section">
-            <div class="current-picture">
-              <a href="https://www.instagram.com/p/DHXgoi2vMe_/?img_index=1">
-              <img src="images/ComingSoon1.png" alt="Current Promo">
-              </a>
-            </div>
-        
-            <div class="current-info">
-              <div class="activities-title">
-                <h2>What's New?</h2>
-              </div>
-              <div class="description">
-                <p>Get your fuel satisfied with the perfect brew! ☕️✨ Meet @brewngo.coffee, where quality coffee meets exceptional flavour. Whether you’re on the go or looking to savour every sip, their caffeine creations are here to satisfy your coffee cravings like never before ☕️ #coffeelover #supportlocal #caffeine</p>
-                  <br>
-                  <p>
-                    Mini Seni Kita: Open haus
-                  </p>
-                  <p>
-                    📍 HAUS KCH, Yun Phin Building
-                  </p>
-                  <p>
-                    📆 29 March 2025
-                  </p>
-                  <p>
-                    🕒 3.00pm - 10.00pm
-                  </p>
-                  <p>
-                    🔥 All ages welcome – let’s have fun!
-                  </p>
-                  <p>
-                    🌟 It’s free entry!
-                  </p>
-                  <br>
-                  <br>
-                  <p>Follow for more updates and releases (*^ω^)!
-                  <br>@senikitakch
-                  <br>@hauskch</p>
-                  <br>
-                  
-              </div>
-            </div>
-        
-            <!-- Timeframe block -->
-            <div class="blog-time-frame">
-              <h2>Date:</h2>
-              <p>Valid until end of the month at all outlets.</p>
-              <h2>Expiry Date:</h2>
-              <p>March 31, 2025</p>
-            </div>
-          </div>
-        </div>
-        <div class="line-title-wrapper">
-          <span class="end-line"></span>
-        </div>      
+<div class="top-row">
+<?php
+include 'connection.php';
+$coming_soon = mysqli_query($conn, "SELECT * FROM activities WHERE type = 'coming' ORDER BY event_date ASC");
+
+while ($row = mysqli_fetch_assoc($coming_soon)): ?>
+  <div class="current-wrapper">
+    <div class="current-section">
+      <div class="current-picture">
+        <a href="<?= htmlspecialchars($row['external_link'] ?: '#') ?>">
+          <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+        </a>
       </div>
+
+      <div class="current-info">
+        <div class="activities-title">
+          <h2><?= htmlspecialchars($row['title']) ?></h2>
+        </div>
+        <div class="description">
+          <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
+        </div>
+      </div>
+
+      <div class="blog-time-frame">
+        <h2>Date:</h2>
+        <p><?= $row['event_date'] ?></p>
+        <h2>Time:</h2>
+        <p><?= $row['start_time'] ?> – <?= $row['end_time'] ?></p>
+      </div>
+    </div>
+  </div>
+<?php endwhile; ?>
+</div>
+
       
       <?php include 'footer.php'; ?>
 

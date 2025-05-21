@@ -75,10 +75,10 @@ if (session_status() === PHP_SESSION_NONE) {
               <fieldset class="shift-group">
                 <legend>Preferred Shift</legend>
                 <label for="morning">Morning</label>
-                <input type="radio" name="shift" id="morning" value="morning"
+                <input type="radio" name="shift" id="morning" value="morning" required
                       <?= ($form_data['shift'] ?? '') === 'morning' ? 'checked' : '' ?>>
                 <label for="night">Night</label>
-                <input type="radio" name="shift" id="night" value="night"
+                <input type="radio" name="shift" id="night" value="night" required
                       <?= ($form_data['shift'] ?? '') === 'night' ? 'checked' : '' ?>>
               </fieldset>
             </div>            

@@ -96,19 +96,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     </figcaption>
                   </figure>
 
-                  <!--Yuri Mocha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/yuri-mocha.jpg" alt="Yuri Mocha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Yuri Mocha</h2>
-                      <p class="prd-description">A unique blend of yuzu and mocha flavors.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-
                   <!--Strawberry Mocha-->
                   <figure class="prd-product-item">
                     <div class="prd-product-image">

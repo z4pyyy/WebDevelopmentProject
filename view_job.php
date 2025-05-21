@@ -86,31 +86,38 @@ if ($selected_id) {
                         <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
                         <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
                         <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
+                        <div class="action-buttons">
                         <!-- Applicant Photo -->
-                        <details>
+                        <details class="job-view-photo">
                             <summary class="viewjob-button">📷 View Photo</summary>
                             <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo"
                                 class="viewjob-photo">
                         </details>
-
-                        <!-- Applicant CV -->
-                        <details>
+                            <!-- Applicant CV -->
+                        <details class="job-view-cv">
                             <summary class="viewjob-button">📄 View CV</summary>
                             <?php
-                            $cv_path = htmlspecialchars($row['cv_path']);
-                            $cv_ext = strtolower(pathinfo($cv_path, PATHINFO_EXTENSION));
+                                $cv_filename = basename($row['cv_path']);
+                                $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION)); // ✅ define $cv_ext
+                                $cv_path = $row['cv_path'];
+                                $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
                             ?>
+                            
                             <?php if ($cv_ext === 'pdf'): ?>
-                            <a href="<?= $cv_path ?>" target="_blank" class="viewjob-cv-link">Open CV (PDF) in New Tab</a>
+                                <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
+                                <p style="margin-top: 10px;">
+                                <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
+                                </p>
                             <?php else: ?>
-                            <a href="<?= $cv_path ?>" target="_blank" class="viewjob-cv-link">Download CV (WORD) </a>
+                                <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
                             <?php endif; ?>
                         </details>
-                    </div>
-                </td>
-            </tr>
-            <?php endif; ?>
-        <?php endwhile; ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                </div>
         </tbody>
     </table>
 </div>

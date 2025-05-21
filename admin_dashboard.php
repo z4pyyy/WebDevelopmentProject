@@ -28,7 +28,6 @@ include 'navbar_admin.php';
     <div class="admin-content">
         <div class="admin-navbar">
             <div><strong>Welcome, Admin</strong></div>
-            <div><a href="logout.php" class="admin-logout-button">Logout</a></div>
         </div>
 
         <div class="admin-dashboard">
@@ -49,6 +48,11 @@ include 'navbar_admin.php';
                     <h5>💼 Job Applications</h5>
                     <p>Check incoming applications for openings.</p>
                     <a href="view_job.php" class="admin-btn">View Applications</a>
+                </div>
+                <div class="admin-card">
+                  <h5>📅 Activities</h5>
+                  <p>Manage and schedule activities & events.</p>
+                  <a href="view_activity.php" class="admin-btn">Manage Activities</a>
                 </div>
             </div>
         </div>
