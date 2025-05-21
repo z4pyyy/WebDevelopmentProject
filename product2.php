@@ -7,7 +7,13 @@ include 'connection.php';
 include 'navbar.php';
 
 // 📦 Fetch only Artisan Brew products
-$query = "SELECT * FROM products WHERE category = 'Artisan Brew' ORDER BY name ASC";
+$query = "
+  SELECT products.*
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  WHERE categories.name = 'Artisan Brew'
+  ORDER BY products.name ASC
+";
 $result = mysqli_query($conn, $query);
 ?>
 

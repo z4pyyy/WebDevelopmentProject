@@ -4,9 +4,16 @@ include 'connection.php';
 include 'navbar.php';
 
 // Fetch only Basic Brew products
-$query = "SELECT * FROM products WHERE category = 'Basic Brew' ORDER BY name ASC";
+$query = "
+  SELECT products.*
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  WHERE categories.name = 'Basic Brew'
+  ORDER BY products.name ASC
+";
 $result = mysqli_query($conn, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

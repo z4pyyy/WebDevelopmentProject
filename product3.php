@@ -7,7 +7,13 @@ include 'connection.php';
 include 'navbar.php';
 
 // 📦 Fetch only Non-Coffee products
-$query = "SELECT * FROM products WHERE category = 'Non-Coffee' ORDER BY name ASC";
+$query = "
+  SELECT products.*
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  WHERE categories.name = 'Non-Coffee'
+  ORDER BY products.name ASC
+";
 $result = mysqli_query($conn, $query);
 ?>
 

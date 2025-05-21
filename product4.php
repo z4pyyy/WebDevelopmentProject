@@ -7,7 +7,13 @@ include 'connection.php';
 include 'navbar.php';
 
 // 📦 Fetch only Hot Beverages
-$query = "SELECT * FROM products WHERE category = 'Hot Beverages' ORDER BY name ASC";
+$query = "
+  SELECT products.*
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  WHERE categories.name = 'Hot Beverages'
+  ORDER BY products.name ASC
+";
 $result = mysqli_query($conn, $query);
 ?>
 
