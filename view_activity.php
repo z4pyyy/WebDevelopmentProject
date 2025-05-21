@@ -1,9 +1,12 @@
 <?php
 session_start();
+$currentPage = basename($_SERVER['PHP_SELF']);
 include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';
-date_default_timezone_set('Asia/Kuala Lumpur'); 
+date_default_timezone_set('Asia/Kuching'); 
+
+
 
 // 🔒 Secure Access
 if (!isset($_SESSION['admin_id']) || !in_array($_SESSION['role_id'] ?? 0, [1, 2, 3])) {
@@ -30,7 +33,7 @@ $all = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date ASC");
 $current = $coming = $past = [];
 
 // Force consistent timezone
-date_default_timezone_set('Asia/Kuching'); // Replace with your local time if needed
+date_default_timezone_set('Asia/Kuching');
 $now_dt = new DateTime();
 
 while ($row = mysqli_fetch_assoc($all)) {

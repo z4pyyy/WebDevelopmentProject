@@ -1,10 +1,10 @@
 <div class="admin-sidebar">
-    <h4><span class="icon">👤</span> Admin Panel</h4>
-    <a href="admin_dashboard.php" class="active">📊 Dashboard</a>
-    <a href="view_membership.php">👥 View Members</a>
-    <a href="view_enquiry.php">📩 View Enquiries</a>
-    <a href="view_job.php">💼 Job Applications</a>
-    <a href="view_activity.php">📢 Promotions & News</a>
-    <a href="view_product.php">🏷️ Products</a>
-    <a href="logout.php">🚪 Logout</a>
-  </div>
+  <h4><span class="icon">👤</span> Admin Panel</h4>
+  <a href="admin_dashboard.php" class="<?= $currentPage == 'admin_dashboard.php' ? 'active' : '' ?>">📊 Dashboard</a>
+  <a href="view_membership.php" class="<?= $currentPage == 'view_membership.php' ? 'active' : '' ?>">👥 View Members</a>
+  <a href="view_enquiry.php" class="<?= $currentPage == 'view_enquiry.php' ? 'active' : '' ?>">📩 View Enquiries</a>
+  <a href="view_job.php" class="<?= $currentPage == 'view_job.php' ? 'active' : '' ?>">💼 Job Applications</a>
+  <a href="view_activity.php" class="<?= $currentPage == 'view_activity.php' ? 'active' : '' ?>">📢 Promotions & News</a>
+  <a href="view_product.php" class="<?= $currentPage == 'view_product.php' ? 'active' : '' ?>">🏷️ Products</a>
+  <a href="logout.php">🚪 Logout</a>
+</div>

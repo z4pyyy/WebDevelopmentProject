@@ -1,9 +1,10 @@
 <?php
 session_start();
+
+$currentPage = basename($_SERVER['PHP_SELF']);
 include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';
-date_default_timezone_set('Asia/Kuala_Lumpur');
 
 // 🔒 Secure Access
 if (!isset($_SESSION['admin_id']) || !in_array($_SESSION['role_id'] ?? 0, [1, 2, 3])) {
@@ -20,13 +21,18 @@ if (isset($_GET['delete_id'])) {
 }
 
 // 📦 Fetch all products grouped by category
-$query = "SELECT * FROM products ORDER BY category ASC, name ASC";
+$query = "
+  SELECT products.*, categories.name AS category_name
+  FROM products
+  LEFT JOIN categories ON products.category_id = categories.id
+  ORDER BY categories.name ASC, products.name ASC
+";
 $result = mysqli_query($conn, $query);
 
 $products_by_category = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $category = $row['category'] ?? 'Uncategorized';
+    $category = $row['category_name'] ?? 'Uncategorized';
     $products_by_category[$category][] = $row;
 }
 

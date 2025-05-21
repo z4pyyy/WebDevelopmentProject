@@ -1957,6 +1957,7 @@ input:focus, select:focus {
     background-color: #b49a5f;
     transition: width 0.5s ease;
     border-radius: 2px;
+    text-decoration: none;
   }
   
   .hover-underline:hover::after {
@@ -4129,11 +4130,11 @@ body {
 /* === Assignment 2 === */
 /* === Admin Dashboard === */
 
-  .view-checkbox {
-      accent-color: #007bff;
-      transform: scale(1.2);
-      cursor: pointer;
-  }
+.view-checkbox {
+    accent-color: #007bff;
+    transform: scale(1.2);
+    cursor: pointer;
+}
 
 .admin-sidebar {
   margin-top: 90px;
@@ -4154,8 +4155,9 @@ body {
 }
 
 .admin-content {
+  overflow-x: hidden;
   margin-top:70px;
-  margin-left: 220px; 
+  margin-left: 220px;
   flex-grow: 1;
   padding: 30px;
   background-color: #f8f9fa;
@@ -4217,12 +4219,19 @@ body {
 
 
 .admin-card-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-direction: row;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 50px;
   margin-top: 20px;
+  margin-bottom: 20px;
   width:90%;
+}
+
+.admin-card-link {
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
 }
 
 .admin-card {
@@ -4232,18 +4241,26 @@ body {
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  flex: 1;
   align-items: center;
+  transition: background-color 0.2s, transform 0.2s;
+  height: 90%;
+}
+
+.admin-card:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .admin-card h5 {
   margin: 0 0 10px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .admin-card p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 15px;
 }
 
@@ -4252,9 +4269,9 @@ body {
   background-color: #007bff;
   color: white;
   text-decoration: none;
-  padding: 6px 12px;
+  padding: 12px 18px;
   border-radius: 4px;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   transition: background-color 0.2s;
 }
 
@@ -4877,7 +4894,7 @@ select {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 100%;
+  width: 90%;
 }
 
 .admin-activity-card h3 {
@@ -5028,16 +5045,20 @@ select {
   border-radius: 8px;
 }
 
+
+
 .admin-header{
-    color: #000000;
-    font-size: 54px;
-    font-weight: 700;
-    -webkit-background-clip: text;
-    background-clip: text;
-    margin-top: 200px;
-    background-size: 200%;
-    animation: gradientFlow 5s linear infinite;
-    font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  margin: 20px 0 10px;
+  color: #273c75;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin-top: 200px;
+  background-size: 200%;
+  animation: gradientFlow 5s linear infinite;
+  font-family: 'Outfit', sans-serif;
+  width:90%;
   }
 
 .admin-activity-thumbnail img:hover {
@@ -5177,16 +5198,6 @@ select {
   color: #2f3640;
 }
 
-.admin-header {
-  font-size: 1.4rem;
-  margin: 20px 0 10px;
-  color: #273c75;
-}
-
-.hover-underline:hover {
-  text-decoration: underline;
-}
-
 /* ===== Divider Line ===== */
 .line {
   display: block;
@@ -5213,7 +5224,7 @@ select {
 
 .admin-activity-thumbnail img {
   max-width: 300px;
-  max-height: 200px;
+  max-height: 400px;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);

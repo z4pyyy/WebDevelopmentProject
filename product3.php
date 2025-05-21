@@ -2,142 +2,78 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-?>
 
+include 'connection.php';
+include 'navbar.php';
+
+// 📦 Fetch only Non-Coffee products
+$query = "SELECT * FROM products WHERE category = 'Non-Coffee' ORDER BY name ASC";
+$result = mysqli_query($conn, $query);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
-    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
-    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
-    <title>Brew & Go Coffee - Home</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brew & Go Coffee - Non-Coffee Beverages">
+  <meta name="keywords" content="Brew & Go, Non-Coffee, tea, soda, chocolate, Kuching">
+  <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+  <title>Brew & Go - Non-Coffee</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Outfit" rel="stylesheet" />
 </head>
-
 <body class="product-page">
-    <div id="top"></div>
-    <header>
-      <?php include 'navbar.php'; ?>
-    </header>
+  <div id="top"></div>
+  <header>
+    <?php include 'navbar.php'; ?>
+  </header>
 
-    <h2 class="prd-drink-name">Non-Coffee</h2>
-    <div class="prd-toggle-wrapper">
-      <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-      <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
-      
-      <div class="prd-menu">
-        <ul>
-          <li><a href="product1.html">Basic Brew</a></li>
-          <li><a href="product2.html">Artisan Brew</a></li>
-          <li><a href="product3.html">Non-Coffee</a></li>
-          <li><a href="product4.html">Hot Beverages</a></li>
-        </ul>
+  <h2 class="prd-drink-name">Non-Coffee</h2>
+
+  <div class="prd-toggle-wrapper">
+    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+    <div class="prd-menu">
+      <ul>
+        <li><a href="product1.php">Basic Brew</a></li>
+        <li><a href="product2.php">Artisan Brew</a></li>
+        <li><a href="product3.php">Non-Coffee</a></li>
+        <li><a href="product4.php">Hot Beverages</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prd-content-container">
+    <div id="non-coffee">
+      <div class="prd-product-list">
+        <?php if (mysqli_num_rows($result) > 0): ?>
+          <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <figure class="prd-product-item">
+              <div class="prd-product-image">
+                <img 
+                  src="<?= (!empty($row['image_path']) && file_exists($row['image_path'])) ? htmlspecialchars($row['image_path']) : 'assets/no-image.png' ?>" 
+                  alt="<?= htmlspecialchars($row['name']) ?>"
+                />
+              </div>
+              <figcaption class="prd-product-info">
+                <h2 class="prd-name"><?= htmlspecialchars($row['name']) ?></h2>
+                <p class="prd-description"><?= !empty($row['description']) ? nl2br(htmlspecialchars($row['description'])) : 'No description available.' ?></p>
+                <p class="prd-price">Member: RM<?= number_format($row['price'], 2) ?></p>
+                <p class="prd-price">Non-Member: RM<?= number_format($row['large_price'], 2) ?></p>
+              </figcaption>
+            </figure>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p>No Non-Coffee products found.</p>
+        <?php endif; ?>
       </div>
     </div>
-    
-    <div class="prd-content-container">
-        <div id="basic-brew">
-                <div class="prd-product-list">
-                  <!--Chocolate-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/chocolate.jpg" alt="Chocolate">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Chocolate</h2>
-                      <p class="prd-description">A rich and creamy chocolate drink.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
+  </div>
+</body>
+</html>
 
-                  <!--Mint Chocolate-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/mint-chocolate.avif" alt="Mint Chocolate">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Mint Chocolate</h2>
-                      <p class="prd-description">A refreshing minty twist on classic chocolate.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Orange Chocolate-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/orange-chocolate.jpg" alt="Orange Chocolate">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Orange Chocolate</h2>
-                      <p class="prd-description">A zesty orange flavor combined with rich chocolate.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Yuzu Soda-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/yuzu-soda.jpeg" alt="Yuzu Soda">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Yuzu Soda</h2>
-                      <p class="prd-description">A refreshing soda with a hint of yuzu.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Strawberry Mocha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/strawberry-mocha.jpeg" alt="Strawberry Mocha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Strawberry Mocha</h2>
-                      <p class="prd-description">A delightful blend of strawberry and mocha.</p>
-                      <p class="prd-price">Member: RM14.90</p>
-                      <p class="prd-price">Non-Member: RM16.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Yuzu Mocha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/yuzu-mocha.jpg" alt="Yuzu Mocha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Yuzu Mocha</h2>
-                      <p class="prd-description">A refreshing blend of yuzu and mocha.</p>
-                      <p class="prd-price">Member: RM14.90</p>
-                      <p class="prd-price">Non-Member: RM16.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Houjicha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/houjicha.jpg" alt="Houjicha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Houjicha</h2>
-                      <p class="prd-description">A roasted green tea with a unique flavor.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <aside class="full-menu">
         <h2 class="full-menu-title">Full Menu</h2>

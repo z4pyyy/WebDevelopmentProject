@@ -2,144 +2,78 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-?>
 
+include 'connection.php';
+include 'navbar.php';
+
+// 📦 Fetch only Hot Beverages
+$query = "SELECT * FROM products WHERE category = 'Hot Beverages' ORDER BY name ASC";
+$result = mysqli_query($conn, $query);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
-    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
-    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
-    <title>Brew & Go Coffee - Home</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brew & Go Coffee - Hot Beverages">
+  <meta name="keywords" content="Hot Coffee, Brew & Go, Tea, Latte, Chocolate, Kuching">
+  <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+  <title>Brew & Go - Hot Beverages</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Outfit" rel="stylesheet" />
 </head>
-
 <body class="product-page">
-    <div id="top"></div>
-    <header>
-      <?php include 'navbar.php'; ?>
-    </header>
+  <div id="top"></div>
+  <header>
+    <?php include 'navbar.php'; ?>
+  </header>
 
+  <h2 class="prd-drink-name">Hot Beverages</h2>
 
-    <h2 class="prd-drink-name">Hot Beverages</h2>
-    <div class="prd-toggle-wrapper">
-      <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-      <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
-      
-      <div class="prd-menu">
-        <ul>
-          <li><a href="product1.html">Basic Brew</a></li>
-          <li><a href="product2.html">Artisan Brew</a></li>
-          <li><a href="product3.html">Non-Coffee</a></li>
-          <li><a href="product4.html">Hot Beverages</a></li>
-        </ul>
+  <div class="prd-toggle-wrapper">
+    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+    <div class="prd-menu">
+      <ul>
+        <li><a href="product1.php">Basic Brew</a></li>
+        <li><a href="product2.php">Artisan Brew</a></li>
+        <li><a href="product3.php">Non-Coffee</a></li>
+        <li><a href="product4.php">Hot Beverages</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prd-content-container">
+    <div id="hot-beverages">
+      <div class="prd-product-list">
+        <?php if (mysqli_num_rows($result) > 0): ?>
+          <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <figure class="prd-product-item">
+              <div class="prd-product-image">
+                <img 
+                  src="<?= (!empty($row['image_path']) && file_exists($row['image_path'])) ? htmlspecialchars($row['image_path']) : 'assets/no-image.png' ?>" 
+                  alt="<?= htmlspecialchars($row['name']) ?>"
+                />
+              </div>
+              <figcaption class="prd-product-info">
+                <h2 class="prd-name"><?= htmlspecialchars($row['name']) ?></h2>
+                <p class="prd-description"><?= !empty($row['description']) ? nl2br(htmlspecialchars($row['description'])) : 'No description available.' ?></p>
+                <p class="prd-price">Member: RM<?= number_format($row['price'], 2) ?></p>
+                <p class="prd-price">Non-Member: RM<?= number_format($row['large_price'], 2) ?></p>
+              </figcaption>
+            </figure>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p>No Hot Beverages found.</p>
+        <?php endif; ?>
       </div>
     </div>
-    
+  </div>
+</body>
+</html>
 
-    <div class="prd-content-container">
-        <div id="basic-brew">
-                <div class="prd-product-list">
-                <!--Hot Americano-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-americano.jpeg" alt="Americano">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Americano</h2>
-                      <p class="prd-description">Rich and creamy, a timeless favorite.</p>
-                      <p class="prd-price">Member: RM8.90</p>
-                      <p class="prd-price">Non-Member: RM10.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Hot Latte-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-latte.jpg" alt="Latte">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Latte</h2>
-                      <p class="prd-description">Indulge in the deep flavors of chocolate.</p>
-                      <p class="prd-price">Member: RM9.90</p>
-                      <p class="prd-price">Non-Member: RM11.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--hot butterscotch latte-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-butterscotch-latte.webp" alt="Butterscotch Latte"> 
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Butterscotch Latte</h2>
-                      <p class="prd-description">A delightful blend of espresso and butterscotch syrup.</p>
-                      <p class="prd-price">Member: RM10.90</p>
-                      <p class="prd-price">Non-Member: RM12.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Hot Cappuccino-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-cappuccino.jpg" alt="Cappuccino">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Cappuccino</h2>
-                      <p class="prd-description">A classic blend of espresso and steamed milk.</p>
-                      <p class="prd-price">Member: RM10.90</p>
-                      <p class="prd-price">Non-Member: RM12.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Hot Chocolate-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-chocolate.jpg" alt="Chocolate">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Chocolate</h2>
-                      <p class="prd-description">A rich and creamy chocolate drink.</p>
-                      <p class="prd-price">Member: RM12.90</p>
-                      <p class="prd-price">Non-Member: RM14.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Hot Yuri Mocha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-yuri-mocha.webp" alt="Yuri Mocha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Yuri Mocha</h2>
-                      <p class="prd-description">A unique blend of yuzu and mocha flavors.</p>
-                      <p class="prd-price">Member: RM12.90</p>
-                      <p class="prd-price">Non-Member: RM14.90</p>
-                    </figcaption>
-                  </figure>
-
-                  <!--Hot Houjicha-->
-                  <figure class="prd-product-item">
-                    <div class="prd-product-image">
-                      <img src="images/hot-houjicha.jpg" alt="Houjicha">
-                    </div>
-                    <figcaption class="prd-product-info">
-                      <h2 class="prd-name">Houjicha</h2>
-                      <p class="prd-description">A roasted green tea with a unique flavor.</p>
-                      <p class="prd-price">Member: RM13.90</p>
-                      <p class="prd-price">Non-Member: RM15.90</p>
-                    </figcaption>
-                  </figure>
-            </div>
-        </div>
-    </div>
-</div>
 
 <aside class="full-menu">
     <h2 class="full-menu-title">Full Menu</h2>

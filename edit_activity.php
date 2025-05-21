@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$currentPage = basename($_SERVER['PHP_SELF']);
 include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';

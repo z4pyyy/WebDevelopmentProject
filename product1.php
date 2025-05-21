@@ -1,113 +1,73 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
+include 'connection.php';
+include 'navbar.php';
+
+// Fetch only Basic Brew products
+$query = "SELECT * FROM products WHERE category = 'Basic Brew' ORDER BY name ASC";
+$result = mysqli_query($conn, $query);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
-    <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
-    <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
-    <title>Brew & Go Coffee - Home</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Brew & Go Coffee - Premium handcrafted beverages">
+  <meta name="keywords" content="Coffee, Brew & Go, Kuching, handcrafted beverages">
+  <meta name="author" content="TERENCE WONG, DARREN CHONG, HANS YEE">
+  <title>Brew & Go - Basic Brew</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Outfit" rel="stylesheet">
 </head>
-
 <body class="product-page">
-    <div id="top"></div>
-    <header>
-      <?php include 'navbar.php'; ?>
-    </header>
-<h2 class="prd-drink-name">Basic Brew</h2>
-<div class="prd-toggle-wrapper">
-  <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-  <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
-  <div class="prd-menu">
-    <ul>
-      <li><a href="product1.html">Basic Brew</a></li>
-      <li><a href="product2.html">Artisan Brew</a></li>
-      <li><a href="product3.html">Non-Coffee</a></li>
-      <li><a href="product4.html">Hot Beverages</a></li>
-</ul>
-</div>
-</div>
-<div class="prd-content-container">
-  <div id="basic-brew">
-    <div class="prd-product-list">
-      <!--Iced Americano-->
-      <figure class="prd-product-item">
-        <div class="prd-product-image">
-          <img alt="Americano" src="images/iceamericano.jpg"/>
-        </div>
-        <figcaption class="prd-product-info">
-          <h2 class="prd-name">Americano</h2>
-          <p class="prd-description">Rich and creamy, a timeless favorite.</p>
-          <p class="prd-price">Member: RM8.90</p>
-          <p class="prd-price">Non-Member: RM10.90</p>
-        </figcaption>
-      </figure>
-      
-      <!-- Latte -->
-      <figure class="prd-product-item">
-        <div class="prd-product-image">
-          <img alt="Latte" src="images/Latte.png"/>
-        </div>
-        <figcaption class="prd-product-info">
-          <h2 class="prd-name">Latte</h2>
-          <p class="prd-description">Indulge in the deep flavors of chocolate.</p>
-          <p class="prd-price">Member: RM10.90</p>
-          <p class="prd-price">Non-Member: RM12.90</p>
-        </figcaption>
-      </figure>
-      
-      <!-- Cappuccino -->
-      <figure class="prd-product-item">
-        <div class="prd-product-image">
-          <img alt="Cappuccino" src="images/Cappuccino.jpg"/>
-        </div>
-        <figcaption class="prd-product-info">
-          <h2 class="prd-name">Cappuccino</h2>
-          <p class="prd-description">A classic blend of espresso and steamed milk.</p>
-          <p class="prd-price">Member: RM11.90</p>
-          <p class="prd-price">Non-Member: RM13.90</p>
-        </figcaption>
-      </figure>
-      
-      <!-- Aerocano -->
-      <figure class="prd-product-item">
-        <div class="prd-product-image">
-          <img alt="Aerocano" src="images/Aerocano.jpg"/>
-        </div>
-        <figcaption class="prd-product-info">
-          <h2 class="prd-name">Aerocano</h2>
-          <p class="prd-description">Aeropress and Americano combined.</p>
-          <p class="prd-price">Member: RM10.90</p>
-          <p class="prd-price">Non-Member: RM12.90</p>
-        </figcaption>
-      </figure>
-      
-      <!-- Aero-Latte -->
-      <figure class="prd-product-item">
-        <div class="prd-product-image">
-          <img alt="Aero-Latte" src="images/aero-latte.jpg"/>
-        </div>
-        <figcaption class="prd-product-info">
-          <h2 class="prd-name">Aero-Latte</h2>
-          <p class="prd-description">Aeropress and Latte combined.</p>
-          <p class="prd-price">Member: RM12.90</p>
-          <p class="prd-price">Non-Member: RM14.90</p>
-        </figcaption>
-      </figure>      
+  <div id="top"></div>
+  <header>
+    <?php include 'navbar.php'; ?>
+  </header>
+
+  <h2 class="prd-drink-name">Basic Brew</h2>
+
+  <div class="prd-toggle-wrapper">
+    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+    <div class="prd-menu">
+      <ul>
+        <li><a href="product1.php">Basic Brew</a></li>
+        <li><a href="product2.php">Artisan Brew</a></li>
+        <li><a href="product3.php">Non-Coffee</a></li>
+        <li><a href="product4.php">Hot Beverages</a></li>
+      </ul>
     </div>
   </div>
-</div>
+
+  <div class="prd-content-container">
+    <div id="basic-brew">
+      <div class="prd-product-list">
+        <?php if (mysqli_num_rows($result) > 0): ?>
+          <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <figure class="prd-product-item">
+              <div class="prd-product-image">
+                <img alt="<?= htmlspecialchars($row['name']) ?>"
+                     src="<?= !empty($row['image_path']) && file_exists($row['image_path']) ? htmlspecialchars($row['image_path']) : 'assets/no-image.png' ?>" />
+              </div>
+              <figcaption class="prd-product-info">
+                <h2 class="prd-name"><?= htmlspecialchars($row['name']) ?></h2>
+                <p class="prd-description"><?= !empty($row['description']) ? nl2br(htmlspecialchars($row['description'])) : 'No description available.' ?></p>
+                <p class="prd-price">Member: RM<?= number_format($row['price'], 2) ?></p>
+                <p class="prd-price">Non-Member: RM<?= number_format($row['large_price'], 2) ?></p>
+              </figcaption>
+            </figure>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p>No products available in Basic Brew.</p>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
 
 <aside class="full-menu">
   <h2 class="full-menu-title">Full Menu</h2>

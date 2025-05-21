@@ -145,7 +145,14 @@ $sql = "CREATE TABLE IF NOT EXISTS activities (
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'activities' ready.<br>" : "❌ " . mysqli_error($conn);
 
-// 7️⃣ PRODUCTS TABLE
+// 7️⃣ CATEGORY TABLE
+$sql = "CREATE TABLE IF NOT EXISTS categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL
+)";
+echo mysqli_query($conn, $sql) ? "✅ Table 'categories' ready.<br>" : "❌ " . mysqli_error($conn);
+
+// 8️⃣ PRODUCTS TABLE
 $sql = "CREATE TABLE IF NOT EXISTS products (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -153,28 +160,33 @@ $sql = "CREATE TABLE IF NOT EXISTS products (
   price DECIMAL(10,2) NOT NULL,
   large_price DECIMAL(10,2) DEFAULT NULL,
   sku VARCHAR(100) UNIQUE,
-  category VARCHAR(100),
+  category_id INT,
   image_path VARCHAR(255),
   availability ENUM('Available', 'Unavailable') DEFAULT 'Available',
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;";
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+) ENGINE=InnoDB";
+echo mysqli_query($conn, $sql) ? "✅ Table 'products' (with category_id) ready.<br>" : "❌ " . mysqli_error($conn);
 
-if (mysqli_query($conn, $sql)) {
-    echo "✅ Table 'products' recreated.<br>";
-} else {
-    echo "❌ Error: " . mysqli_error($conn) . "<br>";
+// 9️⃣ Populate categories
+$categoryList = ['Basic Brew', 'Artisan Brew', 'Non-Coffee', 'Hot Beverages'];
+foreach ($categoryList as $cat) {
+    $cat_escaped = mysqli_real_escape_string($conn, $cat);
+    $check = mysqli_query($conn, "SELECT id FROM categories WHERE name = '$cat_escaped'");
+    if (mysqli_num_rows($check) === 0) {
+        mysqli_query($conn, "INSERT INTO categories (name) VALUES ('$cat_escaped')");
+    }
 }
 
-// 🔁 Insert predefined product list
+// 🔁 Populate products
 $products = [
-    // BASIC BREW
+    // [category name, product name, price, large price, image file]
     ['Basic Brew', 'Americano', 8.90, 10.90, 'ice-americano.jpg'],
     ['Basic Brew', 'Latte', 10.90, 12.90, 'latte.jpg'],
     ['Basic Brew', 'Cappuccino', 11.90, 13.90, 'cappuccino.jpg'],
     ['Basic Brew', 'Aerocano', 10.90, 12.90, 'aerocano.jpg'],
     ['Basic Brew', 'Aero-latte', 12.90, 14.90, 'aero-latte.jpg'],
 
-    // ARTISAN BREW
     ['Artisan Brew', 'Butterscotch Creme', 14.90, 16.90, 'butterscotch-creme.jpg'],
     ['Artisan Brew', 'Butterscotch Latte', 11.90, 13.90, 'butterscotch-latte.jpg'],
     ['Artisan Brew', 'Mint Latte', 12.90, 14.90, 'mint-latte.jpg'],
@@ -188,7 +200,6 @@ $products = [
     ['Artisan Brew', 'Cheese Americano', 13.90, 15.90, 'cheese-americano.jpg'],
     ['Artisan Brew', 'Orange Americano', 13.90, 15.90, 'orange-americano.jpg'],
 
-    // NON-COFFEE
     ['Non-Coffee', 'Chocolate', 13.90, 15.90, 'chocolate.jpg'],
     ['Non-Coffee', 'Mint Chocolate', 13.90, 15.90, 'mint-chocolate.jpg'],
     ['Non-Coffee', 'Orange Chocolate', 13.90, 15.90, 'orange-chocolate.jpg'],
@@ -200,7 +211,6 @@ $products = [
     ['Non-Coffee', 'Yuzu Matcha', 14.90, 16.90, 'yuzu-matcha.jpg'],
     ['Non-Coffee', 'Houjicha', 13.90, 15.90, 'houjicha.jpg'],
 
-    // HOT BEVERAGES
     ['Hot Beverages', 'Americano', 7.90, 9.90, 'hot-americano.jpg'],
     ['Hot Beverages', 'Latte', 9.90, 11.90, 'hot-latte.jpg'],
     ['Hot Beverages', 'Butterscotch Latte', 10.90, 12.90, 'hot-butterscotch-latte.jpg'],
@@ -210,23 +220,27 @@ $products = [
     ['Hot Beverages', 'Houjicha', 13.90, 14.90, 'houjicha.jpg'],
 ];
 
-// Prepared insert
+// ✅ Prepared insert with category_id lookup
 foreach ($products as [$category, $name, $price, $large, $filename]) {
     $sku = strtoupper(str_replace(' ', '_', $category . '_' . $name));
     $escaped_name = mysqli_real_escape_string($conn, $name);
     $escaped_category = mysqli_real_escape_string($conn, $category);
     $image_path = mysqli_real_escape_string($conn, "images/" . $filename);
 
-    $check = mysqli_query($conn, "SELECT id FROM products WHERE name = '$escaped_name' AND category = '$escaped_category'");
+    // Fetch category_id
+    $cat_result = mysqli_query($conn, "SELECT id FROM categories WHERE name = '$escaped_category'");
+    $cat_row = mysqli_fetch_assoc($cat_result);
+    $category_id = $cat_row['id'] ?? 'NULL';
+
+    $check = mysqli_query($conn, "SELECT id FROM products WHERE name = '$escaped_name' AND category_id = $category_id");
     if (mysqli_num_rows($check) === 0) {
         $insert = "
-        INSERT INTO products (name, price, large_price, sku, category, image_path)
-        VALUES ('$escaped_name', $price, $large, '$sku', '$escaped_category', '$image_path')";
+        INSERT INTO products (name, price, large_price, sku, category_id, image_path)
+        VALUES ('$escaped_name', $price, $large, '$sku', $category_id, '$image_path')";
         mysqli_query($conn, $insert);
     }
 }
 echo "✅ Product migration complete: menu items inserted.<br>";
-
 
 
 // Close
