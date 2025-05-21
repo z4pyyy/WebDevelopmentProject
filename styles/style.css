@@ -2185,7 +2185,7 @@ input:focus, select:focus {
     background: rgba(0, 0, 0, 0.3);
   }
 
-  /*registration.html */
+  /*registration.php */
   body.registration-page {
     font-family: 'Roboto', sans-serif;
     background-image: url('../images/INDEXBNG6.png');
@@ -2348,7 +2348,7 @@ input:focus, select:focus {
   color:black;
   }
 
-  /* login.html */
+  /* login.php */
   body.login-page {
     font-family: 'Roboto', sans-serif;
     background-image: url('../images/IndexBackground7.png');
@@ -2369,7 +2369,7 @@ input:focus, select:focus {
   }
 
 
-  /* Joinus.html */
+  /* Joinus.php */
   .joinus-page{
     background-image: url('../images/BaristaPIC1.png');
     background-size: cover;
@@ -2636,7 +2636,7 @@ input:focus, select:focus {
   
 
 
-  /*Product.html*/
+  /*Product.php*/
   .prd-menu-toggle {
     display: none;
   }
@@ -2660,6 +2660,58 @@ input:focus, select:focus {
     display: flex;
     flex-direction: column;
   }
+
+  .admin-prd-menu {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    width: 200px;
+    background: linear-gradient(to bottom, #f7f7f7, #ebebeb);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6); /* subtle top inner light */
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admin-prd-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admin-prd-menu ul li {
+    margin-bottom: 15px;
+    width: 79%;
+  }
+  
+  .admin-prd-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .admin-prd-menu ul li a:hover,
+  .admin-prd-menu ul li a.active {
+    background: #007bff;
+    color: #fff;
+    box-shadow:
+      0 4px 8px rgba(0, 123, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
   
   .prd-menu-btn{
     display:none;
@@ -4844,11 +4896,11 @@ select {
 
 .admin-activities-overview {
   background: #f9f9f9;
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   padding: 15px 20px;
   border-radius: 6px;
   margin: 20px 0;
-  width:90%;
+  width:20%;
 }
 
 .admin-activities-overview h4 {
@@ -4890,16 +4942,18 @@ select {
   flex-direction: row;
   background: #f8f9fa;
   border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   width: 90%;
+  background-color: #fff;
+  border-radius: 10px;
 }
+
 
 .admin-activity-card h3 {
   margin-top: 10px;
-  font-size: 36px;
+  font-size: 36px !important;
   color: #0056b3;
 }
 
@@ -4907,8 +4961,14 @@ select {
   display:flex;
   flex-direction: column;
   margin-top: 20px;
-  font-size: 21px;
-  color: #555;
+  font-weight: 570;
+  color: #000;
+  background-color: #f1f2f6;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .admin-activity-description {
@@ -4926,40 +4986,48 @@ select {
 }
 
 .admin-activity-actions {
-  margin-top: 15px;
+  margin-top: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height:60px;
   text-align: center;
   align-items: center;
+  gap:10px;
 }
 
 .admin-activity-actions a {
   display: inline-block;
-  margin-right: 10px;
-  padding: 6px 12px;
   border-radius: 4px;
   font-size: 1.2rem;
   text-decoration: none;
   transition: background 0.2s ease;
 }
 
+.edit-btn,
+.delete-btn {
+  min-width: 115px;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color:white;
+}
+
 .edit-btn {
-  background: #007bff;
-  color: white;
+  margin-top: 30px;
+  background-color: #44bd32;
 }
 
 .edit-btn:hover {
-  background: #0056b3;
+  background-color: #4cd137;
 }
 
 .delete-btn {
-  background: #dc3545;
-  color: white;
+  background-color: #e84118;
 }
 
 .delete-btn:hover {
-  background: #b02a37;
+  background-color: #c23616;
 }
 
 /* ───────────────────────────────
@@ -5054,7 +5122,7 @@ select {
   color: #273c75;
   -webkit-background-clip: text;
   background-clip: text;
-  margin-top: 200px;
+  margin-top: 100px;
   background-size: 200%;
   animation: gradientFlow 5s linear infinite;
   font-family: 'Outfit', sans-serif;
@@ -5110,6 +5178,7 @@ select {
   flex-direction: column;
   gap: 10px;
   width:2rem;
+  margin-top:20px;
 }
 
 .activity-details h3 {
@@ -5118,15 +5187,6 @@ select {
   color: #004ba0;
 }
 
-.admin-activity-meta {
-  font-size: 0.95rem;
-  color: #444;
-  background-color: #f8f8f8;
-  padding: 10px 12px;
-  border-radius: 8px;
-  line-height: 1.6;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
 
 .admin-activity-description {
   font-size: 0.95rem;
@@ -5143,26 +5203,6 @@ select {
   color: #0066cc;
   text-decoration: underline;
 }
-
-
-.edit-btn,
-.delete-btn {
-  padding: 6px 12px;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  color: white;
-}
-
-.edit-btn {
-  background-color: #007bff;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-}
-
 
 /* ===== Navigation ===== */
 .admin-navbar {
@@ -5206,14 +5246,6 @@ select {
 }
 
 /* ===== Activity Card (Product Card) ===== */
-.admin-activity-card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
 .activity-flex{
   display: flex;
   flex-direction: row;
@@ -5242,47 +5274,15 @@ select {
   transform: scale(1.01);
 }
 
-.admin-activity-meta {
-  background-color: #f1f2f6;
-  padding: 10px 15px;
-  border-radius: 6px;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  color: #2f3640;
-}
 
 .admin-activity-description {
   font-size: 0.95rem;
   line-height: 1.6;
   color: #353b48;
+  max-width: 50rem;
 }
 
-.edit-btn, .delete-btn {
-  padding: 8px 14px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  color: white;
-  transition: background-color 0.2s ease;
-}
 
-.edit-btn {
-  background-color: #44bd32;
-}
-
-.edit-btn:hover {
-  background-color: #4cd137;
-}
-
-.delete-btn {
-  background-color: #e84118;
-}
-
-.delete-btn:hover {
-  background-color: #c23616;
-}
 
 .status-btn {
   padding: 5px 10px;
@@ -5311,7 +5311,25 @@ select {
   opacity: 0.85;
 }
 
+/* Gray-out unavailable product */
+.prd-unavailable {
+  opacity: 0.5;
+  position: relative;
+}
 
+/* OUT OF STOCK badge */
+.prd-stock-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 10;
+}
 
 /* Mobile View Adjustments */
 @media screen and (min-width: 360px) and (max-width: 1300px) {
@@ -5692,7 +5710,7 @@ select {
   }
 
 
-/*Product.html*/
+/*Product.php*/
 .prd-menu-toggle,
 .prd-menu-btn {
   display: block;

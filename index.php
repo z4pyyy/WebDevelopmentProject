@@ -162,7 +162,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
           </div>
           <div class="cta-button-wrapper">
-            <a href="product1.html" class="cta-button">Mood</a>
+            <a href="product1.php" class="cta-button">Mood</a>
           </div>
         </section>   
       </div>
@@ -174,7 +174,7 @@ if (session_status() === PHP_SESSION_NONE) {
       <div class="seperater-text">
         <h1>Experience Brew & Go</h1>
         <p>Where coffee meets character.</p>
-        <a href="blog.html" class="transparent-btn">Explore More</a>
+        <a href="blog.php" class="transparent-btn">Explore More</a>
       </div>
     </div>
   </div>
@@ -218,8 +218,8 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
           
             <div class="button-row">
-              <a href="registration.html" class="btn-index-primary">Join Member</a>
-              <a href="login.html" class="btn-index-secondary"> Log In</a>
+              <a href="registration.php" class="btn-index-primary">Join Member</a>
+              <a href="login.php" class="btn-index-secondary"> Log In</a>
             </div>
           </div>
         
@@ -259,8 +259,8 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
             <div class="button-row">
-              <a href="joinus.html" class="btn-index-primary">Join the Crew</a>
-              <a href="profile1.html" class="btn-index-secondary">Meet the Team</a>
+              <a href="joinus.php" class="btn-index-primary">Join the Crew</a>
+              <a href="profile1.php" class="btn-index-secondary">Meet the Team</a>
             </div>
           </div>
 
@@ -323,7 +323,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <div class="promo-news-grid">
             <!-- Latest News -->
             <div class="promo-card">              
-              <a href="past_activity.html#past_activity2">
+              <a href="past_activity.php#past_activity2">
                 <img src="images/DISCOUNTTHURDAY2024.png" alt="Thursday Discount">
               </a>
               <div class="promo-card-content">
@@ -334,7 +334,7 @@ if (session_status() === PHP_SESSION_NONE) {
             
             <!-- Latest Promotion -->
             <div class="promo-card">
-              <a href="current_activity.html">
+              <a href="current_activity.php">
               <img src="images/Current.jpg" alt="Current Promo">
               <div class="promo-card-content">
               </a>
@@ -405,7 +405,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
           
             <div class="barista-image">
-              <a href="joinus.html" class="btn join-us-btn"> JOIN US? :3</a>
+              <a href="joinus.php" class="btn join-us-btn"> JOIN US? :3</a>
             </div>
           
             <div class="barista-video-wrapper">

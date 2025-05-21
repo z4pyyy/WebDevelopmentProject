@@ -53,10 +53,14 @@ $result = mysqli_query($conn, $query);
       <div class="prd-product-list">
         <?php if (mysqli_num_rows($result) > 0): ?>
           <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <figure class="prd-product-item">
+          <?php $isUnavailable = ($row['availability'] === 'Unavailable'); ?>
+          <figure class="prd-product-item<?= $isUnavailable ? ' prd-unavailable' : '' ?>">
               <div class="prd-product-image">
                 <img alt="<?= htmlspecialchars($row['name']) ?>"
                      src="<?= !empty($row['image_path']) && file_exists($row['image_path']) ? htmlspecialchars($row['image_path']) : 'assets/no-image.png' ?>" />
+                     <?php if ($isUnavailable): ?>
+                  <div class="prd-stock-label">OUT OF STOCK</div>
+                <?php endif; ?>
               </div>
               <figcaption class="prd-product-info">
                 <h2 class="prd-name"><?= htmlspecialchars($row['name']) ?></h2>

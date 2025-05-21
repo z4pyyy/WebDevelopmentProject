@@ -35,7 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </div>
           
           <div class="acknowledgement-item">
-  <figure><img src="images\hot-houjicha.jpg" alt="hot-houjicha.jpg" width="100" height="87"> <figcaption><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.signaturemarket.co%2Fmy%2Fmarketplace%2Fsnack%2F2520%2FJapanese_Houjicha_Latte_with_Organic_Soy_Milk.html&psig=AOvVaw3qTFJfqCh8rLlZSRZgz3kq&ust=1745085787286000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNDl8aaV4owDFQAAAAAdAAAAABAE">hot houjicha</a></figcaption> </figure>
+  <figure><img src="images\hot-houjicha.jpg" alt="hot-houjicha.jpg" width="100" height="87"> <figcaption><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.signaturemarket.co%2Fmy%2Fmarketplace%2Fsnack%2F2520%2FJapanese_Houjicha_Latte_with_Organic_Soy_Milk.php&psig=AOvVaw3qTFJfqCh8rLlZSRZgz3kq&ust=1745085787286000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNDl8aaV4owDFQAAAAAdAAAAABAE">hot houjicha</a></figcaption> </figure>
 </div>
           
           <div class="acknowledgement-item">

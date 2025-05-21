@@ -61,6 +61,18 @@ if (isset($_GET['toggle_id'])) {
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <div class="prd-toggle-wrapper">
+    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+    <div class="admin-prd-menu">
+      <ul>
+        <li><a href="#Artisan_Brew">Artisan Brew</a></li>
+        <li><a href="#Basic_Brew">Basic Brew</a></li>
+        <li><a href="#Hot_Beverages">Hot Beverages</a></li>
+        <li><a href="#Non-Coffee">Non-Coffee</a></li>
+      </ul>
+    </div>
+  </div>
   <div class="admin-content">
       <div class="admin-navbar">
         <div><strong>Products</strong></div>
@@ -72,7 +84,10 @@ if (isset($_GET['toggle_id'])) {
     <?php if (!empty($products_by_category)): ?>
       <?php foreach ($products_by_category as $category => $products): ?>
         <span class="line"></span>
-        <h1 class="admin-header"><span class="hover-underline"><?= htmlspecialchars($category) ?></span></h1>
+        <?php $category_id = str_replace(' ', '_', $category); ?>
+        <h1 id="<?= $category_id ?>" class="admin-header">
+          <span class="hover-underline"><?= htmlspecialchars($category) ?></span>
+        </h1>
         <span class="line"></span>
 
         <?php $i = 1; foreach ($products as $product): ?>
@@ -105,16 +120,16 @@ if (isset($_GET['toggle_id'])) {
 
             </div>
             <div class="admin-activity-actions">
-              <a href="edit_product.php?id=<?= $product['id'] ?>" class="edit-btn">✏️ Edit</a>
-              <a href="?delete_id=<?= $product['id'] ?>" class="delete-btn" onclick="return confirm('Delete this product?')">🗑 Delete</a>
-            </div>
-            <form method="GET" style="display:inline;">
+              <form method="GET" style="display:inline;">
                 <input type="hidden" name="toggle_id" value="<?= $product['id'] ?>">
                 <button type="submit"
-                        class="status-btn <?= $product['availability'] === 'Available' ? 'available' : 'unavailable' ?>">
-                    <?= $product['availability'] === 'Available' ? '🟢 Available' : '⚪ Unavailable' ?>
-                </button>
+                class="status-btn <?= $product['availability'] === 'Available' ? 'available' : 'unavailable' ?>">
+                <?= $product['availability'] === 'Available' ? '🟢 Available' : '⚪ Unavailable' ?>
+              </button>
             </form>
+            <a href="edit_product.php?id=<?= $product['id'] ?>" class="edit-btn">✏️ Edit</a>
+            <a href="?delete_id=<?= $product['id'] ?>" class="delete-btn" onclick="return confirm('Delete this product?')">🗑 Delete</a>
+            </div>
             </div>
           </div>
         <?php $i++; endforeach; ?>

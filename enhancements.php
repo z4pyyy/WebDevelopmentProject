@@ -28,7 +28,7 @@
 
 
       <ol>
-        <a href="index.html">
+        <a href="index.php">
           <img src="../images/NAVBAR.png" alt="Past Activity Image 1" id="past_activity1">
         </a>
 
@@ -45,11 +45,11 @@
 
 
 
-          <a href="product1.html">
+          <a href="product1.php">
             <img src="images/CART.png" alt="Shopping Cart Enhancement">
           </a>
           <li><h2>Shopping Cart</h2>
-          <p>The shopping cart function can be found on every page, particularly the <a href="product1.html">products pages</a> where its effects are most apparent.
+          <p>The shopping cart function can be found on every page, particularly the <a href="product1.php">products pages</a> where its effects are most apparent.
             When any item is selected and added to the user's selection, the item(s) will still appear in the Shopping Cart while visiting other pages of the site. The
             Shopping Cart can be opened by pressing the respective button, and can be closed through the 'Close' button in the sidebar or by pressing the Shopping Cart
             button again.
@@ -63,7 +63,7 @@
 
 
 
-      <a href="index.html">
+      <a href="index.php">
         <img src="images/MOBILEVIEW.png" alt="Mobile View Enhancement">
       </a>
       <li><h2>Mobile View</h2>
@@ -83,7 +83,7 @@
 
 
 
-        <a href="index.html">
+        <a href="index.php">
           <img src="images/FOOTER.png" alt="Footer Hover Enhancement">
         </a>
         <li><h2>Footer</h2>
@@ -96,7 +96,7 @@
 
 
 
-        <a href="index.html">
+        <a href="index.php">
           <img src="images/CAROUSEL.png" alt="Carousel Section">
         </a>
         <li><h2>Carousel Section</h2>
@@ -112,7 +112,7 @@
 
 
         
-        <a href="index.html">
+        <a href="index.php">
           <img src="images/FLIPCARD.png" alt="Membership Flip Cards">
         </a>
         <li><h2>Membership Flip Cards</h2>
@@ -130,7 +130,7 @@
 
 
 
-        <a href="index.html">
+        <a href="index.php">
           <img src="images/MAPENHANCEMENT.png" alt="Map Enhancement">
         </a>
         <li><h2>Interactive Map</h2>
@@ -143,7 +143,7 @@
 
 
 
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/VIDEOLOOP.png" alt="Looping Video Section">
           </a>
           <li><h2>Looping Videos</h2>
@@ -156,7 +156,7 @@
 
 
 
-      <a href="product1.html">
+      <a href="product1.php">
         <img src="images/CATEGORYSIDEBAR.png" alt="Category Hover Effects">
       </a>
       <li><h2>Category Sidebar Hover</h2>
@@ -172,17 +172,17 @@
 
 
 
-      <a href="blog.html">
+      <a href="blog.php">
         <img src="images/ACTIVITYSLIDESHOW.png" alt="Slideshow Feature">
       </a>
       <li><h2>Slideshow</h2>
-        <p>The pictures in the Past Activities section of the page will change at regular intervals, and each picture can be clicked to take the user to <a href="past_activity.html">the Past Activities page</a>.</p>  
+        <p>The pictures in the Past Activities section of the page will change at regular intervals, and each picture can be clicked to take the user to <a href="past_activity.php">the Past Activities page</a>.</p>  
         </li>
 
         
         
         
-        <a href="blog.html">
+        <a href="blog.php">
           <img src="images/ACTIVITYHOVER.png" alt="Blog Hover Effects">
         </a>
         <li><h2>Blog Hover Effects</h2>
@@ -190,7 +190,7 @@
           </p>
         </li>
 
-        <a href="profile1.html">
+        <a href="profile1.php">
           <img src="images/PROFILECARD.png" alt="Profile Page Cards">
         </a>
         <li><h2>Profile Page Cards</h2>
