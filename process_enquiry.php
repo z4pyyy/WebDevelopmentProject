@@ -19,7 +19,7 @@ $address = $street; // For column mapping
 // ✅ 1. Insert without ticket_id
 $sql = "INSERT INTO enquiry (
     first_name, last_name, email, phone, address, postcode, city, state, enquiry_type, message
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param(
