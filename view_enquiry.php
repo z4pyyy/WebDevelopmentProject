@@ -13,31 +13,58 @@ include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';
 
-//Get enquiry info
-$sql = "SELECT * FROM enquiry ORDER BY submitted_at DESC";
+$filter_by = $_GET['filter_by'] ?? '';
+$search_term = trim($_GET['search'] ?? '');
+
+// Build query
+$sql = "SELECT * FROM enquiry";
+$conditions = [];
+
+if (!empty($filter_by) && !empty($search_term)) {
+    $escaped_search = mysqli_real_escape_string($conn, $search_term);
+    switch ($filter_by) {
+        case 'ticket_id':
+            $conditions[] = "ticket_id LIKE '%$escaped_search%'";
+            break;
+        case 'full_name':
+            $conditions[] = "CONCAT(first_name, ' ', last_name) LIKE '%$escaped_search%'";
+            break;
+        case 'email':
+            $conditions[] = "email LIKE '%$escaped_search%'";
+            break;
+        case 'phone':
+            $conditions[] = "phone LIKE '%$escaped_search%'";
+            break;
+    }
+}
+
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
+}
+$sql .= " ORDER BY submitted_at DESC";
+
 $result = mysqli_query($conn, $sql);
 
 // Handle selected row
 $selected_id = $_POST['view_id'] ?? null;
-$selected_ticket = null;
+$selected_enquiry = null;
 
 if ($selected_id) {
     foreach ($result as $row) {
         if ($row['id'] == $selected_id) {
-            $selected_ticket = $row;
+            $selected_enquiry = $row;
             break;
         }
     }
-    mysqli_data_seek($result, 0); // reset pointer
+    mysqli_data_seek($result, 0);
 }
 ?>
 
-?>
-
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Job Applications Overview</title>
+    <title>Enquiry Overview</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
@@ -47,9 +74,27 @@ if ($selected_id) {
         <div><strong>Enquiries</strong></div>
     </div>
 
-<table class="admin-table">
+    <form method="GET">
+        <label for="filter_by"><strong>Search by:</strong></label>
+        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+            <option value="">-- Select Field --</option>
+            <option value="ticket_id" <?= $filter_by === 'ticket_id' ? 'selected' : '' ?>>Ticket ID</option>
+            <option value="full_name" <?= $filter_by === 'full_name' ? 'selected' : '' ?>>Full Name</option>
+            <option value="email" <?= $filter_by === 'email' ? 'selected' : '' ?>>Email</option>
+            <option value="phone" <?= $filter_by === 'phone' ? 'selected' : '' ?>>Phone</option>
+        </select>
+
+        <?php if (!empty($filter_by)): ?>
+            <input type="text" name="search" class="role-filter" value="<?= htmlspecialchars($search_term) ?>" placeholder="Enter keyword...">
+        <?php endif; ?>
+
+        <button type="submit" class="search-button">🔍 Search</button>
+    </form>
+
+    <table class="admin-table">
         <thead>
             <tr>
+                <th>Ticket ID</th>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -61,12 +106,11 @@ if ($selected_id) {
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <?php $isSelected = ($selected_id == $row['id']); ?>
             <tr>
+                <td><?= htmlspecialchars($row['ticket_id']) ?></td>
                 <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
                 <td><?= htmlspecialchars($row['email']) ?></td>
                 <td><?= htmlspecialchars($row['phone']) ?></td>
-                <td><?= $row['submitted_at'] ?></td>
-
-                <!-- Action Button -->
+                <td><?= htmlspecialchars($row['submitted_at']) ?> </td>
                 <td>
                     <form method="POST" class="details-form">
                         <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
@@ -79,26 +123,20 @@ if ($selected_id) {
             <tr class="member-detail-row">
                 <td colspan="5">
                     <div class="member-details-inline">
-                        <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
-                        <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
-                        <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
-                        <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
-                        <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['street']) ?></div>
+                        <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['address']) ?></div>
                         <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
                         <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
                         <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
                         <div class="detail-row"><span class="label">Enquiry Type</span>: <?= htmlspecialchars($row['enquiry_type']) ?></div>
                         <div class="detail-row"><span class="label">Message</span>: <?= htmlspecialchars($row['message']) ?></div>
-                    </td>
-                </tr>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
-                </div>
+                    </div>
+                </td>
+            </tr>
+            <?php endif; ?>
+        <?php endwhile; ?>
         </tbody>
     </table>
 </div>
 
 </body>
 </html>
-
-

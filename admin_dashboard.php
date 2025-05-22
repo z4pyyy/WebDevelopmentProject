@@ -44,7 +44,7 @@ include 'navbar_admin.php';
                       <p>View submitted customer enquiries.</p>
                     </div>
                   </a>
-                <a href="view_jon.php" class="admin-card-link">
+                <a href="view_job.php" class="admin-card-link">
                   <div class="admin-card">
                     <h5>💼 Job Applications</h5>
                     <p>Check incoming applications for openings.</p>
