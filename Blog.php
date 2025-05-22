@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($activities_query)) {
                     <div class="activities-title">
                         <h2><?= htmlspecialchars($current['title']) ?></h2>
                     </div>
-                    <div class="description">
+                    <div class="current-description">
                         <p><?= nl2br(htmlspecialchars($current['description'])) ?></p>
                     </div>
                 </div>
@@ -103,15 +103,22 @@ while ($row = mysqli_fetch_assoc($activities_query)) {
         <?php endif; ?>
 
         <!-- Past Activities -->
-        <div class="past-activities">
-            <?php foreach (array_slice($past, 0, 6) as $p): ?>
-                <a href="past_activity.php">
-                    <div class="past-slide">
-                        <img src="<?= htmlspecialchars($p['image_path']) ?>" alt="Past Activity">
-                        <div class="slide-caption"><?= $p['event_date'] ?><br><b><?= htmlspecialchars($p['title']) ?></b></div>
-                    </div>
+        <div class="past-slideshow">
+            <?php
+            $slideIndex = 1;
+            foreach ($past as $p):
+                // Only assign class s1 to s6 for the first 6 slides
+                $slideClass = 's' . $slideIndex;
+                if ($slideIndex > 6) break;
+            ?>
+                <a href="past_activity.php?id=<?= urlencode($p['id']) ?>" class="past-slide <?= $slideClass ?>">
+                <img src="<?= htmlspecialchars($p['image_path']) ?>" alt="Past Activity">
+                <div class="slide-caption"><?= htmlspecialchars($p['event_date']) ?><br><b><?= htmlspecialchars($p['title']) ?></b></div>
                 </a>
-            <?php endforeach; ?>
+            <?php
+                $slideIndex++;
+            endforeach;
+            ?>
         </div>
     </div>
 </section>
