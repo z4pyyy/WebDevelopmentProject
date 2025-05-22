@@ -13,8 +13,36 @@ include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';
 
-// Get all job applications
-$sql = "SELECT * FROM job_application ORDER BY submitted_at DESC";
+$filter_by = $_GET['filter_by'] ?? '';
+$search_term = trim($_GET['search'] ?? '');
+
+// Build query
+$sql = "SELECT * FROM job_application";
+$conditions = [];
+
+if (!empty($filter_by) && !empty($search_term)) {
+    $escaped_search = mysqli_real_escape_string($conn, $search_term);
+    switch ($filter_by) {
+        case 'full_name':
+            $conditions[] = "CONCAT(first_name, ' ', last_name) LIKE '%$escaped_search%'";
+            break;
+        case 'email':
+            $conditions[] = "email LIKE '%$escaped_search%'";
+            break;
+        case 'phone':
+            $conditions[] = "phone LIKE '%$escaped_search%'";
+            break;
+        case 'submitted_at':
+            $conditions[] = "DATE(submitted_at) = '$escaped_search'";
+            break;
+    }
+}
+
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
+}
+$sql .= " ORDER BY submitted_at DESC";
+
 $result = mysqli_query($conn, $sql);
 
 // Handle selected row
@@ -46,6 +74,27 @@ if ($selected_id) {
         <div><strong>Job Applications</strong></div>
     </div>
 
+    <form method="GET">
+        <label for="filter_by"><strong>Search by:</strong></label>
+        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+            <option value="">-- Select Field --</option>
+            <option value="full_name" <?= $filter_by === 'full_name' ? 'selected' : '' ?>>Full Name</option>
+            <option value="email" <?= $filter_by === 'email' ? 'selected' : '' ?>>Email</option>
+            <option value="phone" <?= $filter_by === 'phone' ? 'selected' : '' ?>>Phone</option>
+            <option value="submitted_at" <?= $filter_by === 'submitted_at' ? 'selected' : '' ?>>Submitted At</option>
+        </select>
+
+        <?php if (!empty($filter_by)): ?>
+            <?php if ($filter_by === 'submitted_at'): ?>
+                <input type="date" name="search" class="role-filter" value="<?= htmlspecialchars($search_term) ?>">
+            <?php else: ?>
+                <input type="text" name="search" class="role-filter" value="<?= htmlspecialchars($search_term) ?>" placeholder="Enter keyword...">
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <button type="submit" class="search-button">🔍 Search</button>
+    </form>
+
     <table class="admin-table">
         <thead>
             <tr>
@@ -64,8 +113,6 @@ if ($selected_id) {
                 <td><?= htmlspecialchars($row['email']) ?></td>
                 <td><?= htmlspecialchars($row['phone']) ?></td>
                 <td><?= $row['submitted_at'] ?></td>
-
-                <!-- Action Button -->
                 <td>
                     <form method="POST" class="details-form">
                         <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
@@ -88,22 +135,18 @@ if ($selected_id) {
                         <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
                         <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
                         <div class="action-buttons">
-                        <!-- Applicant Photo -->
                         <details class="job-view-photo">
                             <summary class="viewjob-button">📷 View Photo</summary>
-                            <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo"
-                                class="viewjob-photo">
+                            <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo" class="viewjob-photo">
                         </details>
-                            <!-- Applicant CV -->
                         <details class="job-view-cv">
                             <summary class="viewjob-button">📄 View CV</summary>
                             <?php
                                 $cv_filename = basename($row['cv_path']);
-                                $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION)); // ✅ define $cv_ext
+                                $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION));
                                 $cv_path = $row['cv_path'];
                                 $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
                             ?>
-                            
                             <?php if ($cv_ext === 'pdf'): ?>
                                 <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
                                 <p style="margin-top: 10px;">
@@ -113,12 +156,12 @@ if ($selected_id) {
                                 <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
                             <?php endif; ?>
                         </details>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
-                </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php endif; ?>
+        <?php endwhile; ?>
         </tbody>
     </table>
 </div>

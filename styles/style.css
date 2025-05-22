@@ -4613,6 +4613,22 @@ select {
   font-size: 1rem;
 }
 
+.role-filter{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width:20%;
+}
+
+.role-filter select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width:20%;
+}
+
 .action-buttons-div{
   display: flex;
   flex-direction: row;

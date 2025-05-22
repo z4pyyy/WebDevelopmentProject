@@ -12,7 +12,19 @@ include 'connection.php';
 include 'navbar.php';
 include 'navbar_admin.php';
 
-// Get member & user info
+// Capture filters
+$filter_by = $_GET['filter_by'] ?? '';
+$search_term = trim($_GET['search_term'] ?? '');
+$role_filter = $_GET['role'] ?? '';
+
+// Get role options
+$role_options = [];
+$role_query = mysqli_query($conn, "SELECT id, name FROM roles");
+while ($r = mysqli_fetch_assoc($role_query)) {
+    $role_options[] = $r;
+}
+
+// Build base SQL
 $sql = "SELECT 
             m.id AS membership_id,
             m.first_name, m.last_name, m.email, m.phone, m.registered_at,
@@ -22,21 +34,34 @@ $sql = "SELECT
             r.name AS role_name
         FROM membership m
         JOIN user u ON u.membership_id = m.id
-        JOIN roles r ON u.role_id = r.id
-        ORDER BY m.registered_at DESC";
-$result = mysqli_query($conn, $sql);
+        JOIN roles r ON u.role_id = r.id";
 
-// Get role options
-$role_options = [];
-$role_query = mysqli_query($conn, "SELECT id, name FROM roles");
-while ($r = mysqli_fetch_assoc($role_query)) {
-    $role_options[] = $r;
+// Apply filters
+$conditions = [];
+if (!empty($role_filter)) {
+    $conditions[] = "u.role_id = " . intval($role_filter);
 }
+if (!empty($filter_by) && !empty($search_term)) {
+    $escaped = mysqli_real_escape_string($conn, $search_term);
+    if ($filter_by === 'member_id') {
+        $id = intval(str_replace('BNG-', '', $escaped));
+        $conditions[] = "m.id = $id";
+    } elseif ($filter_by === 'username') {
+        $conditions[] = "u.username LIKE '%$escaped%'";
+    } elseif ($filter_by === 'role') {
+        $conditions[] = "r.name = '$escaped'";
+    }
+}
+if ($conditions) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
+}
+$sql .= " ORDER BY m.registered_at DESC";
+
+$result = mysqli_query($conn, $sql);
 
 // Handle selected row
 $selected_id = $_POST['view_id'] ?? null;
 $selected_member = null;
-
 if ($selected_id) {
     foreach ($result as $row) {
         if ($row['membership_id'] == $selected_id) {
@@ -62,6 +87,34 @@ if ($selected_id) {
         <div><strong>Registered Member</strong></div>
     </div>
 
+    <form method="GET">
+        <label for="filter_by"><strong>Search by:</strong></label>
+        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+            <option value="">-- Select Field --</option>
+            <option value="member_id" <?= $filter_by === 'member_id' ? 'selected' : '' ?>>Member ID</option>
+            <option value="username" <?= $filter_by === 'username' ? 'selected' : '' ?>>Username</option>
+            <option value="role" <?= $filter_by === 'role' ? 'selected' : '' ?>>Role</option>
+        </select>
+
+        <?php if ($filter_by === 'role'): ?>
+            <select name="search_term" class="role-filter">
+                <option value="">-- Choose Role --</option>
+                <?php foreach ($role_options as $role): ?>
+                    <option value="<?= htmlspecialchars($role['name']) ?>" <?= $search_term === $role['name'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars(ucfirst($role['name'])) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        <?php elseif ($filter_by): ?>
+            <input type="text" name="search_term" class="role-filter"
+                value="<?= htmlspecialchars($search_term) ?>"
+                placeholder="Enter search..." />
+        <?php endif; ?>
+
+        <button type="submit" class="search-button">🔍 Search</button>
+    </form>
+
+
     <table class="admin-table">
         <thead>
             <tr>
@@ -80,51 +133,46 @@ if ($selected_id) {
                 <td><?= 'BNG-' . str_pad($row['membership_id'], 5, '0', STR_PAD_LEFT) ?></td>
                 <td>RM <?= number_format($row['wallet'], 2) ?></td>
 
-                <!-- Role Dropdown Only -->
                 <td>
-                  <form method="POST" action="update_role.php" class="details-form">
-                      <input type="hidden" name="user_id" value="<?= $row['membership_id'] ?>">
-                      <select name="role_id" class="role-select">
-                          <?php foreach ($role_options as $role): ?>
-                              <option value="<?= $role['id'] ?>" <?= $role['id'] == $row['role_id'] ? 'selected' : '' ?>>
-                                  <?= htmlspecialchars(ucfirst($role['name'])) ?>
-                              </option>
-                          <?php endforeach; ?>
-                      </select>
-                      <button type="submit" class="update-role-button">Update</button>
-                  </form>
+                    <form method="POST" action="update_role.php" class="details-form">
+                        <input type="hidden" name="user_id" value="<?= $row['membership_id'] ?>">
+                        <select name="role_id" class="role-select">
+                            <?php foreach ($role_options as $role): ?>
+                                <option value="<?= $role['id'] ?>" <?= $role['id'] == $row['role_id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars(ucfirst($role['name'])) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" class="update-role-button">Update</button>
+                    </form>
                 </td>
 
-                <!-- Action Buttons -->
                 <td>
-                  <div class="action-buttons-div">
-                      <!-- View Details -->
-                      <form method="POST" class="details-form">
-                          <input type="hidden" name="view_id" value="<?= $row['membership_id'] ?>">
-                          <button type="submit" class="member-details-button">View</button>
-                      </form>
-
-                      <!-- Edit Member (Link to edit page) -->
-                      <form method="GET" action="edit_membership.php" class="details-form">
-                          <input type="hidden" name="membership_id" value="<?= $row['membership_id'] ?>">
-                          <button type="submit" class="member-edit-button">Edit</button>
-                      </form>
-                  </div>
-              </td>
-            </tr>
-
-            <?php if ($isSelected): ?>
-            <tr class="member-detail-row">
-                <td colspan="5">
-                    <div class="member-details-inline">
-                    <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
-                    <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
-                    <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
-                    <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
-                    <div class="detail-row"><span class="label">Registered At</span>: <?= $row['registered_at'] ?></div>
+                    <div class="action-buttons-div">
+                        <form method="POST" class="details-form">
+                            <input type="hidden" name="view_id" value="<?= $row['membership_id'] ?>">
+                            <button type="submit" class="member-details-button">View</button>
+                        </form>
+                        <form method="GET" action="edit_membership.php" class="details-form">
+                            <input type="hidden" name="membership_id" value="<?= $row['membership_id'] ?>">
+                            <button type="submit" class="member-edit-button">Edit</button>
+                        </form>
                     </div>
                 </td>
             </tr>
+
+            <?php if ($isSelected): ?>
+                <tr class="member-detail-row">
+                    <td colspan="5">
+                        <div class="member-details-inline">
+                            <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
+                            <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
+                            <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
+                            <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
+                            <div class="detail-row"><span class="label">Registered At</span>: <?= $row['registered_at'] ?></div>
+                        </div>
+                    </td>
+                </tr>
             <?php endif; ?>
         <?php endwhile; ?>
         </tbody>

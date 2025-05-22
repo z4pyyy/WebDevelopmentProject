@@ -93,7 +93,6 @@ $total_upcoming = count($coming);
       <div><strong>Activities</strong></div>
       <a href="add_activity.php" class="add-btn">➕ Add New Activity</a>
     </div>
-    <h2 class="admin-activities-title">📊 Activities Overview</h2>
     <div class="admin-activities-overview">
       <ul>
         <li>Total Ongoing Events: <strong><?= $total_current ?></strong></li>
@@ -105,10 +104,10 @@ $total_upcoming = count($coming);
         <li>Total Upcoming Events: <strong><?= $total_upcoming ?></strong></li>
       </ul>
     </div>
+    <span class="line"></span>
       
       
       <!-- ✅ Ongoing -->
-    <span class="line"></span>
     <h1 id="section-ongoing" class="admin-header"><span class="hover-underline">✅ Ongoing</span></h1>
     <span class="line"></span>    
     <?php if ($total_current > 0): ?>
