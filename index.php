@@ -3,7 +3,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-      <?php include 'navbar.php'; ?>
+<?php 
+include 'navbar.php'; 
+include 'initialize.php';
+include 'connection.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
