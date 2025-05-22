@@ -12,10 +12,42 @@
   <input type="checkbox" id="cart-toggle" class="floating-cart-toggle" aria-label="Toggle Cart">
   <label for="cart-toggle" class="floating-cart-icon">🛒</label>
   <div class="cart-sidebar">
-      <h2>Shopping Cart</h2>
+    <h2>Shopping Cart</h2>
+    <?php if (!empty($_SESSION['cart'])): ?>
+      <ul class="cart-list">
+        <?php foreach ($_SESSION['cart'] as $item): ?>
+          <li class="cart-item">
+            <img src="<?= htmlspecialchars($item['image'] ?? 'assets/no-image.png') ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="cart-item-img">
+            <div class="cart-item-info">
+              <span class="cart-item-name"><?= htmlspecialchars($item['name']) ?></span>
+              <!-- Editable quantity form -->
+              <form method="post" action="update_cart.php" class="cart-update-form" style="display:inline;">
+                <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+                <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="0" class="cart-qty-input" style="width:44px; text-align:center;">
+                <button type="submit" class="cart-update-btn">Update</button>
+              </form>
+              <span class="cart-item-price">RM<?= number_format($item['price'] * $item['quantity'], 2) ?></span>
+            </div>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+      <div class="cart-total">
+        Total: RM
+        <?php
+          $total = 0;
+          foreach ($_SESSION['cart'] as $item) {
+            $total += $item['price'] * $item['quantity'];
+          }
+          echo number_format($total, 2);
+        ?>
+      <a href="checkout.php" class="checkout-btn">Checkout</a>
+      </div>
+    <?php else: ?>
       <p>Your selected items will appear here.</p>
-      <label for="cart-toggle" class="close-cart">✖ Close</label>
+    <?php endif; ?>
+    <label for="cart-toggle" class="close-cart">✖ Close</label>
   </div>
+
 
   <div class="cart-overlay"></div>
 

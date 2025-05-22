@@ -65,6 +65,7 @@ while ($row = mysqli_fetch_assoc($current_result)) {
                       <?php if (!empty($current['external_link'])): ?>
                           <a href="<?= htmlspecialchars($current['external_link']) ?>" class="web-button" target="_blank">Show in Web</a>
                       <?php endif; ?>
+                      </div>
                       <div class="blog-time-frame">
                           <h2>Date:</h2>
                           <p><?= $current['event_date'] ?></p>
@@ -72,7 +73,6 @@ while ($row = mysqli_fetch_assoc($current_result)) {
                           <p><?= $current['start_time'] ?> – <?= $current['end_time'] ?></p>
                       </div>
                 </div>
-
             </div>
         </div>
     <?php else: ?>

@@ -57,24 +57,23 @@ while ($row = mysqli_fetch_assoc($past_result)) {
                     </div>
 
                     <div class="<?= $left ? 'left-current-info' : 'right-current-info' ?>">
-                        <div class="<?= $left ? 'left-activities-title' : 'right-activities-title' ?>">
+                      <div class="<?= $left ? 'left-activities-title' : 'left-activities-title' ?>">
                             <h2><?= date('jS F Y', strtotime($row['event_date'])) ?></h2>
                         </div>
-                        <div class="<?= $left ? 'current-description' : 'right-current-description' ?>">
+                        <div class="<?= $left ? 'right-current-description' : 'right-current-description' ?>">
                             <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
                             <?php if (!empty($row['external_link'])): ?>
                                 <a href="<?= htmlspecialchars($row['external_link']) ?>" class="past-transparent-btn" target="_blank">Show in Web</a>
                             <?php endif; ?>
-                          </div>
                         </div>
-                        <div class="<?= $left ? 'left-blog-time-frame' : 'right-blog-time-frame' ?>">
-                          <h2>Date:</h2>
-                          <p><?= $row['event_date'] ?></p>
-                          <h2>Time:</h2>
-                          <p><?= $row['start_time'] ?> – <?= $row['end_time'] ?></p>
-                        </div>
-
-                </div>
+                      </div>
+                      <div class="<?= $left ? 'left-blog-time-frame' : 'right-blog-time-frame' ?>">
+                        <h2>Date:</h2>
+                        <p><?= $row['event_date'] ?></p>
+                        <h2>Time:</h2>
+                        <p><?= $row['start_time'] ?> – <?= $row['end_time'] ?></p>
+                      </div>
+                  </div>
 
                     <span class="end-line"></span>
                 </div>

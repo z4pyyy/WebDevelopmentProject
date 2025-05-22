@@ -23,8 +23,8 @@ mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $member = mysqli_fetch_assoc($result);
-$maxWallet = 1000;
-$walletProgress = min(100, ($member['wallet'] / $maxWallet) * 100);
+$maxPoints = 10000;
+$pointsProgress = min(100, ($member['points'] / $maxPoints) * 100);
 ?>
 
 <!DOCTYPE html>
@@ -70,14 +70,14 @@ $walletProgress = min(100, ($member['wallet'] / $maxWallet) * 100);
     <div class="rewards-box">
       <div class="star-icon">⭐</div>
       <div class="reward-points">
-        <h3><?= number_format($member['points'] ?? 0, 2) ?></h3>
+        <h3><?= number_format($member['points'] ?? 0, 0) ?></h3>
         <p>Total Stars Earned</p>
       </div>
       <div class="progress-bar">
-        <span class="star" style="left: 50%">★<br>Mid Tier</span>
-        <span class="star" style="left: 90%">★<br>Max Tier</span>
-        <div class="fill" style="width: <?= round($walletProgress) ?>%; transition: width 0.6s ease; background-color: #4caf50; height: 100%;"></div>
-        <div class="progress-label"><?= round($walletProgress) ?>%</div>
+          <span class="star" style="left: 50%">★<br>50k</span>
+          <span class="star" style="left: 90%">★<br>100k</span>
+          <div class="fill" style="width: <?= $pointsProgress ?>%;"></div>
+          <div class="progress-label"><?= number_format($pointsProgress, 1) ?>%</div>
       </div>
     </div>
 

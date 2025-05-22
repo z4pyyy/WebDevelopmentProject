@@ -51,15 +51,17 @@ if ($update_type === 'picture') {
 }
 
 if ($update_type === 'topup') {
-    // ✅ Top-up update
+    // ✅ Top-up update and points increment
     $amount = (int) ($_POST['topup_amount'] ?? 0);
     if (in_array($amount, [30, 50, 100, 200])) {
+        // Update wallet and add points (+1 point per RM1)
         $sql = "UPDATE membership 
                 SET wallet = wallet + ?, 
+                    points = points + ?, 
                     status = IF(wallet + ? >= 30, 'Active', 'Expired') 
                 WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "iii", $amount, $amount, $membership_id);
+        mysqli_stmt_bind_param($stmt, "iiii", $amount, $amount, $amount, $membership_id);
         mysqli_stmt_execute($stmt);
     }
 
@@ -67,6 +69,7 @@ if ($update_type === 'topup') {
     header("Location: membership.php");
     exit;
 }
+
 
 // ✅ Full form update
 $first_name = trim($_POST['first_name']);

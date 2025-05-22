@@ -68,7 +68,20 @@ $result = mysqli_query($conn, $query);
                 <p class="prd-price">Member: RM<?= number_format($row['price'], 2) ?></p>
                 <p class="prd-price">Non-Member: RM<?= number_format($row['large_price'], 2) ?></p>
               </figcaption>
-            </figure>
+              
+              <?php if (!$isUnavailable): ?>
+                <form method="post" action="add_to_cart.php" class="cart-add-form">
+                  <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                  <input type="hidden" name="name" value="<?= htmlspecialchars($row['name']) ?>">
+                  <input type="hidden" name="price" value="<?= $row['price'] ?>">
+                  <input type="hidden" name="large_price" value="<?= $row['large_price'] ?>">
+                  <input type="hidden" name="image" value="<?= htmlspecialchars($row['image_path']) ?>">
+                  <input type="number" name="quantity" min="1" value="1" class="cart-quantity">
+                  <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                </form>
+                <?php endif; ?>
+              </figure>
+
           <?php endwhile; ?>
         <?php else: ?>
           <p>No products available in Basic Brew.</p>
@@ -78,6 +91,7 @@ $result = mysqli_query($conn, $query);
   </div>
 </body>
 </html>
+
 
 
 <aside class="full-menu">
