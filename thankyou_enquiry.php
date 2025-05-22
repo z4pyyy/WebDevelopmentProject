@@ -1,4 +1,5 @@
 <?php
+session_start();
 // In a future version, this data would be passed or queried
 $ticket_id = "ENQ-" . str_pad(rand(1, 9999), 4, "0", STR_PAD_LEFT);
 $first_name = $_SESSION['enquiry_data']['first_name'] ?? 'John';
@@ -7,6 +8,7 @@ $email = $_SESSION['enquiry_data']['email'] ?? 'customer@example.com';
 $phone = $_SESSION['enquiry_data']['phone'] ?? '+60123456789';
 $message = $_SESSION['enquiry_data']['message'] ?? 'Thank you for reaching out!';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +99,7 @@ $message = $_SESSION['enquiry_data']['message'] ?? 'Thank you for reaching out!'
       <div class="ticket-line">Ticket ID: <?= $ticket_id ?></div>
 
       <h3>We’ve received the following details:</h3>
+
       <p><strong>Name:</strong> <?= htmlspecialchars($first_name . ' ' . $last_name) ?></p>
       <p><strong>Email:</strong> <?= htmlspecialchars($email) ?></p>
       <p><strong>Phone:</strong> <?= htmlspecialchars($phone) ?></p>
