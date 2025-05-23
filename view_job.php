@@ -19,6 +19,19 @@ $search_term = trim($_GET['search'] ?? '');
 // Build query
 $sql = "SELECT * FROM job_application";
 $conditions = [];
+$sort_by = $_GET['sort_by'] ?? 'submitted_at';
+
+switch ($sort_by) {
+    case 'id_asc':
+        $sql .= " ORDER BY id ASC";
+        break;
+    case 'id_desc':
+        $sql .= " ORDER BY id DESC";
+        break;
+    default:
+        $sql .= " ORDER BY submitted_at DESC";
+        break;
+}
 
 if (!empty($filter_by) && !empty($search_term)) {
     $escaped_search = mysqli_real_escape_string($conn, $search_term);
@@ -41,7 +54,6 @@ if (!empty($filter_by) && !empty($search_term)) {
 if (!empty($conditions)) {
     $sql .= " WHERE " . implode(" AND ", $conditions);
 }
-$sql .= " ORDER BY submitted_at DESC";
 
 $result = mysqli_query($conn, $sql);
 
@@ -82,6 +94,12 @@ if ($selected_id) {
             <option value="email" <?= $filter_by === 'email' ? 'selected' : '' ?>>Email</option>
             <option value="phone" <?= $filter_by === 'phone' ? 'selected' : '' ?>>Phone</option>
             <option value="submitted_at" <?= $filter_by === 'submitted_at' ? 'selected' : '' ?>>Submitted At</option>
+        </select>
+        <label for="sort_by"><strong>Sort by:</strong></label>
+        <select name="sort_by" id="sort_by" class="role-filter" onchange="this.form.submit()">
+            <option value="submitted_at" <?= ($_GET['sort_by'] ?? '') === 'submitted_at' ? 'selected' : '' ?>>Submitted At</option>
+            <option value="id_asc" <?= ($_GET['sort_by'] ?? '') === 'id_asc' ? 'selected' : '' ?>>ID Ascending</option>
+            <option value="id_desc" <?= ($_GET['sort_by'] ?? '') === 'id_desc' ? 'selected' : '' ?>>ID Descending</option>
         </select>
 
         <?php if (!empty($filter_by)): ?>

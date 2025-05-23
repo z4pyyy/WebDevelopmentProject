@@ -16,6 +16,7 @@ include 'navbar_admin.php';
 $filter_by = $_GET['filter_by'] ?? '';
 $search_term = trim($_GET['search_term'] ?? '');
 $role_filter = $_GET['role'] ?? '';
+$sort_by = $_GET['sort_by'] ?? 'registered_at_desc';
 
 // Get role options
 $role_options = [];
@@ -55,7 +56,16 @@ if (!empty($filter_by) && !empty($search_term)) {
 if ($conditions) {
     $sql .= " WHERE " . implode(" AND ", $conditions);
 }
-$sql .= " ORDER BY m.registered_at DESC";
+$order_clause = match ($sort_by) {
+    'wallet_asc' => 'm.wallet ASC',
+    'wallet_desc' => 'm.wallet DESC',
+    'member_id_asc' => 'm.id ASC',
+    'member_id_desc' => 'm.id DESC',
+    'registered_at_asc' => 'm.registered_at ASC',
+    default => 'm.registered_at DESC',
+};
+
+$sql .= " ORDER BY $order_clause";
 
 $result = mysqli_query($conn, $sql);
 
@@ -94,6 +104,15 @@ if ($selected_id) {
             <option value="member_id" <?= $filter_by === 'member_id' ? 'selected' : '' ?>>Member ID</option>
             <option value="username" <?= $filter_by === 'username' ? 'selected' : '' ?>>Username</option>
             <option value="role" <?= $filter_by === 'role' ? 'selected' : '' ?>>Role</option>
+        </select>
+        <label for="sort_by"><strong>Sort by:</strong></label>
+        <select name="sort_by" id="sort_by" class="role-filter" onchange="this.form.submit()">
+            <option value="registered_at_desc" <?= $sort_by === 'registered_at_desc' ? 'selected' : '' ?>>Newest Registered</option>
+            <option value="registered_at_asc" <?= $sort_by === 'registered_at_asc' ? 'selected' : '' ?>>Oldest Registered</option>
+            <option value="wallet_desc" <?= $sort_by === 'wallet_desc' ? 'selected' : '' ?>>Wallet High → Low</option>
+            <option value="wallet_asc" <?= $sort_by === 'wallet_asc' ? 'selected' : '' ?>>Wallet Low → High</option>
+            <option value="member_id_desc" <?= $sort_by === 'member_id_desc' ? 'selected' : '' ?>>Member ID ↓</option>
+            <option value="member_id_asc" <?= $sort_by === 'member_id_asc' ? 'selected' : '' ?>>Member ID ↑</option>
         </select>
 
         <?php if ($filter_by === 'role'): ?>

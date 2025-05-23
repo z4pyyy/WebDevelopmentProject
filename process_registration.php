@@ -10,7 +10,6 @@ $email = trim($_POST['email']);
 $phone = trim($_POST['phone']);
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
-
 $errors = [];
 
 // 2. Validation
@@ -24,6 +23,11 @@ if (!preg_match('/^[A-Za-z]{3,}$/', $username)) {
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Invalid email format.";
+}
+
+if (strtolower($username) === 'admin' || strtolower($email) === 'admin' || strtolower($email) === 'admin@yourdomain.com') {
+    echo "❌ Dont try to be an Admin, It wont work";
+    exit;
 }
 
 // Check if username already exists
@@ -98,22 +102,25 @@ if (!mysqli_stmt_execute($user_stmt)) {
 
 
 // 6. Inline confirmation screen
-echo <<<HTML
+$_SESSION['registered_user'] = $username;
+header("Refresh: 3; URL=login.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="2;url=login.php">
-  <title>Welcome to Brew & Go!</title>
+  <title>Registration Success | Brew & Go</title>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
-  <div class="thankyou-box">
-    <h1>🎉 Registration Complete!</h1>
-    <p>Welcome, <strong>{$username}</strong>!</p>
-    <p>You’ll be redirected to the login page in a moment...</p>
-  </div>
+<body class="confirmation-page">
+  <section class="thankyou-container">
+    <div class="thankyou-box">
+      <h1>🎉 Registration Successful!</h1>
+      <p>Welcome, <strong><?= htmlspecialchars($username) ?></strong>!</p>
+      <p>You’ll be redirected to the login page shortly...</p>
+      <div class="redirect-info">If not redirected, <a href="login.php">click here</a>.</div>
+    </div>
+  </section>
 </body>
 </html>
-HTML;
-exit;
-?>
+<?php exit; ?>

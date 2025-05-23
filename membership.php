@@ -87,7 +87,11 @@ $pointsProgress = min(100, ($member['points'] / $maxPoints) * 100);
         <li><strong>Member ID:</strong> <?= $member['member_id'] ?? 'N/A' ?></li>
         <li><strong>Email:</strong> <?= htmlspecialchars($member['email']) ?></li>
         <li><strong>Phone:</strong> <?= htmlspecialchars($member['phone']) ?></li>
-        <li><strong>Status:</strong> <?= $member['status'] ?></li>
+        <li><strong>Status:</strong> 
+          <span class="status-badge <?= $member['status'] === 'Active' ? 'active' : 'expired' ?>">
+            <?= $member['status'] ?>
+          </span>
+        </li>        
         <li><strong>Wallet:</strong> RM <?= number_format($member['wallet'] ?? 0, 2) ?></li>
         <li style="margin-top: 10px;">
           <form action="update_profile.php" method="POST" style="display:inline-block;">

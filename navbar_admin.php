@@ -8,5 +8,5 @@
   <a href="view_product.php" class="<?= $currentPage == 'view_product.php' ? 'active' : '' ?>">🏷️ Products</a>
   <a href="add_role.php" class="<?= $currentPage == 'add_role.php' ? 'active' : '' ?>">🪪 Add Roles </a>
   <a href="add_category.php" class="<?= $currentPage == 'add_category.php' ? 'active' : '' ?>">🗂️ Add Category</a>
-  <a href="logout.php">🚪 Logout</a>
+  <a href="logout.php" class="logout-btn">🚪 Logout</a>
 </div>
