@@ -4828,9 +4828,9 @@ body.product-page {
 }
 
 .admin-table {
-  width: 95%;
+  width: 97%;
   border-collapse: collapse;
-  margin-top: 45px;
+  margin-top: 20px;
   background: white;
 }
 .admin-table th, .admin-table td {
@@ -5389,7 +5389,7 @@ select {
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .status-badge.active {
@@ -5511,6 +5511,170 @@ select {
 
 .delete-btn:hover {
   background-color: #c23616;
+}
+
+.status-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-form select {
+    padding: 4px;
+    font-size: 0.9em;
+}
+
+.update-status-button {
+    padding: 4px 8px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.update-status-button:hover {
+    background-color: #45a049;
+}
+
+/* Highlight row by status */
+tr.status-pending {
+    border-right: 10px solid #ffcc00;  /* yellow */
+    background-color: #fffbea;
+}
+
+tr.status-inprogress {
+    border-right: 10px solid #2196f3;  /* blue */
+    background-color: #e7f3fe;
+}
+
+tr.status-resolved {
+    border-right: 10px solid #4caf50;  /* green */
+    border-radius: 12px;
+    background-color: #e8f5e9;
+}
+
+/* Keep detail row neutral */
+tr.member-detail-row {
+    background-color: #f9f9f9;
+    border-left: none;
+}
+
+.admin-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.status-search{
+  display:flex;
+  flex-direction: column;
+}
+
+.status-legend-aside {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    width: 180px;
+    top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-right:60px;
+    height:120px;
+  }
+
+.status-legend-aside h4 {
+    margin-top: 0;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.status-legend-aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status-legend-aside li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.legend-badge {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.legend-badge.status-pending {
+    background-color: #ffcc00;
+}
+
+.legend-badge.status-inprogress {
+    background-color: #2196f3;
+}
+
+.legend-badge.status-resolved {
+    background-color: #4caf50;
+}
+
+.filter-sort {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: flex-start;  /* align items left */
+  align-items: flex-end;
+  gap: 10px; /* smaller gap */
+}
+
+.search-enquiry{
+  width:50%;
+}
+
+.sort-enquiry {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sort-enquiry {
+  flex: 1 1 87px;
+}
+
+.sort-label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.enquiry-filter{
+  width: 100%;
+  padding: 8px;
+}
+
+.search-filter{
+  width: 50%;
+  padding: 8px;
+}
+
+.search-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ff9900;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* align top with inputs */
 }
 
 /* ───────────────────────────────

@@ -126,6 +126,7 @@ $sql = "CREATE TABLE IF NOT EXISTS enquiry (
   state VARCHAR(100),
   enquiry_type VARCHAR(100),
   message TEXT,
+  status ENUM('Pending', 'In Progress', 'Resolved') DEFAULT 'Pending',
   submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'enquiry' ready.<br>" : "❌ " . mysqli_error($conn);
