@@ -69,8 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <div class="admin-content">
+    <div class="admin-navbar">
+        <div><strong>➕ Add New Product</strong></div>
+    </div>
 <div class="add-activity-container">
-  <h2>➕ Add New Product</h2>
 
   <form class="add-activity-form" method="POST" enctype="multipart/form-data">
     <label for="image">Product Image</label>
@@ -106,5 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">Add Product</button>
   </form>
 </div>
+</div>
+
 </body>
 </html>

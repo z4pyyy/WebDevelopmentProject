@@ -54,9 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
+    <div class="admin-content">
+        <div class="admin-navbar">
+            <div><strong>➕ Add New Activity</strong></div>
+        </div>
 <div class="add-activity-container">
-    <h2>➕ Add New Activity</h2>
+
     <form class="add-activity-form" method="POST" enctype="multipart/form-data">
         <label for="title">Activity Title</label>
         <input type="text" name="title" id="title" required>
@@ -85,6 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Add Activity</button>
     </form>
 </div>
-
+</div>
 </body>
 </html>

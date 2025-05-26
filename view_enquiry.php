@@ -171,7 +171,7 @@ if ($selected_id) {
                         <td>
                             <form method="POST" class="details-form">
                                 <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
-                                <button type="submit" class="member-details-button">View</button>
+                                <button type="submit" class="member-details-button-view">View</button>
                             </form>
 
                             <form method="POST" action="update_enquiry.php" class="status-form" style="margin-top: 5px;">
@@ -181,7 +181,7 @@ if ($selected_id) {
                                     <option value="In Progress" <?= $row['status'] === 'In Progress' ? 'selected' : '' ?>>In Progress</option>
                                     <option value="Resolved" <?= $row['status'] === 'Resolved' ? 'selected' : '' ?>>Resolved</option>
                                 </select>
-                                <button type="submit" class="update-status-button">Update</button>
+                                <button type="submit" class="member-details-button">Update</button>
                             </form>
                         </td>
                     </tr>

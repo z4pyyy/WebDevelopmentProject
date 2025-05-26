@@ -38,18 +38,38 @@ $result = mysqli_query($conn, $query);
 
   <h2 class="prd-drink-name">Non-Coffee</h2>
 
-  <div class="prd-toggle-wrapper">
-    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
-    <div class="prd-menu">
-      <ul>
-        <li><a href="product1.php">Basic Brew</a></li>
-        <li><a href="product2.php">Artisan Brew</a></li>
-        <li><a href="product3.php">Non-Coffee</a></li>
-        <li><a href="product4.php">Hot Beverages</a></li>
-      </ul>
-    </div>
+<div class="prd-toggle-wrapper">
+  <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+  <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+  <div class="prd-menu">
+    <ul>
+      <li><a href="product1.php">Basic Brew</a></li>
+      <li><a href="product2.php">Artisan Brew</a></li>
+      <li><a href="product3.php">Non-Coffee</a></li>
+      <li><a href="product4.php">Hot Beverages</a></li>
+      <?php
+      $predefined_categories = ['Basic Brew', 'Artisan Brew', 'Non-Coffee', 'Hot Beverages'];
+      $placeholders = implode(',', array_fill(0, count($predefined_categories), '?'));
+      $category_query = "
+        SELECT COUNT(*) AS count
+        FROM categories
+        WHERE name NOT IN ($placeholders)
+      ";
+      $category_stmt = mysqli_prepare($conn, $category_query);
+      mysqli_stmt_bind_param($category_stmt, str_repeat('s', count($predefined_categories)), ...$predefined_categories);
+      mysqli_stmt_execute($category_stmt);
+      $category_result = mysqli_stmt_get_result($category_stmt);
+      $new_category_count = mysqli_fetch_assoc($category_result)['count'];
+      mysqli_stmt_close($category_stmt);
+
+      if ($new_category_count > 0) {
+        echo '<li><a href="other_products.php">Others</a></li>';
+      }
+      ?>
+    </ul>
   </div>
+</div>
+
 
   <div class="prd-content-container">
     <div id="non-coffee">

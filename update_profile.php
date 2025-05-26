@@ -54,15 +54,30 @@ if ($update_type === 'topup') {
     // ✅ Top-up update and points increment
     $amount = (int) ($_POST['topup_amount'] ?? 0);
     if (in_array($amount, [30, 50, 100, 200])) {
-        // Update wallet and add points (+1 point per RM1)
-        $sql = "UPDATE membership 
-                SET wallet = wallet + ?, 
-                    points = points + ?, 
-                    status = IF(wallet + ? >= 30, 'Active', 'Expired') 
-                WHERE id = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "iiii", $amount, $amount, $amount, $membership_id);
+        // Get current wallet and status
+        $query = "SELECT wallet, status FROM membership WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "i", $membership_id);
         mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $member = mysqli_fetch_assoc($result);
+        $current_wallet = $member['wallet'];
+        $current_status = $member['status'];
+
+        $new_wallet = $current_wallet + $amount;
+        $new_status = $current_status;
+
+        // If currently Inactive and top-up is >= 30, set status to Active
+        if ($current_status === 'Inactive' && $amount >= 30) {
+            $new_status = 'Active';
+        }
+
+        // Update wallet, points, and possibly status
+        $sql = "UPDATE membership SET wallet = ?, points = points + ?, status = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "disi", $new_wallet, $amount, $new_status, $membership_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
     }
 
     mysqli_close($conn);
@@ -70,8 +85,7 @@ if ($update_type === 'topup') {
     exit;
 }
 
-
-// ✅ Full form update
+// ✅ Full form update (only details, status not touched here)
 $first_name = trim($_POST['first_name']);
 $last_name = trim($_POST['last_name']);
 $email = trim($_POST['email']);
@@ -82,8 +96,7 @@ $nationality = trim($_POST['nationality']);
 
 $sql = "UPDATE membership SET 
         first_name = ?, last_name = ?, email = ?, phone = ?, 
-        address = ?, sex = ?, nationality = ?, 
-        status = IF(wallet >= 30, 'Active', 'Expired') 
+        address = ?, sex = ?, nationality = ? 
         WHERE id = ?";
 
 $stmt = mysqli_prepare($conn, $sql);

@@ -12,9 +12,9 @@ include 'connection.php';
 
 $user_id = $_SESSION['user_id'];
 
+// Updated query: Get the status directly from DB, not computed!
 $sql = "SELECT m.profile_picture, m.first_name, m.last_name, m.email, m.phone, m.registered_at,
-               m.member_id, m.wallet, m.points, m.sex, m.nationality, m.address,
-               IF(m.wallet >= 30, 'Active', 'Expired') AS status
+               m.member_id, m.wallet, m.points, m.sex, m.nationality, m.address, m.status
         FROM user u
         JOIN membership m ON u.membership_id = m.id
         WHERE u.id = ?";
@@ -88,8 +88,8 @@ $pointsProgress = min(100, ($member['points'] / $maxPoints) * 100);
         <li><strong>Email:</strong> <?= htmlspecialchars($member['email']) ?></li>
         <li><strong>Phone:</strong> <?= htmlspecialchars($member['phone']) ?></li>
         <li><strong>Status:</strong> 
-          <span class="status-badge <?= $member['status'] === 'Active' ? 'active' : 'expired' ?>">
-            <?= $member['status'] ?>
+          <span class="status-badge <?= strtolower($member['status']) === 'active' ? 'active' : 'inactive' ?>">
+            <?= htmlspecialchars($member['status']) ?>
           </span>
         </li>        
         <li><strong>Wallet:</strong> RM <?= number_format($member['wallet'] ?? 0, 2) ?></li>

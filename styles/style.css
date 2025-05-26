@@ -4451,7 +4451,7 @@ summary::marker {
 
 
 
-body {
+c {
   font-family: 'Roboto', sans-serif;
   background-color: #f9f9f9;
   color: #222;
@@ -4906,6 +4906,22 @@ body.product-page {
 
 .member-details-button:hover {
   background-color: #00ff37 !important;
+  transform: scale(1.05);
+  color:#ffffff !important;
+}
+
+.member-details-button-view {
+  background-color: orange !important;
+  color: white !important;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease !important;
+  width:100%;
+}
+
+.member-details-button-view:hover {
+  background-color: blue !important;
   transform: scale(1.05);
   color:#ffffff !important;
 }
@@ -6064,17 +6080,8 @@ tr.member-detail-row {
   border-radius: 12px;
   transform: translateY(-50%);
   overflow-y: auto;
-  margin-top: 60px;
+  margin-top: 100px;
   padding-left: 30px; 
-}
-
-.add-item-container{
-  margin-left: 250px;
-  max-width: 84%;
-  padding: 20px;
-  background: #fefefe;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
 .admin-form label {
@@ -6107,6 +6114,440 @@ tr.member-detail-row {
 .alert.error { color: #d90429; margin-bottom: 12px; }
 .back-link { display: inline-block; margin-top: 10px; color: #2c3ca4; text-decoration: underline; }
 
+.admin-sidebar .sidebar-dropdown {
+  position: relative; /* you can actually leave this in or remove */
+}
+
+/* Dropdown content will be inline, not floating */
+.admin-sidebar .dropdown-content {
+  display: none;
+  flex-direction: column;
+  padding-left: 30px;         /* Indent sub-link to visually nest */
+  background: none;           /* Remove background if you don't want a card look */
+  box-shadow: none;           /* Remove floating shadow */
+  position: static;           /* NOT absolute, so it stays inline */
+  min-width: 0;               /* Reset from before */
+  border-radius: 0;
+  margin: 0;                  /* No margin needed */
+}
+
+/* Show dropdown on hover or .open class */
+.admin-sidebar .sidebar-dropdown.open .dropdown-content,
+.admin-sidebar .sidebar-dropdown:hover .dropdown-content,
+.admin-sidebar .sidebar-dropdown:focus-within .dropdown-content {
+  display: flex;
+}
+
+.admin-sidebar .dropdown-content a {
+  font-size: 18px;
+  padding: 6px 0 6px 0;
+  color: #fff;
+}
+
+.admin-sidebar .dropdown-content a.active {
+  background: #0c9bfa;
+  color: #fff !important;
+  border-radius: 5px;
+  font-weight: bold;
+  padding-left: 18px;
+}
+
+.error-msg {
+    color: #fff;
+    background: #e74c3c;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    padding: 10px 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 340px;
+}
+
+.newsletter-msg {
+    margin-top: 8px;
+    font-size: 1em;
+    font-weight: 500;
+}
+/* Newsletter Panel Styling */
+.admin-newsletter-panel {
+    max-width: 650px;
+    background: #f8fafc;
+    padding: 34px 38px 38px 38px;
+    border-radius: 18px;
+    box-shadow: 0 4px 30px #0002;
+    border: 1px solid #e1e8ef;
+    transition: box-shadow 0.2s;
+    margin-left: 220px;
+    min-height :600px;
+}
+.admin-newsletter-panel h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #1e2633;
+    margin-bottom: 20px;
+}
+.admin-newsletter-panel label {
+    font-weight: 600;
+    margin-top: 16px;
+    display: block;
+    letter-spacing: 0.04em;
+    color: #222d3d;
+}
+.admin-newsletter-panel input[type="text"],
+.admin-newsletter-panel textarea,
+.admin-newsletter-panel input[type="file"] {
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    padding: 10px 13px;
+    border-radius: 8px;
+    border: 1.5px solid #cfd9e6;
+    background: #fff;
+    font-size: 1em;
+    transition: border 0.2s;
+}
+.admin-newsletter-panel input[type="text"]:focus,
+.admin-newsletter-panel textarea:focus {
+    border: 1.5px solid #2196F3;
+    outline: none;
+}
+.admin-newsletter-panel textarea {
+    min-height: 110px;
+    font-family: inherit;
+}
+.admin-newsletter-panel button {
+    background: #2196F3;
+    color: #fff;
+    padding: 13px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08em;
+    margin-top: 8px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px #2196f33a;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.admin-newsletter-panel button:hover {
+    background: #1767b3;
+}
+.admin-newsletter-panel .feedback {
+    margin-bottom: 18px;
+    font-weight: 500;
+    font-size: 1.07em;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Subscriber List Table Styling */
+.admin-subscriber-list {
+    max-width: 650px;
+    margin-left: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 24px #0001;
+    border: 1px solid #e1e8ef;
+    padding: 34px 38px 38px 38px;
+    min-height: 600px;
+}
+.admin-subscriber-list h3 {
+    margin: 0;
+    padding: 22px 22px 30px 0;
+    font-size: 1.18em;
+    color: #0c2336;
+}
+.admin-subscriber-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 0 0;
+    font-size: 1em;
+    letter-spacing: 0.01em;
+}
+.admin-subscriber-list th, .admin-subscriber-list td {
+    padding: 11px 18px;
+    text-align: left;
+    border-bottom: 1px solid #eef3f9;
+}
+.admin-subscriber-list th {
+    background: #2196F3;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.03em;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.admin-subscriber-list tr:last-child td {
+    border-bottom: none;
+}
+.admin-subscriber-list td {
+    color: #3c4257;
+}
+
+.newsletter-input{
+  width:50%;
+}
+
+.admin-newsletter-history {
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 24px #0001;
+    border: 1px solid #e1e8ef;
+}
+.admin-newsletter-history h3 {
+    margin: 0;
+    padding: 22px 28px 0 28px;
+    font-size: 1.18em;
+    color: #0c2336;
+}
+.admin-newsletter-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 0 0;
+    font-size: 1em;
+    letter-spacing: 0.01em;
+}
+.admin-newsletter-history th, .admin-newsletter-history td {
+    padding: 10px 13px;
+    text-align: left;
+    border-bottom: 1px solid #eef3f9;
+}
+.admin-newsletter-history th {
+    background: #0066aa;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.03em;
+}
+.admin-newsletter-history tr:last-child td {
+    border-bottom: none;
+}
+.admin-newsletter-history td {
+    color: #3c4257;
+    vertical-align: top;
+}
+
+.admin-newsletter-wrapper{
+  display:flex;
+  flex-direction: row;
+  margin: 35px auto 45px auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-newsletter-history-wrapper{
+  display:flex;
+  flex-direction: row;
+  margin-left:300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-subscriber-button{
+    display: inline-block;
+    padding: 6px 18px;
+    background: #ff9900;
+    color: #fff !important;
+    border-radius: 7px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.23s, box-shadow 0.23s;
+    box-shadow: 0 2px 8px #ff99002c;
+    margin-bottom: 9px;
+}
+
+.member-subscriber-button-view:hover,
+.member-subscriber-button-view:focus {
+    background: #e67e22;
+    color: #fff !important;
+    box-shadow: 0 4px 16px #ff990066;
+    text-decoration: none;
+    outline: none;
+}
+
+.view-subscriber-btn{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Newsletter Subscriber List */
+.subscriber-list-wrapper {
+    min-width: 1100px;
+    margin-top: 90px;
+    background: #fff;
+    padding: 36px 38px 28px 38px;
+    border-radius: 16px;
+    box-shadow: 0 4px 32px #0011;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscriber-list-wrapper h2 {
+    margin-top: 0;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #353535;
+}
+
+.subscriber-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 18px;
+    font-size: 1.07rem;
+}
+
+.subscriber-list-table th,
+.subscriber-list-table td {
+    padding: 13px 12px;
+    text-align: left;
+}
+
+.subscriber-list-table th {
+    background: blue;
+    color: #fff;
+    font-weight: 600;
+    border-bottom: 3px solid #1565c0;
+    font-size: 1.08rem;
+}
+
+.subscriber-list-table td {
+    border-bottom: 1px solid #eee;
+}
+
+.subscriber-list-table tr:last-child td {
+    border-bottom: none;
+}
+
+.subscriber-list-table tr:hover {
+    background: #f6f9ff;
+    transition: background 0.13s;
+}
+
+.subscriber-delete-btn {
+    color: #fff;
+    background: #d13a3a;
+    border: none;
+    border-radius: 7px;
+    padding: 6px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px #d13a3a33;
+    font-size: 1rem;
+}
+
+.subscriber-delete-btn:hover,
+.subscriber-delete-btn:focus {
+    background: #b32d2d;
+    color: #fff;
+    box-shadow: 0 4px 16px #d13a3a44;
+    outline: none;
+}
+
+.feedback {
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #2196F3;
+}
+
+.back-link-newsletter {
+    display: inline-block;
+    margin-top: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #2196F3;
+    background: #e3f2fd;
+    padding: 8px 20px;
+    border-radius: 7px;
+    transition: background 0.17s;
+}
+.back-link-newsletter:hover {
+    background: #bbdefb;
+    color: #1976d2;
+}
+
+.center-div{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:100px;
+}
+
+        .category-table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .category-table th,
+        .category-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .category-table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .category-table td a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.2em;
+        }
+        .category-table td a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .error-msg {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .add-item-container{
+            background: #fefefe;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .add-category-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 50%;
+        }
+        .add-category-form label {
+            font-weight: bold;
+        }
+        .add-category-form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .add-category-form button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .add-category-form button:hover {
+            background-color: #0056b3;
+        }
 /* Mobile View Adjustments */
 @media screen and (min-width: 360px) and (max-width: 1300px) {
     

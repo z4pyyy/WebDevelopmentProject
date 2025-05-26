@@ -52,7 +52,7 @@ $sql = "CREATE TABLE IF NOT EXISTS membership (
   wallet DECIMAL(10,2) DEFAULT 0.00,
   points INT DEFAULT 0,
   profile_picture VARCHAR(255) DEFAULT NULL,
-  status ENUM('Active', 'Expired') DEFAULT 'Expired',
+  status ENUM('Active', 'Inactive') DEFAULT 'Inactive',
   registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'membership' updated and ready.<br>" : "❌ " . mysqli_error($conn);
@@ -178,6 +178,24 @@ foreach ($categoryList as $cat) {
         mysqli_query($conn, "INSERT INTO categories (name) VALUES ('$cat_escaped')");
     }
 }
+
+// 1️⃣0️⃣ NEWSLETTER SUBSCRIBERS TABLE
+$sql = "CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+echo mysqli_query($conn, $sql) ? "✅ Table 'newsletter_subscribers' ready.<br>" : "❌ " . mysqli_error($conn);
+
+// 1️⃣1️⃣ NEWSLETTER HISTORY TABLE
+$sql = "CREATE TABLE IF NOT EXISTS newsletter_history (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  subject VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  attachment_path VARCHAR(255) DEFAULT NULL,
+  sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+echo mysqli_query($conn, $sql) ? "✅ Table 'newsletter_history' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 🔁 Populate products
 $products = [
