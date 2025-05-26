@@ -38,6 +38,12 @@ $subscribers = mysqli_query($conn, "SELECT * FROM newsletter_subscribers ORDER B
 </head>
 
 <body>
+
+<div class="admin-content">
+    <div class="admin-navbar">
+        <div><strong>Subscribers</strong></div>
+        <a href="admin_newsletter.php" class="backto-view">← Back to Newsletter Panel</a>
+    </div>
     <div class="center-div">
     <div class="subscriber-list-wrapper">
         <h2>All Newsletter Subscribers (<?= mysqli_num_rows($subscribers) ?>)</h2>
@@ -69,7 +75,7 @@ $subscribers = mysqli_query($conn, "SELECT * FROM newsletter_subscribers ORDER B
                 <?php endwhile; ?>
             </tbody>
         </table>
-        <a href="admin_newsletter.php" class="back-link-newsletter">← Back to Newsletter Panel</a>
+    </div>
     </div>
     </div>
 </body>

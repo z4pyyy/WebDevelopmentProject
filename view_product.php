@@ -12,10 +12,13 @@ if (!isset($_SESSION['admin_id']) || !in_array($_SESSION['role_id'] ?? 0, [1, 2,
     exit;
 }
 
-// 🗑 Delete Product
+// 🗑 Delete Product (Using Prepared Statement)
 if (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);
-    mysqli_query($conn, "DELETE FROM products WHERE id = $id");
+    $stmt = mysqli_prepare($conn, "DELETE FROM products WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
     header("Location: view_product.php");
     exit;
 }
@@ -33,13 +36,21 @@ $query = "
 ";
 
 $conditions = [];
+$params = [];
+$types = '';
 if (!empty($filter_by) && !empty($search_term)) {
     if ($filter_by === 'name') {
-        $conditions[] = "products.name LIKE '%$escaped_search%'";
+        $conditions[] = "products.name LIKE ?";
+        $params[] = "%$search_term%";
+        $types .= 's';
     } elseif ($filter_by === 'sku') {
-        $conditions[] = "products.sku LIKE '%$escaped_search%'";
+        $conditions[] = "products.sku LIKE ?";
+        $params[] = "%$search_term%";
+        $types .= 's';
     } elseif ($filter_by === 'availability') {
-        $conditions[] = "products.availability = '$escaped_search'";
+        $conditions[] = "products.availability = ?";
+        $params[] = $search_term;
+        $types .= 's';
     }
 }
 
@@ -48,23 +59,40 @@ if (!empty($conditions)) {
 }
 
 $query .= " ORDER BY categories.name ASC, products.name ASC";
-$result = mysqli_query($conn, $query);
+$stmt = mysqli_prepare($conn, $query);
+
+if (!empty($params)) {
+    mysqli_stmt_bind_param($stmt, $types, ...$params);
+}
+
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 $products_by_category = [];
+$other_categories = [];
+$predefined_categories = ['Basic Brew', 'Artisan Brew', 'Non-Coffee', 'Hot Beverages'];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $category = $row['category_name'] ?? 'Uncategorized';
     $products_by_category[$category][] = $row;
 }
+mysqli_stmt_close($stmt);
 
-// 🔄 Toggle Availability
+// 🔄 Toggle Availability (Using Prepared Statement)
 if (isset($_GET['toggle_id'])) {
     $id = intval($_GET['toggle_id']);
-    $result = mysqli_query($conn, "SELECT availability FROM products WHERE id = $id");
+    $stmt = mysqli_prepare($conn, "SELECT availability FROM products WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     if ($row = mysqli_fetch_assoc($result)) {
         $new_status = ($row['availability'] === 'Available') ? 'Unavailable' : 'Available';
-        mysqli_query($conn, "UPDATE products SET availability = '$new_status' WHERE id = $id");
+        $update_stmt = mysqli_prepare($conn, "UPDATE products SET availability = ? WHERE id = ?");
+        mysqli_stmt_bind_param($update_stmt, "si", $new_status, $id);
+        mysqli_stmt_execute($update_stmt);
+        mysqli_stmt_close($update_stmt);
     }
+    mysqli_stmt_close($stmt);
     header("Location: view_product.php");
     exit;
 }
@@ -78,22 +106,22 @@ if (isset($_GET['toggle_id'])) {
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <div class="prd-toggle-wrapper">
-    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
-    <div class="admin-prd-menu">
-      <ul>
-        <li><a href="#Artisan_Brew">Artisan Brew</a></li>
-        <li><a href="#Basic_Brew">Basic Brew</a></li>
-        <li><a href="#Hot_Beverages">Hot Beverages</a></li>
-        <li><a href="#Non-Coffee">Non-Coffee</a></li>
-      </ul>
-    </div>
+<div class="prd-toggle-wrapper">
+  <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
+  <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+  <div class="admin-prd-menu">
+    <ul>
+      <?php foreach (array_keys($products_by_category) as $category): ?>
+        <?php $category_id = str_replace(' ', '_', $category); ?>
+        <li><a href="#<?= htmlspecialchars($category_id) ?>"><?= htmlspecialchars($category) ?></a></li>
+      <?php endforeach; ?>
+    </ul>
   </div>
+</div>
   <div class="admin-content">
     <div class="admin-navbar">
       <div><strong>Products</strong></div>
-      <a href="add_product.php" class="add-btn">➕ Add New Product</a>
+      <a href="add_product.php" class="backto-view">➕ Add New Product</a>
     </div>
 
     <form method="GET" style="margin: 15px 0;">
@@ -121,7 +149,7 @@ if (isset($_GET['toggle_id'])) {
     <?php if (!empty($products_by_category)): ?>
       <?php foreach ($products_by_category as $category => $products): ?>
         <?php $category_id = str_replace(' ', '_', $category); ?>
-        <h1 id="<?= $category_id ?>" class="admin-header">
+        <h1 id="<?= htmlspecialchars($category_id) ?>" class="admin-header">
           <span class="hover-underline"><?= htmlspecialchars($category) ?></span>
         </h1>
         <span class="line"></span>

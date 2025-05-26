@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Profile picture upload
     $profile_picture = $_POST['existing_picture'];
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
-        $upload_dir = "uploads/";
+        $upload_dir = "uploads/profilepics/";
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
@@ -89,14 +89,17 @@ if (!$member) {
 <?php include 'navbar.php'; ?>
 <?php include 'navbar_admin.php'; ?>
 
-<div class="admin-content">
+    <div class="admin-content">
+        <div class="admin-navbar">
+            <div><strong>✏️ Edit Member</strong></div>
+            <a href="view_membership.php" class="backto-view">← Back to Member List</a>
+        </div>
     <?php if (isset($error)): ?>
         <p class="form-error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
 
     <form method="POST" enctype="multipart/form-data" class="edit-form">
         <table class="admin-table">
-            <caption>Editing Member Profile</caption>
             <thead>
                 <tr><th>Field</th><th>Value</th></tr>
             </thead>

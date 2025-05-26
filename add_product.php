@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>➕ Add New Product</strong></div>
+        <a href="view_product.php" class="backto-view">← Back to Products</a>
     </div>
 <div class="add-activity-container">
 

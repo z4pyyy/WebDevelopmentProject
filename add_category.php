@@ -53,6 +53,7 @@ $categories = mysqli_query($conn, "SELECT * FROM categories ORDER BY id ASC");
     <div class="admin-content">
         <div class="admin-navbar">
             <div><strong>➕ Add New Category</strong></div>
+            <a href="view_product.php" class="backto-view">← Back to Products</a>
         </div>
     <div class="add-item-container">
         <h2 class="admin-dashboard">Existing Categories</h2>

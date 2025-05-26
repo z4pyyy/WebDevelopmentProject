@@ -5716,12 +5716,12 @@ tr.member-detail-row {
   Add Activity Form
 ─────────────────────────────── */
 .add-activity-container {
-  max-width: 800px;
-  margin: 90px auto 40px;
   padding: 20px;
   background: #fefefe;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  width:50%;
+  margin: 50px auto;
 }
 
 .add-activity-container h2 {
@@ -6177,12 +6177,11 @@ tr.member-detail-row {
     box-shadow: 0 4px 30px #0002;
     border: 1px solid #e1e8ef;
     transition: box-shadow 0.2s;
-    margin-left: 220px;
     min-height :600px;
 }
 .admin-newsletter-panel h3 {
     margin-top: 0;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 700;
     color: #1e2633;
     margin-bottom: 20px;
@@ -6253,10 +6252,11 @@ tr.member-detail-row {
     min-height: 600px;
 }
 .admin-subscriber-list h3 {
-    margin: 0;
-    padding: 22px 22px 30px 0;
-    font-size: 1.18em;
-    color: #0c2336;
+    margin-top: 0;
+    font-size: 2em;
+    font-weight: 700;
+    color: #1e2633;
+    margin-bottom: 20px;
 }
 .admin-subscriber-list table {
     width: 100%;
@@ -6271,7 +6271,7 @@ tr.member-detail-row {
     border-bottom: 1px solid #eef3f9;
 }
 .admin-subscriber-list th {
-    background: #2196F3;
+    background: #1771b8;
     color: #fff;
     font-weight: 600;
     font-size: 1.03em;
@@ -6341,7 +6341,6 @@ tr.member-detail-row {
 .admin-newsletter-history-wrapper{
   display:flex;
   flex-direction: row;
-  margin-left:300px;
   align-items: center;
   justify-content: center;
 }
@@ -6370,15 +6369,14 @@ tr.member-detail-row {
 
 .view-subscriber-btn{
   display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
 }
 
 /* Newsletter Subscriber List */
 .subscriber-list-wrapper {
     min-width: 1100px;
-    margin-top: 90px;
     background: #fff;
     padding: 36px 38px 28px 38px;
     border-radius: 16px;
@@ -6482,72 +6480,122 @@ tr.member-detail-row {
   margin-top:100px;
 }
 
-        .category-table {
-            width: 50%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .category-table th,
-        .category-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .category-table th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-        .category-table td a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 1.2em;
-        }
-        .category-table td a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-        .error-msg {
-            color: #dc3545;
-            margin-top: 10px;
-        }
+.category-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.category-table th,
+.category-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.category-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.category-table td a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1.2em;
+}
+.category-table td a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.error-msg {
+    color: #dc3545;
+    margin-top: 10px;
+}
 
-        .add-item-container{
-            background: #fefefe;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-            padding: 20px;
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-        }
-        .add-category-form {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 50%;
-        }
-        .add-category-form label {
-            font-weight: bold;
-        }
-        .add-category-form input {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .add-category-form button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .add-category-form button:hover {
-            background-color: #0056b3;
-        }
+.add-item-container{
+    background: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+.add-category-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+.add-category-form label {
+    font-weight: bold;
+}
+.add-category-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.add-category-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.add-category-form button:hover {
+    background-color: #0056b3;
+}
+
+.newsletter-subscriber-view{
+  background: #2196F3;
+  color: #fff;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08em;
+  margin-top: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px #2196f33a;
+  cursor: pointer;
+  transition: background 0.2s;
+  width:40%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.backto-view{
+  background: #2196F3;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.3em;
+  font-weight: 600;
+  box-shadow: 0 2px 6px #2196f33a;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.form-errors{
+  background-color: #ffe6e6;
+  border: 2px solid #ff4d4d;
+  color: #b30000;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.add-member-form{
+  width:100%;
+}
+
+.admin-add-member-form{
+  width:50%;
+}
 /* Mobile View Adjustments */
 @media screen and (min-width: 360px) and (max-width: 1300px) {
     

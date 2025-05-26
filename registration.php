@@ -69,15 +69,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <form action="process_registration.php" method="POST" class="registration-form">
       <div class="form-section">
       <?php if (!empty($errors)): ?>
-        <div class="form-errors" style="
-          background-color: #ffe6e6;
-          border: 2px solid #ff4d4d;
-          color: #b30000;
-          padding: 15px 20px;
-          border-radius: 8px;
-          margin-bottom: 20px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        ">
+        <div class="form-errors">
           <h4 style="margin-top: 0;">⚠ Please correct the following:</h4>
           <ul style="padding-left: 20px; margin-top: 10px;">
             <?php foreach ($errors as $error): ?>

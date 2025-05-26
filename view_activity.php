@@ -91,7 +91,7 @@ $total_upcoming = count($coming);
     <div class="admin-content">
     <div class="admin-navbar">
       <div><strong>Activities</strong></div>
-      <a href="add_activity.php" class="add-btn">➕ Add New Activity</a>
+      <a href="add_activity.php" class="backto-view">➕ Add New Activity</a>
     </div>
     <div class="admin-activities-overview">
       <ul>

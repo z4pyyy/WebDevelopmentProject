@@ -84,6 +84,7 @@ if ($selected_id) {
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>Job Applications</strong></div>
+        <a href="admin_dashboard.php" class="backto-view">← Back to Dashboard</a>
     </div>
 
     <form method="GET">

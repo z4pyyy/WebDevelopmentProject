@@ -29,7 +29,7 @@ $update_type = $_POST['update_type'] ?? 'full';
 if ($update_type === 'picture') {
     // ✅ Picture update
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
-        $upload_dir = 'uploads/';
+        $upload_dir = 'uploads/profilepics/';
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }

@@ -24,7 +24,7 @@ echo "✅ Selected database: $dbname<br>";
 
 // Create roles table
 $sql = "CREATE TABLE IF NOT EXISTS roles (
-  id TINYINT PRIMARY KEY,
+  id TINYINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) UNIQUE NOT NULL
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'roles' ready.<br>" : "❌ " . mysqli_error($conn);

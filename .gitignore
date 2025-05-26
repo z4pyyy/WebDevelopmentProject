@@ -3,9 +3,10 @@ uploads/cvs/*
 uploads/events/*
 uploads/newsletter/*
 uploads/photos/*
-
+uploads/profilepics/*
 # But do NOT ignore the folders themselves
 !uploads/cvs/
 !uploads/events/
 !uploads/newsletter/
 !uploads/photos/
+uploads/profilepics/

@@ -12,6 +12,7 @@
     <a href="view_membership.php" class="<?= $currentPage == 'view_membership.php' ? 'active' : '' ?>">👥 View Members ▸</a>
     <div class="dropdown-content">
       <a href="add_role.php" class="<?= $currentPage == 'add_role.php' ? 'active' : '' ?>">🪪 Add Role</a>
+      <a href="add_member.php" class="<?= $currentPage == 'add_member.php' ? 'active' : '' ?>">👥 Add New Member</a>
     </div>
   </div>
 

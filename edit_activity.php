@@ -65,9 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+<div class="admin-content">
+    <div class="admin-navbar">
+        <div><strong>✏️ Edit Activity</strong></div>
+        <a href="view_activity.php" class="backto-view">← Back to Activity</a>
+    </div>
 <div class="add-activity-container">
-    <h2>✏️ Edit Activity</h2>
-
+    <div class="center-div">
     <?php if (!empty($activity['image_path'])): ?>
         <div class="admin-activity-thumbnail centered-thumbnail">
             <label for="image" class="clickable-thumbnail" title="Click to change image">
@@ -75,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
         </div>
     <?php endif; ?>
-    
+    </div>
     <input type="file" name="image" id="image" accept="image/*" style="display:none;">
 
     <form class="add-activity-form" method="POST" enctype="multipart/form-data">
@@ -103,6 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Update Activity</button>
     </form>
 </div>
-
+</div>
 </body>
 </html>

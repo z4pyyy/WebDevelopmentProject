@@ -127,86 +127,89 @@ $history = mysqli_query($conn, "SELECT * FROM newsletter_history ORDER BY sent_a
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+<div class="admin-content">
     <div class="admin-navbar">
-        <div><strong>📰 Newsletter Panel</strong></div>
+        <div><strong>Newsletter</strong></div>
+        <a href="view_activity.php" class="backto-view">← Back to Activity</a>
     </div>
-<div class="admin-newsletter-wrapper">
-<div class="admin-newsletter-panel">
-    <h3>Send Newsletter</h3>
-    <?php if (!empty($feedback)): ?>
-        <div class="feedback"><?= $feedback ?></div>
-    <?php endif; ?>
-    <form method="POST" enctype="multipart/form-data">
-        <label for="subject" class="newsletter-input">Subject*</label>
-        <input type="text" name="subject" id="subject" required>
 
-        <label for="body" class="newsletter-input">Message</label>
-        <textarea name="body" id="body" rows="8" required placeholder="Write your newsletter here. HTML allowed for formatting, links, etc."></textarea>
+    <div class="admin-newsletter-wrapper">
+        <div class="admin-newsletter-panel">
+            <h3>Send Newsletter</h3>
+            <?php if (!empty($feedback)): ?>
+                <div class="feedback"><?= $feedback ?></div>
+            <?php endif; ?>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="subject" class="newsletter-input">Subject*</label>
+                <input type="text" name="subject" id="subject" required>
 
-        <label for="attachment" class="newsletter-input">Attachment (image or PDF, optional)</label>
-        <input type="file" name="attachment" id="attachment" accept="image/*,.pdf">
+                <label for="body" class="newsletter-input">Message</label>
+                <textarea name="body" id="body" rows="8" required placeholder="Write your newsletter here. HTML allowed for formatting, links, etc."></textarea>
 
-        <button type="submit" name="newsletter_send">Send Newsletter</button>
-    </form>
-</div>
-<div class="admin-subscriber-list">
-    <div class="view-subscriber-btn">
-    <h3>Newsletter Subscribers (<?= mysqli_num_rows($subscribers) ?>)</h3>
-        <a href="view_subscriber.php" class="member-subscriber-button">View</a>
+                <label for="attachment" class="newsletter-input">Attachment (image or PDF, optional)</label>
+                <input type="file" name="attachment" id="attachment" accept="image/*,.pdf">
+
+                <button type="submit" name="newsletter_send">Send Newsletter</button>
+            </form>
+        </div>
+        <div class="admin-subscriber-list">
+            <div class="view-subscriber-btn">
+                <h3>Newsletter Subscribers (<?= mysqli_num_rows($subscribers) ?>)</h3>
+                <a href="view_subscriber.php" class="newsletter-subscriber-view">View Subscribers</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Email Address</th>
+                        <th>Subscribed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $n=1; while ($row = mysqli_fetch_assoc($subscribers)): ?>
+                        <tr>
+                            <td><?= $n++ ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['subscribed_at']) ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="admin-newsletter-history-wrapper">
+        <div class="admin-newsletter-history">
+            <h3>Sent Newsletter History (<?= mysqli_num_rows($history) ?>)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>Sent At</th>
+                        <th>Preview</th>
+                        <th>Attachment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; while ($row = mysqli_fetch_assoc($history)): ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= htmlspecialchars($row['subject']) ?></td>
+                            <td><?= htmlspecialchars($row['sent_at']) ?></td>
+                            <td style="max-width:280px;overflow-wrap:anywhere"><?= htmlspecialchars(mb_strimwidth(strip_tags($row['body']), 0, 80, '...')) ?></td>
+                            <td>
+                                <?php if ($row['attachment_path']): ?>
+                                    <a href="<?= htmlspecialchars($row['attachment_path']) ?>" target="_blank" class="member-details-button-view">View</a>
+                                <?php else: ?>
+                                    <span>-</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Email Address</th>
-                <th>Subscribed At</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $n=1; while ($row = mysqli_fetch_assoc($subscribers)): ?>
-                <tr>
-                    <td><?= $n++ ?></td>
-                    <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= htmlspecialchars($row['subscribed_at']) ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
 </div>
-</div>
-<div class="admin-newsletter-history-wrapper">
-<div class="admin-newsletter-history">
-    <h3>Sent Newsletter History (<?= mysqli_num_rows($history) ?>)</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Subject</th>
-                <th>Sent At</th>
-                <th>Preview</th>
-                <th>Attachment</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i=1; while ($row = mysqli_fetch_assoc($history)): ?>
-                <tr>
-                    <td><?= $i++ ?></td>
-                    <td><?= htmlspecialchars($row['subject']) ?></td>
-                    <td><?= htmlspecialchars($row['sent_at']) ?></td>
-                    <td style="max-width:280px;overflow-wrap:anywhere"><?= htmlspecialchars(mb_strimwidth(strip_tags($row['body']), 0, 80, '...')) ?></td>
-                    <td>
-                        <?php if ($row['attachment_path']): ?>
-                            <a href="<?= htmlspecialchars($row['attachment_path']) ?>" target="_blank" class="member-details-button-view">View</a>
-                        <?php else: ?>
-                            <span>-</span>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</div>
-</div>
-
 </body>
 </html>

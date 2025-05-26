@@ -87,6 +87,7 @@ if ($selected_id) {
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>Enquiries</strong></div>
+        <a href="admin_dashboard.php" class="backto-view">← Back to Dashboard</a>
     </div>
 
     <div class="admin-flex-container">

@@ -114,70 +114,74 @@ $result = mysqli_query($conn, $query);
 </html>
 
 
+
 <aside class="full-menu">
-    <h2 class="full-menu-title">Full Menu</h2>
-    <div class="menu-table-wrapper">
-      <table class="menu-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Beverage</th>
-            <th>MP</th>
-            <th>NP</th>
-          </tr>
-        </thead>
-        <tbody>
-    <!-- BASIC BREW -->
-    <tr class="prd-menu-category"><td rowspan="6">Basic Brew</td></tr>
-    <td>Americano</td><td>8.90</td><td>10.90</td></tr>
-    <tr><td>Latte</td><td>10.90</td><td>12.90</td></tr>
-    <tr><td>Cappuccino</td><td>11.90</td><td>13.90</td></tr>
-    <tr><td>Aerocano</td><td>10.90</td><td>12.90</td></tr>
-    <tr><td>Aero-latte</td><td>12.90</td><td>14.90</td></tr>
+  <h2 class="full-menu-title">Full Menu</h2>
+  <div class="menu-table-wrapper">
+    <table class="menu-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Beverage</th>
+          <th>MP</th>
+          <th>NP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $category_query = "SELECT id, name FROM categories ORDER BY name ASC";
+        $category_result = mysqli_query($conn, $category_query);
+        if (!$category_result) {
+          echo "<tr><td colspan='4'>Error loading categories: " . htmlspecialchars(mysqli_error($conn)) . "</td></tr>";
+        } else {
+          $has_categories = false;
+          while ($category = mysqli_fetch_assoc($category_result)) {
+            $has_categories = true;
+            $category_name = $category['name'];
+            $category_id = $category['id'];
 
-    <!-- ARTISAN BREW -->
-    <tr class="prd-menu-category"><td rowspan="13">Artisan Brew</td></tr>
-    <td>Butterscotch Latte</td><td>11.90</td><td>13.90</td></tr>
-    <tr><td>Butterscotch Creme</td><td>14.90</td><td>16.90</td></tr>
-    <tr><td>Mint Latte</td><td>12.90</td><td>14.90</td></tr>
-    <tr><td>Vienna Latte</td><td>14.90</td><td>16.90</td></tr>
-    <tr><td>Pistachio Latte</td><td>15.90</td><td>17.90</td></tr>
-    <tr><td>Strawberry Latte</td><td>14.90</td><td>16.90</td></tr>
-    <tr><td>Mocha</td><td>11.90</td><td>13.90</td></tr>
-    <tr><td>Mint Mocha</td><td>12.90</td><td>14.90</td></tr>
-    <tr><td>Orange Mocha</td><td>12.90</td><td>14.90</td></tr>
-    <tr><td>Yuzu Americano</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Cheese Americano</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Orange Americano</td><td>13.90</td><td>15.90</td></tr>
+            $count_query = "SELECT COUNT(*) AS count FROM products WHERE category_id = ?";
+            $count_stmt = mysqli_prepare($conn, $count_query);
+            mysqli_stmt_bind_param($count_stmt, 'i', $category_id);
+            mysqli_stmt_execute($count_stmt);
+            $count_result = mysqli_stmt_get_result($count_stmt);
+            $count = mysqli_fetch_assoc($count_result)['count'];
+            mysqli_stmt_close($count_stmt);
 
-    <!-- NON-COFFEE -->
-    <tr class="prd-menu-category"><td rowspan="11">Non-Coffee</td></tr>
-    <td>Chocolate</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Mint Chocolate</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Orange Chocolate</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Yuzu Soda</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Strawberry Soda</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Yuzu Cheese</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Yuri Matcha</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Strawberry Matcha</td><td>14.90</td><td>16.90</td></tr>
-    <tr><td>Yuzu Matcha</td><td>14.90</td><td>16.90</td></tr>
-    <tr><td>Houjicha</td><td>13.90</td><td>15.90</td></tr>
+            $product_query = "
+              SELECT name, price, large_price
+              FROM products
+              WHERE category_id = ?
+              ORDER BY name ASC
+            ";
+            $product_stmt = mysqli_prepare($conn, $product_query);
+            mysqli_stmt_bind_param($product_stmt, 'i', $category_id);
+            mysqli_stmt_execute($product_stmt);
+            $product_result = mysqli_stmt_get_result($product_stmt);
 
-    <!-- HOT BEVERAGES -->
-    <tr class="prd-menu-category"><td rowspan="8">Hot Beverages</td></tr>
-      <td>Americano</td><td>7.90</td><td>9.90</td></tr>
-    <tr><td>Latte</td><td>9.90</td><td>11.90</td></tr>
-    <tr><td>Butterscotch Latte</td><td>10.90</td><td>12.90</td></tr>
-    <tr><td>Cappuccino</td><td>10.90</td><td>12.90</td></tr>
-    <tr><td>Chocolate</td><td>12.90</td><td>14.90</td></tr>
-    <tr><td>Yuri Matcha</td><td>13.90</td><td>15.90</td></tr>
-    <tr><td>Houjicha</td><td>13.90</td><td>14.90</td></tr>
-
-    <tr class="full-row"><td colspan="4">MORE COMING SOON</td></tr>        
-  </tbody>
+            // Always display the category, even if it has no products
+            echo "<tr class='prd-menu-category'><td rowspan='" . ($count > 0 ? $count + 1 : 2) . "'>" . htmlspecialchars($category_name) . "</td></tr>";
+            if ($count > 0) {
+              while ($row = mysqli_fetch_assoc($product_result)) {
+                $large_price = $row['large_price'] !== null ? number_format($row['large_price'], 2) : 'N/A';
+                echo "<tr><td>" . htmlspecialchars($row['name']) . "</td><td>" . number_format($row['price'], 2) . "</td><td>" . $large_price . "</td></tr>";
+              }
+            } else {
+              echo "<tr><td colspan='3'>No products in this category.</td></tr>";
+            }
+            mysqli_stmt_close($product_stmt);
+          }
+          if (!$has_categories) {
+            echo "<tr><td colspan='4'>No categories available.</td></tr>";
+          }
+        }
+        ?>
+        <tr class="full-row"><td colspan="4">MORE COMING SOON</td></tr>
+      </tbody>
     </table>
   </div>
 </aside>
+
 <section class="product-explainer">
   <h2>About Our Artisan Drinks</h2>
   <dl>

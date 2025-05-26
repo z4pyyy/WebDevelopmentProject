@@ -95,6 +95,7 @@ if ($selected_id) {
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>Registered Member</strong></div>
+        <a href="add_member.php" class="backto-view">Add New Member</a>
     </div>
 
     <form method="GET">
