@@ -2,13 +2,27 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// ✅ SECURITY CHECK: only allow roles 1 (admin), 2 (operator), 3 (staff)
-if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id']) || !in_array($_SESSION['role_id'], [1, 2, 3])) {
+
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
+
+$currentPage = basename($_SERVER['PHP_SELF']);
+include 'connection.php';
+include 'auth.php';
+
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
     exit;
 }
 
-$currentPage = basename($_SERVER['PHP_SELF']);
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
+    exit;
+}
+
 include 'navbar.php';
 include 'navbar_admin.php';
 
@@ -60,6 +74,18 @@ include 'navbar_admin.php';
                   <div class="admin-card">
                   <h5>🏷️ Products</h5>
                   <p>Manage current products and availability.</p>
+                  </div>
+                </a>
+                <a href="view_newsletter.php" class="admin-card-link">
+                  <div class="admin-card">
+                  <h5>📰 Newsletter</h5>
+                  <p>View and manage Newsletter and Subscriber.</p>
+                  </div>
+                </a>
+                <a href="view_permissions.php" class="admin-card-link">
+                  <div class="admin-card">
+                  <h5>👮 Permissions</h5>
+                  <p>View and manage User Permissions.</p>
                   </div>
                 </a>
             </div>

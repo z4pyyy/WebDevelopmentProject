@@ -1,16 +1,30 @@
 <?php
-session_start();
-$currentPage = basename($_SERVER['PHP_SELF']);
-require_once 'connection.php';
-include 'navbar.php'; 
-include 'navbar_admin.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Only allow admin
-if (!isset($_SESSION['admin_id']) || ($_SESSION['role_id'] ?? 0) != 1) {
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
+
+$currentPage = basename($_SERVER['PHP_SELF']);
+include 'connection.php';
+include 'auth.php';
+
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
     exit;
 }
 
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
+    exit;
+}
+
+include 'navbar.php';
+include 'navbar_admin.php';
 $feedback = '';
 if (isset($_SESSION['subscriber_feedback'])) {
     $feedback = $_SESSION['subscriber_feedback'];
@@ -42,42 +56,42 @@ $subscribers = mysqli_query($conn, "SELECT * FROM newsletter_subscribers ORDER B
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>Subscribers</strong></div>
-        <a href="admin_newsletter.php" class="backto-view">← Back to Newsletter Panel</a>
+        <a href="view_newsletter.php" class="backto-view">← Back to Newsletter Panel</a>
     </div>
     <div class="center-div">
-    <div class="subscriber-list-wrapper">
-        <h2>All Newsletter Subscribers (<?= mysqli_num_rows($subscribers) ?>)</h2>
-        <?php if (!empty($feedback)): ?>
-            <div class="feedback"><?= $feedback ?></div>
-        <?php endif; ?>
-        <table class="subscriber-list-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Email Address</th>
-                    <th>Subscribed At</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $n = 1; while ($row = mysqli_fetch_assoc($subscribers)): ?>
+        <div class="subscriber-list-wrapper">
+            <h2>All Newsletter Subscribers (<?= mysqli_num_rows($subscribers) ?>)</h2>
+            <?php if (!empty($feedback)): ?>
+                <div class="feedback"><?= $feedback ?></div>
+            <?php endif; ?>
+            <table class="subscriber-list-table">
+                <thead>
                     <tr>
-                        <td><?= $n++ ?></td>
-                        <td><?= htmlspecialchars($row['email']) ?></td>
-                        <td><?= htmlspecialchars($row['subscribed_at']) ?></td>
-                        <td>
-                            <form method="POST" style="display:inline;">
-                                <input type="hidden" name="delete_subscriber_id" value="<?= $row['id'] ?>">
-                                <button type="submit" class="subscriber-delete-btn" onclick="return confirm('Delete this subscriber?')">Delete</button>
-                            </form>
-                        </td>
+                        <th>#</th>
+                        <th>Email Address</th>
+                        <th>Subscribed At</th>
+                        <th>Delete</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php $n = 1; while ($row = mysqli_fetch_assoc($subscribers)): ?>
+                        <tr>
+                            <td><?= $n++ ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['subscribed_at']) ?></td>
+                            <td>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="delete_subscriber_id" value="<?= $row['id'] ?>">
+                                    <button type="submit" class="subscriber-delete-btn" onclick="return confirm('Delete this subscriber?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
 </body>
 </html>
 

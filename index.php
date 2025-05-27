@@ -86,7 +86,7 @@ include 'connection.php';
             <div class="carousel-card">
               <h2>Artisan Brew</h2>
               <div class="carousel-img-wrapper">
-                <img src="images/CheeseAmericano.jpg" alt="Cheese Americano">
+                <img src="images/cheese-americano.jpg" alt="Cheese Americano">
               </div>     
               <h3>Cheese Americano</h3>
               <br>

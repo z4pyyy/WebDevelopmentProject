@@ -30,6 +30,7 @@ if (strtolower($username) === 'admin') {
             $_SESSION['role_id'] = 1;
             $_SESSION['username'] = 'admin';
 
+            error_log("Admin login successful: admin_id={$admin['id']}, role_id=1");
             display_login_success("👑 Welcome, Admin!", "You are now logged in as administrator.", "admin_dashboard.php");
         }
     }
@@ -50,11 +51,13 @@ $result = mysqli_stmt_get_result($stmt);
 if ($user = mysqli_fetch_assoc($result)) {
     if (password_verify($password, $user['password'])) {
         // ✅ User login success
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['admin_id'] = $user['id']; // Set admin_id for consistency
+        $_SESSION['user_id'] = $user['id'];  // Keep user_id if needed elsewhere
         $_SESSION['username'] = $username;
         $_SESSION['role_id'] = $user['role_id'];
         $_SESSION['role'] = 'user';
 
+        error_log("User login successful: admin_id={$user['id']}, role_id={$user['role_id']}");
         display_login_success("✅ Welcome, $username!", "You are now logged in.", "membership.php");
     }
 }
@@ -63,7 +66,6 @@ if ($user = mysqli_fetch_assoc($result)) {
 $_SESSION['login_error'] = "Invalid Login ID or Password.";
 header("Location: login.php");
 exit;
-
 
 // 🔄 Login Success Display Function
 function display_login_success($title, $message, $redirect_url) {

@@ -71,17 +71,29 @@
       </li>
       <li><span class="hover-underline"><a href="joinus.php">Join Us</a></li></span>
       <li><span class="hover-underline"><a href="enquiry.php">Enquiry</a></li></span>
-      <li>
-        <?php if (isset($_SESSION['username'])): ?>
-          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-            <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
-          <?php else: ?>
-            <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($_SESSION['username']) ?></a></span>
+      <?php
+      $role_id = $_SESSION['role_id'] ?? 0;
+      $username = $_SESSION['username'] ?? null;
+      ?>
+        <?php if ($username): ?>
+          <?php if ($role_id == 1): ?>
+            <!-- Admin: only "View" -->
+            <li>
+            <span class="hover-underline"><a href="admin_dashboard.php">ADMIN</a></span>
+            <?php elseif (in_array($role_id, [2,3])): ?>
+              <!-- Operator/Staff: both "View" AND username -->
+              <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+            </li>
+            <li>
+              <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($username) ?></a></span>
+            </li>
+            <?php else: ?>
+            <!-- Normal user: only username (membership) -->
+            <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($username) ?></a></span>
           <?php endif; ?>
         <?php else: ?>
           <span class="hover-underline"><a href="registration.php">Membership</a></span>
         <?php endif; ?>
-      </li>
       <?php if (isset($_SESSION['username'])): ?>
         <li><span class="hover-underline"><a href="logout.php">Logout</a></li></span>
       <?php endif; ?>
@@ -93,12 +105,22 @@
           <li><a href="Blog.php">Blog</a></li>
           <li><a href="joinus.php">Join Us</a></li>
           <li><a href="enquiry.php">Enquiry</a></li>
+          <?php
+          $role_id = $_SESSION['role_id'] ?? 0;
+          $username = $_SESSION['username'] ?? null;
+          ?>
           <li>
-            <?php if (isset($_SESSION['username'])): ?>
-              <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <?php if ($username): ?>
+              <?php if ($role_id == 1): ?>
+                <!-- Admin: only "View" -->
                 <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+              <?php elseif (in_array($role_id, [2,3])): ?>
+                <!-- Operator/Staff: both "View" AND username -->
+                <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+                <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($username) ?></a></span>
               <?php else: ?>
-                <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($_SESSION['username']) ?></a></span>
+                <!-- Normal user: only username (membership) -->
+                <span class="hover-underline"><a href="membership.php"><?= htmlspecialchars($username) ?></a></span>
               <?php endif; ?>
             <?php else: ?>
               <span class="hover-underline"><a href="registration.php">Membership</a></span>

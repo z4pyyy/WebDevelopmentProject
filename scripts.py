@@ -1,29 +1,31 @@
-from PIL import Image
 import os
 
-# 🔧 Set your image directory here
-folder_path = r"C:\Users\nfsgi\OneDrive\Desktop\images"
+def is_page(filename):
+    # Skip common backend includes/partials/config files
+    lower = filename.lower()
+    if lower.startswith('_'):
+        return False
+    if 'include' in lower or 'partial' in lower or 'config' in lower or 'navbar' in lower or 'footer' in lower or 'connection' in lower:
+        return False
+    return lower.endswith('.php')
 
-# Loop through all files in the directory
-for filename in os.listdir(folder_path):
-    if not filename.lower().endswith(('.png','.jpeg', '.webp', '.bmp', '.tiff')):
-        continue  # Skip non-target formats
+def scan_php_pages(root_dir, ignore_dirs=None):
+    if ignore_dirs is None:
+        ignore_dirs = {'vendor', 'node_modules', 'uploads', 'assets', 'images', '__pycache__'}
+    php_pages = []
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        # Modify dirnames in-place to skip ignored folders
+        dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
+        for filename in filenames:
+            if is_page(filename):
+                rel_path = os.path.relpath(os.path.join(dirpath, filename), root_dir)
+                php_pages.append(rel_path.replace('\\', '/'))  # Normalize path
+    return sorted(set(php_pages))
 
-    img_path = os.path.join(folder_path, filename)
-    name_without_ext = os.path.splitext(filename)[0]
-    new_filename = name_without_ext + '.jpg'
-    new_path = os.path.join(folder_path, new_filename)
-
-    try:
-        with Image.open(img_path) as img:
-            # Convert to RGB (JPEG doesn't support alpha)
-            rgb_img = img.convert('RGB')
-            rgb_img.save(new_path, 'JPEG')
-            print(f"✅ Converted: {filename} → {new_filename}")
-
-        # Delete the original file
-        os.remove(img_path)
-        print(f"🗑️ Deleted original file: {filename}")
-
-    except Exception as e:
-        print(f"❌ Failed to convert {filename}: {e}")
+if __name__ == "__main__":
+    root = os.getcwd()  # Run this script from your project root
+    pages = scan_php_pages(root)
+    print("\n--- PHP Web Pages in Project ---")
+    for page in pages:
+        print(page)
+    print(f"\nTotal: {len(pages)} pages found.")

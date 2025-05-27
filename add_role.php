@@ -1,13 +1,25 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
+
 $currentPage = basename($_SERVER['PHP_SELF']);
 include 'connection.php';
-include 'navbar.php';
-include 'navbar_admin.php';
+include 'auth.php';
 
-// Security: Only allow admin (role_id 1)
-if (!isset($_SESSION['admin_id']) || ($_SESSION['role_id'] ?? 0) != 1) {
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
+    exit;
+}
+
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
     exit;
 }
 
@@ -19,8 +31,52 @@ $row_count_result = mysqli_query($conn, $row_count_query);
 $row_count = mysqli_fetch_assoc($row_count_result)['total'];
 $expected_id = $row_count + 1; // Expected ID for the new role
 
+// Handle Role Deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_role'])) {
+    $role_id = intval($_POST['role_id'] ?? 0);
+
+    if ($role_id > 0) {
+        // Check if the role is in use by any users
+        $stmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM user WHERE role_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $role_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $user_count);
+        mysqli_stmt_fetch($stmt);
+        mysqli_stmt_close($stmt);
+
+        if ($user_count > 0) {
+            $error = "Cannot delete role ID $role_id: It is currently assigned to $user_count user(s).";
+        } else {
+            // Check if the role has any page permissions
+            $stmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM page_permissions WHERE role_id = ?");
+            mysqli_stmt_bind_param($stmt, "i", $role_id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $perm_count);
+            mysqli_stmt_fetch($stmt);
+            mysqli_stmt_close($stmt);
+
+            if ($perm_count > 0) {
+                $error = "Cannot delete role ID $role_id: It has $perm_count page permissions associated with it.";
+            } else {
+                // Safe to delete
+                $stmt = mysqli_prepare($conn, "DELETE FROM roles WHERE id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $role_id);
+                if (mysqli_stmt_execute($stmt)) {
+                    header("Location: add_role.php");
+                    exit;
+                } else {
+                    $error = "Failed to delete role: " . mysqli_error($conn);
+                }
+                mysqli_stmt_close($stmt);
+            }
+        }
+    } else {
+        $error = "Invalid role ID for deletion.";
+    }
+}
+
 // Insert Role Logic
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_role'])) {
     $role_name = trim($_POST['role_name']);
     if ($role_name !== "") {
         // 🛑 Duplicate check (case-insensitive)
@@ -44,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } elseif ($new_role_id != $expected_id) {
                     $error = "Warning: New role ID ($new_role_id) does not match expected ID ($expected_id). Check the AUTO_INCREMENT setting.";
                 } else {
-                    header("Location: add_role.php");
                     exit;
                 }
             } else {
@@ -56,6 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Role name cannot be empty!";
     }
 }
+
+include 'navbar.php';
+include 'navbar_admin.php';
 
 // Fetch all roles
 $roles = mysqli_query($conn, "SELECT * FROM roles ORDER BY id ASC");
@@ -80,6 +138,7 @@ $roles = mysqli_query($conn, "SELECT * FROM roles ORDER BY id ASC");
                     <tr>
                         <th>Role ID</th>
                         <th>Role Name</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,14 +146,18 @@ $roles = mysqli_query($conn, "SELECT * FROM roles ORDER BY id ASC");
                         <tr>
                             <td><?= htmlspecialchars($row['id']) ?></td>
                             <td><a href="edit_role.php?id=<?= $row['id'] ?>"><?= htmlspecialchars($row['name']) ?></a></td>
+                            <td>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="role_id" value="<?= htmlspecialchars($row['id']) ?>">
+                                    <button type="submit" name="delete_role" class="delete-btn">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
-            <?php if (!empty($error)): ?>
-                <div class="error-msg"><?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
-            <form class="add-category-form" method="POST" autocomplete="off">
+            <form class="add-category-form" method="POST" action="" autocomplete="off">
+                <input type="hidden" name="add_role" value="1">
                 <label for="role_name">New Role Name</label>
                 <input type="text" name="role_name" id="role_name" required>
                 <button type="submit">Add Role</button>

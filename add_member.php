@@ -2,16 +2,27 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-if (!isset($_SESSION['admin_id'])) {
+
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
+
+$currentPage = basename($_SERVER['PHP_SELF']);
+include 'connection.php';
+include 'auth.php';
+
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
     exit;
 }
 
-$input = $_SESSION['add_member_input'] ?? [];
-$errors = $_SESSION['add_member_errors'] ?? [];
-unset($_SESSION['add_member_input'], $_SESSION['add_member_errors']);
-$currentPage = basename($_SERVER['PHP_SELF']);
-include 'connection.php';
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
+    exit;
+}
+
 include 'navbar.php';
 include 'navbar_admin.php';
 ?>

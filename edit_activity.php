@@ -1,14 +1,25 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 include 'connection.php';
-include 'navbar.php';
-include 'navbar_admin.php';
+include 'auth.php';
 
-// 🔒 Secure access
-if (!isset($_SESSION['admin_id']) || !in_array($_SESSION['role_id'] ?? 0, [1, 2, 3])) {
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
+    exit;
+}
+
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
     exit;
 }
 
@@ -54,6 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: view_activity.php");
     exit;
 }
+
+include 'navbar.php';
+include 'navbar_admin.php';
 ?>
 
 <!DOCTYPE html>

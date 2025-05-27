@@ -197,6 +197,57 @@ $sql = "CREATE TABLE IF NOT EXISTS newsletter_history (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 echo mysqli_query($conn, $sql) ? "✅ Table 'newsletter_history' ready.<br>" : "❌ " . mysqli_error($conn);
 
+// 1️⃣2️⃣ PAGE PERMISSIONS TABLE
+$sql = "CREATE TABLE IF NOT EXISTS page_permissions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  page VARCHAR(100) NOT NULL,
+  role_id TINYINT NOT NULL,
+  can_view TINYINT(1) NOT NULL DEFAULT 1,
+  UNIQUE KEY unique_page_role (page, role_id),
+  FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
+)";
+echo mysqli_query($conn, $sql) ? "✅ Table 'page_permissions' ready.<br>" : "❌ " . mysqli_error($conn);
+
+// Optionally, insert example permissions (customize as needed)
+$page_perms = [
+    // page => [list of role ids who CAN view]
+    'admin_dashboard.php' => [1, 2, 3],    // admin, operator, staff
+    'view_activity.php' => [1, 2, 3],  // admin, operator, staff
+    'view_enquiry.php' => [1, 2, 3],   // admin, operator, staff
+    'view_job.php'     => [1, 2],      // admin, operator only
+    'view_membership.php' => [1, 2],   // admin, operator only
+    'view_newsletter.php' => [1, 2],   // admin, operator only
+    'view_product.php' => [1, 2, 3],   // admin, operator, staff
+    'view_role.php' => [1],         // admin only
+    'view_subscriber.php' => [1, 2], // admin, operator only
+    'view_permissions.php' => [1, 2], // admin only
+
+    'add_activity.php' => [1, 2], // admin, operator only
+    'add_category.php' => [1, 2], // admin, operator only
+    'add_member.php' => [1, 2], // admin, operator only
+    'add_product.php'  => [1, 2], // admin, operator only
+    'add_role.php' => [1], // admin only
+
+    'edit_activity.php' => [1, 2], // admin, operator only
+    'edit_category.php' => [1, 2], // admin, operator only
+    'edit_member.php' => [1, 2], // admin, operator only
+    'edit_product.php'  => [1, 2], // admin, operator only
+    'edit_role.php' => [1], // admin only
+];
+foreach ($page_perms as $page => $roles) {
+    $role_ids = [];
+      $res = mysqli_query($conn, "SELECT id FROM roles");
+      while ($r = mysqli_fetch_assoc($res)) $role_ids[] = $r['id'];
+      foreach ($role_ids as $role_id) {
+        $can_view = in_array($role_id, $roles) ? 1 : 0;
+        $check = mysqli_query($conn, "SELECT id FROM page_permissions WHERE page='$page' AND role_id=$role_id");
+        if (mysqli_num_rows($check) === 0) {
+            mysqli_query($conn, "INSERT INTO page_permissions (page, role_id, can_view) VALUES ('$page', $role_id, $can_view)");
+        }
+    }
+}
+echo "✅ Page permissions seeded.<br>";
+
 // 🔁 Populate products
 $products = [
     // [category name, product name, price, large price, image file]

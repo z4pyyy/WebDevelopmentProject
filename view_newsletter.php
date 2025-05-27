@@ -1,15 +1,30 @@
 <?php
-session_start();
-$currentPage = basename($_SERVER['PHP_SELF']);
-require_once 'connection.php';
-include 'navbar.php';
-include 'navbar_admin.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Only allow admin (role_id 1)
-if (!isset($_SESSION['admin_id']) || ($_SESSION['role_id'] ?? 0) != 1) {
+// Debug: Log session variables
+error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
+
+$currentPage = basename($_SERVER['PHP_SELF']);
+include 'connection.php';
+include 'auth.php';
+
+// 🔒 Secure Access: Check page permissions
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
+    error_log("view_membership.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
     header("Location: login.php");
     exit;
 }
+
+if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
+    error_log("view_membership.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
+    header("Location: no_access.php"); // Redirect to no_access.php
+    exit;
+}
+
+include 'navbar.php';
+include 'navbar_admin.php';
 
 $feedback = '';
 if (isset($_SESSION['newsletter_feedback'])) {
@@ -107,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_send'])) {
         } else {
             $_SESSION['newsletter_feedback'] = "<span style='color:#c0392b;'>Some emails failed:<br>" . implode('<br>', $send_errors) . "</span>";
         }
-        header("Location: admin_newsletter.php");
+        header("Location: view_newsletter.php");
         exit;
     } else if (!$subject || !$body) {
         $feedback = "<span style='color:#c0392b;'>Please enter subject and message.</span>";
@@ -211,5 +226,6 @@ $history = mysqli_query($conn, "SELECT * FROM newsletter_history ORDER BY sent_a
         </div>
     </div>
 </div>
+
 </body>
 </html>
