@@ -108,6 +108,7 @@ $sql = "CREATE TABLE IF NOT EXISTS job_application (
   state VARCHAR(100),
   photo_path VARCHAR(255),
   cv_path VARCHAR(255),
+  status ENUM('Pending', 'Accepted', 'Rejected') NOT NULL DEFAULT 'Pending';
   submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 echo mysqli_query($conn, $sql) ? "✅ Table 'job_application' ready.<br>" : "❌ " . mysqli_error($conn);

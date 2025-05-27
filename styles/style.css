@@ -4835,8 +4835,14 @@ body.product-page {
 }
 .admin-table th, .admin-table td {
   border: 1px solid #ccc;
-  padding: 10px;
   text-align: left;
+  white-space: nowrap;
+  width: 25%;
+  padding:12px;
+}
+
+.action-buttons-wrapper{
+  padding:30px;
 }
 .admin-table th {
   background-color: #343a40;
@@ -5024,14 +5030,14 @@ select {
 }
 
 .cancel-edit-button {
-    background-color: red;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 18px;
-    text-decoration: none;
+    background-color: red !important;
+    color: white !important;
+    padding: 10px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    text-decoration: none !important;
 }
 
 
@@ -6710,6 +6716,25 @@ h1 {
   background-color: #f8f9fa;
   display:flex;
   flex-direction: column;
+}
+
+.view-details-button{
+  margin-top: 0 !important;
+  padding: 14px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  background: #ff9900;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3sease;
+}
+
+.details-form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 /* Mobile View Adjustments */
 @media screen and (min-width: 360px) and (max-width: 1300px) {

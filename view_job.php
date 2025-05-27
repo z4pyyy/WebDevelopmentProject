@@ -23,17 +23,27 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
     exit;
 }
 
-include 'navbar.php';
-include 'navbar_admin.php';
 
+// 🔄 Toggle Status
+if (isset($_GET['toggle_status_id']) && isset($_GET['status'])) {
+    $id = intval($_GET['toggle_status_id']);
+    $new_status = in_array($_GET['status'], ['Pending', 'Accepted', 'Rejected']) ? $_GET['status'] : 'Pending';
+    $stmt = mysqli_prepare($conn, "UPDATE job_application SET status = ? WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "si", $new_status, $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("Location: view_job.php");
+    exit;
+}
 
+// 🔍 Handle Search Filters
 $filter_by = $_GET['filter_by'] ?? '';
 $search_term = trim($_GET['search'] ?? '');
+$sort_by = $_GET['sort_by'] ?? 'submitted_at';
 
 // Build query
 $sql = "SELECT * FROM job_application";
 $conditions = [];
-$sort_by = $_GET['sort_by'] ?? 'submitted_at';
 
 switch ($sort_by) {
     case 'id_asc':
@@ -76,14 +86,16 @@ $selected_id = $_POST['view_id'] ?? null;
 $selected_applicant = null;
 
 if ($selected_id) {
-    foreach ($result as $row) {
-        if ($row['id'] == $selected_id) {
-            $selected_applicant = $row;
-            break;
-        }
-    }
-    mysqli_data_seek($result, 0); // reset pointer
+    $stmt = mysqli_prepare($conn, "SELECT * FROM job_application WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $selected_id);
+    mysqli_stmt_execute($stmt);
+    $selected_result = mysqli_stmt_get_result($stmt);
+    $selected_applicant = mysqli_fetch_assoc($selected_result);
+    mysqli_stmt_close($stmt);
 }
+
+include 'navbar.php';
+include 'navbar_admin.php';
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +106,6 @@ if ($selected_id) {
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>Job Applications</strong></div>
@@ -128,6 +139,9 @@ if ($selected_id) {
         <button type="submit" class="search-button">🔍 Search</button>
     </form>
 
+    <!-- Pending Applications -->
+    <h2 class="admin-header">Pending Applications</h2>
+    <span class="line"></span>
     <table class="admin-table">
         <thead>
             <tr>
@@ -139,65 +153,251 @@ if ($selected_id) {
             </tr>
         </thead>
         <tbody>
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <?php $isSelected = ($selected_id == $row['id']); ?>
-            <tr>
-                <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['phone']) ?></td>
-                <td><?= $row['submitted_at'] ?></td>
-                <td>
-                    <form method="POST" class="details-form">
-                        <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
-                        <button type="submit" class="member-details-button">View</button>
-                    </form>
-                </td>
-            </tr>
-
-            <?php if ($isSelected): ?>
-            <tr class="member-detail-row">
-                <td colspan="5">
-                    <div class="member-details-inline">
-                        <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
-                        <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
-                        <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
-                        <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
-                        <div class="detail-row"><span class="label">Shift</span>: <?= htmlspecialchars($row['preferred_shift']) ?></div>
-                        <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['address']) ?></div>
-                        <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
-                        <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
-                        <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
-                        <div class="action-buttons">
-                        <details class="job-view-photo">
-                            <summary class="viewjob-button">📷 View Photo</summary>
-                            <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo" class="viewjob-photo">
-                        </details>
-                        <details class="job-view-cv">
-                            <summary class="viewjob-button">📄 View CV</summary>
-                            <?php
-                                $cv_filename = basename($row['cv_path']);
-                                $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION));
-                                $cv_path = $row['cv_path'];
-                                $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
-                            ?>
-                            <?php if ($cv_ext === 'pdf'): ?>
-                                <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
-                                <p style="margin-top: 10px;">
-                                <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
-                                </p>
-                            <?php else: ?>
-                                <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
-                            <?php endif; ?>
-                        </details>
+        <?php
+        mysqli_data_seek($result, 0); // Reset result pointer
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($row['status'] === 'Pending') {
+                $isSelected = ($selected_id == $row['id']);
+                ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['phone']) ?></td>
+                    <td><?= $row['submitted_at'] ?></td>
+                    <td>
+                        <div class="action-buttons-wrapper">
+                        <form method="POST" class="details-form">
+                            <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
+                            <button type="submit" class="view-details-button">View</button>
+                        </form>
+                        <form method="GET" style="display:inline;">
+                            <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
+                            <button type="submit" name="status" value="Accepted" class="save-edit-button">Accept</button>
+                            <button type="submit" name="status" value="Rejected" class="cancel-edit-button">Deny</button>
+                        </form>
                         </div>
-                    </div>
-                </td>
+                    </td>
+                </tr>
+
+                <?php if ($isSelected): ?>
+                <tr class="member-detail-row">
+                    <td colspan="5">
+                        <div class="member-details-inline">
+                            <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
+                            <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
+                            <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
+                            <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
+                            <div class="detail-row"><span class="label">Shift</span>: <?= htmlspecialchars($row['preferred_shift']) ?></div>
+                            <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['address']) ?></div>
+                            <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
+                            <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
+                            <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
+                            <div class="action-buttons">
+                            <details class="job-view-photo">
+                                <summary class="viewjob-button">📷 View Photo</summary>
+                                <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo" class="viewjob-photo">
+                            </details>
+                            <details class="job-view-cv">
+                                <summary class="viewjob-button">📄 View CV</summary>
+                                <?php
+                                    $cv_filename = basename($row['cv_path']);
+                                    $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION));
+                                    $cv_path = $row['cv_path'];
+                                    $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
+                                ?>
+                                <?php if ($cv_ext === 'pdf'): ?>
+                                    <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="900px" />
+                                    <p style="margin-top: 10px;">
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
+                                    </p>
+                                <?php else: ?>
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
+                                <?php endif; ?>
+                            </details>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <?php endif; ?>
+            <?php }
+        }
+        ?>
+        </tbody>
+    </table>
+
+    <!-- Accepted Applications -->
+    <h2 class="admin-header">Accepted Applications</h2>
+    <span class="line"></span>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Submitted At</th>
+                <th>Action</th>
             </tr>
-            <?php endif; ?>
-        <?php endwhile; ?>
+        </thead>
+        <tbody>
+        <?php
+        mysqli_data_seek($result, 0); // Reset result pointer
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($row['status'] === 'Accepted') {
+                $isSelected = ($selected_id == $row['id']);
+                ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['phone']) ?></td>
+                    <td><?= $row['submitted_at'] ?></td>
+                    <td>
+                        <div class="action-buttons-wrapper">
+                        <form method="POST" class="details-form">
+                            <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
+                            <button type="submit" class="view-details-button">View</button>
+                        </form>
+                        <form method="GET" style="display:inline;">
+                            <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
+                            <button type="submit" name="status" value="Pending" class="save-edit-btn">Pending</button>
+                            <button type="submit" name="status" value="Rejected" class="cancel-edit-button">Deny</button>
+                        </form>
+                        </div>
+                    </td>
+                </tr>
+
+                <?php if ($isSelected): ?>
+                <tr class="member-detail-row">
+                    <td colspan="5">
+                        <div class="member-details-inline">
+                            <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
+                            <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
+                            <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
+                            <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
+                            <div class="detail-row"><span class="label">Shift</span>: <?= htmlspecialchars($row['preferred_shift']) ?></div>
+                            <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['address']) ?></div>
+                            <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
+                            <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
+                            <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
+                            <div class="action-buttons">
+                            <details class="job-view-photo">
+                                <summary class="viewjob-button">📷 View Photo</summary>
+                                <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo" class="viewjob-photo">
+                            </details>
+                            <details class="job-view-cv">
+                                <summary class="viewjob-button">📄 View CV</summary>
+                                <?php
+                                    $cv_filename = basename($row['cv_path']);
+                                    $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION));
+                                    $cv_path = $row['cv_path'];
+                                    $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
+                                ?>
+                                <?php if ($cv_ext === 'pdf'): ?>
+                                    <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
+                                    <p style="margin-top: 10px;">
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
+                                    </p>
+                                <?php else: ?>
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
+                                <?php endif; ?>
+                            </details>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <?php endif; ?>
+            <?php }
+        }
+        ?>
+        </tbody>
+    </table>
+
+    <!-- Rejected Applications -->
+    <h2 class="admin-header">Rejected Applications</h2>
+    <span class="line"></span>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Submitted At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        mysqli_data_seek($result, 0); // Reset result pointer
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($row['status'] === 'Rejected') {
+                $isSelected = ($selected_id == $row['id']);
+                ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['phone']) ?></td>
+                    <td><?= $row['submitted_at'] ?></td>
+                    <div class="action-buttons-wrapper">
+                    <td>
+                        <div class="action-buttons-wrapper">
+                        <form method="POST" class="details-form">
+                            <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
+                            <button type="submit" class="view-details-button">View</button>
+                        </form>
+                        <form method="GET" style="display:inline;">
+                            <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
+                            <button type="submit" name="status" value="Pending" class="cancel-edit-btn">Pending</button>
+                            <button type="submit" name="status" value="Accepted" class="save-edit-button">Accept</button>
+                        </form>
+                        </div>
+                    </td>
+                    </div>
+                </tr>
+
+                <?php if ($isSelected): ?>
+                <tr class="member-detail-row">
+                    <td colspan="5">
+                        <div class="member-details-inline">
+                            <div class="detail-row"><span class="label">First Name</span>: <?= htmlspecialchars($row['first_name']) ?></div>
+                            <div class="detail-row"><span class="label">Last Name</span>: <?= htmlspecialchars($row['last_name']) ?></div>
+                            <div class="detail-row"><span class="label">Email</span>: <?= htmlspecialchars($row['email']) ?></div>
+                            <div class="detail-row"><span class="label">Phone</span>: <?= htmlspecialchars($row['phone']) ?></div>
+                            <div class="detail-row"><span class="label">Shift</span>: <?= htmlspecialchars($row['preferred_shift']) ?></div>
+                            <div class="detail-row"><span class="label">Address</span>: <?= htmlspecialchars($row['address']) ?></div>
+                            <div class="detail-row"><span class="label">Postcode</span>: <?= htmlspecialchars($row['postcode']) ?></div>
+                            <div class="detail-row"><span class="label">City</span>: <?= htmlspecialchars($row['city']) ?></div>
+                            <div class="detail-row"><span class="label">State</span>: <?= htmlspecialchars($row['state']) ?></div>
+                            <div class="action-buttons">
+                            <details class="job-view-photo">
+                                <summary class="viewjob-button">📷 View Photo</summary>
+                                <img src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Applicant Photo" class="viewjob-photo">
+                            </details>
+                            <details class="job-view-cv">
+                                <summary class="viewjob-button">📄 View CV</summary>
+                                <?php
+                                    $cv_filename = basename($row['cv_path']);
+                                    $cv_ext = strtolower(pathinfo($cv_filename, PATHINFO_EXTENSION));
+                                    $cv_path = $row['cv_path'];
+                                    $cv_path_encoded = 'uploads/cvs/' . rawurlencode($cv_filename);
+                                ?>
+                                <?php if ($cv_ext === 'pdf'): ?>
+                                    <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
+                                    <p style="margin-top: 10px;">
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
+                                    </p>
+                                <?php else: ?>
+                                    <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">⬇ Download CV (WORD)</a>
+                                <?php endif; ?>
+                            </details>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <?php endif; ?>
+            <?php }
+        }
+        ?>
         </tbody>
     </table>
 </div>
-
 </body>
 </html>
