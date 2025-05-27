@@ -23,8 +23,6 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
     exit;
 }
 
-include 'navbar.php';
-include 'navbar_admin.php';
 
 $feedback = '';
 if (isset($_SESSION['newsletter_feedback'])) {
@@ -128,6 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_send'])) {
         $feedback = "<span style='color:#c0392b;'>Please enter subject and message.</span>";
     }
 }
+
+include 'navbar.php';
+include 'navbar_admin.php';
 
 // Fetch all subscribers for display
 $subscribers = mysqli_query($conn, "SELECT * FROM newsletter_subscribers ORDER BY subscribed_at DESC");
