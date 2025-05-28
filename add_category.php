@@ -23,8 +23,6 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
     exit;
 }
 
-include 'connection.php';
-
 // Initialize error message
 $error = "";
 

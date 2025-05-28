@@ -1,7 +1,9 @@
 <?php
-include 'connection.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+include 'connection.php';
 // 1. Fetch & sanitize input
 $username   = trim($_POST['username']);
 $first_name = trim($_POST['first_name']);

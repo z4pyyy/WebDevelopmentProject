@@ -1,6 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include 'connection.php';
-session_start();
 
 // ✅ Preserve form data
 $_SESSION['joinus_form'] = $_POST;

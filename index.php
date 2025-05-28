@@ -4,9 +4,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 <?php 
-include 'navbar.php'; 
-include 'initialize.php';
 include 'connection.php';
+include 'initialize.php';
+include 'navbar.php'; 
 
 ?>
 <!DOCTYPE html>

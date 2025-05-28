@@ -4,6 +4,7 @@ if (!isset($_SESSION['admin_id'])) {
   header("Location: login.php");
   exit;
 }
+
 include 'connection.php';
 
 $user_id = $_POST['user_id'] ?? null;
@@ -18,3 +19,4 @@ if ($user_id && $role_id) {
 
 header("Location: view_membership.php");
 exit;
+?>

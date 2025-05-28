@@ -2,6 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 include 'connection.php';
 
 $username = trim($_POST['username'] ?? '');
