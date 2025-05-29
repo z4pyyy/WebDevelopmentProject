@@ -6800,6 +6800,7 @@ h1 {
 /* Universal Search Bar */
 .nav-search-form {
   display: flex;
+  flex-direction: row;
   align-items: center;
   background: #f7f7fa;
   border-radius: 6px;

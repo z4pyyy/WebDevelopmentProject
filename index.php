@@ -288,7 +288,7 @@ $latest_upcoming = !empty($coming) ? $coming[0] : null;
                 </div>
             </div>
             <div class="button-row">
-                <?php if (isset($_SESSION['admin_id']) && $_SESSION['role_id'] == [2,3]): ?>
+                <?php if (isset($_SESSION['admin_id']) && in_array($_SESSION['role_id'], [2, 3])): ?>
                     <a href="admin_dashboard.php" class="btn-index-primary">Admin Dashboard</a>
                 <?php else: ?>
                     <a href="joinus.php" class="btn-index-primary">Join the Crew</a>
