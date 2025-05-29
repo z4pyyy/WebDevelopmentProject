@@ -170,10 +170,10 @@ include 'navbar_admin.php';
                             <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
                             <button type="submit" class="view-details-button">View</button>
                         </form>
-                        <form method="GET" style="display:inline;">
+                        <form method="GET" class="job-decicion">
                             <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
                             <button type="submit" name="status" value="Accepted" class="save-edit-button">Accept</button>
-                            <button type="submit" name="status" value="Rejected" class="cancel-edit-button">Deny</button>
+                            <button type="submit" name="status" value="Rejected" class="delete-edit-button">Deny</button>
                         </form>
                         </div>
                     </td>
@@ -207,7 +207,7 @@ include 'navbar_admin.php';
                                 ?>
                                 <?php if ($cv_ext === 'pdf'): ?>
                                     <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="900px" />
-                                    <p style="margin-top: 10px;">
+                                    <p>
                                     <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
                                     </p>
                                 <?php else: ?>
@@ -256,10 +256,10 @@ include 'navbar_admin.php';
                             <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
                             <button type="submit" class="view-details-button">View</button>
                         </form>
-                        <form method="GET" style="display:inline;">
+                        <form method="GET" class="job-decicion">
                             <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
-                            <button type="submit" name="status" value="Pending" class="save-edit-btn">Pending</button>
-                            <button type="submit" name="status" value="Rejected" class="cancel-edit-button">Deny</button>
+                            <button type="submit" name="status" value="Pending" class="pending-edit-button">Pending</button>
+                            <button type="submit" name="status" value="Rejected" class="delete-edit-button">Deny</button>
                         </form>
                         </div>
                     </td>
@@ -293,7 +293,7 @@ include 'navbar_admin.php';
                                 ?>
                                 <?php if ($cv_ext === 'pdf'): ?>
                                     <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
-                                    <p style="margin-top: 10px;">
+                                    <p>
                                     <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
                                     </p>
                                 <?php else: ?>
@@ -343,9 +343,9 @@ include 'navbar_admin.php';
                             <input type="hidden" name="view_id" value="<?= $row['id'] ?>">
                             <button type="submit" class="view-details-button">View</button>
                         </form>
-                        <form method="GET" style="display:inline;">
+                        <form method="GET" class="job-decicion">
                             <input type="hidden" name="toggle_status_id" value="<?= $row['id'] ?>">
-                            <button type="submit" name="status" value="Pending" class="cancel-edit-btn">Pending</button>
+                            <button type="submit" name="status" value="Pending" class="pending-edit-button">Pending</button>
                             <button type="submit" name="status" value="Accepted" class="save-edit-button">Accept</button>
                         </form>
                         </div>
@@ -381,7 +381,7 @@ include 'navbar_admin.php';
                                 ?>
                                 <?php if ($cv_ext === 'pdf'): ?>
                                     <embed src="<?= $cv_path_encoded ?>" type="application/pdf" width="100%" height="500px" />
-                                    <p style="margin-top: 10px;">
+                                    <p>
                                     <a href="<?= htmlspecialchars($cv_path) ?>" target="_blank" class="viewjob-cv-link">🔗 Open PDF in New Tab</a>
                                     </p>
                                 <?php else: ?>

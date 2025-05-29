@@ -8,13 +8,9 @@ function can_view_page($page, $role_id, $conn) {
     mysqli_stmt_close($stmt);
     return $result && $can_view == 1;
 }
-?>
 
-
-<?php
 $role_id = $_SESSION['role_id'] ?? 0;
 ?>
-
 <div class="admin-sidebar">
   <div class="admin-brand">
     <a href="admin_dashboard.php" class="admin-brand-link"><h4><span class="icon">👤</span> Admin Panel</h4></a>
@@ -99,7 +95,5 @@ $role_id = $_SESSION['role_id'] ?? 0;
   ): ?>
     <a href="view_permissions.php" class="<?= $currentPage == 'view_permissions.php' ? 'active' : '' ?>">🔑 View Permissions</a>
   <?php endif; ?>
-
-
   <a href="logout.php" class="logout-btn">🚪 Logout</a>
 </div>

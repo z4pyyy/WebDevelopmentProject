@@ -82,7 +82,7 @@ include 'navbar_admin.php';
             </div>
             <div class="form-actions">
                 <button type="submit" class="save-edit-button">Add Member</button>
-                <button type="reset" class="cancel-edit-button">Reset</button>
+                <button type="reset" class="delete-edit-button">Reset</button>
             </div>
         </form>
     </div>

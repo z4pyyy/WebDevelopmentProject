@@ -2,13 +2,13 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+include 'connection.php';
+include 'auth.php';
 
 // Debug: Log session variables
 error_log("view_membership.php accessed. Session: " . print_r($_SESSION, true));
 
 $currentPage = basename($_SERVER['PHP_SELF']);
-include 'connection.php';
-include 'auth.php';
 
 // 🔒 Secure Access: Check page permissions
 if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
@@ -23,6 +23,14 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
     exit;
 }
 
+// 🗑 Delete
+if (isset($_POST['delete'])) {
+    $id = intval($_GET['id']);
+    mysqli_query($conn, "DELETE FROM activities WHERE id = $id");
+    header("Location: view_activity.php");
+    exit;
+}
+
 // 🔍 Fetch existing activity
 $id = intval($_GET['id'] ?? 0);
 $query = mysqli_query($conn, "SELECT * FROM activities WHERE id = $id");
@@ -34,7 +42,7 @@ if (!$activity) {
 }
 
 // 🔁 Handle update
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete'])) {
     $title         = trim($_POST['title']);
     $description   = trim($_POST['description']);
     $event_date    = $_POST['event_date'];
@@ -42,26 +50,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $end_time      = $_POST['end_time'];
     $location      = trim($_POST['location']);
     $external_link = trim($_POST['external_link']);
-
+    
     // 📷 Image handling
     $image_path = $activity['image_path']; // default to old image
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $upload_dir = 'uploads/events/';
+        $upload_dir = 'Uploads/events/';
         if (!file_exists($upload_dir)) mkdir($upload_dir, 0777, true);
-
+        
         $filename    = uniqid('event_') . '_' . basename($_FILES['image']['name']);
         $target_path = $upload_dir . $filename;
-
+        
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
             $image_path = $target_path;
         }
     }
-
+    
     // 💾 Update database
     $stmt = mysqli_prepare($conn, "UPDATE activities SET title=?, description=?, image_path=?, event_date=?, start_time=?, end_time=?, location=?, external_link=? WHERE id=?");
     mysqli_stmt_bind_param($stmt, "ssssssssi", $title, $description, $image_path, $event_date, $start_time, $end_time, $location, $external_link, $id);
     mysqli_stmt_execute($stmt);
-
+    
     header("Location: view_activity.php");
     exit;
 }
@@ -69,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'navbar.php';
 include 'navbar_admin.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,49 +85,51 @@ include 'navbar_admin.php';
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
 <div class="admin-content">
     <div class="admin-navbar">
         <div><strong>✏️ Edit Activity</strong></div>
         <a href="view_activity.php" class="backto-view">← Back to Activity</a>
     </div>
-<div class="add-activity-container">
-    <div class="center-div">
-    <?php if (!empty($activity['image_path'])): ?>
-        <div class="admin-activity-thumbnail centered-thumbnail">
-            <label for="image" class="clickable-thumbnail" title="Click to change image">
-                <img src="<?= htmlspecialchars($activity['image_path']) ?>" alt="Current Image" class="activity-image">
-            </label>
+    <div class="add-activity-container">
+        <div class="center-div">
+        <?php if (!empty($activity['image_path'])): ?>
+            <div class="admin-activity-thumbnail centered-thumbnail">
+                <label for="image" class="clickable-thumbnail" title="Click to change image">
+                    <img src="<?= htmlspecialchars($activity['image_path']) ?>" alt="Current Image" class="activity-image">
+                </label>
+            </div>
+        <?php endif; ?>
         </div>
-    <?php endif; ?>
+        
+        <form class="add-activity-form" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" id="image" accept="image/*" style="display:none;">
+            <label for="title">Activity Title</label>
+            <input type="text" name="title" id="title" value="<?= htmlspecialchars($activity['title']) ?>" required>
+
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="5" required><?= htmlspecialchars($activity['description']) ?></textarea>
+
+            <label for="event_date">Date</label>
+            <input type="date" name="event_date" id="event_date" value="<?= $activity['event_date'] ?>" required>
+
+            <label for="start_time">Start Time</label>
+            <input type="time" name="start_time" id="start_time" value="<?= $activity['start_time'] ?>" required>
+
+            <label for="end_time">End Time</label>
+            <input type="time" name="end_time" id="end_time" value="<?= $activity['end_time'] ?>" required>
+
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" value="<?= htmlspecialchars($activity['location']) ?>" required>
+
+            <label for="external_link">External Link (optional)</label>
+            <input type="url" name="external_link" id="external_link" value="<?= htmlspecialchars($activity['external_link']) ?>">
+
+            <div class="form-actions">
+                <button type="submit">Update Activity</button>
+                <button type="submit" name="delete" class="delete-edit-button" onclick="return confirm('Delete this activity?')">🗑 Delete</button>
+            </div>
+        </form>
     </div>
-    <input type="file" name="image" id="image" accept="image/*" style="display:none;">
-
-    <form class="add-activity-form" method="POST" enctype="multipart/form-data">
-        <label for="title">Activity Title</label>
-        <input type="text" name="title" id="title" value="<?= htmlspecialchars($activity['title']) ?>" required>
-
-        <label for="description">Description</label>
-        <textarea name="description" id="description" rows="5" required><?= htmlspecialchars($activity['description']) ?></textarea>
-
-        <label for="event_date">Date</label>
-        <input type="date" name="event_date" id="event_date" value="<?= $activity['event_date'] ?>" required>
-
-        <label for="start_time">Start Time</label>
-        <input type="time" name="start_time" id="start_time" value="<?= $activity['start_time'] ?>" required>
-
-        <label for="end_time">End Time</label>
-        <input type="time" name="end_time" id="end_time" value="<?= $activity['end_time'] ?>" required>
-
-        <label for="location">Location</label>
-        <input type="text" name="location" id="location" value="<?= htmlspecialchars($activity['location']) ?>" required>
-
-        <label for="external_link">External Link (optional)</label>
-        <input type="url" name="external_link" id="external_link" value="<?= htmlspecialchars($activity['external_link']) ?>">
-
-        <button type="submit">Update Activity</button>
-    </form>
-</div>
 </div>
 </body>
 </html>

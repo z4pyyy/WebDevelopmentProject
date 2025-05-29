@@ -1,31 +1,34 @@
-import os
+import random
+import datetime
 
-def is_page(filename):
-    # Skip common backend includes/partials/config files
-    lower = filename.lower()
-    if lower.startswith('_'):
-        return False
-    if 'include' in lower or 'partial' in lower or 'config' in lower or 'navbar' in lower or 'footer' in lower or 'connection' in lower:
-        return False
-    return lower.endswith('.php')
+first_names = ["Alice", "Mohd", "Jane", "David", "Wei Ling", "Siti", "Lucas", "Ryan", "Michelle", "Karen"]
+last_names = ["Tan", "Rahim", "Lim", "Ong", "Lee", "Chong", "Yap", "Goh", "Wong", "Ng"]
+cities = [("Kuching", "Sarawak"), ("Miri", "Sarawak"), ("Ipoh", "Perak"), ("Shah Alam", "Selangor"), ("Penang", "Penang"), ("Petaling Jaya", "Selangor"), ("Johor Bahru", "Johor"), ("Alor Setar", "Kedah")]
+enquiry_types = ["Membership", "Products", "Pop-up Market Activities"]
+messages = [
+    "How do I renew my membership?",
+    "Do you offer lactose-free options?",
+    "Will there be a market next month?",
+    "Is Cold Brew available for delivery?",
+    "Can I transfer my membership to a friend?",
+    "How long does shipping take?",
+    "Are pets allowed at events?",
+    "Can I pay by credit card?",
+    "Do you have WiFi?",
+    "Where can I park?"
+]
 
-def scan_php_pages(root_dir, ignore_dirs=None):
-    if ignore_dirs is None:
-        ignore_dirs = {'vendor', 'node_modules', 'uploads', 'assets', 'images', '__pycache__'}
-    php_pages = []
-    for dirpath, dirnames, filenames in os.walk(root_dir):
-        # Modify dirnames in-place to skip ignored folders
-        dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
-        for filename in filenames:
-            if is_page(filename):
-                rel_path = os.path.relpath(os.path.join(dirpath, filename), root_dir)
-                php_pages.append(rel_path.replace('\\', '/'))  # Normalize path
-    return sorted(set(php_pages))
-
-if __name__ == "__main__":
-    root = os.getcwd()  # Run this script from your project root
-    pages = scan_php_pages(root)
-    print("\n--- PHP Web Pages in Project ---")
-    for page in pages:
-        print(page)
-    print(f"\nTotal: {len(pages)} pages found.")
+for i in range(1, 16):
+    fn = random.choice(first_names)
+    ln = random.choice(last_names)
+    city, state = random.choice(cities)
+    street = f"{random.randint(1, 999)} Random St"
+    postcode = str(random.randint(10000, 99999))
+    phone = f"01{random.randint(0,9)}-{random.randint(1000000,9999999)}"
+    email = f"{fn.lower()}.{ln.lower()}@example.com"
+    eq_type = random.choice(enquiry_types)
+    msg = random.choice(messages)
+    ticket_id = f"ENQ-{10000 + i}"
+    status = random.choice(["Pending", "In Progress", "Resolved"])
+    address = f"{street}, {city}, {state}, {postcode}"
+    print(f"INSERT INTO enquiry (ticket_id, first_name, last_name, email, phone, address, postcode, city, state, enquiry_type, message, status) VALUES ('{ticket_id}', '{fn}', '{ln}', '{email}', '{phone}', '{address}', '{postcode}', '{city}', '{state}', '{eq_type}', '{msg}', '{status}');")

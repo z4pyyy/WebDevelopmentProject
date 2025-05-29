@@ -2,13 +2,37 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-?>
-<?php 
+
 include 'connection.php';
 include 'initialize.php';
 include 'navbar.php'; 
 
+// Fetch activities for the "What's Brewing?" section
+date_default_timezone_set('Asia/Kuching');
+$now_dt = new DateTime();
+$current = [];
+$coming = [];
+
+$all_activities = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date ASC");
+
+while ($row = mysqli_fetch_assoc($all_activities)) {
+    $start_dt = DateTime::createFromFormat('Y-m-d H:i:s', $row['event_date'] . ' ' . $row['start_time']);
+    $end_dt = DateTime::createFromFormat('Y-m-d H:i:s', $row['event_date'] . ' ' . $row['end_time']);
+
+    if (!$start_dt || !$end_dt) continue;
+
+    if ($start_dt > $now_dt) {
+        $coming[] = $row;
+    } elseif ($start_dt <= $now_dt && $end_dt >= $now_dt) {
+        $current[] = $row;
+    }
+}
+
+// Get the most recent current and upcoming activities (limit to 1 each)
+$latest_current = !empty($current) ? $current[0] : null;
+$latest_upcoming = !empty($coming) ? $coming[0] : null;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,82 +216,86 @@ include 'navbar.php';
         </div>
         <div class="join-section-grid">
 
-          <!-- LEFT: Join as Member -->
-          <div class="join-card">
+        <!-- LEFT: Join as Member -->
+        <div class="join-card">
             <div class="card-title-overlay">
-              <div class="line-title-wrapper">
-                <span class="line"></span>
-                <h1 class="blend-header"><span class="hover-underline"> Front of the Queue </span></h1>
-                <span class="line"></span>
-              </div>
+                <div class="line-title-wrapper">
+                    <span class="line"></span>
+                    <h1 class="blend-header"><span class="hover-underline"> Front of the Queue </span></h1>
+                    <span class="line"></span>
+                </div>
             </div>
             <div class="flip-container">
-              <div class="flipper">
-                <div class="flip-front">
-                  <img src="images/INDEXBNG5.png" alt="Join Our Membership" />
+                <div class="flipper">
+                    <div class="flip-front">
+                        <img src="images/INDEXBNG5.png" alt="Join Our Membership" />
+                    </div>
+                    <div class="flip-back">
+                        <div class="back-info">
+                            <h3>Join Brew & Go Rewards</h3>
+                            <h2>Register now and enjoy exclusive member perks, points, and special offers!</h2>
+                            <ul class="perk-list">
+                                <li>💳 Minimum top-up to join: <strong>RM30</strong></li>
+                                <li>💰 Top-up options: <strong>RM50, RM100, RM200</strong></li>
+                                <li>🔒 Credit stored is <strong>non-withdrawable</strong></li>
+                                <li>🕓 <strong>Lifetime Membership</strong></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="flip-back">
-                  <div class="back-info">
-                    <h3>Join Brew & Go Rewards</h3>
-                    <h2>Register now and enjoy exclusive member perks, points, and special offers!</h2>
-                    
-                    <ul class="perk-list">
-                      <li>💳 Minimum top-up to join: <strong>RM30</strong></li>
-                      <li>💰 Top-up options: <strong>RM50, RM100, RM200</strong></li>
-                      <li>🔒 Credit stored is <strong>non-withdrawable</strong></li>
-                      <li>🕓 <strong>Lifetime Membership</strong></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
             </div>
-          
             <div class="button-row">
-              <a href="registration.php" class="btn-index-primary">Join Member</a>
-              <a href="login.php" class="btn-index-secondary"> Log In</a>
+                <?php if (isset($_SESSION['admin_id']) && in_array($_SESSION['role_id'], [2, 3])): ?>
+                    <a href="membership.php" class="btn-index-primary">View Profile</a>
+                <?php else: ?>
+                    <a href="registration.php" class="btn-index-primary">Join Member</a>
+                    <a href="login.php" class="btn-index-secondary">Log In</a>
+                <?php endif; ?>
             </div>
-          </div>
-        
-           <!-- RIGHT: Join as Crew -->
-          <div class="join-card">
+        </div>
+
+        <!-- RIGHT: Join as Crew -->
+        <div class="join-card">
             <div class="card-title-overlay">
-              <div class="line-title-wrapper">
-                <span class="line"></span>
-                <h1 class="blend-header"><span class="hover-underline"> Behind the Brew </span></h1>
-                <span class="line"></span>
-              </div>
+                <div class="line-title-wrapper">
+                    <span class="line"></span>
+                    <h1 class="blend-header"><span class="hover-underline"> Behind the Brew </span></h1>
+                    <span class="line"></span>
+                </div>
             </div>
-
             <div class="flip-container">
-              <div class="flipper">
-                <!-- Front Image -->
-                <div class="flip-front">
-                  <img src="images/BaristaPIC2.png" alt="Join the Crew" />
+                <div class="flipper">
+                    <!-- Front Image -->
+                    <div class="flip-front">
+                        <img src="images/BaristaPIC2.png" alt="Join the Crew" />
+                    </div>
+                    <!-- Back Info -->
+                    <div class="flip-back">
+                        <div class="back-info">
+                            <h3>We're Hiring!</h3>
+                            <p><strong>Positions:</strong> Barista | Cashier</p>
+                            <p><strong>Locations:</strong><br>One Jaya Mall<br>Plaza Merdeka Mall</p>
+                            <p><strong>Benefits:</strong><br>
+                                EPF & SOCSO<br>
+                                Meal Allowance Provided<br>
+                                Sales Commission<br>
+                                Salary Range: RM1,700 – RM3,800
+                            </p>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
                 </div>
-                <!-- Back Info -->
-                <div class="flip-back">
-                  <div class="back-info">
-                    <h3>We're Hiring!</h3>
-                    <p><strong>Positions:</strong> Barista | Cashier</p>
-                    <p><strong>Locations:</strong><br>One Jaya Mall<br>Plaza Merdeka Mall</p>
-                    <p><strong>Benefits:</strong><br>
-                      EPF & SOCSO<br>
-                      Meal Allowance Provided<br>
-                      Sales Commission<br>
-                      Salary Range: RM1,700 – RM3,800
-                    </p>
-                    <br>
-                    <br>
-                  </div>
-                </div>
-              </div>
             </div>
-
             <div class="button-row">
-              <a href="joinus.php" class="btn-index-primary">Join the Crew</a>
-              <a href="profile1.php" class="btn-index-secondary">Meet the Team</a>
+                <?php if (isset($_SESSION['admin_id']) && $_SESSION['role_id'] == [2,3]): ?>
+                    <a href="admin_dashboard.php" class="btn-index-primary">Admin Dashboard</a>
+                <?php else: ?>
+                    <a href="joinus.php" class="btn-index-primary">Join the Crew</a>
+                <?php endif; ?>
+                <a href="profile1.php" class="btn-index-secondary">Meet the Team</a>
             </div>
-          </div>
+        </div>
 
         </div>
       </div>
@@ -318,37 +346,61 @@ include 'navbar.php';
 
 
         <!-- Latest Promotions & News Section -->
-        <section class="promo-news-section">
+      <section class="promo-news-section">
           <div class="promo-news-title-wrapper">
-            <span class="promo-news-line"></span>
-            <h1 class="promo-news-header"><span class="hover-underline">What's Brewing?</span></h1>
-            <span class="promo-news-line"></span>
+              <span class="promo-news-line"></span>
+              <h1 class="promo-news-header"><span class="hover-underline">What's Brewing?</span></h1>
+              <span class="promo-news-line"></span>
           </div>
 
           <div class="promo-news-grid">
-            <!-- Latest News -->
-            <div class="promo-card">              
-              <a href="past_activity.php#past_activity2">
-                <img src="images/DISCOUNTTHURDAY2024.png" alt="Thursday Discount">
-              </a>
-              <div class="promo-card-content">
-                <h2>📣Thursday Discount!</h2>
-                <p>Catch us soon at AEON Mall Kuching Central — opening in May!</p>
-              </div>
-            </div>
-            
-            <!-- Latest Promotion -->
-            <div class="promo-card">
-              <a href="current_activity.php">
-              <img src="images/Current.jpg" alt="Current Promo">
-              <div class="promo-card-content">
-              </a>
-                  <h2>🔥 March Promo!</h2>
-                  <p>Buy 1 Get 1 Free on all Cold Brews every Friday in March!</p>
-              </div>
-            </div>
+              <!-- Upcoming Activity -->
+              <?php if ($latest_upcoming): ?>
+                  <div class="promo-card">
+                      <a href="coming_soon.php#activity_<?php echo $latest_upcoming['id']; ?>">
+                          <img src="<?php echo htmlspecialchars($latest_upcoming['image_path'] ?: 'images/default_promo.jpg'); ?>" alt="<?php echo htmlspecialchars($latest_upcoming['title']); ?>">
+                      </a>
+                      <div class="promo-card-content">
+                          <h2>📌 <?php echo htmlspecialchars($latest_upcoming['title']); ?></h2>
+                          <p><?php echo htmlspecialchars($latest_upcoming['description']); ?></p>
+                      </div>
+                  </div>
+              <?php else: ?>
+                  <div class="promo-card">
+                      <a href="current_activity.php">
+                          <img src="images/DISCOUNTTHURDAY2024.png" alt="Default Upcoming">
+                      </a>
+                      <div class="promo-card-content">
+                          <h2>📌 Stay Tuned!</h2>
+                          <p>No upcoming activities at the moment. Check back soon!</p>
+                      </div>
+                  </div>
+              <?php endif; ?>
+
+              <!-- Current Activity -->
+              <?php if ($latest_current): ?>
+                  <div class="promo-card">
+                      <a href="current_activity.php#activity_<?php echo $latest_current['id']; ?>">
+                          <img src="<?php echo htmlspecialchars($latest_current['image_path'] ?: 'images/default_promo.jpg'); ?>" alt="<?php echo htmlspecialchars($latest_current['title']); ?>">
+                      </a>
+                      <div class="promo-card-content">
+                          <h2>🔥 <?php echo htmlspecialchars($latest_current['title']); ?></h2>
+                          <p><?php echo htmlspecialchars($latest_current['description']); ?></p>
+                      </div>
+                  </div>
+              <?php else: ?>
+                  <div class="promo-card">
+                      <a href="current_activity.php">
+                          <img src="images/Current.jpg" alt="Default Current">
+                      </a>
+                      <div class="promo-card-content">
+                          <h2>🔥 No Current Promotions</h2>
+                          <p>Check back later for exciting offers!</p>
+                      </div>
+                  </div>
+              <?php endif; ?>
           </div>
-        </section>
+      </section>
 
 
         

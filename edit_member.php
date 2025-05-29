@@ -28,6 +28,19 @@ if (!$membership_id || !is_numeric($membership_id)) {
     die("Invalid membership ID.");
 }
 
+// Handle Delete Member
+if (isset($_POST['delete_member']) && $_POST['delete_member'] === 'yes') {
+    $stmt = mysqli_prepare($conn, "DELETE FROM membership WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $membership_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    // Optional: Add redirect to member list after deletion
+    header("Location: view_membership.php?deleted=1");
+    exit;
+}
+
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $first_name = trim($_POST['first_name']);
@@ -185,7 +198,12 @@ include 'navbar_admin.php';
         <div class="form-actions">
             <button type="submit" class="save-edit-button">Save Changes</button>
             <a href="view_membership.php" class="cancel-edit-button">Cancel</a>
+            <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this member? This action cannot be undone.');">
+                <input type="hidden" name="delete_member" value="yes">
+                <button type="submit" class="delete-edit-button">Delete Member</button>
+            </form>
         </div>
+
     </form>
 </div>
 

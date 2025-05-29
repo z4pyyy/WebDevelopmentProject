@@ -26,19 +26,7 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
 include 'navbar.php';
 include 'navbar_admin.php';
   
-  date_default_timezone_set('Asia/Kuching'); 
-// 🗑 Delete
-if (isset($_GET['delete_id'])) {
-    $id = intval($_GET['delete_id']);
-    mysqli_query($conn, "DELETE FROM activities WHERE id = $id");
-    header("Location: admin_activities.php");
-    exit;
-}
-
-// ⏱ Get current datetime
-$now = date('Y-m-d H:i:s');
-$today = date('Y-m-d');
-
+date_default_timezone_set('Asia/Kuching'); 
 // 🔎 Fetch all activities
 $all = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date ASC");
 
@@ -64,7 +52,6 @@ while ($row = mysqli_fetch_assoc($all)) {
     }
 }
 
-
 // 📊 Stats
 $total_current = count($current);
 $today_count = 0;
@@ -81,7 +68,6 @@ foreach ($current as $row) {
 $total_upcoming = count($coming);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +94,6 @@ $total_upcoming = count($coming);
     </div>
     <div class="admin-activities-overview">
       <ul>
-        <li>Total Ongoing Events: <strong><?= $total_current ?></strong></li>
         <li>Happening Today (<?= $today_count ?>): 
           <strong>
             <?= $today_count > 0 ? implode(', ', array_map('htmlspecialchars', $today_titles)) : 'None' ?>
@@ -119,8 +104,7 @@ $total_upcoming = count($coming);
     </div>
     <span class="line"></span>
       
-      
-      <!-- ✅ Ongoing -->
+    <!-- ✅ Ongoing -->
     <h1 id="section-ongoing" class="admin-header"><span class="hover-underline">✅ Ongoing</span></h1>
     <span class="line"></span>    
     <?php if ($total_current > 0): ?>
@@ -146,14 +130,13 @@ $total_upcoming = count($coming);
             <div class="admin-activity-description"><?= nl2br(htmlspecialchars($row['description'])) ?></div>
             <?php if (!empty($row['external_link'])): ?>
               <div class="admin-activity-link">🔗 <a href="<?= htmlspecialchars($row['external_link']) ?>" target="_blank">External Link</a></div>
-              <?php endif; ?>
-            </div>
-            <div class="admin-activity-actions">
-              <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
-              <a href="?delete_id=<?= $row['id'] ?>" class="delete-btn" onclick="return confirm('Delete this activity?')">🗑 Delete</a>
-            </div>
+            <?php endif; ?>
+          </div>
+          <div class="admin-activity-actions">
+            <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
           </div>
         </div>
+      </div>
     <?php $i++; endforeach; ?>
     <?php else: ?><p>No ongoing activities.</p><?php endif; ?>
     
@@ -170,71 +153,66 @@ $total_upcoming = count($coming);
                 <div class="admin-activity-thumbnail">
                   <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Activity Thumbnail" class="activity-image">
                 </div>
-        <?php else: ?><p>No Image activities.</p><?php endif; ?>
-      </a>
-      <div class="admin-activity-stats">
-        <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
-          <h3><?= $i . '. ' . htmlspecialchars($row['title']) ?></h3>
-        </a>
-        <div class="admin-activity-meta">
-          📅 <?= $row['event_date'] ?><br>
-          🕒 <?= $row['start_time'] ?> – <?= $row['end_time'] ?><br>
-          📍 <?= htmlspecialchars($row['location']) ?>
+              <?php else: ?><p>No Image activities.</p><?php endif; ?>
+            </a>
+            <div class="admin-activity-stats">
+              <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
+                <h3><?= $i . '. ' . htmlspecialchars($row['title']) ?></h3>
+              </a>
+              <div class="admin-activity-meta">
+                📅 <?= $row['event_date'] ?><br>
+                🕒 <?= $row['start_time'] ?> – <?= $row['end_time'] ?><br>
+                📍 <?= htmlspecialchars($row['location']) ?>
+              </div>
+              <div class="admin-activity-description"><?= nl2br(htmlspecialchars($row['description'])) ?></div>
+              <?php if (!empty($row['external_link'])): ?>
+                <div class="admin-activity-link">🔗 <a href="<?= htmlspecialchars($row['external_link']) ?>" target="_blank">External Link</a></div>
+              <?php endif; ?>
+            </div>
+            <div class="admin-activity-actions">
+              <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
+            </div>
+          </div>
         </div>
-        <div class="admin-activity-description"><?= nl2br(htmlspecialchars($row['description'])) ?></div>
-        <?php if (!empty($row['external_link'])): ?>
-          <div class="admin-activity-link">🔗 <a href="<?= htmlspecialchars($row['external_link']) ?>" target="_blank">External Link</a></div>
-          <?php endif; ?>
-        </div>
-        <div class="admin-activity-actions">
-          <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
-          <a href="?delete_id=<?= $row['id'] ?>" class="delete-btn" onclick="return confirm('Delete this activity?')">🗑 Delete</a>
-        </div>
-      </div>
-    </div>
     <?php $i++; endforeach; ?>
     <?php else: ?><p>No upcoming activities.</p><?php endif; ?>
       
-      
-      <!-- ⏳ Past -->
-      <span class="line"></span>
-      <h1 id="section-past" class="admin-header"><span class="hover-underline">⏳ Past Activities</span></h1>
-      <span class="line"></span>
-      <?php if (!empty($past)): ?>
-      <?php $i = 1; foreach ($past as $row): ?>
-          <div class="admin-activity-card">
-    <div class="activity-flex">
-      <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
-        <?php if (!empty($row['image_path'])): ?>
-          <div class="admin-activity-thumbnail">
-            <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Activity Thumbnail" class="activity-image">
+    <!-- ⏳ Past -->
+    <span class="line"></span>
+    <h1 id="section-past" class="admin-header"><span class="hover-underline">⏳ Past Activities</span></h1>
+    <span class="line"></span>
+    <?php if (!empty($past)): ?>
+    <?php $i = 1; foreach ($past as $row): ?>
+        <div class="admin-activity-card">
+          <div class="activity-flex">
+            <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
+              <?php if (!empty($row['image_path'])): ?>
+                <div class="admin-activity-thumbnail">
+                  <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Activity Thumbnail" class="activity-image">
+                </div>
+              <?php else: ?><p>No Image activities.</p><?php endif; ?>
+            </a>
+            <div class="activity-activities-stats">
+              <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
+                <h3><?= $i . '. ' . htmlspecialchars($row['title']) ?></h3>
+              </a>
+              <div class="admin-activity-meta">
+                📅 <?= $row['event_date'] ?><br>
+                🕒 <?= $row['start_time'] ?> – <?= $row['end_time'] ?><br>
+                📍 <?= htmlspecialchars($row['location']) ?>
+              </div>
+              <div class="admin-activity-description"><?= nl2br(htmlspecialchars($row['description'])) ?></div>
+              <?php if (!empty($row['external_link'])): ?>
+                <div class="admin-activity-link">🔗 <a href="<?= htmlspecialchars($row['external_link']) ?>" target="_blank">External Link</a></div>
+              <?php endif; ?>
+            </div>
+            <div class="admin-activity-actions">
+              <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
+            </div>
           </div>
-        <?php else: ?><p>No Image activities.</p><?php endif; ?>
-
-        </a>
-        <div class="activity-activities-stats">
-          <a href="edit_activity.php?id=<?= $row['id'] ?>" class="activity-edit-link">
-            <h3><?= $i . '. ' . htmlspecialchars($row['title']) ?></h3>
-          </a>
-          <div class="admin-activity-meta">
-            📅 <?= $row['event_date'] ?><br>
-            🕒 <?= $row['start_time'] ?> – <?= $row['end_time'] ?><br>
-            📍 <?= htmlspecialchars($row['location']) ?>
-          </div>
-          <div class="admin-activity-description"><?= nl2br(htmlspecialchars($row['description'])) ?></div>
-        <?php if (!empty($row['external_link'])): ?>
-        <div class="admin-activity-link">🔗 <a href="<?= htmlspecialchars($row['external_link']) ?>" target="_blank">External Link</a></div>
-        <?php endif; ?>
-      </div>
-      <div class="admin-activity-actions">
-        <a href="edit_activity.php?id=<?= $row['id'] ?>" class="edit-btn">✏️ Edit</a>
-        <a href="?delete_id=<?= $row['id'] ?>" class="delete-btn" onclick="return confirm('Delete this activity?')">🗑 Delete</a>
-      </div>
-    </div>
-  </div>
-<?php $i++; endforeach; ?>
-<?php else: ?><p>No past activities.</p><?php endif; ?>
-
+        </div>
+    <?php $i++; endforeach; ?>
+    <?php else: ?><p>No past activities.</p><?php endif; ?>
 </div>  
 </div>
 </body>
