@@ -9,25 +9,25 @@ $conn = mysqli_connect($servername, $username, $password);
 if (!$conn) {
     die("❌ Connection failed: " . mysqli_connect_error());
 }
-echo "✅ Connected to MySQL server.<br>";
+// echo "✅ Connected to MySQL server.<br>";
 
 // Create database
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Database '$dbname' is ready.<br>";
+    // echo "✅ Database '$dbname' is ready.<br>";
 } else {
     die("❌ Error creating database: " . mysqli_error($conn));
 }
 
 mysqli_select_db($conn, $dbname);
-echo "✅ Selected database: $dbname<br>";
+// echo "✅ Selected database: $dbname<br>";
 
 // Create roles table
 $sql = "CREATE TABLE IF NOT EXISTS roles (
   id TINYINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) UNIQUE NOT NULL
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'roles' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'roles' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // Insert roles
 $roles = [1 => 'admin', 2 => 'operator', 3 => 'staff', 4 => 'user'];
@@ -55,7 +55,7 @@ $sql = "CREATE TABLE IF NOT EXISTS membership (
   status ENUM('Active', 'Inactive') DEFAULT 'Inactive',
   registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'membership' updated and ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'membership' updated and ready.<br>" : "❌ " . mysqli_error($conn);
 
 
 
@@ -70,7 +70,7 @@ $sql = "CREATE TABLE IF NOT EXISTS user (
   FOREIGN KEY (membership_id) REFERENCES membership(id) ON DELETE CASCADE,
   FOREIGN KEY (role_id) REFERENCES roles(id)
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'user' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'user' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 3️⃣ ADMIN TABLE
 $sql = "CREATE TABLE IF NOT EXISTS admin (
@@ -78,7 +78,7 @@ $sql = "CREATE TABLE IF NOT EXISTS admin (
   username VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'admin' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'admin' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // Insert default admin (plain text 'admin')
 $check_admin_sql = "SELECT id FROM admin WHERE LOWER(username) = 'admin'";
@@ -86,12 +86,12 @@ $check_admin_result = mysqli_query($conn, $check_admin_sql);
 if (mysqli_num_rows($check_admin_result) === 0) {
     $insert_admin_sql = "INSERT INTO admin (username, password) VALUES ('admin', 'admin')";
     if (mysqli_query($conn, $insert_admin_sql)) {
-        echo "✅ Default admin account created.<br>";
+        // echo "✅ Default admin account created.<br>";
     } else {
         echo "❌ Failed to create default admin: " . mysqli_error($conn) . "<br>";
     }
 } else {
-    echo "ℹ️ Default admin already exists.<br>";
+    // echo "ℹ️ Default admin already exists.<br>";
 }
 
 // 4️⃣ JOB APPLICATION TABLE
@@ -108,10 +108,10 @@ $sql = "CREATE TABLE IF NOT EXISTS job_application (
   state VARCHAR(100),
   photo_path VARCHAR(255),
   cv_path VARCHAR(255),
-  status ENUM('Pending', 'Accepted', 'Rejected') NOT NULL DEFAULT 'Pending';
+  status ENUM('Pending', 'Accepted', 'Rejected') NOT NULL DEFAULT 'Pending',
   submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'job_application' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'job_application' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 5️⃣ ENQUIRY TABLE
 $sql = "CREATE TABLE IF NOT EXISTS enquiry (
@@ -130,7 +130,7 @@ $sql = "CREATE TABLE IF NOT EXISTS enquiry (
   status ENUM('Pending', 'In Progress', 'Resolved') DEFAULT 'Pending',
   submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'enquiry' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'enquiry' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 6️⃣ ACTIVITIES TABLE
 $sql = "CREATE TABLE IF NOT EXISTS activities (
@@ -145,14 +145,14 @@ $sql = "CREATE TABLE IF NOT EXISTS activities (
   external_link VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'activities' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'activities' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 7️⃣ CATEGORY TABLE
 $sql = "CREATE TABLE IF NOT EXISTS categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) UNIQUE NOT NULL
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'categories' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'categories' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 8️⃣ PRODUCTS TABLE
 $sql = "CREATE TABLE IF NOT EXISTS products (
@@ -168,7 +168,7 @@ $sql = "CREATE TABLE IF NOT EXISTS products (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 ) ENGINE=InnoDB";
-echo mysqli_query($conn, $sql) ? "✅ Table 'products' (with category_id) ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'products' (with category_id) ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 9️⃣ Populate categories
 $categoryList = ['Basic Brew', 'Artisan Brew', 'Non-Coffee', 'Hot Beverages'];
@@ -186,7 +186,7 @@ $sql = "CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   email VARCHAR(255) NOT NULL UNIQUE,
   subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-echo mysqli_query($conn, $sql) ? "✅ Table 'newsletter_subscribers' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'newsletter_subscribers' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 1️⃣1️⃣ NEWSLETTER HISTORY TABLE
 $sql = "CREATE TABLE IF NOT EXISTS newsletter_history (
@@ -196,7 +196,7 @@ $sql = "CREATE TABLE IF NOT EXISTS newsletter_history (
   attachment_path VARCHAR(255) DEFAULT NULL,
   sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-echo mysqli_query($conn, $sql) ? "✅ Table 'newsletter_history' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'newsletter_history' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // 1️⃣2️⃣ PAGE PERMISSIONS TABLE
 $sql = "CREATE TABLE IF NOT EXISTS page_permissions (
@@ -207,7 +207,7 @@ $sql = "CREATE TABLE IF NOT EXISTS page_permissions (
   UNIQUE KEY unique_page_role (page, role_id),
   FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 )";
-echo mysqli_query($conn, $sql) ? "✅ Table 'page_permissions' ready.<br>" : "❌ " . mysqli_error($conn);
+mysqli_query($conn, $sql) ? "✅ Table 'page_permissions' ready.<br>" : "❌ " . mysqli_error($conn);
 
 // Optionally, insert example permissions (customize as needed)
 $page_perms = [
@@ -247,7 +247,7 @@ foreach ($page_perms as $page => $roles) {
         }
     }
 }
-echo "✅ Page permissions seeded.<br>";
+// echo "✅ Page permissions seeded.<br>";
 
 // 🔁 Populate products
 $products = [
@@ -311,10 +311,10 @@ foreach ($products as [$category, $name, $price, $large, $filename]) {
         mysqli_query($conn, $insert);
     }
 }
-echo "✅ Product migration complete: menu items inserted.<br>";
+// echo "✅ Product migration complete: menu items inserted.<br>";
 
 
 // Close
 mysqli_close($conn);
-echo "✅ MySQL connection closed.<br>";
+// echo "✅ MySQL connection closed.<br>";
 ?>

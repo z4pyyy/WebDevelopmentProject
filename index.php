@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+include 'setup.php';
 include 'connection.php';
-include 'initialize.php';
 include 'navbar.php'; 
 
 // Fetch activities for the "What's Brewing?" section

@@ -42,7 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div class="input-group-row">
                 <div class="input-group">
 
-                  <label for="username">Login ID</label>
+                  <label for="username">Username</label>
                   <input type="text" id="username" name="username" maxlength="30" 
                   pattern="[A-Za-z0-9#]+" 
                   placeholder="Jackie" 
