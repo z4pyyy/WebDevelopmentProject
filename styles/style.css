@@ -1429,6 +1429,12 @@ footer .subscribe-form button.btn-index-subscribe:hover {
   padding-top: 20px;
   font-size: 14px;
   color: #ccc;
+  text-decoration: none;
+}
+
+.footer-bottom a{
+  color: #f6a62d;
+  text-decoration: none;
 }
 
 .footer-container {
