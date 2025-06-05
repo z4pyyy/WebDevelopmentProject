@@ -110,7 +110,7 @@ $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
       <li>
         <?php if ($username): ?>
           <?php if ($role_id == 1): ?>
-            <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
+            <span class="hover-underline"><a href="admin_dashboard.php">ADMIN</a></span>
           <?php elseif (in_array($role_id, [2,3])): ?>
             <span class="hover-underline"><a href="admin_dashboard.php">View</a></span>
             <span class="hover-underline"><a href="membership.php"><?php echo htmlspecialchars($username); ?></a></span>
