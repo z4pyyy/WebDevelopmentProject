@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'connection.php';
 
+date_default_timezone_set('Asia/Kuching'); 
 $now = new DateTime();
 $past_result = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date DESC");
 
