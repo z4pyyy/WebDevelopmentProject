@@ -26,7 +26,6 @@ if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
 include 'navbar.php';
 include 'navbar_admin.php';
   
-date_default_timezone_set('Asia/Kuching'); 
 // 🔎 Fetch all activities
 $all = mysqli_query($conn, "SELECT * FROM activities ORDER BY event_date ASC");
 

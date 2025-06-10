@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'connection.php';
 include 'navbar.php';
-
+date_default_timezone_set('Asia/Kuching'); 
 $now = new DateTime();
 
 // Use DateTime for safer comparison
