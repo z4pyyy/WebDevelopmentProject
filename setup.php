@@ -147,6 +147,123 @@ $sql = "CREATE TABLE IF NOT EXISTS activities (
 )";
 mysqli_query($conn, $sql) ? "✅ Table 'activities' ready.<br>" : "❌ " . mysqli_error($conn);
 
+$check = mysqli_query($conn, "SELECT COUNT(*) AS count FROM activities");
+$count_row = mysqli_fetch_assoc($check);
+if (intval($count_row['count']) === 0) {
+
+    // --- Coming Soon Activities (event_date in 2026) ---
+    $coming_soon = [
+        [
+            'title' => "What's New? (Mini Seni Kita: Open haus)",
+            'description' => "Get your fuel satisfied with the perfect brew! ☕️✨ Meet @brewngo.coffee, where quality coffee meets exceptional flavour. Whether you’re on the go or looking to savour every sip, their caffeine creations are here to satisfy your coffee cravings like never before ☕️ #coffeelover #supportlocal #caffeine\n\nMini Seni Kita: Open haus\n📍 HAUS KCH, Yun Phin Building\n📆 29 March 2026\n🕒 3.00pm - 10.00pm\n🔥 All ages welcome – let’s have fun!\n🌟 It’s free entry!\n\nFollow for more updates and releases (*^ω^)! @senikitakch @hauskch",
+            'image_path' => "images/ComingSoon1.png",
+            'event_date' => "2026-03-29",
+            'start_time' => "15:00:00",
+            'end_time' => "22:00:00",
+            'location' => "HAUS KCH, Yun Phin Building",
+            'external_link' => "https://www.instagram.com/p/DHXgoi2vMe_/?img_index=1"
+        ],
+        [
+            'title' => "Current Promo: Free Drink + Voucher",
+            'description' => "(Change to today date)🎉 Get 1 free drink and 1 RM10 voucher if you topup with a minimum of RM50! Available only at our Plaza Merdeka outlet. Limited time offer!",
+            'image_path' => "images/Current.jpg", 
+            'event_date' => "2026-04-10",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "Plaza Merdeka",
+            'external_link' => "https://www.facebook.com/share/p/15QWjDkuAL/"
+        ]
+    ];
+
+    // --- Past Activities (event_date in 2024) ---
+    $past_activities = [
+        [
+            'title' => "24th January 2024 - FREE ORANGES",
+            'description' => "FREE ORANGES!!! 🍊🧧🪭\nRedeem free oranges from us when you purchase 2 drinks & more. Starting from Saturday 25/1 and while stocks last. Come come!!",
+            'image_path' => "images/Past1.jpg",
+            'event_date' => "2024-01-24",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "All outlets",
+            'external_link' => "https://www.facebook.com/share/p/1AXJ2yhYcx/"
+        ],
+        [
+            'title' => "28th October 2024 - 11% OFF Thursdays",
+            'description' => "Enjoy 11% OFF on your total bill, every Thursday! ☕️",
+            'image_path' => "images/Past2.jpg",
+            'event_date' => "2024-10-28",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "All outlets",
+            'external_link' => "https://www.facebook.com/share/p/15ownGyQ5r/"
+        ],
+        [
+            'title' => "9th September 2024 - Grabfood 50% Off",
+            'description' => "Lazy to go out?\nOrder from us on Grabfood and get it delivered right at your door step! ☕️\nGet up to 50% off too!",
+            'image_path' => "images/Past3.jpg",
+            'event_date' => "2024-09-09",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "Online / Grabfood",
+            'external_link' => "https://www.facebook.com/share/p/1AEvFEc2tA/"
+        ],
+        [
+            'title' => "4th April 2024 - Coffee Cart @ One Jaya",
+            'description' => "We’re excited to announce that our cozy little coffee cart is now open for all the coffee drinkers community!\nLocation: Main entrance of One Jaya\nOpening hours: Saturday to Thursday 9am-6pm, close on Friday",
+            'image_path' => "images/Past4.jpg",
+            'event_date' => "2024-04-04",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "Main entrance of One Jaya",
+            'external_link' => "https://www.facebook.com/share/p/12H4yxZbY8g/"
+        ],
+        [
+            'title' => "28th March 2024 - Grand Opening Coffee Cart",
+            'description' => "Finally.. the wait is over!\nJoin us at the Grand Opening of our Coffee Cart this Saturday, 30th March 2024 at 9am onwards!\nStand a chance to get our free goodie bag for the first 50 customers!!",
+            'image_path' => "images/Past5.jpg",
+            'event_date' => "2024-03-28",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "Coffee Cart, One Jaya",
+            'external_link' => "https://www.facebook.com/share/p/15xobh7QwJ/"
+        ],
+        [
+            'title' => "1st February 2024 - Team is Growing!",
+            'description' => "🧧开工大吉🧧 we’re grateful that our team is slowly growing, and we’re determined to serve you at our very best! Come visit us from 9am-6pm daily!",
+            'image_path' => "images/CNYOPENING.png",
+            'event_date' => "2024-02-01",
+            'start_time' => "00:00",
+            'end_time' => "23:59",
+            'location' => "All outlets",
+            'external_link' => "https://www.instagram.com/p/DFg4hlxvOxg/?img_index=1"
+        ]
+    ];
+
+    // Insert function
+    function insert_activity($conn, $data) {
+        $sql = "INSERT INTO activities 
+            (title, description, image_path, event_date, start_time, end_time, location, external_link)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param(
+            $stmt, "ssssssss",
+            $data['title'], $data['description'], $data['image_path'], $data['event_date'],
+            $data['start_time'], $data['end_time'], $data['location'], $data['external_link']
+        );
+        $ok = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $ok;
+    }
+
+    $inserted = 0;
+    foreach ($coming_soon as $a) { $inserted += insert_activity($conn, $a) ? 1 : 0; }
+    foreach ($past_activities as $a) { $inserted += insert_activity($conn, $a) ? 1 : 0; }
+
+} else {
+    // Table already has data
+    // echo "<i>Activities already populated.</i>";
+}
+
 // 7️⃣ CATEGORY TABLE
 $sql = "CREATE TABLE IF NOT EXISTS categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
