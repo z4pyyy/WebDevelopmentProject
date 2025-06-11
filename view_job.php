@@ -114,7 +114,7 @@ include 'navbar_admin.php';
 
     <form method="GET">
         <label for="filter_by"><strong>Search by:</strong></label>
-        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+        <select name="filter_by" id="filter_by" class="role-filter" >
             <option value="">-- Select Field --</option>
             <option value="full_name" <?= $filter_by === 'full_name' ? 'selected' : '' ?>>Full Name</option>
             <option value="email" <?= $filter_by === 'email' ? 'selected' : '' ?>>Email</option>
@@ -122,7 +122,7 @@ include 'navbar_admin.php';
             <option value="submitted_at" <?= $filter_by === 'submitted_at' ? 'selected' : '' ?>>Submitted At</option>
         </select>
         <label for="sort_by"><strong>Sort by:</strong></label>
-        <select name="sort_by" id="sort_by" class="role-filter" onchange="this.form.submit()">
+        <select name="sort_by" id="sort_by" class="role-filter" >
             <option value="submitted_at" <?= ($_GET['sort_by'] ?? '') === 'submitted_at' ? 'selected' : '' ?>>Submitted At</option>
             <option value="id_asc" <?= ($_GET['sort_by'] ?? '') === 'id_asc' ? 'selected' : '' ?>>ID Ascending</option>
             <option value="id_desc" <?= ($_GET['sort_by'] ?? '') === 'id_desc' ? 'selected' : '' ?>>ID Descending</option>

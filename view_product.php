@@ -13,13 +13,13 @@ include 'auth.php';
 // 🔒 Secure Access: Check page permissions
 if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_id'])) {
     error_log("view_product.php: Session check failed. admin_id: " . ($_SESSION['admin_id'] ?? 'not set') . ", role_id: " . ($_SESSION['role_id'] ?? 'not set'));
-    header("Location: login.php");
+    echo "<meta http-equiv='refresh' content='0;url=login.php'>";
     exit;
 }
 
 if (!checkPagePermission($conn, $currentPage, $_SESSION['role_id'])) {
     error_log("view_product.php: Permission denied for role_id: " . $_SESSION['role_id'] . ", page: $currentPage");
-    header("Location: no_access.php"); // Redirect to no_access.php
+    echo "<meta http-equiv='refresh' content='0;url=no_access.php'>";
     exit;
 }
 
@@ -30,6 +30,26 @@ include 'navbar_admin.php';
 $filter_by = $_GET['filter_by'] ?? '';
 $search_term = trim($_GET['search'] ?? '');
 $escaped_search = mysqli_real_escape_string($conn, $search_term);
+
+// 🔄 Toggle Availability (POST, not JS/GET)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_id'])) {
+    $id = intval($_POST['toggle_id']);
+    $stmt = mysqli_prepare($conn, "SELECT availability FROM products WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $new_status = ($row['availability'] === 'Available') ? 'Unavailable' : 'Available';
+        $update_stmt = mysqli_prepare($conn, "UPDATE products SET availability = ? WHERE id = ?");
+        mysqli_stmt_bind_param($update_stmt, "si", $new_status, $id);
+        mysqli_stmt_execute($update_stmt);
+        mysqli_stmt_close($update_stmt);
+    }
+    mysqli_stmt_close($stmt);
+    // No header(), just reload via standard POST-redirect GET if you want.
+    // echo "<meta http-equiv='refresh' content='0;url=view_product.php'>";
+    // exit;
+}
 
 // 📦 Fetch all products grouped by category
 $query = "
@@ -78,26 +98,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 mysqli_stmt_close($stmt);
 
-// 🔄 Toggle Availability (Using Prepared Statement)
-if (isset($_GET['toggle_id'])) {
-    $id = intval($_GET['toggle_id']);
-    $stmt = mysqli_prepare($conn, "SELECT availability FROM products WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    if ($row = mysqli_fetch_assoc($result)) {
-        $new_status = ($row['availability'] === 'Available') ? 'Unavailable' : 'Available';
-        $update_stmt = mysqli_prepare($conn, "UPDATE products SET availability = ? WHERE id = ?");
-        mysqli_stmt_bind_param($update_stmt, "si", $new_status, $id);
-        mysqli_stmt_execute($update_stmt);
-        mysqli_stmt_close($update_stmt);
-    }
-    mysqli_stmt_close($stmt);
-    header("Location: view_product.php");
-    exit;
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,8 +108,7 @@ if (isset($_GET['toggle_id'])) {
 </head>
 <body>
 <div class="prd-toggle-wrapper">
-    <input type="checkbox" id="prd-menu-toggle" class="prd-menu-toggle">
-    <label for="prd-menu-toggle" class="prd-menu-btn">☰ Select Category</label>
+    <!-- No JS: Show full menu always -->
     <div class="admin-prd-menu">
         <ul>
             <?php foreach (array_keys($products_by_category) as $category): ?>
@@ -126,7 +126,7 @@ if (isset($_GET['toggle_id'])) {
 
     <form method="GET" style="margin: 15px 0;">
         <label for="filter_by"><strong>Search by:</strong></label>
-        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+        <select name="filter_by" id="filter_by" class="role-filter" >
             <option value="">-- Select Field --</option>
             <option value="name" <?= $filter_by === 'name' ? 'selected' : '' ?>>Name</option>
             <option value="sku" <?= $filter_by === 'sku' ? 'selected' : '' ?>>SKU</option>
@@ -172,8 +172,7 @@ if (isset($_GET['toggle_id'])) {
                                 💵 Regular: RM <?= number_format($product['price'], 2) ?><br>
                                 💵 Large: RM <?= number_format($product['large_price'], 2) ?><br>
                                 🏷️ SKU: <?= htmlspecialchars($product['sku']) ?><br>
-                                🔄 Availability: <?= htmlspecialchars($product['availability'] ?? 'Availab
-System: le') ?>
+                                🔄 Availability: <?= htmlspecialchars($product['availability'] ?? 'Available') ?>
                             </div>
 
                             <?php if (!empty($product['description'])): ?>
@@ -181,7 +180,7 @@ System: le') ?>
                             <?php endif; ?>
                         </div>
                         <div class="admin-activity-actions">
-                            <form method="GET" style="display:inline;">
+                            <form method="POST" style="display:inline;">
                                 <input type="hidden" name="toggle_id" value="<?= $product['id'] ?>">
                                 <button type="submit" class="status-btn <?= $product['availability'] === 'Available' ? 'available' : 'unavailable' ?>">
                                     <?= $product['availability'] === 'Available' ? '🟢 Available' : '⚪ Unavailable' ?>

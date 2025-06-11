@@ -107,7 +107,7 @@ if ($selected_id) {
     <form method="GET" class="filter-sort">
         <div class="search-enquiry">
         <label for="filter_by"><strong>Search by:</strong></label>
-        <select name="filter_by" id="filter_by" class="search-filter" onchange="this.form.submit()">
+        <select name="filter_by" id="filter_by" class="search-filter" >
             <option value="">-- Select Field --</option>
             <option value="ticket_id" <?= $filter_by === 'ticket_id' ? 'selected' : '' ?>>Ticket ID</option>
             <option value="full_name" <?= $filter_by === 'full_name' ? 'selected' : '' ?>>Full Name</option>

@@ -62,8 +62,7 @@ $pointsProgress = min(100, ($member['points'] / $maxPoints) * 100);
           id="profilePicInput" 
           name="profile_picture" 
           accept="image/*" 
-          style="display: none;"
-          onchange="this.form.submit();">
+          style="display: none;">
       </form>
     </div>
 

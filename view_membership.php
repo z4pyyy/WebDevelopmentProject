@@ -114,14 +114,14 @@ if ($selected_id) {
 
     <form method="GET">
         <label for="filter_by"><strong>Search by:</strong></label>
-        <select name="filter_by" id="filter_by" class="role-filter" onchange="this.form.submit()">
+        <select name="filter_by" id="filter_by" class="role-filter" >
             <option value="">-- Select Field --</option>
             <option value="member_id" <?= $filter_by === 'member_id' ? 'selected' : '' ?>>Member ID</option>
             <option value="username" <?= $filter_by === 'username' ? 'selected' : '' ?>>Username</option>
             <option value="role" <?= $filter_by === 'role' ? 'selected' : '' ?>>Role</option>
         </select>
         <label for="sort_by"><strong>Sort by:</strong></label>
-        <select name="sort_by" id="sort_by" class="role-filter" onchange="this.form.submit()">
+        <select name="sort_by" id="sort_by" class="role-filter" >
             <option value="registered_at_desc" <?= $sort_by === 'registered_at_desc' ? 'selected' : '' ?>>Newest Registered</option>
             <option value="registered_at_asc" <?= $sort_by === 'registered_at_asc' ? 'selected' : '' ?>>Oldest Registered</option>
             <option value="wallet_desc" <?= $sort_by === 'wallet_desc' ? 'selected' : '' ?>>Wallet High → Low</option>
