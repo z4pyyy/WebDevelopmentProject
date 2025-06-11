@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['footer_subscribe'])) 
       <p class="footer-header">ACKNOWLEDGEMENT</p>
       <p><a href="acknowledgement.php">Acknowledgement</a></p>
       <p><a href="enhancements.php">Enhancements</a></p>
-      <p><a href="https://www.youtube.com/watch?v=Nz_lsiT_kcI">Presentation Video</a></p>
+      <p><a href="https://youtu.be/vTK2mGx1TK8">Presentation Video</a></p>
     </div>
 
     <!-- Column 3: Subscription -->
