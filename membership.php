@@ -49,22 +49,31 @@ $pointsProgress = min(100, ($member['points'] / $maxPoints) * 100);
   <section class="member-dashboard">
     <h2>Good day, <span class="member-name"><?= htmlspecialchars($member['first_name']) ?></span>!</h2>
 
-    <div class="member-profile-wrapper" style="text-align: center; margin-bottom: 20px;">
-      <form action="update_profile.php" method="POST" enctype="multipart/form-data" style="display:inline-block;">
-        <input type="hidden" name="update_type" value="picture">
-        <label for="profilePicInput" style="cursor: pointer; display: inline-block;">
-          <img 
-            src="<?= $member['profile_picture'] ? htmlspecialchars($member['profile_picture']) : 'images/default-profile.png' ?>" alt="Profile Picture" >
-          <p>Click to change picture</p>
-        </label>
-        <input 
-          type="file" 
-          id="profilePicInput" 
-          name="profile_picture" 
-          accept="image/*" 
-          style="display: none;">
-      </form>
-    </div>
+  <div class="member-profile-wrapper" style="text-align: center; margin-bottom: 20px;">
+    <form action="update_profile.php" method="POST" enctype="multipart/form-data" style="display:inline-block;">
+      <input type="hidden" name="update_type" value="picture">
+      <!-- Clicking this label (the picture) will open file input -->
+      <label for="profilePicInput" style="cursor: pointer; display: inline-block;">
+        <img 
+          src="<?= $member['profile_picture'] ? htmlspecialchars($member['profile_picture']) : 'images/default-profile.png' ?>" 
+          alt="Profile Picture" 
+          style="max-width:130px; max-height:130px; border-radius:50%; border:2px solid #eee;">
+        <div style="color: #888; font-size: 0.9em;">Click to choose a new photo</div>
+      </label>
+      <input 
+        type="file" 
+        id="profilePicInput" 
+        name="profile_picture" 
+        accept="image/*"
+        style="display: none;"
+        required
+      >
+      <div>
+        <button type="submit" class="upload-btn" style="margin-top:10px;">Upload</button>
+      </div>
+    </form>
+  </div>
+
 
     <div class="rewards-box">
       <div class="star-icon">⭐</div>
