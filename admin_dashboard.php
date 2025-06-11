@@ -70,7 +70,7 @@ include 'navbar_admin.php';
                   <p>Manage and schedule activities & events.</p>
                   </div>
                 </a>  
-                <a href="view_activity.php" class="admin-card-link">
+                <a href="view_product.php" class="admin-card-link">
                   <div class="admin-card">
                   <h5>🏷️ Products</h5>
                   <p>Manage current products and availability.</p>
