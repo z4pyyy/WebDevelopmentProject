@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include 'setup.php';
+// include 'setup.php';
 include 'connection.php';
 include 'navbar.php'; 
 

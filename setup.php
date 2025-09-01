@@ -1,26 +1,23 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "assignment2";
+// Load DB credentials first
+$db_user   = getenv('DB_USER') ?: 'root';
+$db_pass   = getenv('DB_PASS') ?: '';
+$db_name   = getenv('DB_NAME') ?: 'developmentdb';
+$db_socket = getenv('DB_SOCKET');
 
-// Connect to MySQL
-$conn = mysqli_connect($servername, $username, $password);
-if (!$conn) {
-    die("❌ Connection failed: " . mysqli_connect_error());
-}
-// echo "✅ Connected to MySQL server.<br>";
-
-// Create database
-$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
-if (mysqli_query($conn, $sql)) {
-    // echo "✅ Database '$dbname' is ready.<br>";
-} else {
-    die("❌ Error creating database: " . mysqli_error($conn));
+// Check socket
+if (!$db_socket || !file_exists($db_socket)) {
+    die("❌ Cloud SQL socket not found at: $db_socket");
 }
 
-mysqli_select_db($conn, $dbname);
-// echo "✅ Selected database: $dbname<br>";
+// Connect via socket
+$mysqli = new mysqli(null, $db_user, $db_pass, $db_name, null, $db_socket);
+if ($mysqli->connect_error) {
+    die("❌ Connection failed: " . $mysqli->connect_error);
+}
+$conn = $mysqli;
+
+echo "✅ Connected to Cloud SQL via socket and using database '$db_name'.<br>";
 
 // Create roles table
 $sql = "CREATE TABLE IF NOT EXISTS roles (
